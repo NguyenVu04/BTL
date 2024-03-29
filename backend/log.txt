@@ -1,0 +1,1 @@
+2024-03-29T22:20:56.885818400: java.lang.IllegalArgumentException: 'path' must be a non-empty String: com.project.backend.repository.FirestoreRepository
