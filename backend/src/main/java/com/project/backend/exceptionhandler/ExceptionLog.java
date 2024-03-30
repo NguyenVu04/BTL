@@ -16,4 +16,11 @@ public class ExceptionLog {
             System.err.println(e);
         }
     }
+    public void log(Exception exception) {
+        try (PrintWriter writer = new PrintWriter(new FileWriter(logFile, true))) {
+            writer.printf("%s: %s: %s\n", LocalDateTime.now(), exception, exception.getMessage());
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
 }
