@@ -2,28 +2,23 @@ package com.project.backend.security;
 
 import java.util.List;
 
-import com.google.cloud.firestore.annotation.Exclude;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
-@CollectionName("AuthDetails")
+@CollectionName("SecurityDetails")
 public class AuthenticationDetails extends Model {
-    public enum UserRole {
-        TEACHER, STUDENT
-    }
     private String email;
     private String password;
-    @Exclude
-    private List<UserRole> userRole;
     private List<String> role;
     private String userId;
-    public AuthenticationDetails(String username, String password, List<UserRole> userRole) {
+    protected AuthenticationDetails() {}
+    public AuthenticationDetails(String username, String password, List<UserRole> userRole, String userId) {
         this.email = username;
         this.password = password;
-        this.userRole = userRole;
         this.role = userRole.stream()
                             .map(role -> role.name())
                             .toList();
+        this.userId = userId;
     }
     public String getPassword() {
         return password;
@@ -31,18 +26,13 @@ public class AuthenticationDetails extends Model {
     public void setPassword(String password) {
         this.password = password;
     }
-    @Exclude
-    public List<UserRole> getUserRole() {
-        return userRole;
+    public List<String> getRole() {
+        return role;
     }
-    public void setUserRole(List<UserRole> userRole) {
-        this.userRole = userRole;
+    public void setRole(List<UserRole> userRole) {
         this.role = userRole.stream()
                             .map(role -> role.name())
                             .toList();
-    }
-    public List<String> getRole() {
-        return role;
     }
     public String getEmail() {
         return email;
@@ -55,6 +45,5 @@ public class AuthenticationDetails extends Model {
     }
     public void setUserId(String userId) {
         this.userId = userId;
-    }
-    
+    }    
 }

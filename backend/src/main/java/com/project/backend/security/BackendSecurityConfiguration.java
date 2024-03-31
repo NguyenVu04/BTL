@@ -17,11 +17,7 @@ public class BackendSecurityConfiguration {
     private BackendAuthenticationProvider provider;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(
-            req -> req.anyRequest()
-                      .permitAll()
-            )
-            .csrf(crsf -> crsf.disable())
+        http.csrf(crsf -> crsf.disable())
             .sessionManagement(
                 session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );

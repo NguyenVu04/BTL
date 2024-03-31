@@ -3,12 +3,14 @@ package com.project.backend.security;
 import java.util.Date;
 import java.util.Map;
 
+import javax.annotation.Nullable;
 import javax.crypto.SecretKey;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
 
 import io.jsonwebtoken.Claims;
@@ -19,18 +21,25 @@ import io.jsonwebtoken.security.AeadAlgorithm;
 public class JwtUtils {
     @Autowired
     private FirestoreRepository repository;
+    @Autowired
+    private ExceptionLog exceptionLog;
     private final SecretKey encodeKey = Jwts.KEY.A256KW.key().build();
     private final SecretKey decodeKey = Jwts.KEY.A256GCMKW.key().build();
     private final SecretKey signKey = Jwts.KEY.A128GCMKW.key().build();
     private final AeadAlgorithm algorithm = Jwts.ENC.A256GCM;
     public Claims decodeToken(String token) {
-        return Jwts.parser()
+        try {
+            return Jwts.parser()
                    .decryptWith(decodeKey)
                    .build()
                    .parseEncryptedClaims(token)
                    .getPayload();
-                   
+        } catch (Exception e) {
+            exceptionLog.log(e, this.getClass().getName());
+            return null;
+        }                   
     }
+    @Nullable
     public String encodeObject(String id) {
         DocumentSnapshot snapshot = repository.getDocumentById(AuthenticationDetails.class, id);
         if (snapshot == null) {
@@ -48,27 +57,33 @@ public class JwtUtils {
                    .signWith(signKey)
                    .expiration(expDate)
                    .issuedAt(now)
+                   .issuer(id)
                    .id(id)
                    .claims(object)
                    .encryptWith(encodeKey, algorithm)
                    .compact();
     }
-    public boolean isValid(String token) {
-        Date now = new Date();
-        Claims claims = decodeToken(token);
-        if (claims.containsKey("id") && 
-            claims.containsKey("password") && 
-            claims.getExpiration().before(now)) {
-            return true;
+    public boolean isValid(Claims claims) {
+        try {
+            Date now = new Date();
+            if (claims.containsKey("id") && 
+                claims.containsKey("password") && 
+                claims.getExpiration().before(now)) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception e) {
+            exceptionLog.log(e, this.getClass().getName());
+            return false;
         }
-        return false;
     }
-    public String getId(String token) {
-        Claims claims = decodeToken(token);
+    @Nullable
+    public String getId(Claims claims) {
         return claims.get("id", String.class);
     }
-    public String getPassword(String token) {
-        Claims claims = decodeToken(token);
+    @Nullable
+    public String getPassword(Claims claims) {
         return claims.get("password", String.class);
     }
 }

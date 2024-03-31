@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 
 import javax.annotation.Nonnull;
 
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.RUNTIME)
 public @interface CollectionName {
     @Nonnull String value();
 }

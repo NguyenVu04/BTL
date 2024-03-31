@@ -22,7 +22,7 @@ public class BackendAuthenticationProvider implements AuthenticationProvider {
     private BackendDetailsService service;
     @Autowired
     private ExceptionLog exceptionLog;
-    private final PasswordEncoder encoder = new BCryptPasswordEncoder();
+    public final PasswordEncoder encoder = new BCryptPasswordEncoder();
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -31,14 +31,15 @@ public class BackendAuthenticationProvider implements AuthenticationProvider {
         AuthenticationDetails details = service.loadUserByEmail(email);
         String userPassword = details.getPassword();
 
-        if (encoder.matches(password, userPassword)) {
+        //if (encoder.matches(password, userPassword)) {
+        if (password.equals(userPassword)) {
             List<SimpleGrantedAuthority> list = details.getRole()
                                                        .stream()
                                                        .map(role -> new SimpleGrantedAuthority(role))
                                                        .toList();
             return UsernamePasswordAuthenticationToken.authenticated(details.getId(), password, list);
         } else {
-            AuthenticationException e = new UsernameNotFoundException(this.getClass().getName());
+            AuthenticationException e = new UsernameNotFoundException(userPassword + "!=" + password);
             exceptionLog.log(e);
             throw e;
         }

@@ -20,8 +20,7 @@ public class BackendDetailsService {
         if (collection != null && email != null) {
             try {
                 Query query = collection.whereEqualTo("email", email).limit(1);
-                QuerySnapshot snapshot = query.get()
-                                              .get();
+                QuerySnapshot snapshot = query.get().get();
                 if (!snapshot.isEmpty()) {
                     DocumentReference documentReference = snapshot.getDocuments()
                                                                   .get(0)

@@ -1,10 +1,10 @@
-2024-03-29T22:20:56.885818400: java.lang.IllegalArgumentException: 'path' must be a non-empty String: com.project.backend.repository.FirestoreRepository
-2024-03-31T17:46:08.123887600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:46:08.233019700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:46:55.709644700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:46:55.806804100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:47:39.893758700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:47:40.025004500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:51:08.671974500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:51:08.741282400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
-2024-03-31T17:53:32.086438500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T21:35:59.020534800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-03-31T21:37:06.638305400: org.springframework.security.core.userdetails.UsernameNotFoundException: aaa
+2024-03-31T21:39:15.037336400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-03-31T21:47:02.903748200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-03-31T21:47:38.663664500: org.springframework.security.core.userdetails.UsernameNotFoundException: aaa
+2024-03-31T21:49:03.250708500: org.springframework.security.core.userdetails.UsernameNotFoundException: Could not deserialize object. Class com.project.backend.security.AuthenticationDetails does not define a no-argument constructor. If you are using ProGuard, make sure these constructors are not stripped
+2024-03-31T22:05:17.284120300: org.springframework.security.core.userdetails.UsernameNotFoundException: Could not deserialize object. Class com.project.backend.security.AuthenticationDetails does not define a no-argument constructor. If you are using ProGuard, make sure these constructors are not stripped
+2024-03-31T22:06:28.259952200: org.springframework.security.core.userdetails.UsernameNotFoundException: Could not deserialize object. Class com.project.backend.security.AuthenticationDetails does not define a no-argument constructor. If you are using ProGuard, make sure these constructors are not stripped
+2024-03-31T22:08:29.230500300: io.jsonwebtoken.security.UnsupportedKeyException: Unable to determine a suitable MAC or Signature algorithm for the specified key using available heuristics: either the key size is too weak be used with available algorithms, or the key size is unavailable (e.g. if using a PKCS11 or HSM (Hardware Security Module) key store). If you are using a PKCS11 or HSM keystore, consider using the JwtBuilder.signWith(Key, SecureDigestAlgorithm) method instead.
+2024-03-31T22:09:41.184069300: io.jsonwebtoken.security.UnsupportedKeyException: Unable to determine a suitable MAC or Signature algorithm for the specified key using available heuristics: either the key size is too weak be used with available algorithms, or the key size is unavailable (e.g. if using a PKCS11 or HSM (Hardware Security Module) key store). If you are using a PKCS11 or HSM keystore, consider using the JwtBuilder.signWith(Key, SecureDigestAlgorithm) method instead.
