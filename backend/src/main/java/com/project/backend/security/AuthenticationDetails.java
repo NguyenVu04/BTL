@@ -1,5 +1,7 @@
 package com.project.backend.security;
 
+import java.util.List;
+
 import com.google.cloud.firestore.annotation.Exclude;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
@@ -12,19 +14,16 @@ public class AuthenticationDetails extends Model {
     private String email;
     private String password;
     @Exclude
-    private UserRole userRole;
-    private String role;
-    public AuthenticationDetails(String username, String password, UserRole userRole) {
+    private List<UserRole> userRole;
+    private List<String> role;
+    private String userId;
+    public AuthenticationDetails(String username, String password, List<UserRole> userRole) {
         this.email = username;
         this.password = password;
         this.userRole = userRole;
-        this.role = userRole.name();
-    }
-    public String getUsername() {
-        return email;
-    }
-    public void setUsername(String username) {
-        this.email = username;
+        this.role = userRole.stream()
+                            .map(role -> role.name())
+                            .toList();
     }
     public String getPassword() {
         return password;
@@ -33,14 +32,29 @@ public class AuthenticationDetails extends Model {
         this.password = password;
     }
     @Exclude
-    public UserRole getUserRole() {
+    public List<UserRole> getUserRole() {
         return userRole;
     }
-    public void setUserRole(UserRole userRole) {
+    public void setUserRole(List<UserRole> userRole) {
         this.userRole = userRole;
-        this.role = userRole.name();
+        this.role = userRole.stream()
+                            .map(role -> role.name())
+                            .toList();
     }
-    public String getRole() {
+    public List<String> getRole() {
         return role;
     }
+    public String getEmail() {
+        return email;
+    }
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    public String getUserId() {
+        return userId;
+    }
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+    
 }

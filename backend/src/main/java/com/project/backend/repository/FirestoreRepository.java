@@ -7,6 +7,7 @@ import javax.annotation.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.google.api.core.ApiFuture;
 import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -27,29 +28,43 @@ public class FirestoreRepository {
                repository.collection(type.getAnnotation(CollectionName.class).value()) : 
                null;
     }
-    public <T extends Model> void saveDocument(T model) {
+    public <T extends Model> String saveDocument(T model) {
         if (model == null) {
             exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
-            return;
+            return null;
         }
         CollectionReference collection = getCollection(model.getClass());
         if (collection != null) {
-            collection.add(model);
+            ApiFuture<DocumentReference> api = collection.add(model);
+            try {
+                return api.get().getId();
+            } catch (Exception e) {
+                exceptionLog.log(e, this.getClass().getName());
+                return null;
+            }
         } else {
             exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            return null;
         }
     }
 
-    public void saveDocument(Class<?> type, Map<String, Object> model) {
+    public String saveDocument(Class<?> type, Map<String, Object> model) {
         if (model == null) {
             exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
-            return;
+            return null;
         }
         CollectionReference collection = getCollection(type);
         if (collection != null) {
-            collection.add(model);
+            ApiFuture<DocumentReference> api = collection.add(model);
+            try {
+                return api.get().getId();
+            } catch (Exception e) {
+                exceptionLog.log(e, this.getClass().getName());
+                return null;
+            }
         } else {
             exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            return null;
         }
     }
 

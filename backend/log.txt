@@ -1,1 +1,10 @@
 2024-03-29T22:20:56.885818400: java.lang.IllegalArgumentException: 'path' must be a non-empty String: com.project.backend.repository.FirestoreRepository
+2024-03-31T17:46:08.123887600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:46:08.233019700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:46:55.709644700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:46:55.806804100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:47:39.893758700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:47:40.025004500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:51:08.671974500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:51:08.741282400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter: com.project.backend.security.JwtAuthenticationFilter
+2024-03-31T17:53:32.086438500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
