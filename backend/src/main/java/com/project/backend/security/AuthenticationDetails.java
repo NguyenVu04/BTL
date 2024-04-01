@@ -14,7 +14,8 @@ public class AuthenticationDetails extends Model {
     protected AuthenticationDetails() {}
     public AuthenticationDetails(String username, String password, List<UserRole> userRole, String userId) {
         this.email = username;
-        this.password = password;
+        this.password = BackendAuthenticationProvider.encoder
+                                                     .encode(password);
         this.role = userRole.stream()
                             .map(role -> role.name())
                             .toList();

@@ -25,7 +25,6 @@ public class JwtUtils {
     private ExceptionLog exceptionLog;
     private final SecretKey encodeKey = Jwts.KEY.A256KW.key().build();
     private final SecretKey decodeKey = Jwts.KEY.A256GCMKW.key().build();
-    private final SecretKey signKey = Jwts.KEY.A128GCMKW.key().build();
     private final AeadAlgorithm algorithm = Jwts.ENC.A256GCM;
     public Claims decodeToken(String token) {
         try {
@@ -39,8 +38,23 @@ public class JwtUtils {
             return null;
         }                   
     }
+    public String encodeObject(String id, Map<String, Object> object) {
+        Date now = new Date();
+        Date expDate = new Date(now.getTime() + 20000);
+        try {
+            return Jwts.builder()
+                       .claims(object)
+                       .id(id)
+                       .encryptWith(encodeKey, algorithm)
+                       .expiration(expDate)
+                       .compact();
+        } catch (Exception e) {
+            exceptionLog.log(e);
+            return null;
+        }
+    }
     @Nullable
-    public String encodeObject(String id) {
+    public String encodeObjectById(String id) {
         DocumentSnapshot snapshot = repository.getDocumentById(AuthenticationDetails.class, id);
         if (snapshot == null) {
             return null;
@@ -54,10 +68,7 @@ public class JwtUtils {
         Date now = new Date();
         Date expDate = new Date(now.getTime() + 20000);
         return Jwts.builder()
-                   .signWith(signKey)
                    .expiration(expDate)
-                   .issuedAt(now)
-                   .issuer(id)
                    .id(id)
                    .claims(object)
                    .encryptWith(encodeKey, algorithm)

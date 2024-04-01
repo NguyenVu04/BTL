@@ -4,8 +4,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.exceptionhandler.ExceptionLog;
+import com.project.backend.repository.FirestoreRepository;
+import com.project.backend.security.AuthenticationDetails;
 import com.project.backend.security.JwtUtils;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,6 +23,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.util.MultiValueMapAdapter;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -27,14 +36,35 @@ public class AuthenticationController {
     private ExceptionLog exceptionLog;
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private FirestoreRepository repository;
     @PostMapping("")
-    public ResponseEntity<String> login(@RequestParam(name = "email", required = true) String email,  
+    public ResponseEntity<Map<String, Object>> login(@RequestParam(name = "email", required = true) String email,  
                                         @RequestParam(name = "password", required = true) String password) {
         try {
             Authentication authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             if (authentication.isAuthenticated()) {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                return ResponseEntity.status(HttpStatus.OK).header("Authorization", jwtUtils.encodeObject(authentication.getName())).build();
+                DocumentSnapshot snapshot = repository.getDocumentById(AuthenticationDetails.class, 
+                                                                        authentication.getName());
+                if (snapshot != null) {
+                    Map<String, Object> map = snapshot.getData();
+                    if (map != null) {
+                        String token = jwtUtils.encodeObject(snapshot.getId(), map);
+                        map.remove("password");
+                        Map<String, List<String>> header = new HashMap<String, List<String>>();
+                        header.put("Authorization", Arrays.asList(token));
+                        return new ResponseEntity<Map<String,Object>>(map, 
+                                                                    new MultiValueMapAdapter<String, String>(header), 
+                                                                    HttpStatus.OK);
+                    } else {
+                        exceptionLog.log(new UsernameNotFoundException(this.getClass().getName()));
+                        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                    }
+                } else {
+                    exceptionLog.log(new UsernameNotFoundException(this.getClass().getName()));
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                }
             } else {
                 exceptionLog.log(new UsernameNotFoundException(this.getClass().getName()));
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
