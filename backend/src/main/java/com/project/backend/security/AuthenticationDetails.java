@@ -12,8 +12,8 @@ public class AuthenticationDetails extends Model {
     private List<String> role;
     private String userId;
     protected AuthenticationDetails() {}
-    public AuthenticationDetails(String username, String password, List<UserRole> userRole, String userId) {
-        this.email = username;
+    public AuthenticationDetails(String email, String password, List<UserRole> userRole, String userId) {
+        this.email = email;
         this.password = BackendAuthenticationProvider.encoder
                                                      .encode(password);
         this.role = userRole.stream()
