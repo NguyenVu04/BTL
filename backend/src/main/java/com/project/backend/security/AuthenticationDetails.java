@@ -11,8 +11,10 @@ public class AuthenticationDetails extends Model {
     private String password;
     private List<String> role;
     private String userId;
+    private String username;
     protected AuthenticationDetails() {}
-    public AuthenticationDetails(String email, String password, List<UserRole> userRole, String userId) {
+    public AuthenticationDetails(String username, String email, String password, List<UserRole> userRole, String userId) {
+        this.username = username;
         this.email = email;
         this.password = BackendAuthenticationProvider.encoder
                                                      .encode(password);
@@ -20,6 +22,12 @@ public class AuthenticationDetails extends Model {
                             .map(role -> role.name())
                             .toList();
         this.userId = userId;
+    }
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
     }
     public String getPassword() {
         return password;

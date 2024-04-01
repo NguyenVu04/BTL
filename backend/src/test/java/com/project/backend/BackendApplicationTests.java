@@ -21,18 +21,19 @@ class BackendApplicationTests {
 	private FirestoreRepository repo;
 	@Test
 	void testSaveDocument() {
-		AuthenticationDetails details = new AuthenticationDetails("aaa", "baabb4477", Arrays.asList(UserRole.STUDENT), "scw594P1nMrDvIglNSJm");
+		AuthenticationDetails details = new AuthenticationDetails("d", "aaa", "baabb4477", Arrays.asList(UserRole.STUDENT), "scw594P1nMrDvIglNSJm");
 		repo.saveDocument(details);
 	}
 	@Test
 	void testGetDocumentsByField() {
-		List<DocumentSnapshot> list = repo.getDocumentsByField(AuthenticationDetails.class, "email", "aaa", 0, 2);
-		assertEquals("bbbbbb", list.get(0).getData().get("userId").toString());
+		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "ioq7bGpKnXVKLcWAPamF");
+		List<DocumentSnapshot> list = repo.getDocumentsByField(AuthenticationDetails.class, "email", "aaa");
+		assertEquals("c", list.get(1).getData().get("username").toString());
 	}
 	@Test
 	void testGetDocumentById() {
-		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "w00KJz3nTgB5Rs4hrPdz");
-		assertEquals("aaa", obj.getData().get("email"));
+		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "ioq7bGpKnXVKLcWAPamF");
+		assertEquals("b", obj.getData().get("username"));
 	}
 	@Test
 	void testDeleteDocumentById() {

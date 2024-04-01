@@ -97,17 +97,13 @@ public class FirestoreRepository {
     @Nullable
     public List<DocumentSnapshot> getDocumentsByField(Class<? extends Model> type, 
                                                       String fieldName, 
-                                                      Object value, 
-                                                      int offset, 
-                                                      int limit) {
+                                                      Object value) {
         CollectionReference collection = getCollection(type);
         if (collection == null || fieldName == null) {
             exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
             return null;
         }
-        Query query = collection.whereEqualTo(fieldName, value)
-                                .offset(offset)
-                                .limit(limit);
+        Query query = collection.whereEqualTo(fieldName, value);
         try {
             ApiFuture<QuerySnapshot> futureQuerySnapshot = query.get();
             List<DocumentSnapshot> snapshots = new ArrayList<>();
@@ -116,7 +112,7 @@ public class FirestoreRepository {
                          .forEach(doc -> snapshots.add(doc));
             return snapshots;
         } catch (Exception e) {
-            exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            exceptionLog.log(new IllegalArgumentException(e));
             return null;
         }
     }
