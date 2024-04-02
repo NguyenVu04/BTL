@@ -36,7 +36,7 @@ public class BackendAuthenticationProvider implements AuthenticationProvider {
                                                        .stream()
                                                        .map(role -> new SimpleGrantedAuthority(role))
                                                        .toList();
-            return UsernamePasswordAuthenticationToken.authenticated(details.getId(), password, list);
+            return UsernamePasswordAuthenticationToken.authenticated(details.getUserId(), password, list);
         } else {
             AuthenticationException e = new UsernameNotFoundException(this.getClass().getName());
             exceptionLog.log(e);

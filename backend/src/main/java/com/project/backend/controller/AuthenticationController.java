@@ -45,12 +45,15 @@ public class AuthenticationController {
             Authentication authentication = manager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
             if (authentication.isAuthenticated()) {
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                DocumentSnapshot snapshot = repository.getDocumentById(AuthenticationDetails.class, 
-                                                                        authentication.getName());
-                if (snapshot != null) {
-                    Map<String, Object> map = snapshot.getData();
+                List<DocumentSnapshot> snapshots = repository.getDocumentsByField(AuthenticationDetails.class,
+                                                                 "userId",
+                                                                            authentication.getName(), 
+                                                                            1); 
+                if (snapshots != null && !snapshots.isEmpty()) {
+                    Map<String, Object> map = snapshots.get(0)
+                                                       .getData();
                     if (map != null) {
-                        String token = jwtUtils.encodeObject(snapshot.getId(), map);
+                        String token = jwtUtils.encodeObject(map);
                         map.remove("password");
                         Map<String, List<String>> header = new HashMap<String, List<String>>();
                         header.put("Authorization", Arrays.asList(token));

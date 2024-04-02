@@ -7,6 +7,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -26,12 +28,13 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private ExceptionLog exceptionLog;
     @Autowired
     private JwtUtils jwtUtils;
+    @Autowired
+    private AuthenticationManager manager;
     private final List<String> excludePattern = Arrays.asList("/", "/login", "/signup");
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        filterChain.doFilter(request, response);  
-        /*if (excludePattern.contains(request.getHttpServletMapping().getPattern())) {
+        if (excludePattern.contains(request.getHttpServletMapping().getPattern())) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -50,13 +53,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             String password = jwtUtils.getPassword(claims);
             Authentication authentication = SecurityContextHolder.getContext()
                                                                  .getAuthentication();
-            if (authentication != null &&
-                authentication.getName()
-                              .equals(id) && 
-                authentication.getCredentials()
-                              .toString()
-                              .equals(password)) {
-                filterChain.doFilter(request, response);
+            if (authentication != null) {
+                if (authentication.getName()
+                                  .equals(id) && 
+                    authentication.getCredentials()
+                                  .toString()
+                                  .equals(password)) {
+                    filterChain.doFilter(request, response);
+                } else {
+                    Authentication jwtAuthentication = new UsernamePasswordAuthenticationToken(jwtUtils.getUsername(claims), password);
+                    try {
+                        jwtAuthentication = manager.authenticate(jwtAuthentication);
+                        SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
+                        filterChain.doFilter(request, response);
+                    } catch (Exception e) {
+                        exceptionLog.log(e);
+                        response.sendError(HttpStatus.UNAUTHORIZED.value());
+                    }
+                }
             } else {
                 IOException e = new IOException(this.getClass().getName());
                 exceptionLog.log(e);
@@ -66,7 +80,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             IOException e = new IOException(this.getClass().getName());
             exceptionLog.log(e);
             response.sendError(HttpStatus.UNAUTHORIZED.value());
-        }*/
+        }
     }
 
 }
