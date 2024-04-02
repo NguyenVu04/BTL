@@ -86,7 +86,7 @@ public class FirestoreRepository {
                                                                      .get();
                 return documentSnapshot.exists() ? documentSnapshot : null;
             } catch (Exception e) {
-                exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+                exceptionLog.log(e);
                 return null;
             }
         } else {
@@ -95,7 +95,7 @@ public class FirestoreRepository {
         }
     }
     @Nullable
-    public List<DocumentSnapshot> getDocumentsByField(Class<? extends Model> type, 
+    public List<DocumentSnapshot> getAllDocumentsByField(Class<? extends Model> type, 
                                                       String fieldName, 
                                                       Object value) {
         CollectionReference collection = getCollection(type);
@@ -112,7 +112,61 @@ public class FirestoreRepository {
                          .forEach(doc -> snapshots.add(doc));
             return snapshots;
         } catch (Exception e) {
-            exceptionLog.log(new IllegalArgumentException(e));
+            exceptionLog.log(e);
+            return null;
+        }
+    }
+    public List<DocumentSnapshot> getDocumentsByField(Class<? extends Model> type,
+                                                      String fieldName,
+                                                      Object value,
+                                                      String orderBy,
+                                                      int limit)
+    {
+        CollectionReference colletion = getCollection(type);
+        if (colletion == null || orderBy == null || fieldName == null) {
+            exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            return null;
+        }
+        Query query = colletion.orderBy(orderBy)
+                               .whereEqualTo(fieldName, value)
+                               .limit(limit);
+        ApiFuture<QuerySnapshot> apiQuerySnapshot = query.get();
+        List<DocumentSnapshot> snapshots = new ArrayList<DocumentSnapshot>();
+        try {
+            QuerySnapshot querySnapshot = apiQuerySnapshot.get();
+            querySnapshot.getDocuments()
+                         .forEach(doc -> snapshots.add(doc));
+            return snapshots;
+        } catch (Exception e) {
+            exceptionLog.log(e);
+            return null;
+        }
+    }
+    public List<DocumentSnapshot> getDocumentsByField(Class<? extends Model> type,
+                                                      String fieldName,
+                                                      Object value,
+                                                      DocumentSnapshot lastVisible,
+                                                      String orderBy,
+                                                      int limit)
+    {
+        CollectionReference colletion = getCollection(type);
+        if (colletion == null || orderBy == null || fieldName == null || lastVisible == null) {
+            exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            return null;
+        }
+        Query query = colletion.orderBy(orderBy)
+                               .whereEqualTo(fieldName, value)
+                               .startAfter(lastVisible)
+                               .limit(limit);
+        ApiFuture<QuerySnapshot> apiQuerySnapshot = query.get();
+        List<DocumentSnapshot> snapshots = new ArrayList<DocumentSnapshot>();
+        try {
+            QuerySnapshot querySnapshot = apiQuerySnapshot.get();
+            querySnapshot.getDocuments()
+                         .forEach(doc -> snapshots.add(doc));
+            return snapshots;
+        } catch (Exception e) {
+            exceptionLog.log(e);
             return null;
         }
     }

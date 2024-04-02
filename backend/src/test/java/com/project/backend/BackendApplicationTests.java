@@ -26,14 +26,14 @@ class BackendApplicationTests {
 	}
 	@Test
 	void testGetDocumentsByField() {
-		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "ioq7bGpKnXVKLcWAPamF");
-		List<DocumentSnapshot> list = repo.getDocumentsByField(AuthenticationDetails.class, "email", "aaa");
-		assertEquals("c", list.get(1).getData().get("username").toString());
+		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "Djo2ohyahjN8gGofkPW5");
+		List<DocumentSnapshot> list = repo.getDocumentsByField(AuthenticationDetails.class, "email", "aaa", "username", 2);
+		assertEquals(2, list.size());
 	}
 	@Test
 	void testGetDocumentById() {
-		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "ioq7bGpKnXVKLcWAPamF");
-		assertEquals("b", obj.getData().get("username"));
+		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "lSKOq6mNbM9hW3aoOoSg");
+		assertEquals("c", obj.getData().get("username"));
 	}
 	@Test
 	void testDeleteDocumentById() {
