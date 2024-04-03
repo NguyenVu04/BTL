@@ -6,7 +6,7 @@ Các ràng buộc dữ liệu bao gồm:
 - Ràng buộc ngữ nghĩa
 
 * Về ràng buộc Miền giá trị: yêu cầu các kiểu dữ liệu phải tuân theo ý nghĩa của dữ liệu (VD: miền giá trị của DOB là DD/MM/YY < thời gian hiện tại, mssv không thể âm, điểm không quá 10 hoặc 100 ) .
-* Về ràng buộc Khóa và toàn vẹn thực thể: yêu cầu mỗi Entity(thực thể or object) phải có khóa ( không được trùng nhau ) để xác định chính Entity đó, khóa ( phần được gạch chân ) không thể NULL.
+* Về ràng buộc Khóa và toàn vẹn thực thể: yêu cầu mỗi Entity(thực thể or object) phải có khóa ( không được trùng nhau ) (VD mssv, CourseID) để xác định chính Entity đó, khóa ( phần được gạch chân ) không thể NULL.
 * Về Các giá trị NULL: có những dữ liệu khi lưu không được phép NULL, việc NULL hay không tùy thuộc vào dữ liệu cần lưu.
 * Về Ràng buộc Toàn vẹn tham chiếu: là ràng buộc mà nếu Entity LƯU DỮ LIỆU của Entity khác, thì các thao tác CRUD nếu thay đổi dữ liệu của Entity này thì phải thay đổi kéo theo các dữ liệu của các Entity 
 có liên quan ( quan hệ kéo theo ), duy trì sự thống nhất / nhất quán giữa các bộ trong hai quan hệ. VD : nếu xóa 1 sinh viên trong khóa học hệ điều hành thì cần thay đổi các dữ liệu trong Entity sinh viên ( xóa CourseID trong
