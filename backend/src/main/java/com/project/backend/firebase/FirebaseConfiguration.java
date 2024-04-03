@@ -13,19 +13,26 @@ import com.google.firebase.cloud.FirestoreClient;
 
 @Configuration
 public class FirebaseConfiguration {
+    // Bean for initializing FirebaseApp with credentials from a service account file
     @Bean
     public FirebaseApp firebaseApp() throws Exception {
+        // Load service account credentials from a file
         FileInputStream serviceAccount = new FileInputStream("firebase.json");
 
+        // Configure Firebase options with the service account credentials
         FirebaseOptions options = FirebaseOptions.builder()
                                                  .setCredentials(
                                                     GoogleCredentials.fromStream(serviceAccount)
                                                     )
                                                  .build();
+        // Initialize FirebaseApp with the configured options
         return FirebaseApp.initializeApp(options);
     }
+
+    // Bean for creating a Firestore instance using the initialized FirebaseApp
     @Bean
     public Firestore firestore(FirebaseApp app) {
+        // Get Firestore instance associated with the FirebaseApp
         return FirestoreClient.getFirestore(app);
     }
 }

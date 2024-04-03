@@ -32,7 +32,7 @@ class BackendApplicationTests {
 	private FirestoreRepository repo;
 	@Test
 	void testSaveDocument() {
-		AuthenticationDetails details = new AuthenticationDetails("aaa4", "baabb", UserRole.TEACHER, "123");
+		AuthenticationDetails details = new AuthenticationDetails("aaa10", "baabb", UserRole.TEACHER, "12345");
 		repo.saveDocument(details);
 	}
 	@SuppressWarnings("unused")

@@ -22,16 +22,22 @@ import io.jsonwebtoken.Jwts;
 
 @Service
 public class JwtUtils {
+    // Autowired instance of ExceptionLog for logging exceptions
     @Autowired
     private ExceptionLog exceptionLog;
+    // SecretKey used for JWT encryption and decryption
     private SecretKey key;
+    // File name for storing the secret key
     private static final String keyFile = "SecretKey";
+
+    // Constructor initializes the secret key from a file or generates a new one if the file is not found
     public JwtUtils() {
         try (InputStream input = new FileInputStream(keyFile)) {
             byte[] bytes = input.readAllBytes();
             key = new SecretKeySpec(bytes, "AES");
         } catch (Exception e) {
             exceptionLog.log(e);
+            // Generate a new secret key if the file is not found
             key = Jwts.KEY.A256GCMKW.key().build();
             try (PrintStream print = new PrintStream(new FileOutputStream("key", false))) {
                 print.write(key.getEncoded());
@@ -40,6 +46,8 @@ public class JwtUtils {
             }
         }
     }
+
+    // Decodes a JWT token and returns its claims
     public Claims decodeToken(String token) {
         try {
             return Jwts.parser()
@@ -52,6 +60,8 @@ public class JwtUtils {
             return null;
         }                   
     }
+
+    // Encodes a map of claims into a JWT token
     public String encodeObject(Map<String, Object> map) {
         if (!map.containsKey("userId")) return null;
         String id = map.get("userId").toString();
@@ -72,6 +82,8 @@ public class JwtUtils {
             return null;
         }
     }   
+
+    // Checks if the provided claims are valid (not null, contain email and password, and not expired)
     public boolean isValid(Claims claims) {
         try {
             Date now = new Date();
@@ -88,14 +100,20 @@ public class JwtUtils {
             return false;
         }
     }
+
+    // Retrieves the user ID from the claims
     @Nullable
     public String getId(Claims claims) {
         return claims.getId();
     }
+
+    // Retrieves the password from the claims
     @Nullable
     public String getPassword(Claims claims) {
         return claims.get("password", String.class);
     }
+
+    // Retrieves the email from the claims
     @Nullable
     public String getEmail(Claims claims) {
         return claims.get("email", String.class);

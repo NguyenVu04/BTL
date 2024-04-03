@@ -17,3 +17,4 @@
 2024-04-03T15:59:40.031505800: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-04-03T16:03:00.059976100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-04-03T16:03:14.069293400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-03T22:01:15.460050600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter

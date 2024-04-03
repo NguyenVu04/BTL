@@ -17,23 +17,33 @@ import com.project.backend.exceptionhandler.ExceptionLog;
 @Configuration
 @EnableWebSecurity
 public class BackendSecurityConfiguration {
+    // Password encoder for hashing passwords
     public static final PasswordEncoder encoder = new BCryptPasswordEncoder();
+
+    // Autowired instance of BackendDetailsService for user details retrieval
     @Autowired
     private BackendDetailsService service;
+
+    // Autowired instance of ExceptionLog for logging exceptions
     @Autowired
     private ExceptionLog exceptionLog;
+
+    // Bean for configuring the security filter chain
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http//.csrf(crsf -> crsf.requireCsrfProtectionMatcher(req -> req.getRequestURI().equals("/home")))
-            .csrf(csrf -> csrf.disable())
-            .sessionManagement(
-                session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                );
+        // Disable CSRF protection for simplicity (not recommended for production)
+        http.csrf(csrf -> csrf.disable())
+            //.csrf(csrf -> csrf.requireCsrfProtectionMatcher(req -> req.getRequestURI().equals("/user")))
+            // Configure session management to be stateless
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
+
+    // Bean for configuring the AuthenticationManager with a custom authentication provider
     @Bean 
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
+        // Use a custom authentication provider with BCryptPasswordEncoder, BackendDetailsService, and ExceptionLog
         builder.authenticationProvider(new BackendAuthenticationProvider(BackendSecurityConfiguration.encoder, service, exceptionLog));
         return builder.build();
     }
