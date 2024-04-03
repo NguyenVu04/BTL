@@ -11,5 +11,5 @@ Các ràng buộc dữ liệu bao gồm:
 * Về Ràng buộc Toàn vẹn tham chiếu: là ràng buộc mà nếu Entity LƯU DỮ LIỆU của Entity khác, thì các thao tác CRUD nếu thay đổi dữ liệu của Entity này thì phải thay đổi kéo theo các dữ liệu của các Entity 
 có liên quan ( quan hệ kéo theo ), duy trì sự thống nhất / nhất quán giữa các bộ trong hai quan hệ. VD : nếu xóa 1 sinh viên trong khóa học hệ điều hành thì cần thay đổi các dữ liệu trong Entity sinh viên ( xóa CourseID trong
 của hệ diều hành trong phần dữ liệu của Entity sinh viên )  
-* Ràng buộc ngữ nghĩa : VD: tuổi sinh viên phải ít nhất 18, email không được chứa từ ngữ thô tục, 
+* Ràng buộc ngữ nghĩa : VD: tuổi sinh viên phải ít nhất 18, email không được chứa từ ngữ thô tục, nếu Rating của khóa học đó dưới 3 sao thì sẽ không hiển thị số Rating lên trên thông tin khóa học.
   
