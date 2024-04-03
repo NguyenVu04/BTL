@@ -1,19 +1,30 @@
 package com.project.backend;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.Arrays;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.crypto.SecretKey;
+import javax.crypto.spec.SecretKeySpec;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
 import com.project.backend.security.AuthenticationDetails;
+import com.project.backend.security.JwtUtils;
 import com.project.backend.security.UserRole;
+
+import io.jsonwebtoken.Jwts;
 @SuppressWarnings("null")
 @SpringBootTest
 class BackendApplicationTests {
@@ -21,9 +32,10 @@ class BackendApplicationTests {
 	private FirestoreRepository repo;
 	@Test
 	void testSaveDocument() {
-		AuthenticationDetails details = new AuthenticationDetails("d", "aaa", "baabb4477", Arrays.asList(UserRole.STUDENT), "scw594P1nMrDvIglNSJm");
+		AuthenticationDetails details = new AuthenticationDetails("aaa4", "baabb", UserRole.TEACHER, "123");
 		repo.saveDocument(details);
 	}
+	@SuppressWarnings("unused")
 	@Test
 	void testGetDocumentsByField() {
 		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "Djo2ohyahjN8gGofkPW5");
@@ -54,5 +66,38 @@ class BackendApplicationTests {
 		Map<String, Object> o = obj.getData();	
 		o.put("email", "44444444");
 		assertEquals(true, repo.updateDocumentById(AuthenticationDetails.class, "w00KJz3nTgB5Rs4hrPdz", o));
+	}
+	@Autowired
+	private ExceptionLog log;
+	@Test
+	void testEncodeJwt() {
+		SecretKey s = Jwts.KEY.A256GCMKW.key().build();
+		byte[] k = s.getEncoded();
+		try (PrintStream out = new PrintStream(new FileOutputStream("SecretKey", false))) {
+			out.write(k);
+		} catch (Exception e) {
+			log.log(e);
+		}
+		try (InputStream stream = new FileInputStream("SecretKey")) {
+			byte[] bytes = stream.readAllBytes();
+			SecretKey key = new SecretKeySpec(bytes, "AES");
+			assertTrue(key.equals(s));
+		} catch (Exception e) {
+			log.log(e);
+		}
+	}
+	@Autowired
+	private JwtUtils utils;
+	@Test
+	void testJwtUtils() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("email", "aaaaaaaa");
+		map.put("userId", "123456");
+		assertEquals(map.get("user"), utils.decodeToken(utils.encodeObject(map)).get("user"));
+	}
+	@Test
+	void testJwtUtils2() {
+		String token = "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..8uCUEqdolq3OJDat.qwMaiIMwFaETEqoWotAVeNUpUJLlCWRO30zEmJzp1QP9zE72aCsp4OYdHO247jySlBzzV7DBrFUVETTsFfmlC1SYTmwFAtF1uUNYSMACRDZqw55zp_L4YgWlSmKpRj7OLVkev9j_xoEPPy0M1wInAUjCF4REER1IG7rWSXyKWcP2lv6E56OuXw.KlelRFys5mV8Qpd0tk6Yug";
+		assertEquals("aaa1", utils.decodeToken(token).get("email"));
 	}
 }

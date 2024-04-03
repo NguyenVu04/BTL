@@ -119,6 +119,30 @@ public class FirestoreRepository {
     public List<DocumentSnapshot> getDocumentsByField(Class<? extends Model> type,
                                                       String fieldName,
                                                       Object value,
+                                                      int limit)
+    {
+        CollectionReference colletion = getCollection(type);
+        if (colletion == null || fieldName == null) {
+            exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            return null;
+        }
+        Query query = colletion.whereEqualTo(fieldName, value)
+                               .limit(limit);
+        ApiFuture<QuerySnapshot> apiQuerySnapshot = query.get();
+        List<DocumentSnapshot> snapshots = new ArrayList<DocumentSnapshot>();
+        try {
+            QuerySnapshot querySnapshot = apiQuerySnapshot.get();
+            querySnapshot.getDocuments()
+                         .forEach(doc -> snapshots.add(doc));
+            return snapshots;
+        } catch (Exception e) {
+            exceptionLog.log(e);
+            return null;
+        }
+    }
+    public List<DocumentSnapshot> getDocumentsByField(Class<? extends Model> type,
+                                                      String fieldName,
+                                                      Object value,
                                                       String orderBy,
                                                       int limit)
     {
