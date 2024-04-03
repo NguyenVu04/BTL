@@ -13,3 +13,5 @@ có liên quan ( quan hệ kéo theo ), duy trì sự thống nhất / nhất qu
 của hệ diều hành trong phần dữ liệu của Entity sinh viên )  
 * Ràng buộc ngữ nghĩa : VD: tuổi sinh viên phải ít nhất 18, email không được chứa từ ngữ thô tục, nếu Rating của khóa học đó dưới 3 sao thì sẽ không hiển thị số Rating lên trên thông tin khóa học.
   
+Danh sách các ràng buộc dữ liệu :
+https://docs.google.com/document/d/192L3it6e7ZqgHWbLMMCBCwfY5B16RWgSCi8-6F1OYow/edit?usp=sharing
