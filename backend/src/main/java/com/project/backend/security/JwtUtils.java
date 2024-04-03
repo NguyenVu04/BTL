@@ -71,13 +71,14 @@ public class JwtUtils {
             exceptionLog.log(e);
             return null;
         }
-    }
+    }   
     public boolean isValid(Claims claims) {
         try {
             Date now = new Date();
-            if (claims.containsKey("id") && 
-                claims.containsKey("password") && 
-                claims.getExpiration().before(now)) {
+            if (claims != null &&
+                claims.containsKey("email") && 
+                claims.containsKey("password") &&
+                claims.getExpiration().after(now)) {
                 return true;
             } else {
                 return false;
@@ -89,15 +90,11 @@ public class JwtUtils {
     }
     @Nullable
     public String getId(Claims claims) {
-        return claims.get("id", String.class);
+        return claims.getId();
     }
     @Nullable
     public String getPassword(Claims claims) {
         return claims.get("password", String.class);
-    }
-    @Nullable
-    public String getUsername(Claims claims) {
-        return claims.get("username", String.class);
     }
     @Nullable
     public String getEmail(Claims claims) {

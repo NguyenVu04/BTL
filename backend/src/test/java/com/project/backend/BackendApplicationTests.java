@@ -7,7 +7,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,7 +32,7 @@ class BackendApplicationTests {
 	private FirestoreRepository repo;
 	@Test
 	void testSaveDocument() {
-		AuthenticationDetails details = new AuthenticationDetails("da", "aaa2", "baabb", Arrays.asList(UserRole.STUDENT), "scw594P1nMrDvIglNSJm");
+		AuthenticationDetails details = new AuthenticationDetails("aaa4", "baabb", UserRole.TEACHER, "123");
 		repo.saveDocument(details);
 	}
 	@SuppressWarnings("unused")

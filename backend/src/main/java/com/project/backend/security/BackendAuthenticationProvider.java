@@ -2,45 +2,46 @@ package com.project.backend.security;
 
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Service;
-
 import com.project.backend.exceptionhandler.ExceptionLog;
 
-@Service
 public class BackendAuthenticationProvider implements AuthenticationProvider {
-    @Autowired
-    private BackendDetailsService service;
-    @Autowired
-    private ExceptionLog exceptionLog;
-    public static final PasswordEncoder encoder = new BCryptPasswordEncoder();
-
+    private final BackendDetailsService service;
+    private final ExceptionLog exceptionLog;
+    public final PasswordEncoder encoder;
+    public BackendAuthenticationProvider(PasswordEncoder encoder, 
+                                         BackendDetailsService service, 
+                                         ExceptionLog exceptionLog){
+        this.encoder = encoder;
+        this.exceptionLog = exceptionLog;
+        this.service = service;
+    }
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String email = authentication.getName();
-        String password = authentication.getCredentials().toString();
         AuthenticationDetails details = service.loadUserByEmail(email);
+        if (details == null) {
+            exceptionLog.log(new UsernameNotFoundException(this.getClass().getName() + ": " + authentication.toString()));
+            authentication.setAuthenticated(false);
+            return authentication;
+        }
+        String password = authentication.getCredentials()
+                                        .toString();
         String userPassword = details.getPassword();
 
         if (encoder.matches(password, userPassword)) {
-            List<SimpleGrantedAuthority> list = details.getRole()
-                                                       .stream()
-                                                       .map(role -> new SimpleGrantedAuthority(role))
-                                                       .toList();
+            List<SimpleGrantedAuthority> list = List.of(new SimpleGrantedAuthority(details.getRole()));
             return UsernamePasswordAuthenticationToken.authenticated(details.getUserId(), password, list);
         } else {
-            AuthenticationException e = new UsernameNotFoundException(this.getClass().getName());
-            exceptionLog.log(e);
-            throw e;
+            exceptionLog.log(new UsernameNotFoundException(this.getClass().getName() + ": " + authentication.toString()));
+            authentication.setAuthenticated(false);
+            return authentication;
         }
     }
 

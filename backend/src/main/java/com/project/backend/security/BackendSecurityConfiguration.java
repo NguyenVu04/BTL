@@ -8,16 +8,24 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+
+import com.project.backend.exceptionhandler.ExceptionLog;
 
 @Configuration
 @EnableWebSecurity
 public class BackendSecurityConfiguration {
-    @Autowired 
-    private BackendAuthenticationProvider provider;
+    public static final PasswordEncoder encoder = new BCryptPasswordEncoder();
+    @Autowired
+    private BackendDetailsService service;
+    @Autowired
+    private ExceptionLog exceptionLog;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(crsf -> crsf.disable())
+        http//.csrf(crsf -> crsf.requireCsrfProtectionMatcher(req -> req.getRequestURI().equals("/home")))
+            .csrf(csrf -> csrf.disable())
             .sessionManagement(
                 session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 );
@@ -26,7 +34,7 @@ public class BackendSecurityConfiguration {
     @Bean 
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        builder.authenticationProvider(provider);
+        builder.authenticationProvider(new BackendAuthenticationProvider(BackendSecurityConfiguration.encoder, service, exceptionLog));
         return builder.build();
     }
 }
