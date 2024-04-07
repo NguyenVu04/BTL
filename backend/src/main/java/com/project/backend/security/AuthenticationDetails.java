@@ -3,17 +3,20 @@ package com.project.backend.security;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
+/**
+ * Specifies the name of the Firebase Firestore collection that stores
+ * security-related details.
+ */
 @CollectionName("SecurityDetails")
 public class AuthenticationDetails extends Model {
     // User's email address
     private String email;
     // User's hashed password
     private String password;
-    // User's role (e.g., ADMIN, USER)
+    // User's role (TEACHER, STUDENT)
     private String role;
     // Unique identifier for the user
     private String userId;
-
     // Protected no-argument constructor for Firestore serialization
     protected AuthenticationDetails() {}
 
@@ -25,7 +28,6 @@ public class AuthenticationDetails extends Model {
         this.role = userRole.name();
         this.userId = userId;
     }
-
     // Getter for the password
     public String getPassword() {
         return password;

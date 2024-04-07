@@ -30,7 +30,13 @@ public class JwtUtils {
     // File name for storing the secret key
     private static final String keyFile = "SecretKey";
 
-    // Constructor initializes the secret key from a file or generates a new one if the file is not found
+    /**
+     * Initializes the secret key used for JWT encryption and decryption.
+     * If a file named "SecretKey" exists, the key is loaded from the file.
+     * Otherwise, a new secret key is generated and stored in the "SecretKey" file.
+     * Any exceptions that occur during the initialization process are logged using
+     * the `ExceptionLog` service.
+     */
     public JwtUtils() {
         try (InputStream input = new FileInputStream(keyFile)) {
             byte[] bytes = input.readAllBytes();
@@ -46,24 +52,37 @@ public class JwtUtils {
             }
         }
     }
-
-    // Decodes a JWT token and returns its claims
+    
+    /**
+     * Decodes the provided JWT token and returns the claims payload.
+     * 
+     * @param token The JWT token to decode.
+     * @return The claims payload of the decoded token, or null if an exception
+     *         occurs during decoding.
+     */
     public Claims decodeToken(String token) {
         try {
             return Jwts.parser()
-                       .decryptWith(key)
-                       .build()
-                       .parseEncryptedClaims(token)
-                       .getPayload();
+                    .decryptWith(key)
+                    .build()
+                    .parseEncryptedClaims(token)
+                    .getPayload();
         } catch (Exception e) {
             exceptionLog.log(e);
             return null;
-        }                   
+        }
     }
 
-    // Encodes a map of claims into a JWT token
+    /**
+     * Encodes a map of user data into a JWT token.
+     *
+     * @param map A map containing the user's email, password, and userId.
+     * @return The encoded JWT token, or null if an exception occurs during
+     *         encoding.
+     */
     public String encodeObject(Map<String, Object> map) {
-        if (!map.containsKey("userId")) return null;
+        if (!map.containsKey("userId"))
+            return null;
         String id = map.get("userId").toString();
         Map<String, Object> object = new HashMap<String, Object>();
         object.put("email", map.get("email"));
@@ -72,25 +91,31 @@ public class JwtUtils {
         Date expDate = new Date(now.getTime() + 3600000);
         try {
             return Jwts.builder()
-                       .claims(object)
-                       .id(id)
-                       .encryptWith(key, Jwts.ENC.A256GCM)
-                       .expiration(expDate)
-                       .compact();
+                    .claims(object)
+                    .id(id)
+                    .encryptWith(key, Jwts.ENC.A256GCM)
+                    .expiration(expDate)
+                    .compact();
         } catch (Exception e) {
             exceptionLog.log(e);
             return null;
         }
-    }   
+    }
 
-    // Checks if the provided claims are valid (not null, contain email and password, and not expired)
+    /**
+     * Checks if the provided JWT claims are valid. The claims must contain the
+     * 'email' and 'password' keys, and the token must not be expired.
+     *
+     * @param claims The JWT claims to validate.
+     * @return True if the claims are valid, false otherwise.
+     */
     public boolean isValid(Claims claims) {
         try {
             Date now = new Date();
             if (claims != null &&
-                claims.containsKey("email") && 
-                claims.containsKey("password") &&
-                claims.getExpiration().after(now)) {
+                    claims.containsKey("email") &&
+                    claims.containsKey("password") &&
+                    claims.getExpiration().after(now)) {
                 return true;
             } else {
                 return false;
