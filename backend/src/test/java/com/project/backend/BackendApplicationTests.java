@@ -7,17 +7,22 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.sql.Time;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.Student.Student;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
 import com.project.backend.security.AuthenticationDetails;
@@ -34,6 +39,23 @@ class BackendApplicationTests {
 	void testSaveDocument() {
 		AuthenticationDetails details = new AuthenticationDetails("aaa101", "baabb", UserRole.TEACHER, "123465");
 		repo.saveDocument(details);
+	}
+	@Test
+	void testStudent() {
+		Student student = new Student("Viet", Timestamp.now(), "daivietvonin1@gmail.com", null, true);
+		repo.saveDocument(student);
+	}
+	@Test
+	void testGetStudent() {
+		DocumentSnapshot obj = repo.getDocumentById(Student.class, "fcq518PECoQ78ITUnszO");
+		Student student = obj.toObject(Student.class);
+		assertEquals("Viet", student.getName());
+	}
+	@Test
+	void testStudentOrderBy() {
+		
+		List<DocumentSnapshot> list = repo.getDocumentsByField(Student.class, "name", "Viet", "dob", 1);
+		assertEquals("Viet", list.get(0).get("name"));
 	}
 	@SuppressWarnings("unused")
 	@Test

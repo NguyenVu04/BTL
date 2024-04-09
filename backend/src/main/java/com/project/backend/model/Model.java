@@ -13,4 +13,9 @@ public abstract class Model {
     public String getId() {
         return id;
     }
+
+    // Setter for the document ID
+    public void setId(String id) {
+        this.id = id;
+    }
 }

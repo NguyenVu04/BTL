@@ -38,7 +38,32 @@ public class FirestoreRepository {
                 : null;
     }
 
-    // Method to save a model object to Firestore and return the document ID
+    // Method to save a model object with specific documentID to Firestore and return the document ID
+    public <T extends Model> String saveDocument(T model, String documentId) {
+        // Check if the model is null
+        if (model == null) {
+            exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            return null;
+        }
+        // Get the collection reference for the model
+        CollectionReference collection = getCollection(model.getClass());
+        if (collection != null) {
+            // Add the model to the collection and get the document reference
+            DocumentReference documentReference = collection.document(documentId);
+            // model.setId(documentId);
+            ApiFuture<WriteResult> api = documentReference.set(model);
+            try {
+                // Return the document ID
+                return api.get().getClass().getName();
+            } catch (Exception e) {
+                exceptionLog.log(e, this.getClass().getName());
+                return null;
+            }
+        } else {
+            exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+            return null;
+        }
+    }
     public <T extends Model> String saveDocument(T model) {
         // Check if the model is null
         if (model == null) {
