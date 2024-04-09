@@ -48,6 +48,11 @@ public class FirestoreRepository {
         // Get the collection reference for the model
         CollectionReference collection = getCollection(model.getClass());
         if (collection != null) {
+            Object object = getDocumentById(model.getClass(), documentId);
+            if (object != null) {
+                exceptionLog.log(new IllegalArgumentException(this.getClass().getName()));
+                return null;
+            }
             // Add the model to the collection and get the document reference
             DocumentReference documentReference = collection.document(documentId);
             // model.setId(documentId);
