@@ -47,7 +47,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         // Skip JWT authentication for specified URIs
-        if (excludePattern.contains(request.getRequestURI()) || true/*for testing only, remove on production*/) {
+        if (excludePattern.contains(request.getRequestURI()) /*|| truefor testing only, remove on production*/) {
             filterChain.doFilter(request, response);
             return;
         }

@@ -63,10 +63,10 @@ public class JwtUtils {
     public Claims decodeToken(String token) {
         try {
             return Jwts.parser()
-                    .decryptWith(key)
-                    .build()
-                    .parseEncryptedClaims(token)
-                    .getPayload();
+                       .decryptWith(key)
+                       .build()
+                       .parseEncryptedClaims(token)
+                       .getPayload();
         } catch (Exception e) {
             exceptionLog.log(e);
             return null;
@@ -95,6 +95,7 @@ public class JwtUtils {
                     .id(id)
                     .encryptWith(key, Jwts.ENC.A256GCM)
                     .expiration(expDate)
+                    .issuedAt(now)
                     .compact();
         } catch (Exception e) {
             exceptionLog.log(e);
@@ -113,9 +114,9 @@ public class JwtUtils {
         try {
             Date now = new Date();
             if (claims != null &&
-                    claims.containsKey("email") &&
-                    claims.containsKey("password") &&
-                    claims.getExpiration().after(now)) {
+                claims.containsKey("email") &&
+                claims.containsKey("password") &&
+                claims.getExpiration().after(now)) {
                 return true;
             } else {
                 return false;
