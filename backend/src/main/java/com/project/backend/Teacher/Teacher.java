@@ -2,9 +2,9 @@ package com.project.backend.Teacher;
 
 import java.util.List;
 
+import com.google.cloud.Timestamp;
 import com.project.backend.Course.Course;
 import com.project.backend.firebase.CollectionName;
-import com.project.backend.model.DOB;
 import com.project.backend.model.Model;
 
 import lombok.Getter;
@@ -18,7 +18,7 @@ public class Teacher extends Model {
 
     private String email;
 
-    private DOB dob;
+    private Timestamp dayofBirth;
 
     private String phonenumber;
     private List<Course> CourseID;   
@@ -27,13 +27,13 @@ public class Teacher extends Model {
     public Teacher(
                 String name, 
                 String email, 
-                DOB dob, 
+                Timestamp dayofBirth, 
                 String phonenumber, 
                 List<Course> CourseID, 
                 Certificate certificate) {
         this.name = name;
         this.email = email;
-        this.dob = dob;
+        this.dayofBirth = dayofBirth;
         this.phonenumber = phonenumber;
         this.CourseID = CourseID;
         this.certificate = certificate;
