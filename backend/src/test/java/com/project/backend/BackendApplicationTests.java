@@ -55,7 +55,7 @@ class BackendApplicationTests {
 	}
 	@Test
 	void testUpdateDocumentById() {
-		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "w00KJz3nTgB5Rs4hrPdz");
+		DocumentSnapshot obj = repo.getDocumentById(AuthenticationDetails.class, "TXda3LgHmXVotDhfwloI");
 		AuthenticationDetails d = obj.toObject(AuthenticationDetails.class);
 		d.setEmail("bbbbbb");
 		assertEquals(true, repo.updateDocumentById(d));
