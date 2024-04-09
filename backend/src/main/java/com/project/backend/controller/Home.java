@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class Home {
     @GetMapping("/student")
     public String home() {
-        String name = SecurityContextHolder.getContext().getAuthentication().getName();
-        return name;
+        return "Hello";
     }
     
 }

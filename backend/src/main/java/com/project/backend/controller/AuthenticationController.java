@@ -46,14 +46,11 @@ public class AuthenticationController {
             if (authentication.isAuthenticated()) {
                 SecurityContextHolder.getContext()
                                      .setAuthentication(authentication);
-                List<DocumentSnapshot> snapshots = repository.getDocumentsByField(AuthenticationDetails.class,
-                                                                 "userId",
-                                                                            authentication.getName(), 
-                                                                            1); 
-                if (snapshots != null && !snapshots.isEmpty()) {
-                    Map<String, Object> map = snapshots.get(0)
-                                                       .getData();
+                DocumentSnapshot snapshot = repository.getDocumentById(AuthenticationDetails.class, authentication.getName()); 
+                if (snapshot != null) {
+                    Map<String, Object> map = snapshot.getData();
                     if (map != null) {
+                        map.put("id", snapshot.getId());
                         map.put("password", password);
                         String token = jwtUtils.encodeObject(map);
                         map.remove("password");

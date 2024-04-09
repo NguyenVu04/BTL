@@ -42,14 +42,15 @@ public class BackendAuthenticationProvider implements AuthenticationProvider {
             return authentication;
         }
         // Extract the password from the authentication object
-        String password = authentication.getCredentials().toString();
+        String password = authentication.getCredentials()
+                                        .toString();
         // Compare the provided password with the stored password
         String userPassword = details.getPassword();
 
         // If the passwords match, create an authenticated UsernamePasswordAuthenticationToken with the user's details and roles
         if (encoder.matches(password, userPassword)) {
             List<SimpleGrantedAuthority> list = List.of(new SimpleGrantedAuthority(details.getRole()));
-            return UsernamePasswordAuthenticationToken.authenticated(details.getUserId(), password, list);
+            return UsernamePasswordAuthenticationToken.authenticated(details.getId(), password, list);
         } else {
             // If the passwords do not match, log the exception and return the authentication object marked as not authenticated
             exceptionLog.log(new UsernameNotFoundException(this.getClass().getName() + ": " + authentication.toString()));

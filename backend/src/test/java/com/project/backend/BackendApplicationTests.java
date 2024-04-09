@@ -34,7 +34,7 @@ class BackendApplicationTests {
 	private FirestoreRepository repo;
 	@Test
 	void testSaveDocument() {
-		AuthenticationDetails details = new AuthenticationDetails("aaa101", "baabb", UserRole.TEACHER, "123465");
+		AuthenticationDetails details = new AuthenticationDetails("123465", "aaa101", "baabb", UserRole.TEACHER);
 		repo.saveDocument(details);
 	}
 	@Test

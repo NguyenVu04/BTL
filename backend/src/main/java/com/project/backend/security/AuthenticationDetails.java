@@ -1,5 +1,6 @@
 package com.project.backend.security;
 
+import com.google.cloud.Timestamp;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
@@ -15,19 +16,29 @@ public class AuthenticationDetails extends Model {
     private String password;
     // User's role (TEACHER, STUDENT)
     private String role;
-    // Unique identifier for the user
-    private String userId;
+    //The timestamp of the user's last logout from the application.
+    private Timestamp lastLogout;
     // Protected no-argument constructor for Firestore serialization
     protected AuthenticationDetails() {}
 
     // Constructor to create an AuthenticationDetails object with email, password, role, and userId
-    public AuthenticationDetails(String email, String password, UserRole userRole, String userId) {
+    public AuthenticationDetails(String userId, String email, String password, UserRole userRole) {
         this.email = email;
         // Encode the password using the BCryptPasswordEncoder from BackendSecurityConfiguration
         this.password = BackendSecurityConfiguration.encoder.encode(password);
         this.role = userRole.name();
-        this.userId = userId;
+        this.setId(userId);
+        lastLogout = Timestamp.now();
     }
+    //Getter for lastLogout
+    public Timestamp getLastLogout() {
+        return lastLogout;
+    }
+    //Setter for lastLogout
+    public void setLastLogout(Timestamp lastLogout) {
+        this.lastLogout = lastLogout;
+    }
+
     // Getter for the password
     public String getPassword() {
         return password;
@@ -56,15 +67,5 @@ public class AuthenticationDetails extends Model {
     // Setter for the email
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    // Getter for the userId
-    public String getUserId() {
-        return userId;
-    }
-
-    // Setter for the userId
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }    
+    }   
 }

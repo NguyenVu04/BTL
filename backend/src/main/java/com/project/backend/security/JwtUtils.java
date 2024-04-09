@@ -15,13 +15,18 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.google.cloud.Timestamp;
+import com.google.cloud.firestore.FieldMask;
 import com.project.backend.exceptionhandler.ExceptionLog;
+import com.project.backend.repository.FirestoreRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 @Service
 public class JwtUtils {
+    @Autowired
+    private FirestoreRepository repository;
     // Autowired instance of ExceptionLog for logging exceptions
     @Autowired
     private ExceptionLog exceptionLog;
@@ -81,9 +86,8 @@ public class JwtUtils {
      *         encoding.
      */
     public String encodeObject(Map<String, Object> map) {
-        if (!map.containsKey("userId"))
-            return null;
-        String id = map.get("userId").toString();
+        if (!map.containsKey("id")) return null;
+        String id = map.get("id").toString();
         Map<String, Object> object = new HashMap<String, Object>();
         object.put("email", map.get("email"));
         object.put("password", map.get("password"));
@@ -111,18 +115,16 @@ public class JwtUtils {
      * @return True if the claims are valid, false otherwise.
      */
     public boolean isValid(Claims claims) {
-        try {
-            Date now = new Date();
-            if (claims != null &&
-                claims.containsKey("email") &&
-                claims.containsKey("password") &&
-                claims.getExpiration().after(now)) {
-                return true;
-            } else {
-                return false;
-            }
-        } catch (Exception e) {
-            exceptionLog.log(e, this.getClass().getName());
+        Date now = new Date();
+        if (claims != null &&
+            claims.containsKey("email") &&
+            claims.containsKey("password") &&
+            claims.getExpiration().after(now)) {
+            /*Timestamp lastLogin = repository.getCollection(AuthenticationDetails.class)
+                                            .document(claims.getId())
+                                            .get(FieldMask.of("lastLogin"))*/
+            return true;
+        } else {
             return false;
         }
     }
