@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.cloud.Timestamp;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.FieldMask;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
@@ -116,14 +117,23 @@ public class JwtUtils {
      */
     public boolean isValid(Claims claims) {
         Date now = new Date();
+        CollectionReference collection = repository.getCollection(AuthenticationDetails.class);
         if (claims != null &&
             claims.containsKey("email") &&
             claims.containsKey("password") &&
-            claims.getExpiration().after(now)) {
-            /*Timestamp lastLogin = repository.getCollection(AuthenticationDetails.class)
-                                            .document(claims.getId())
-                                            .get(FieldMask.of("lastLogin"))*/
-            return true;
+            claims.getExpiration().after(now) &&
+            collection != null) {         
+            try {
+                Timestamp lastLogout = collection.document(claims.getId())
+                                                .get(FieldMask.of("lastLogin"))
+                                                .get()
+                                                .toObject(Timestamp.class);
+                Timestamp issueAt = Timestamp.of(claims.getIssuedAt());
+                return issueAt.compareTo(lastLogout) > 0 ? true : false;
+            } catch (Exception e) {
+                exceptionLog.log(e);
+                return false;
+            }
         } else {
             return false;
         }
