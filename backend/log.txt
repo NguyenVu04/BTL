@@ -1,5 +1,10 @@
-2024-04-09T20:47:38.792221: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
-2024-04-09T22:11:31.612816600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
-2024-04-09T22:11:31.772853200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
-2024-04-09T22:28:28.943465100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
-2024-04-09T22:29:09.938545200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-09T22:58:27.826247500: java.lang.RuntimeException: Could not deserialize object. Failed to convert value of type java.util.HashMap to Timestamp
+2024-04-09T22:58:27.827239900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-09T23:05:36.159203600: java.lang.NullPointerException: Cannot read field "seconds" because "other" is null
+2024-04-09T23:05:36.160203300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-09T23:05:58.546962900: java.lang.NullPointerException: Cannot read field "seconds" because "other" is null
+2024-04-09T23:05:58.547972700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-09T23:06:04.484836300: java.lang.NullPointerException: Cannot read field "seconds" because "other" is null
+2024-04-09T23:06:04.484836300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-09T23:08:00.404340600: java.lang.NullPointerException: Cannot read field "seconds" because "other" is null: com.project.backend.security.JwtUtils
+2024-04-09T23:08:00.405338900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter

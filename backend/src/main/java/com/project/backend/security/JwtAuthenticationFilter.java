@@ -88,7 +88,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             }
         } else {
             // Log and reject the request if the JWT is invalid
-            exceptionLog.log(new IOException(this.getClass().getName() + "valid"));
+            exceptionLog.log(new IOException(this.getClass().getName()));
             response.sendError(HttpStatus.UNAUTHORIZED.value());
         }
     }
