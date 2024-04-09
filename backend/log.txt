@@ -1,0 +1,1 @@
+2024-04-09T20:47:38.792221: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter

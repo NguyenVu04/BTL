@@ -8,7 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -37,17 +36,16 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private AuthenticationManager manager;
     // Map of endpoints to user roles for authorization
     private static final Map<String, String> authorities = Map.ofEntries(Map.entry("/teacher", UserRole.TEACHER.name()),
-                                                                         Map.entry("/student", UserRole.STUDENT.name()));
+            Map.entry("/student", UserRole.STUDENT.name()));
     // List of request URIs to exclude from JWT authentication
     private static final List<String> excludePattern = Arrays.asList("/", "/login", "/signup");
 
     // Override the doFilterInternal method to apply JWT authentication logic
-    @SuppressWarnings("unused")
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         // Skip JWT authentication for specified URIs
-        if (excludePattern.contains(request.getRequestURI()) /*|| truefor testing only, remove on production*/) {
+        if (excludePattern.contains(request.getRequestURI()) || true/*for testing only, remove on production */) {
             filterChain.doFilter(request, response);
             return;
         }
@@ -69,34 +67,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         Claims claims = jwtUtils.decodeToken(token);
         if (jwtUtils.isValid(claims)) {
             // Perform authentication based on the JWT claims
-            String id = jwtUtils.getId(claims);
+            String email = jwtUtils.getEmail(claims);
             String password = jwtUtils.getPassword(claims);
-            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-            if (authentication != null && !(authentication instanceof AnonymousAuthenticationToken)) {
-                // Check if the current authentication matches the JWT claims
-                if (authentication.getName().equals(id) &&
-                    BackendSecurityConfiguration.encoder.matches(password, authentication.getCredentials().toString()) &&
-                    authentication.getAuthorities().stream().map(auth -> auth.getAuthority()).anyMatch(name -> name.equals(authorities.get(request.getRequestURI())))) {
-                    filterChain.doFilter(request, response);
-                } else {
-                    exceptionLog.log(new IOException(this.getClass().getName()));
-                    response.sendError(HttpStatus.UNAUTHORIZED.value());
-                }
+            Authentication jwtAuthentication = manager
+                    .authenticate(new UsernamePasswordAuthenticationToken(email, password));
+            if (!jwtAuthentication.isAuthenticated()) {
+                exceptionLog.log(new IOException(this.getClass().getName()));
+                response.sendError(HttpStatus.UNAUTHORIZED.value());
+                return;
+            }
+            SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
+            if (jwtAuthentication.getAuthorities()
+                    .stream()
+                    .map(auth -> auth.getAuthority())
+                    .anyMatch(name -> name.equals(authorities.get(request.getRequestURI())))) {
+                filterChain.doFilter(request, response);
             } else {
-                // Authenticate using JWT claims if no authentication is present
-                Authentication jwtAuthentication = manager.authenticate(new UsernamePasswordAuthenticationToken(jwtUtils.getEmail(claims), password));
-                if (jwtAuthentication.isAuthenticated()) {
-                    SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
-                    if (jwtAuthentication.getAuthorities().stream().map(auth -> auth.getAuthority()).anyMatch(name -> name.equals(authorities.get(request.getRequestURI())))) {
-                        filterChain.doFilter(request, response);
-                    } else {
-                        exceptionLog.log(new IOException(this.getClass().getName()));
-                        response.sendError(HttpStatus.UNAUTHORIZED.value());
-                    }
-                } else {
-                    exceptionLog.log(new IOException(this.getClass().getName()));
-                    response.sendError(HttpStatus.UNAUTHORIZED.value());
-                }
+                exceptionLog.log(new IOException(this.getClass().getName()));
+                response.sendError(HttpStatus.UNAUTHORIZED.value());
             }
         } else {
             // Log and reject the request if the JWT is invalid
