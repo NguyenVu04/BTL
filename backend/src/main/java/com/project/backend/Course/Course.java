@@ -6,6 +6,7 @@ import java.util.Map;
 import com.google.cloud.Timestamp;
 import com.project.backend.Course.Quizz.Quizz;
 import com.project.backend.Student.Student;
+import com.project.backend.Teacher.Teacher;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
@@ -26,7 +27,7 @@ public class Course extends Model{
     private Map<String,String> timeTable;
 
     private List<Student> listStudent;
-
+    private List<Teacher> listTeacher; 
     protected Course(){}
 
     public Course(
@@ -38,7 +39,8 @@ public class Course extends Model{
             Double price, 
             List<Map<String, Quizz>> quizz, 
             Map<String,String> timeTable,
-            List<Student> listStudent
+            List<Student> listStudent,
+            List<Teacher> listTeacher
             ) {
         this.name = name;
         this.category = category;
@@ -49,5 +51,6 @@ public class Course extends Model{
         this.quizz = quizz;
         this.timeTable = timeTable;
         this.listStudent = listStudent;
+        this.listTeacher = listTeacher;
     }
 }

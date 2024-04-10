@@ -23,6 +23,8 @@ import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.Course.Course;
 import com.project.backend.Student.Student;
+import com.project.backend.Teacher.Certificate;
+import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
 import com.project.backend.security.AuthenticationDetails;
@@ -44,8 +46,9 @@ class BackendApplicationTests {
 	@Test
 	void testSaveCourse() {
 		List<Student> students = new ArrayList<Student>();
-		Course course = new Course("KTLT", null, Timestamp.now(), Timestamp.now(), null, 120.0, null, null, students);
-		repo.saveDocument(course, "CO1023");
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		Course course = new Course("KTLT", null, Timestamp.now(), Timestamp.now(), null, 120.0, null, null, students, teachers);
+		repo.saveDocument(course, "CO1015");
 	}
 	@Test
 	void testStudent() {
@@ -53,6 +56,14 @@ class BackendApplicationTests {
 		Student student = new Student("Viet", Timestamp.now(), "daivietvonin1@gmail.com", CourseID, true);
 		repo.saveDocument(student, "2213954");
 	}
+	@Test
+	void testTeacher() {
+		List<String> CourseID = new ArrayList<String>();
+		Certificate certificate = new Certificate("CSE", "Professor", "HCMUT");
+		Teacher student = new Teacher("Viet", "ledinhthuan@hcmut.edu.vn", Timestamp.now(), "0937584842", CourseID, certificate);
+		repo.saveDocument(student, "1121");
+	}
+
 	@Test
 	void testGetStudent() {
 		DocumentSnapshot obj = repo.getDocumentById(Student.class, "fcq518PECoQ78ITUnszO");

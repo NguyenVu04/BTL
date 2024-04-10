@@ -20,3 +20,4 @@
 2024-04-09T23:19:28.430388: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1, Credentials=[PROTECTED], Authenticated=false, Details=null, Granted Authorities=[]]
 2024-04-09T23:19:28.431372300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
 >>>>>>> 07477057fefdde503c69e0a091515919a3e94f16
+2024-04-10T14:29:39.299224700: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository

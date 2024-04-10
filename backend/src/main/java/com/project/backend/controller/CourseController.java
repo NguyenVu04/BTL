@@ -6,6 +6,7 @@ import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.Course.Course;
 import com.project.backend.Student.Student;
+import com.project.backend.Teacher.Teacher;
 import com.project.backend.repository.FirestoreRepository;
 
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public class CourseController {
         }        
         Student student = findStudent.toObject(Student.class);
         for (int i = 0 ; i < student.getCourseID().size() ; i++) {
-            if (student.getCourseID().get(i) == CourseID){
+            if (student.getCourseID().get(i).equals(CourseID)){
                 return "Student already in this course";
             }
         }
@@ -81,4 +82,31 @@ public class CourseController {
         return "Successfully";
 
     }
+
+    @PostMapping("/Add/Teacher")
+    public String addTeacherIntoCourse(@RequestParam String teacherID,
+                                       @RequestParam String CourseID) 
+    {
+                                      
+        DocumentSnapshot findTeacher = repository.getDocumentById(Teacher.class, teacherID);
+        if (findTeacher == null) {
+            return "Teacher not exist";
+        }        
+        Teacher teacher = findTeacher.toObject(Teacher.class);
+        for (int i = 0 ; i < teacher.getCourseID().size() ; i++) {
+            if (teacher.getCourseID().get(i).equals(CourseID)){
+                return "Teacher already in this course";
+            }
+        }
+        // inject courseID into that teacher
+        teacher.getCourseID().add(CourseID);
+        
+        // inject that teacher into the course
+        Course temp = repository.getDocumentById(Course.class, CourseID).toObject(Course.class);
+        temp.getListTeacher().add(teacher);
+        repository.updateDocumentById(teacher);
+        repository.updateDocumentById(temp);
+        return "Successfully";
+    }
+    
 }
