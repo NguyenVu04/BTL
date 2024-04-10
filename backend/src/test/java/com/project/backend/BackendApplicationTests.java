@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.Course.Course;
 import com.project.backend.Student.Student;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
@@ -54,6 +55,11 @@ class BackendApplicationTests {
 		
 		List<DocumentSnapshot> list = repo.getDocumentsByField(Student.class, "name", "Viet", "dob", 1);
 		assertEquals("Viet", list.get(0).get("name"));
+	}
+	@Test
+	void testGetDocumentsByField1() {
+		List<DocumentSnapshot> list = repo.getAllDocumentsByField(Course.class, "price", 100);
+			assertEquals(2, list.size());
 	}
 	@SuppressWarnings("unused")
 	@Test
