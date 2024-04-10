@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.google.cloud.Timestamp;
 import com.project.backend.Course.Quizz.Quizz;
+import com.project.backend.Student.Student;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
@@ -17,29 +18,28 @@ import lombok.Setter;
 public class Course extends Model{
     private String name; // name of the course
     private Category category;
-    private Timestamp endDate;;
     private Timestamp startDate;;
+    private Timestamp endDate;;
     private List<Lesson> LessonMaterials;
-    private Integer price;
-    private List<Quizz> quizz;
-    private List<String> TeacherID;
-    private List<String> StudentID;
+    private Double price;
+    private List<Map<String, Quizz>> quizz;
     private Map<String,String> timeTable;
 
+    private List<Student> listStudent;
 
     protected Course(){}
 
     public Course(
             String name, 
             Category category, 
-            Timestamp endDate, 
             Timestamp startDate, 
+            Timestamp endDate, 
             List<Lesson> LessonMaterials, 
-            Integer price, 
-            List<Quizz> quizz, 
-            List<String> TeacherID,
-            List<String> StudentID,
-            Map<String,String> timeTable) {
+            Double price, 
+            List<Map<String, Quizz>> quizz, 
+            Map<String,String> timeTable,
+            List<Student> listStudent
+            ) {
         this.name = name;
         this.category = category;
         this.endDate = endDate;
@@ -47,8 +47,7 @@ public class Course extends Model{
         this.LessonMaterials = LessonMaterials;
         this.price = price;
         this.quizz = quizz;
-        this.TeacherID = TeacherID;
-        this.StudentID = StudentID;
         this.timeTable = timeTable;
+        this.listStudent = listStudent;
     }
 }

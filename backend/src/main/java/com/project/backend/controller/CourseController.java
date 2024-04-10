@@ -30,7 +30,7 @@ public class CourseController {
     private FirestoreRepository repository;
 
     // get Course by ID
-    @GetMapping("/FindCourseByID")
+    @GetMapping("/FindCourse/ByID")
     public Course getCourse(@RequestParam String id) {
         DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class, id);
         Course course = documentSnapshot.toObject(Course.class);
@@ -40,7 +40,7 @@ public class CourseController {
     }
 
     // get Course by price
-    @GetMapping("/FindAllCourseByPrice")
+    @GetMapping("/FindAllCourse/ByPrice")
     public List<Course> getCoursebyField(@RequestParam Integer value) {
         List<DocumentSnapshot> snapshot = repository.getAllDocumentsByField(Course.class, "price", value);
         Course one = snapshot.get(0).toObject(Course.class);
@@ -54,14 +54,31 @@ public class CourseController {
 
     // add student into course
     @PostMapping("/Add/Student")
-    public String addStudent(@RequestParam String Name, 
-                            @RequestParam Timestamp DayOfBirth, 
-                            @RequestParam String Email, 
-                            @RequestParam String CourseID )
+    public String addStudentIntoCourse(
+                            @RequestParam String studentID, 
+                            @RequestParam String CourseID 
+                            )
     {
+        // get course information
+        DocumentSnapshot findStudent = repository.getDocumentById(Student.class, studentID);
+        if (findStudent == null) {
+            return "Student not exist";
+        }        
+        Student student = findStudent.toObject(Student.class);
+        for (int i = 0 ; i < student.getCourseID().size() ; i++) {
+            if (student.getCourseID().get(i) == CourseID){
+                return "Student already in this course";
+            }
+        }
+        // inject courseID into that student
+        student.getCourseID().add(CourseID);
         
-        Student student = new Student(Name, DayOfBirth, Email, null, false);          
-        return null;
+        // inject that student into the course
+        Course temp = repository.getDocumentById(Course.class, CourseID).toObject(Course.class);
+        temp.getListStudent().add(student);
+        repository.updateDocumentById(student);
+        repository.updateDocumentById(temp);
+        return "Successfully";
 
     }
 }

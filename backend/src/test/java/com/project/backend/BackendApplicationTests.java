@@ -9,10 +9,12 @@ import java.io.InputStream;
 import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.checkerframework.checker.units.qual.Time;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -39,9 +41,16 @@ class BackendApplicationTests {
 		repo.saveDocument(details);
 	}
 	@Test
+	void testSaveCourse() {
+		List<Student> students = new ArrayList<Student>();
+		Course course = new Course("KTLT", null, Timestamp.now(), Timestamp.now(), null, 120.0, null, null, students);
+		repo.saveDocument(course, "CO1023");
+	}
+	@Test
 	void testStudent() {
-		Student student = new Student("Viet", Timestamp.now(), "daivietvonin1@gmail.com", null, true);
-		repo.saveDocument(student);
+		List<String> CourseID = new ArrayList<String>();
+		Student student = new Student("Viet", Timestamp.now(), "daivietvonin1@gmail.com", CourseID, true);
+		repo.saveDocument(student, "2213954");
 	}
 	@Test
 	void testGetStudent() {

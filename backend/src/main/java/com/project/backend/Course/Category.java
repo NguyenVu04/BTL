@@ -6,8 +6,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Category {
-    private String major;
-    private Integer yearvalid;
+    private String major = null;
+    private Integer yearvalid = null;
 
     protected Category(){
     }

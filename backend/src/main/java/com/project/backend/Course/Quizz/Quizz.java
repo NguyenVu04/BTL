@@ -11,18 +11,23 @@ public class Quizz {
     private Timestamp Startdate;
     private Timestamp Enddate;
     private QuestionAndAnswer questionAndAnswer;
-
-    protected Quizz(){
-    }
+    private String title;
+    // find score of student by id
+    private QuizzDetail quizzDetail;
+    protected Quizz(){}
 
     public Quizz(
         Timestamp startDate,
         Timestamp endDate,
-        QuestionAndAnswer questionAndAnswer
+        QuestionAndAnswer questionAndAnswer,
+        QuizzDetail quizzDetail,
+        String title
         ){
             this.Startdate = startDate;
             this.Enddate = endDate;
             this.questionAndAnswer = questionAndAnswer;
+            this.quizzDetail = quizzDetail;
+            this.title = title;
         }
 }
 
