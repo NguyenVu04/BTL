@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
@@ -131,6 +132,30 @@ public class CourseController {
         repository.updateDocumentById(teacher);
         repository.updateDocumentById(temp);
         return "Successfully";
+    }
+    
+
+    @PutMapping("/Update/Course")
+    public String updateCourse(@RequestParam String field, @RequestParam Object value, @RequestParam String id) {
+        DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class, id);
+        if (documentSnapshot == null) {
+            return "Course not exist";
+        }
+        Object find = documentSnapshot.get(field);
+        if (find == null) {
+            return "Can't find field: " + field;
+        }
+
+        Map<String, Object> obj = repository.getDocumentById(Course.class, id).getData();
+        obj.put(field, value);
+
+        repository.updateDocumentById(Course.class, id, obj);
+        return "Succefully";
+    }
+
+    @GetMapping("/Foo")
+    public String addFoo(@RequestParam(name = "id", required = false) String fooId, @RequestParam String name) { 
+        return "ID: " + fooId + " Name: " + name;
     }
     
 }
