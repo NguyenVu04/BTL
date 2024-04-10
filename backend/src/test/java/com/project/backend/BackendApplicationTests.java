@@ -35,7 +35,8 @@ class BackendApplicationTests {
 	@Test
 	void testSaveDocument() {
 		AuthenticationDetails details = new AuthenticationDetails("admin", "admin", "admin", UserRole.STUDENT);
-		repo.saveDocument(details);
+		boolean t = repo.updateDocumentById(details);
+		assertTrue(t);
 	}
 	@Test
 	void testStudent() {
