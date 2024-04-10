@@ -1,3 +1,10 @@
+<<<<<<< HEAD
+
+2024-04-10T00:43:28.929568200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-10T08:09:41.437315800: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-10T08:10:53.887155300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-04-10T08:17:04.985566: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+=======
 2024-04-09T20:47:38.792221: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-04-09T22:11:31.612816600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-04-09T22:11:31.772853200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
@@ -12,3 +19,4 @@
 2024-04-09T23:19:28.429371: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
 2024-04-09T23:19:28.430388: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1, Credentials=[PROTECTED], Authenticated=false, Details=null, Granted Authorities=[]]
 2024-04-09T23:19:28.431372300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+>>>>>>> 07477057fefdde503c69e0a091515919a3e94f16

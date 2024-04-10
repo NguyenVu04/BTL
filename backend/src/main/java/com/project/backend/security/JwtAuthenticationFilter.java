@@ -3,8 +3,6 @@ package com.project.backend.security;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -34,25 +32,17 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     // Autowired instance of AuthenticationManager for authentication
     @Autowired
     private AuthenticationManager manager;
-    // Map of endpoints to user roles for authorization
-    private static final Map<String, String> authorities = Map.ofEntries(Map.entry("/teacher", UserRole.TEACHER.name()),
-            Map.entry("/student", UserRole.STUDENT.name()));
     // List of request URIs to exclude from JWT authentication
-    private static final List<String> excludePattern = Arrays.asList("/", "/login", "/signup");
-
+    private static final List<String> excludedPath = Arrays.asList("/", "/login", "/signup");
+    // List of request URIs required JWT authentication
+    private static final List<String> authenticatedPath= Arrays.asList("/logout");
     // Override the doFilterInternal method to apply JWT authentication logic
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         // Skip JWT authentication for specified URIs
-        if (excludePattern.contains(request.getRequestURI()) || true/*for testing only, remove on production */) {
+        if (excludedPath.contains(request.getRequestURI()) || true/*for testing only, remove on production */) {
             filterChain.doFilter(request, response);
-            return;
-        }
-        // Check if the request URI exists
-        if (!authorities.containsKey(request.getRequestURI())) {
-            exceptionLog.log(new IOException(this.getClass().getName()));
-            response.sendError(HttpStatus.NOT_FOUND.value());
             return;
         }
         // Extract the JWT token from the request header
@@ -76,19 +66,24 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                 response.sendError(HttpStatus.UNAUTHORIZED.value());
                 return;
             }
-            SecurityContextHolder.getContext().setAuthentication(jwtAuthentication);
-            if (jwtAuthentication.getAuthorities()
-                    .stream()
-                    .map(auth -> auth.getAuthority())
-                    .anyMatch(name -> name.equals(authorities.get(request.getRequestURI())))) {
+            SecurityContextHolder.getContext()
+                                 .setAuthentication(jwtAuthentication);
+            if (authenticatedPath.contains(request.getRequestURI()) ||
+                jwtAuthentication.getAuthorities()
+                                 .stream()
+                                 .map(auth -> auth.getAuthority())
+                                 .anyMatch(name -> name.toLowerCase()
+                                                       .equals(request.getRequestURI()
+                                                       .split("/")[1]))) {
                 filterChain.doFilter(request, response);
+                return;
             } else {
                 exceptionLog.log(new IOException(this.getClass().getName()));
                 response.sendError(HttpStatus.UNAUTHORIZED.value());
             }
         } else {
             // Log and reject the request if the JWT is invalid
-            exceptionLog.log(new IOException(this.getClass().getName() + "valid"));
+            exceptionLog.log(new IOException(this.getClass().getName()));
             response.sendError(HttpStatus.UNAUTHORIZED.value());
         }
     }

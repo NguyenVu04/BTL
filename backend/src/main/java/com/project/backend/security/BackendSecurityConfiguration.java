@@ -33,6 +33,7 @@ public class BackendSecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         // Disable CSRF protection for simplicity (not recommended for production)
         http.csrf(csrf -> csrf.disable())
+            .logout(out -> out.disable())
             //.csrf(csrf -> csrf.requireCsrfProtectionMatcher(req -> req.getRequestURI().equals("/user")))
             // Configure session management to be stateless
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

@@ -124,14 +124,19 @@ public class JwtUtils {
             claims.getExpiration().after(now) &&
             collection != null) {         
             try {
-                Timestamp lastLogout = collection.document(claims.getId())
-                                                .get(FieldMask.of("lastLogin"))
-                                                .get()
-                                                .toObject(Timestamp.class);
+                Map<String, Object> data = collection.document(claims.getId())
+                                                     .get(FieldMask.of("lastLogout"))
+                                                     .get()
+                                                     .getData();
+                if (data == null) {
+                    exceptionLog.log(new NullPointerException(this.getClass().getName()));
+                    return false;
+                }
+                Timestamp lastLogout = (Timestamp) data.get("lastLogout");
                 Timestamp issueAt = Timestamp.of(claims.getIssuedAt());
-                return issueAt.compareTo(lastLogout) > 0 ? true : false;
+                return issueAt.compareTo(lastLogout) > 0;
             } catch (Exception e) {
-                exceptionLog.log(e);
+                exceptionLog.log(e, this.getClass().getName());
                 return false;
             }
         } else {
