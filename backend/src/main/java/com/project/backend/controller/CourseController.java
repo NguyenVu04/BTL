@@ -4,13 +4,17 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.Course.Category;
 import com.project.backend.Course.Course;
+import com.project.backend.Course.Lesson;
+import com.project.backend.Course.Quizz.Quizz;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Teacher;
 import com.project.backend.repository.FirestoreRepository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,7 +56,27 @@ public class CourseController {
 
     }
 
+    // create a new Course
+    @PostMapping("Add/Course")
+    public String createCourse(
+                                @RequestParam String name,
+                                @RequestParam Double price) 
+    {
+            
+        if (repository.getDocumentById(Course.class, name) != null) {
+            return "Course already exist";
+        }
+        Category category = new Category(null, null);
+        List<Lesson> LessonMaterials = new ArrayList<Lesson>();
+		List<Student> students = new ArrayList<Student>();
+		List<Teacher> teachers = new ArrayList<Teacher>();
+		List<Map<String,Quizz>> quizz = new ArrayList<Map<String,Quizz>>();
 
+		Course course = new Course(name, category, Timestamp.now(), Timestamp.now(), LessonMaterials, price, quizz, null, students, teachers);
+        repository.saveDocument(course, name);
+        return "Succefully";
+    }
+    
     // add student into course
     @PostMapping("/Add/Student")
     public String addStudentIntoCourse(

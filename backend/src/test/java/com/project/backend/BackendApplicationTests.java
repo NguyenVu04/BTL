@@ -14,14 +14,16 @@ import java.util.Map;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import org.checkerframework.checker.units.qual.Time;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.Course.Category;
 import com.project.backend.Course.Course;
+import com.project.backend.Course.Lesson;
+import com.project.backend.Course.Quizz.Quizz;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Certificate;
 import com.project.backend.Teacher.Teacher;
@@ -45,10 +47,13 @@ class BackendApplicationTests {
 	}
 	@Test
 	void testSaveCourse() {
+		List<Lesson> LessonMaterials = new ArrayList<Lesson>();
 		List<Student> students = new ArrayList<Student>();
 		List<Teacher> teachers = new ArrayList<Teacher>();
-		Course course = new Course("KTLT", null, Timestamp.now(), Timestamp.now(), null, 120.0, null, null, students, teachers);
-		repo.saveDocument(course, "CO1015");
+		List<Map<String,Quizz>> quizz = new ArrayList<Map<String,Quizz>>();
+		Category category = new Category("He thong thong tin", 2);
+		Course course = new Course("DSA", category, Timestamp.now(), Timestamp.now(), LessonMaterials, 120.0, quizz, null, students, teachers);
+		repo.saveDocument(course, "CO2023");
 	}
 	@Test
 	void testStudent() {
