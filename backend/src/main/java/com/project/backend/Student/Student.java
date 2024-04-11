@@ -7,6 +7,7 @@ import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
 @CollectionName("Student")
@@ -16,6 +17,7 @@ import lombok.Setter;
 public class Student extends Model {
     private String name;
     private Timestamp dob;
+    @NonNull
     private String email;
     private List<String> CourseID;
     private boolean status;
@@ -23,7 +25,7 @@ public class Student extends Model {
 
     protected Student() {}
 
-    public Student(String name, Timestamp dob, String email, List<String> CourseID, boolean status) {
+    public Student(String name, Timestamp dob, @NonNull String email, List<String> CourseID, boolean status) {
         this.name = name;
         this.dob = dob;
         this.email = email;

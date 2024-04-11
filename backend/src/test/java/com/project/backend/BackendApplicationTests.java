@@ -10,6 +10,7 @@ import java.io.PrintStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -17,6 +18,10 @@ import javax.crypto.spec.SecretKeySpec;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+
+// import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -46,26 +51,32 @@ class BackendApplicationTests {
 		assertTrue(t);
 	}
 	@Test
-	void testSaveCourse() {
-		List<Lesson> LessonMaterials = new ArrayList<Lesson>();
-		List<Student> students = new ArrayList<Student>();
-		List<Teacher> teachers = new ArrayList<Teacher>();
-		List<Map<String,Quizz>> quizz = new ArrayList<Map<String,Quizz>>();
-		Category category = new Category("He thong thong tin", 2);
-		Course course = new Course("DSA", category, Timestamp.now(), Timestamp.now(), LessonMaterials, 120.0, quizz, null, students, teachers);
-		repo.saveDocument(course, "CO2023");
-	}
-	@Test
 	void testStudent() {
 		List<String> CourseID = new ArrayList<String>();
-		Student student = new Student("Viet", Timestamp.now(), "daivietvonin1@gmail.com", CourseID, true);
-		repo.saveDocument(student, "2213954");
+		LocalDateTime convertDate = LocalDateTime.of(2004, 1, 21, 12, 20, 10);
+		Date date = Date.from(convertDate.atZone(ZoneId.systemDefault()).toInstant());
+		Timestamp timestamp = Timestamp.of(date); 
+		
+		Student student = new Student("Viet", timestamp, "daivietvonin1@gmail.com", CourseID, true);
+		repo.saveDocument(student, "2213955");
+	}
+	@Test
+	void testUpdateDOB() {
+		LocalDateTime date = LocalDateTime.of(2004,  12, 8, 0, 0, 0); 
+		Date dates = Date.from(date.atZone(ZoneId.systemDefault()).toInstant() );
+		Timestamp timestamp = Timestamp.of(dates);
+		Map<String, Object> obj = repo.getDocumentById(Student.class, "2213955").getData();
+		obj.put("dob", timestamp);
+        repo.updateDocumentById(Student.class, "2213955", obj);
 	}
 	@Test
 	void testTeacher() {
 		List<String> CourseID = new ArrayList<String>();
 		Certificate certificate = new Certificate("CSE", "Professor", "HCMUT");
-		Teacher student = new Teacher("Viet", "ledinhthuan@hcmut.edu.vn", Timestamp.now(), "0937584842", CourseID, certificate);
+		LocalDateTime date = LocalDateTime.now(); 
+		Date dates = Date.from(date.atZone(ZoneId.systemDefault()).toInstant() );
+		Timestamp timestamp = Timestamp.of(dates);
+		Teacher student = new Teacher("Viet", "ledinhthuan@hcmut.edu.vn", timestamp, "0937584842", CourseID, certificate);
 		repo.saveDocument(student, "1121");
 	}
 

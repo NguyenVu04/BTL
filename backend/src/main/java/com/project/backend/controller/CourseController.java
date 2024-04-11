@@ -19,14 +19,10 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-
-
-
-
 
 
 @RestController
@@ -61,7 +57,9 @@ public class CourseController {
     @PostMapping("Add/Course")
     public String createCourse(
                                 @RequestParam String name,
-                                @RequestParam Double price) 
+                                @RequestParam Double price,
+                                @RequestParam String id
+                                ) 
     {
             
         if (repository.getDocumentById(Course.class, name) != null) {
@@ -73,8 +71,10 @@ public class CourseController {
 		List<Teacher> teachers = new ArrayList<Teacher>();
 		List<Map<String,Quizz>> quizz = new ArrayList<Map<String,Quizz>>();
 
-		Course course = new Course(name, category, Timestamp.now(), Timestamp.now(), LessonMaterials, price, quizz, null, students, teachers);
-        repository.saveDocument(course, name);
+        Timestamp now = Timestamp.now();
+        Timestamp later = Timestamp.ofTimeMicroseconds((now.getSeconds()+10713600)*1000000);
+		Course course = new Course(name, category, now, later, LessonMaterials, price, quizz, null, students, teachers);
+        repository.saveDocument(course, id);
         return "Succefully";
     }
     
@@ -152,6 +152,92 @@ public class CourseController {
         repository.updateDocumentById(Course.class, id, obj);
         return "Succefully";
     }
+
+    @DeleteMapping("/Delete/Course")
+    public String deleteCourse(@RequestParam String id) {
+        DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class, id);
+        if (documentSnapshot == null) {
+            return "Course not exist";
+        }
+        repository.deleteDocumentById(Course.class, id);
+        return "Succefully";
+    }
+
+    @DeleteMapping("/Delete/Student")
+    public String deleteStudentinCourse(@RequestParam String id, @RequestParam String idCourse) {
+        DocumentSnapshot documentSnapshot = repository.getDocumentById(Student.class, id);
+        if (documentSnapshot == null) {
+            return "Student not exist";
+        }
+        DocumentSnapshot snapshot = repository.getDocumentById(Course.class, idCourse);
+        if (snapshot == null) {
+            return "Course not exist";
+        }
+
+        Student student = documentSnapshot.toObject(Student.class);
+        String email = student.getEmail();
+        boolean alreadyExists = false;
+        for (int i = 0 ; i < student.getCourseID().size() ; i++) {
+            if (student.getCourseID().get(i).equals(idCourse)){
+                student.getCourseID().remove(i);
+                alreadyExists = true;
+                repository.updateDocumentById(student);
+                break;
+            }
+        }
+        if (alreadyExists == false) {
+            return "Student doesn't exist in this course";
+        }
+        Course course = snapshot.toObject(Course.class);
+        // course.getListStudent()
+        for (int i = 0 ; i <  course.getListStudent().size(); i++) {
+            if (course.getListStudent().get(i).getEmail().equals(email)) {
+                course.getListStudent().remove(i);
+                break;
+            }
+        }
+        repository.updateDocumentById(course);
+        return "Succefully";
+
+    }
+    @DeleteMapping("/Delete/Teacher")
+    public String deleteTeacherinCourse(@RequestParam(defaultValue = "non") String id, @RequestParam(required = false) String idCourse) {
+        DocumentSnapshot documentSnapshot = repository.getDocumentById(Teacher.class, id);
+        if (documentSnapshot == null) {
+            return "Teacher not exist";
+        }
+        DocumentSnapshot snapshot = repository.getDocumentById(Course.class, idCourse);
+        if (snapshot == null) {
+            return "Course not exist";
+        }
+
+        Teacher teacher = documentSnapshot.toObject(Teacher.class);
+        String email = teacher.getEmail();
+        boolean alreadyExists = false;
+        for (int i = 0 ; i < teacher.getCourseID().size() ; i++) {
+            if (teacher.getCourseID().get(i).equals(idCourse)){
+                teacher.getCourseID().remove(i);
+                repository.updateDocumentById(teacher);
+                alreadyExists = true;
+                break;
+            }
+        }
+        if (alreadyExists == false) {
+            return "Teacher doesn't exist in this course";
+        }
+        Course course = snapshot.toObject(Course.class);
+        for (int i = 0 ; i <  course.getListTeacher().size(); i++) {
+            if (course.getListTeacher().get(i).getEmail().equals(email)) {
+                course.getListTeacher().remove(i);
+                break;
+            }
+        }
+        repository.updateDocumentById(course);
+        return "Succefully";
+
+    }
+
+
 
     @GetMapping("/Foo")
     public String addFoo(@RequestParam(name = "id", required = false) String fooId, @RequestParam String name) { 

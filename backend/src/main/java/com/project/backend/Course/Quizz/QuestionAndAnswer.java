@@ -8,7 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class QuestionAndAnswer {
-    Integer Score;
+    Integer Score = 0;
     List<String> Questions;
 
     protected QuestionAndAnswer() {}

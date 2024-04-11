@@ -3,12 +3,12 @@ package com.project.backend.Teacher;
 import java.util.List;
 
 import com.google.cloud.Timestamp;
-import com.project.backend.Course.Course;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 @Getter
@@ -17,7 +17,7 @@ import lombok.Setter;
 @NoArgsConstructor
 public class Teacher extends Model {
     private String name;
-
+    @NonNull
     private String email;
 
     private Timestamp dayofBirth;
