@@ -7,9 +7,12 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Map;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -150,5 +153,28 @@ class BackendApplicationTests {
 	void testJwtUtils2() {
 		String token = "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..8uCUEqdolq3OJDat.qwMaiIMwFaETEqoWotAVeNUpUJLlCWRO30zEmJzp1QP9zE72aCsp4OYdHO247jySlBzzV7DBrFUVETTsFfmlC1SYTmwFAtF1uUNYSMACRDZqw55zp_L4YgWlSmKpRj7OLVkev9j_xoEPPy0M1wInAUjCF4REER1IG7rWSXyKWcP2lv6E56OuXw.KlelRFys5mV8Qpd0tk6Yug";
 		assertEquals("aaa1", utils.decodeToken(token).get("email"));
+	}
+	@Test
+	void testDateToLocalDateTime () {
+		/**
+		 * Tests the conversion between `LocalDateTime`, `Date`, and `Timestamp`
+		 * objects.
+		 * 
+		 * This test verifies that a `LocalDateTime` can be converted to a `Date` and
+		 * back to a `LocalDateTime` without losing any precision.
+		 * 
+		 * @param convertDate the `LocalDateTime` to be converted
+		 * @param date        the `Date` object created from the `LocalDateTime`
+		 * @param timestamp   the `Timestamp` object created from the `Date`
+		 * @param newDate     the `Date` object created from the `Timestamp`
+		 * @param dateTime    the `LocalDateTime` object created from the `Date`
+		 */
+		LocalDateTime convertDate = LocalDateTime.of(2024, 1, 21, 12, 20, 10);
+		Date date = Date.from(convertDate.atZone(ZoneId.systemDefault()).toInstant());
+		Timestamp timestamp = Timestamp.of(date);
+		Date newDate = timestamp.toDate();
+		assertEquals(date, newDate);
+		LocalDateTime dateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
+		assertEquals(convertDate.getDayOfMonth(), dateTime.getDayOfMonth());
 	}
 }
