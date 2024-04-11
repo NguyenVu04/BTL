@@ -10,6 +10,7 @@ import com.google.cloud.firestore.Firestore;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
 import com.google.firebase.cloud.FirestoreClient;
+import com.google.firebase.cloud.StorageClient;
 
 @Configuration
 public class FirebaseConfiguration {
@@ -24,6 +25,7 @@ public class FirebaseConfiguration {
                                                  .setCredentials(
                                                     GoogleCredentials.fromStream(serviceAccount)
                                                     )
+                                                 .setStorageBucket("database-6cded.appspot.com")
                                                  .build();
         // Initialize FirebaseApp with the configured options
         return FirebaseApp.initializeApp(options);
@@ -34,5 +36,10 @@ public class FirebaseConfiguration {
     public Firestore firestore(FirebaseApp app) {
         // Get Firestore instance associated with the FirebaseApp
         return FirestoreClient.getFirestore(app);
+    }
+    @Bean
+    public StorageClient storage(FirebaseApp app) {
+        // Get Storage instance associated with the FirebaseApp
+        return StorageClient.getInstance(app);
     }
 }
