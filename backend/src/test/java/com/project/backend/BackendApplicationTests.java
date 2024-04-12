@@ -46,7 +46,10 @@ class BackendApplicationTests {
 	private FirestoreRepository repo;
 	@Autowired
 	private ExceptionLog exceptionLog;
-
+	@Autowired
+	private BackendStorage storage;
+	@Autowired
+	private EmailService mail;
 	@Test
 	void testSaveDocument() {
 		AuthenticationDetails details = new AuthenticationDetails("admin2", "admin2", "admin", UserRole.STUDENT);
@@ -206,22 +209,42 @@ class BackendApplicationTests {
 		LocalDateTime dateTime = LocalDateTime.ofInstant(date.toInstant(), ZoneId.systemDefault());
 		assertEquals(convertDate.getDayOfMonth(), dateTime.getDayOfMonth());
 	}
-
-	@Autowired
-	private BackendStorage storage;
-
-	@Autowired
-	private EmailService mail;
-
 	@Test
 	public void testEmail() {
+		/**
+		 * Retrieves a file from the storage and asserts that the file name matches the
+		 * expected value.
+		 *
+		 * @param storage          The storage service to retrieve the file from.
+		 * @param expectedFileName The expected name of the file.
+		 */
 		Map.Entry<String, Resource> resource = storage.getFile(Arrays.asList("Hello, World.txt"));
 		assertEquals("Hello, World.txt", resource.getKey());
+		/**
+		 * Sends an email with the specified parameters.
+		 *
+		 * @param sender      The sender of the email.
+		 * @param subject     The subject of the email.
+		 * @param body        The body of the email.
+		 * @param recipient   The recipient of the email.
+		 * @param attachments The list of attachments to include in the email.
+		 * @return True if the email was sent successfully, false otherwise.
+		 */
 		assertTrue(mail.sendEmail("backend",
 				"MAIL TEST",
 				"This is a test",
 				"nguyenvu04.work@gmail.com",
 				Arrays.asList(resource)));
+		/**
+		 * Sends an email with the specified parameters.
+		 *
+		 * @param sender      The sender of the email.
+		 * @param subject     The subject of the email.
+		 * @param body        The body of the email.
+		 * @param recipients  The list of recipients for the email.
+		 * @param attachments The list of attachments to include in the email.
+		 * @return True if the email was sent successfully, false otherwise.
+		 */
 		assertTrue(mail.sendEmail("backend",
 				"MAIL TEST",
 				"This is a test",

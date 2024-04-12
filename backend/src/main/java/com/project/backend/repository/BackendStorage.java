@@ -2,6 +2,7 @@ package com.project.backend.repository;
 
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import javax.annotation.Nullable;
 
@@ -16,79 +17,125 @@ import com.google.cloud.storage.Bucket.BlobWriteOption;
 import com.google.firebase.cloud.StorageClient;
 import com.project.backend.exceptionhandler.ExceptionLog;
 
+/**
+ * Provides methods for interacting with a configured storage backend, such as
+ * Google Cloud Storage or Firebase Storage.
+ *
+ * This class provides methods for saving, deleting, retrieving, and updating
+ * file blobs in the configured storage backend.
+ */
 @Repository
 public class BackendStorage {
     @Autowired
     private StorageClient storage;
     @Autowired
     private ExceptionLog exceptionLog;
+
+    /**
+     * Saves a file blob to the configured storage backend.
+     *
+     * @param file The file to be saved.
+     * @param path The path where the file should be saved, as a list of directory
+     *             names.
+     * @return {@code true} if the file was saved successfully, {@code false}
+     *         otherwise.
+     */
     public boolean saveBlob(MultipartFile file, List<String> path) {
-        StringBuilder sb = new StringBuilder();
-        path.forEach(p -> sb.append(p).append("/"));
-        sb.append(file.getOriginalFilename());
+        StringJoiner joiner = new StringJoiner("/");
+        path.forEach(p -> joiner.add(p));
         try {
             storage.bucket()
-                   .create(sb.toString(), 
-                           file.getInputStream(), 
-                           BlobWriteOption.doesNotExist());
+                    .create(joiner.toString(),
+                            file.getInputStream(),
+                            BlobWriteOption.doesNotExist());
             return true;
         } catch (Exception e) {
             exceptionLog.log(e);
             return false;
         }
     }
+
+    /**
+     * Deletes a file blob from the configured storage backend.
+     *
+     * @param path The path where the file is stored, as a list of directory names.
+     * @return {@code true} if the file was deleted successfully, {@code false}
+     *         otherwise.
+     */
     public boolean deleteBlob(List<String> path) {
         Blob blob = this.getBlob(path);
         if (blob == null) {
             return false;
-        } 
+        }
         blob.delete();
         return true;
     }
+
+    /**
+     * Retrieves a file from the configured storage backend.
+     *
+     * @param path The path where the file is stored, as a list of directory names.
+     * @return A {@link Map.Entry} containing the file name and the file contents as
+     *         a {@link Resource}, or {@code null} if the file could not be
+     *         retrieved.
+     */
     @Nullable
     public Map.Entry<String, Resource> getFile(List<String> path) {
-        StringBuilder sb = new StringBuilder();
         if (path == null || path.isEmpty()) {
+            exceptionLog.log(new NullPointerException(this.getClass().getName()));
             return null;
         }
-        for (String p : path) {
-            sb.append(p).append("/");
-        }
-        sb.deleteCharAt(sb.length() - 1);
+        StringJoiner joiner = new StringJoiner("/");
+        path.forEach(p -> joiner.add(p));
         Blob blob = storage.bucket()
-                           .get(sb.toString());
+                .get(joiner.toString());
         try {
             return Map.entry(blob.getName(), new ByteArrayResource(blob.getContent()));
         } catch (Exception e) {
-            exceptionLog.log(e, sb.toString());
+            exceptionLog.log(e, this.getClass().getName());
             return null;
-        }        
+        }
     }
+
+    /**
+     * Retrieves a blob from the configured storage backend.
+     *
+     * @param path The path where the file is stored, as a list of directory names.
+     * @return The blob at the specified path, or {@code null} if the blob could not
+     *         be retrieved.
+     */
     @Nullable
     public Blob getBlob(List<String> path) {
-        StringBuilder sb = new StringBuilder();
         if (path == null || path.isEmpty()) {
+            exceptionLog.log(new NullPointerException(this.getClass().getName()));
             return null;
         }
-        for (String p : path) {
-            sb.append(p).append("/");
-        }
-        sb.deleteCharAt(sb.length() - 1);
+        StringJoiner joiner = new StringJoiner("/");
+        path.forEach(p -> joiner.add(p));
         Blob blob = storage.bucket()
-                           .get(sb.toString());
+                .get(joiner.toString());
         return blob;
     }
+
+    /**
+     * Updates a blob in the configured storage backend with the provided file.
+     *
+     * @param file The file to be uploaded.
+     * @param path The path where the file should be stored, as a list of directory
+     *             names.
+     * @return {@code true} if the file was successfully uploaded, {@code false}
+     *         otherwise.
+     */
     public boolean updateBlob(MultipartFile file, List<String> path) {
-        StringBuilder sb = new StringBuilder();
-        path.forEach(p -> sb.append(p).append("/"));
-        sb.append(file.getOriginalFilename());
+        StringJoiner joiner = new StringJoiner("/");
+        path.forEach(p -> joiner.add(p));
         try {
             storage.bucket()
-                   .create(sb.toString(), 
-                           file.getInputStream()); 
+                    .create(joiner.toString(),
+                            file.getInputStream());
             return true;
         } catch (Exception e) {
-            exceptionLog.log(e);
+            exceptionLog.log(e, this.getClass().getName());
             return false;
         }
     }
