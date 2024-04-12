@@ -1,0 +1,5 @@
+2024-04-12T19:57:12.633319700: java.util.UnknownFormatConversionException: Conversion = ' ': com.project.backend.email.EmailService
+2024-04-12T20:28:16.463424500: java.util.UnknownFormatConversionException: Conversion = ';': com.project.backend.email.EmailService
+2024-04-12T20:34:22.751636300: java.util.UnknownFormatConversionException: Conversion = ';': com.project.backend.email.EmailService
+2024-04-12T20:40:23.550494700: java.util.UnknownFormatConversionException: Conversion = ';': com.project.backend.email.EmailService
+2024-04-12T20:43:21.575180700: java.util.UnknownFormatConversionException: Conversion = ';': com.project.backend.email.EmailService

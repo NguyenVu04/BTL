@@ -217,10 +217,15 @@ class BackendApplicationTests {
 	public void testEmail() {
 		Map.Entry<String, Resource> resource = storage.getFile(Arrays.asList("Hello, World.txt"));
 		assertEquals("Hello, World.txt", resource.getKey());
-		assertTrue(mail.sendEmail("test",
-				"test2",
+		assertTrue(mail.sendEmail("backend",
+				"MAIL TEST",
 				"This is a test",
 				"nguyenvu04.work@gmail.com",
+				Arrays.asList(resource)));
+		assertTrue(mail.sendEmail("backend",
+				"MAIL TEST",
+				"This is a test",
+				Arrays.asList("nguyenvu04.work@gmail.com", "daivietvonin1@gmail.com"),
 				Arrays.asList(resource)));
 	}
 }
