@@ -218,8 +218,8 @@ class BackendApplicationTests {
 		 * @param storage          The storage service to retrieve the file from.
 		 * @param expectedFileName The expected name of the file.
 		 */
-		Map.Entry<String, Resource> resource = storage.getFile(Arrays.asList("Hello, World.txt"));
-		assertEquals("Hello, World.txt", resource.getKey());
+		Map.Entry<String, Resource> resource = storage.getFile(Arrays.asList("aacac.txt.txt"));
+		assertEquals("aacac.txt.txt", resource.getKey());
 		/**
 		 * Sends an email with the specified parameters.
 		 *
