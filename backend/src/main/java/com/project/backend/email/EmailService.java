@@ -121,4 +121,46 @@ public class EmailService {
             return false;
         }
     }
+    public boolean sendEmail(String from, String subject, String body, List<String> to,
+            Map.Entry<String, Resource> file) {
+        MimeMessage message = mailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            for (String t : to) {
+                helper.addTo(t);
+            }
+            helper.setFrom(from);
+            helper.setSubject(subject);
+            helper.setText(String.format("%s,\n%s", from, body), String.format(form, from, body));
+            if (file != null) {
+                helper.addAttachment(file.getKey(), file.getValue());
+            }
+            message = helper.getMimeMessage();
+            mailSender.send(message);
+            return true;
+        } catch (Exception e) {
+            exceptionLog.log(e, this.getClass().getName());
+            return false;
+        }
+    }
+    public boolean sendEmail(String from, String subject, String body, String to,
+            Map.Entry<String, Resource> file) {
+        MimeMessage message = mailSender.createMimeMessage();
+        try {
+            MimeMessageHelper helper = new MimeMessageHelper(message, true);
+            helper.addTo(to);
+            helper.setFrom(from);
+            helper.setSubject(subject);
+            helper.setText(String.format("%s,\n%s", from, body), String.format(form, from, body));
+            if (file != null) {
+                helper.addAttachment(file.getKey(), file.getValue());
+            }
+            message = helper.getMimeMessage();
+            mailSender.send(message);
+            return true;
+        } catch (Exception e) {
+            exceptionLog.log(e, this.getClass().getName());
+            return false;
+        }
+    }
 }
