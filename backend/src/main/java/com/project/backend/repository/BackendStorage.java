@@ -1,12 +1,15 @@
 package com.project.backend.repository;
 
-import java.io.InputStream;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Nullable;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.storage.Blob;
 import com.google.cloud.storage.Bucket.BlobWriteOption;
@@ -19,29 +22,14 @@ public class BackendStorage {
     private StorageClient storage;
     @Autowired
     private ExceptionLog exceptionLog;
-    public boolean saveBlob(InputStream file, List<String> path) {
+    public boolean saveBlob(MultipartFile file, List<String> path) {
         StringBuilder sb = new StringBuilder();
         path.forEach(p -> sb.append(p).append("/"));
+        sb.append(file.getOriginalFilename());
         try {
             storage.bucket()
                    .create(sb.toString(), 
-                           file, 
-                           BlobWriteOption.doesNotExist());
-            return true;
-        } catch (Exception e) {
-            exceptionLog.log(e);
-            return false;
-        }
-    }
-    public boolean saveBlob(InputStream file, String ...path) {
-        StringBuilder sb = new StringBuilder();
-        for (String p : path) {
-            sb.append(p).append("/");
-        }
-        try {
-            storage.bucket()
-                   .create(sb.toString(), 
-                           file, 
+                           file.getInputStream(), 
                            BlobWriteOption.doesNotExist());
             return true;
         } catch (Exception e) {
@@ -57,54 +45,47 @@ public class BackendStorage {
         blob.delete();
         return true;
     }
-    public boolean deleteBlob(String ...path) {
-        List<String> list = List.of(path);
-        Blob blob = this.getBlob(list);
-        if (blob == null) {
-            return false;
+    @Nullable
+    public Map.Entry<String, Resource> getFile(List<String> path) {
+        StringBuilder sb = new StringBuilder();
+        if (path == null || path.isEmpty()) {
+            return null;
         }
-        blob.delete();
-        return true;
+        for (String p : path) {
+            sb.append(p).append("/");
+        }
+        sb.deleteCharAt(sb.length() - 1);
+        Blob blob = storage.bucket()
+                           .get(sb.toString());
+        try {
+            return Map.entry(blob.getName(), new ByteArrayResource(blob.getContent()));
+        } catch (Exception e) {
+            exceptionLog.log(e, sb.toString());
+            return null;
+        }        
     }
     @Nullable
     public Blob getBlob(List<String> path) {
         StringBuilder sb = new StringBuilder();
-        path.forEach(p -> sb.append(p).append("/"));
-        return storage.bucket()
-                      .get(sb.toString());
-    }
-    @Nullable
-    public Blob getBlob(InputStream file, String ...path) {
-        StringBuilder sb = new StringBuilder();
+        if (path == null || path.isEmpty()) {
+            return null;
+        }
         for (String p : path) {
             sb.append(p).append("/");
         }
+        sb.deleteCharAt(sb.length() - 1);
         Blob blob = storage.bucket()
                            .get(sb.toString());
         return blob;
     }
-    public boolean updateBlob(InputStream file, List<String> path) {
+    public boolean updateBlob(MultipartFile file, List<String> path) {
         StringBuilder sb = new StringBuilder();
         path.forEach(p -> sb.append(p).append("/"));
+        sb.append(file.getOriginalFilename());
         try {
             storage.bucket()
                    .create(sb.toString(), 
-                           file); 
-            return true;
-        } catch (Exception e) {
-            exceptionLog.log(e);
-            return false;
-        }
-    }
-    public boolean updateBlob(InputStream file, String ...path) {
-        StringBuilder sb = new StringBuilder();
-        for (String p : path) {
-            sb.append(p).append("/");
-        }
-        try {
-            storage.bucket()
-                   .create(sb.toString(), 
-                           file); 
+                           file.getInputStream()); 
             return true;
         } catch (Exception e) {
             exceptionLog.log(e);

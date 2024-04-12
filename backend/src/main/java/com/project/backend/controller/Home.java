@@ -5,10 +5,11 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.project.backend.repository.BackendStorage;
 
+import java.util.Arrays;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 
@@ -22,12 +23,8 @@ public class Home {
     }
     @PostMapping("/file")
     public String postMethodName(@RequestParam(name = "file", required = true) MultipartFile file) {
-        try {
-            storage.saveBlob(file.getInputStream(), file.getOriginalFilename());
-            return file.toString();
-        } catch (Exception e) {
-            return e.toString();
-        }
+        storage.updateBlob(file, Arrays.asList());
+        return file.toString();
     }
     
 }
