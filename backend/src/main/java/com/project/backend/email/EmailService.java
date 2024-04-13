@@ -129,11 +129,9 @@ public class EmailService {
      * @param subject The subject of the email.
      * @param body    The body of the email.
      * @param to      A list of email addresses of the recipients.
-     * @param file    An attachment to include in the email.
      * @return True if the email was sent successfully, false otherwise.
      */
-    public boolean sendEmail(String from, String subject, String body, List<String> to,
-            Map.Entry<String, Resource> file) {
+    public boolean sendEmail(String from, String subject, String body, List<String> to) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -143,9 +141,6 @@ public class EmailService {
             helper.setFrom(from);
             helper.setSubject(subject);
             helper.setText(String.format("%s,\n%s", from, body), String.format(form, from, body));
-            if (file != null) {
-                helper.addAttachment(file.getKey(), file.getValue());
-            }
             message = helper.getMimeMessage();
             mailSender.send(message);
             return true;
@@ -162,11 +157,9 @@ public class EmailService {
      * @param subject The subject of the email.
      * @param body    The body of the email.
      * @param to      The email address of the recipient.
-     * @param file    An attachment to include in the email.
      * @return True if the email was sent successfully, false otherwise.
      */
-    public boolean sendEmail(String from, String subject, String body, String to,
-            Map.Entry<String, Resource> file) {
+    public boolean sendEmail(String from, String subject, String body, String to) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(message, true);
@@ -174,9 +167,6 @@ public class EmailService {
             helper.setFrom(from);
             helper.setSubject(subject);
             helper.setText(String.format("%s,\n%s", from, body), String.format(form, from, body));
-            if (file != null) {
-                helper.addAttachment(file.getKey(), file.getValue());
-            }
             message = helper.getMimeMessage();
             mailSender.send(message);
             return true;

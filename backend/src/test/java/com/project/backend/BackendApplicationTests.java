@@ -24,7 +24,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.core.io.Resource;
 
 import com.google.cloud.Timestamp;
+import com.google.cloud.firestore.CollectionReference;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.firestore.Firestore;
 import com.project.backend.Course.Course;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Certificate;
@@ -50,6 +52,8 @@ class BackendApplicationTests {
 	private BackendStorage storage;
 	@Autowired
 	private EmailService mail;
+	@Autowired
+	private Firestore store;
 	@Test
 	void testSaveDocument() {
 		AuthenticationDetails details = new AuthenticationDetails("admin3", "admin3", "admin", UserRole.STUDENT);
@@ -250,5 +254,19 @@ class BackendApplicationTests {
 				"This is a test",
 				Arrays.asList("nguyenvu04.work@gmail.com", "daivietvonin1@gmail.com"),
 				Arrays.asList(resource)));
+	}
+	@Test
+	void testQuiz () {
+		CollectionReference collection = store.collection("testQuiz");
+		HashMap<String, Object> map = new HashMap<>();
+		LocalDateTime time = LocalDateTime.of(2024, 4, 14, 1, 0, 0);
+		Date date = Date.from(time.atZone(ZoneId.systemDefault()).toInstant());
+		map.put("dl", Timestamp.of(date));
+		map.put("email", "nguyenvu04.work@gmail.com");
+		map.put("score", 11);
+		collection.add(map);
+		map.put("email", "daivietvonin1@gmail.com");
+		map.put("score", 1);
+		collection.add(map);
 	}
 }
