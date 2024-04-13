@@ -121,6 +121,17 @@ public class EmailService {
             return false;
         }
     }
+
+    /**
+     * Sends an email with the specified parameters.
+     *
+     * @param from    The email address of the sender.
+     * @param subject The subject of the email.
+     * @param body    The body of the email.
+     * @param to      A list of email addresses of the recipients.
+     * @param file    An attachment to include in the email.
+     * @return True if the email was sent successfully, false otherwise.
+     */
     public boolean sendEmail(String from, String subject, String body, List<String> to,
             Map.Entry<String, Resource> file) {
         MimeMessage message = mailSender.createMimeMessage();
@@ -143,6 +154,17 @@ public class EmailService {
             return false;
         }
     }
+
+    /**
+     * Sends an email with the specified parameters.
+     *
+     * @param from    The email address of the sender.
+     * @param subject The subject of the email.
+     * @param body    The body of the email.
+     * @param to      The email address of the recipient.
+     * @param file    An attachment to include in the email.
+     * @return True if the email was sent successfully, false otherwise.
+     */
     public boolean sendEmail(String from, String subject, String body, String to,
             Map.Entry<String, Resource> file) {
         MimeMessage message = mailSender.createMimeMessage();

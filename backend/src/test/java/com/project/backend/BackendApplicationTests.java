@@ -52,7 +52,7 @@ class BackendApplicationTests {
 	private EmailService mail;
 	@Test
 	void testSaveDocument() {
-		AuthenticationDetails details = new AuthenticationDetails("admin2", "admin2", "admin", UserRole.STUDENT);
+		AuthenticationDetails details = new AuthenticationDetails("admin3", "admin3", "admin", UserRole.STUDENT);
 		boolean t = repo.updateDocumentById(details);
 		assertTrue(t);
 	}
