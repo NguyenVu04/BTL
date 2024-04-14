@@ -11,41 +11,109 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.project.backend.exceptionhandler.ExceptionLog;
 
+/**
+ * Configures the security filter chain for the application.
+ * This method sets up the following security settings:
+ * - Adds the JwtAuthenticationFilter before the
+ * UsernamePasswordAuthenticationFilter
+ * - Disables CSRF protection
+ * - Authorizes requests to "/student/**" for users with the "STUDENT" authority
+ * - Authorizes requests to "/teacher/**" for users with the "TEACHER" authority
+ * - Permits all other requests
+ * - Disables logout functionality
+ * - Sets the session management policy to STATELESS, which means no session
+ * will be created or used.
+ *
+ * @param http the HttpSecurity object to configure the security settings
+ * @return the configured SecurityFilterChain
+ * @throws Exception if an error occurs during the configuration
+ */
 @Configuration
 @EnableWebSecurity
 public class BackendSecurityConfiguration {
-    // Password encoder for hashing passwords
+    /**
+     * The JwtAuthenticationFilter is an autowired dependency that is used to filter
+     * incoming requests and authenticate them using a JSON Web Token (JWT).
+     */
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    /**
+     * A PasswordEncoder implementation that uses the BCrypt hashing algorithm to
+     * securely
+     * store and compare passwords. This encoder is used throughout the application
+     * to
+     * handle password-related operations.
+     */
     public static final PasswordEncoder encoder = new BCryptPasswordEncoder();
-
-    // Autowired instance of BackendDetailsService for user details retrieval
+    /**
+     * The BackendDetailsService is an autowired dependency that is used to retrieve
+     * user details for authentication purposes.
+     */
     @Autowired
     private BackendDetailsService service;
-
-    // Autowired instance of ExceptionLog for logging exceptions
+    /**
+     * An autowired dependency that is used to log exceptions that occur during the
+     * application's execution.
+     */
     @Autowired
     private ExceptionLog exceptionLog;
 
-    // Bean for configuring the security filter chain
+    /**
+     * Configures the security filter chain for the application.
+     * This method sets up the following security settings:
+     * - Adds the JwtAuthenticationFilter before the
+     * UsernamePasswordAuthenticationFilter
+     * - Disables CSRF protection
+     * - Authorizes requests to "/student/**" for users with the "STUDENT" authority
+     * - Authorizes requests to "/teacher/**" for users with the "TEACHER" authority
+     * - Permits all other requests
+     * - Disables logout functionality
+     * - Sets the session management policy to STATELESS, which means no session
+     * will be created or used.
+     *
+     * @param http the HttpSecurity object to configure the security settings
+     * @return the configured SecurityFilterChain
+     * @throws Exception if an error occurs during the configuration
+     */
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        // Disable CSRF protection for simplicity (not recommended for production)
-        http.csrf(csrf -> csrf.disable())
-            .logout(out -> out.disable())
-            //.csrf(csrf -> csrf.requireCsrfProtectionMatcher(req -> req.getRequestURI().equals("/user")))
-            // Configure session management to be stateless
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(req -> req.anyRequest().permitAll())
+                /*.authorizeHttpRequests(req -> req.requestMatchers("/student/**")
+                                                 .hasAuthority("STUDENT")
+                                                 .requestMatchers("/teacher/**")
+                                                 .hasAuthority("TEACHER")
+                                                 .requestMatchers("/logout")
+                                                 .authenticated()
+                                                 .anyRequest()
+                                                 .permitAll())*/               
+                .logout(out -> out.disable())
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
     }
 
-    // Bean for configuring the AuthenticationManager with a custom authentication provider
-    @Bean 
+    /**
+     * Configures the authentication manager for the application.
+     * This method sets up the authentication provider that is used to authenticate
+     * users.
+     * The authentication provider is configured with the password encoder, the
+     * backend details service,
+     * and the exception log.
+     *
+     * @param http the HttpSecurity object to configure the authentication manager
+     * @return the configured AuthenticationManager
+     * @throws Exception if an error occurs during the configuration
+     */
+    @Bean
     public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
         AuthenticationManagerBuilder builder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        // Use a custom authentication provider with BCryptPasswordEncoder, BackendDetailsService, and ExceptionLog
-        builder.authenticationProvider(new BackendAuthenticationProvider(BackendSecurityConfiguration.encoder, service, exceptionLog));
+        builder.authenticationProvider(
+                new BackendAuthenticationProvider(BackendSecurityConfiguration.encoder, service, exceptionLog));
         return builder.build();
     }
 }

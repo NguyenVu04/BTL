@@ -15,19 +15,12 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.cloud.Timestamp;
-import com.google.cloud.firestore.CollectionReference;
-import com.google.cloud.firestore.FieldMask;
 import com.project.backend.exceptionhandler.ExceptionLog;
-import com.project.backend.repository.FirestoreRepository;
-
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 
 @Service
 public class JwtUtils {
-    @Autowired
-    private FirestoreRepository repository;
     // Autowired instance of ExceptionLog for logging exceptions
     @Autowired
     private ExceptionLog exceptionLog;
@@ -90,7 +83,7 @@ public class JwtUtils {
         if (!map.containsKey("id")) return null;
         String id = map.get("id").toString();
         Map<String, Object> object = new HashMap<String, Object>();
-        object.put("email", map.get("email"));
+        object.put("role", map.get("role"));
         object.put("password", map.get("password"));
         Date now = new Date();
         Date expDate = new Date(now.getTime() + 3600000);
@@ -117,31 +110,10 @@ public class JwtUtils {
      */
     public boolean isValid(Claims claims) {
         Date now = new Date();
-        CollectionReference collection = repository.getCollection(AuthenticationDetails.class);
-        if (claims != null &&
-            claims.containsKey("email") &&
-            claims.containsKey("password") &&
-            claims.getExpiration().after(now) &&
-            collection != null) {         
-            try {
-                Map<String, Object> data = collection.document(claims.getId())
-                                                     .get(FieldMask.of("lastLogout"))
-                                                     .get()
-                                                     .getData();
-                if (data == null) {
-                    exceptionLog.log(new NullPointerException(this.getClass().getName()));
-                    return false;
-                }
-                Timestamp lastLogout = (Timestamp) data.get("lastLogout");
-                Timestamp issueAt = Timestamp.of(claims.getIssuedAt());
-                return issueAt.compareTo(lastLogout) > 0;
-            } catch (Exception e) {
-                exceptionLog.log(e, this.getClass().getName());
-                return false;
-            }
-        } else {
-            return false;
-        }
+        return (claims != null &&
+                claims.containsKey("role") &&
+                claims.containsKey("password") &&
+                claims.getExpiration().after(now));
     }
 
     // Retrieves the user ID from the claims
@@ -158,7 +130,7 @@ public class JwtUtils {
 
     // Retrieves the email from the claims
     @Nullable
-    public String getEmail(Claims claims) {
-        return claims.get("email", String.class);
+    public String getRole(Claims claims) {
+        return claims.get("role", String.class);
     }
 }
