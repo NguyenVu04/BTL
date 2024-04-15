@@ -1,0 +1,24 @@
+#content .content__map {
+    height: 48px;
+    background-color: #ddd;
+    margin: 16px auto 32px;
+    border-radius: 5px;
+    text-align: center;
+    line-height: 48px;
+}
+
+#content .content__map a {
+    color: #002792;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+#content .classlist-on {
+    background-color: #8abee0;  
+}
+
+#content .content__map:hover {
+    background-color: #8abee0;
+    cursor: pointer;
+}

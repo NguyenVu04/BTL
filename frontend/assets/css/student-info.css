@@ -1,0 +1,101 @@
+body{
+    background-color: whitesmoke;
+}
+.option{
+    /* margin: 5px 0px; */
+    position: relative;
+    top: 80px;
+    background-color: white;
+    display: flex;
+    height: 60px;
+    justify-content: space-evenly;
+}
+.option_detail{
+    width: 12%;
+    opacity: 0.3;
+}
+.option_detail-info{
+    /* padding: 0 30px; */
+    margin: 20px auto; 
+    text-align: center;  
+    position: relative;
+}
+.active{
+    opacity: 1;
+}
+.active::before{
+    content:'';
+    background-color: var(--themeColor);
+    height: 5px;
+    width: 12%;
+    position: absolute;
+    top: 100%;
+}
+.main-color{
+    color: var(--themeColor);
+}
+.option_detail:hover{
+    opacity: 1;
+    cursor: pointer;
+}
+.option_detail:hover i{
+    color: var(--themeColor);
+}
+.detail-info{
+    position: relative;
+    width: 80%;
+    height: 700px;
+    top: 140px;
+    background-color: white;
+    margin: auto;
+}
+.detail-info-header{
+    height: 15%;
+}
+.detail-info-body{
+    height: 70%;
+    background-color: white;
+    display: flex;
+    flex-wrap: wrap;
+}
+.detail-info-footer{
+    height: 15%;
+    position: relative;
+}
+.detail-info-item{
+    height: 20%;
+    width: 50%;
+    padding: 20px 60px;
+    position: relative;
+}
+.detail-info-item::after{
+    content: '';
+    height: 0.5px;
+    background-color: black;
+    width: 50%;
+    position: absolute;
+    top: 100%;
+}
+.detail-info-item > p{
+    line-height: 30px;
+}
+.detail-info-footer > div{
+    height: 50%;
+    width: 12%;
+    padding:17px 20px;
+    border-radius: 20px;
+    background-color: var(--themeColor);
+    text-align: center;
+    position: absolute;
+    right: 80px;
+    bottom: 10px;
+    font-weight: bold;
+}
+.detail-info-footer>div:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+.student-info{
+    width: 100%;
+    height: 100%;
+}

@@ -1,0 +1,45 @@
+#slideshow {
+    overflow: hidden;
+    height: 510px;
+    width: 80%;
+    /* padding: 0 50px 0 50px; */
+    /* box-sizing: border-box; */
+    margin: 0 auto;
+    position: relative;
+    top: 80px;
+    }
+    
+    .slide-wrapper {
+    display: flex;
+    width: 4593px;
+    -webkit-animation: slide 14s ease infinite;
+    }
+    .slide{
+    /* float: left; */
+    height: 510px;
+    width: 1531px;
+    }
+    .img1{
+    background: url('/assets/img/1533535408phpRuopAS.jpeg') ;
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .img2{
+    background: url('/assets/img/Hoover-Tower-Stanford-University-California.webp');
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    .img3{
+    background: url('/assets/img/the-denning-house-at-stanford-university-14.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    }
+    
+    @-webkit-keyframes slide {
+    20% {margin-left: 0px;}
+    30% {margin-left: -1531px;}
+    50% {margin-left: -1531px;}
+    60% {margin-left: -3062px;}
+    80% {margin-left: -3062px;}
+    }
+    

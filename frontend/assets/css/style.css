@@ -1,0 +1,212 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+:root{
+    --themeColor: #F8E6CB;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Inter', sans-serif;
+    scroll-behavior: smooth;
+}
+
+
+#main {
+
+}
+
+#header {
+    height: 80px;
+    background-color: var(--themeColor);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+}
+
+#nav {
+    position: relative;
+    max-width: 1440px;
+    margin: 0 auto;
+    line-height: 80px;
+    display: flex;
+    justify-content: space-between;
+}
+
+#nav .nav__logo {
+    width: 80px; 
+    height: 80px;  
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+
+#nav .nav__logo:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+
+.nav__logo img {
+    width: 100%;
+    padding: 12px;
+}
+
+#nav .nav__menu {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+#nav .nav__menu div {
+    padding: 0 20px;    
+}
+
+#nav .nav__menu a{
+    text-decoration: none;
+    color: #000;
+}
+
+#nav .nav__menu:hover {
+    cursor: pointer;
+}
+
+#nav .menu-home:hover > a,
+#nav .menu-teacher:hover > a, 
+#nav .menu-student:hover > a, 
+#nav .menu-courses:hover > a {
+    color: #0c89dc;
+}
+
+#nav .ava-icon:hover .subnav,
+#nav .menu-teacher:hover > .subnav,
+#nav .menu-student:hover > .subnav,
+#nav .menu-courses:hover > .subnav
+{
+    display: block;
+    border-radius: 20px;
+}
+
+
+#nav .subnav {
+    position: absolute;
+    background-color: #fdf7e9;
+    list-style-type: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    min-width: 200px;
+    border-radius: 20px;
+    line-height: 60px !important;
+    display: none;
+}
+
+#nav .subnav li {
+    display: block;
+}
+
+#nav .subnav li:hover {
+    background-color: #8abee0;
+    border-radius: 20px;
+}
+
+#nav .subnav a {
+    display: block;
+    font-size: 15px;
+    padding: 0 20px;
+    font-weight: 500;
+    text-decoration: none;
+    color: #000;
+}
+
+
+#nav .menu-effect > a {
+    position: relative;
+}
+
+#nav .menu-effect > a::before {
+    content: '';
+    width: 0px;
+    height: 5px;
+    background-color: #0c89dc;
+    position: absolute;
+    top: 120%;
+    transition: .5s;
+}
+
+#nav .menu-effect:hover > a::before{
+    width: 100%;
+}
+
+/* .nav__menu:hover{
+    color: rgba(9, 40, 241, 0.573);
+} */
+
+#nav .nav__icon {
+    max-height: 80px    ;
+    color: #002792;
+    line-height: 80px;
+    display: flex;
+    align-items: center;
+}
+
+
+.nav__icon .noti-icon {
+    padding: 0 8px;
+    font-size: 24px;
+}
+
+.nav__icon .ava-icon {
+    padding-left: 16px;
+    font-size: 48px;
+    position: relative;
+}
+
+.nav__icon .ava-icon .arrow-down {
+    font-size: 16px;
+    margin-left: -10px;
+    margin-right: 12px;
+}
+
+#nav .nav__icon .subnav {
+    position: absolute;
+    right: 0;
+}
+
+#nav .nav__icon .subnav a{
+
+}
+
+.nav__icon .noti-icon:hover,
+.nav__icon .ava-icon:hover {
+    color: #0c89dc;
+    cursor: pointer;
+}
+
+#starter {
+    /* position: relative;
+    background-color: #0c0928;
+    top: 80px;
+    margin-top: calc(80px + 24px);
+    margin: auto;
+    width: 90%;
+    height: 500px; */
+}
+
+#content {
+    position: relative;
+    top: 80px;
+    display: block;
+    width: 100%;
+    height: 10000px;
+    background: linear-gradient(-90deg,#f2d0f5, #d6dffe);    
+}
+#footer {
+
+}
+
