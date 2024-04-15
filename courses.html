@@ -278,17 +278,13 @@
                             <div class="edit-heading">Hiệu chỉnh môn học</div>
                             <div class="row">
                                 <div class="col l-o-1 l-4">
-                                    <div class="edit-course">
-                                        <a href="">
-                                            Đăng kí mới
-                                        </a>
+                                    <div class="edit-course regist-course">
+                                        Đăng kí mới
                                     </div>
                                 </div>
                                 <div class="col l-o-2 l-4">
-                                    <div class="edit-course">
-                                        <a href="">
-                                            Xóa môn học
-                                        </a>
+                                    <div class="edit-course delete-course">
+                                        Xóa môn học
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +294,7 @@
             </div>
         </div>
         
-        <footer> 
+        <footer id="footer"> 
             <div class="chan">
                     <div class="cotleft">
                         <div class="logo-text-container">
@@ -401,22 +397,42 @@
         </footer>
     </div>
 
-    <!-- Thêm modal vào phần tử body -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Thêm khóa học mới</h2>
-        <form id="addCourseForm">
-            <label for="courseName">Tên khóa học:</label>
-            <input type="text" id="courseName" name="courseName" required>
-            <!-- Thêm các trường thông tin khác ở đây nếu cần -->
-            <button type="submit">Xác nhận</button>
-        </form>
+    <div class="modal js-modal">
+        <div class="modal-container js-modal-container">
+            <div class="modal-close js-modal-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <header class="modal-header">
+                <i class="fa-solid fa-graduation-cap modal-graduate"></i>
+                Đăng kí môn học     
+            </header>
+
+            <div class="modal-body">
+                <label for="modal-quantity" class="modal-label">
+                    <i class="fa-solid fa-book"></i>
+                    Tên môn học
+                </label>
+                <input id="modal-course-name" type="text" class="modal-input" placeholder="Nhập tên môn học bạn muốn đăng kí">
+
+                <label for="modal-mail" class="modal-label">
+                    <i class="fa-solid fa-file-code"></i>
+                    Mã môn học
+                </label>
+                <input id="modal-course-id" type="email" class="modal-input" placeholder="Nhập mã môn học">
+                <button id="submit-btn">
+                    Xác nhận đăng kí
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+
+            <footer class="modal-footer">
+                <p class="modal-help">Need <a href="http://www.aao.hcmut.edu.vn/">help?</a></p>
+            </footer>
         </div>
     </div>
   
-
-    
     <script src="./courses.js"></script>
+
 </body>
 </html>
