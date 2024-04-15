@@ -26,14 +26,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 @RestController
-@RequestMapping("/Teacher")
+@RequestMapping("/teacher")
 
 public class TeacherController {
     
     @Autowired
     private FirestoreRepository repository;
 
-    @GetMapping("/Find")
+    @GetMapping("/id")
     public String findTeacher(@RequestParam String id) {
         DocumentSnapshot documentSnapshot = repository.getDocumentById(Teacher.class, id);
         if (documentSnapshot == null) {
@@ -44,7 +44,7 @@ public class TeacherController {
         return documentSnapshot.toObject(Teacher.class).getName();
     }
     
-    @PutMapping("/Update")
+    @PutMapping("/id/info")
     public String putMethodName(@RequestParam String id,
                                 @RequestParam String field,
                                 @RequestParam Object value) 
@@ -63,7 +63,7 @@ public class TeacherController {
         return "Successfully";
     }
 
-    @PutMapping("/Update/DOB")
+    @PutMapping("/id/info/day-of-birth")
     public String updateDOB(
         @RequestParam String id, 
         @RequestParam (required = false, defaultValue = "0000") Integer year,
@@ -87,7 +87,7 @@ public class TeacherController {
         return "Successfully";
     }
     
-    @DeleteMapping("/Delete")
+    @DeleteMapping("/id/del")
     public String DeleteStudent(@RequestParam String id) {
         //TODO: process DELETE request
         

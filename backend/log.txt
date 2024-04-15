@@ -8,6 +8,7 @@
 2024-04-15T21:14:55.487715500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
 2024-04-15T21:14:55.487715500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=aaaa, Credentials=[PROTECTED], Authenticated=false, Details=null, Granted Authorities=[]]
 2024-04-15T21:14:55.497636300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+<<<<<<< Updated upstream
 2024-04-15T22:54:38.884676200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
 2024-04-15T22:54:38.886687600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
 2024-04-15T23:09:54.944601700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
@@ -30,3 +31,13 @@
 2024-04-15T23:58:38.311007600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
 2024-04-15T23:58:38.312012500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=dmbachkhoa@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
 2024-04-15T23:58:38.312012500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+=======
+2024-04-15T23:37:36.793486900: java.lang.NullPointerException: Cannot invoke "com.google.cloud.firestore.DocumentSnapshot.toObject(java.lang.Class)" because "documentSnapshot" is null
+2024-04-15T23:39:31.370069800: java.lang.IllegalArgumentException: 'path' must be a non-empty String
+2024-04-16T00:41:58.336531500: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T00:42:46.485554600: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T00:44:12.866201200: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T00:44:18.624303100: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T00:48:04.392947800: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T00:48:18.721589900: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+>>>>>>> Stashed changes
