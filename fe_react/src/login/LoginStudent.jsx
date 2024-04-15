@@ -3,16 +3,13 @@ import '../assets/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 
-function LoginStudent () {
+function LoginStudent (props) {
     return (
         <div className="login">
             <div className="login__option-student">
-                <h2 style={{ paddingTop: '30px' }}>
-                <FontAwesomeIcon
-                    icon={faChevronLeft}
-                    style={{ margin: '0px 70px 0px 40px' }}
-                />
-                Đăng nhập cho sinh viên
+                <h2 style={{paddingTop: '30px'}}>
+                    <i style={{margin: '0px 70px 0px 40px'}} onClick={() => props.setOption(1)}><FontAwesomeIcon icon={faChevronLeft}/></i>
+                    Đăng nhập cho sinh viên
                 </h2>
                 <p style={{ padding: '0px 70px', marginTop: '20px' }}>
                 Lưu ý: Dùng email trường có đuôi hcmut.edu.vn để đăng nhập

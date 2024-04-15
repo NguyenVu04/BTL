@@ -1,8 +1,14 @@
 import LoginMain from "./login/LoginMain.jsx"
-import LoginTeacher from "./login/LoginTeacher.jsx"
+import MainPage from "./homepage/MainPage.jsx"
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 function App() {
   return (
-      <LoginMain />
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/login" element={<LoginMain />} />
+      </Routes>
+    </Router>
   )
 }
 

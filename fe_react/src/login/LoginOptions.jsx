@@ -3,7 +3,7 @@ import '../assets/style.css'
 import study1 from '../assets/img/study1.jpg'
 import HCMUT_official_logo from '../assets/img/HCMUT_official_logo.png'
 
-function LoginOptions () {
+function LoginOptions (props) {
     return (
         <div className="login">
             <div className="login__option">
@@ -15,10 +15,10 @@ function LoginOptions () {
                     Trường đại học Bách Khoa - Đại học quốc gia TP.HCM <br/>
                     Trường đào tạo kỹ thuật số 1 miền nam
                 </h3>
-                <div className="login-teacher">
+                <div className="login-teacher" onClick={() => props.setOption(2)}>
                     <h3 className="login-note">Đăng nhập cho giảng viên</h3>
                 </div>
-                <div className="login-student">
+                <div className="login-student" onClick={() => props.setOption(3)}>
                     <h3 className="login-note">Đăng nhập cho sinh viên</h3>
                 </div>
                 <p style={{padding: '15px 20px 0px 50px', fontSize: '13px'}}>
