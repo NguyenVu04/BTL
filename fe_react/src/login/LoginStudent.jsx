@@ -6,17 +6,23 @@ import { useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import validator from "validator";
+import { Navigate, useNavigate } from 'react-router-dom'
 function LoginStudent (props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [disabled, setDisabled] = useState(false)
+    const navigate = useNavigate()
     function handleSubmit () {
         if (!email.endsWith('@hcmut.edu.vn') && !validator.isEmail(email)) {
             toast.error("Invalid Email, Please try again.")
+            setEmail('')
+            setPassword('')
             return;
         }
         if (!validator.isLength(password, {min: 8, max: 32})) {
             toast.error("Invalid Password, Please try again.")
+            setEmail('')
+            setPassword('')
             return;
         }
         let data = new FormData()
@@ -40,10 +46,10 @@ function LoginStudent (props) {
         ).then(
             data => {
                 localStorage.setItem('Authorization', data['authorization'])
-                console.log(localStorage.getItem('Authorization'))
+                navigate('/')
             }
         ).catch(
-            toast.error("Wrong Username or Password, Please try again.")
+            () => toast.error("Wrong Username or Password, Please try again.")
         ).finally(
             setDisabled(false)
         )
