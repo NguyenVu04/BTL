@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
 import com.project.backend.exceptionhandler.ExceptionLog;
 
 /**
@@ -84,14 +83,16 @@ public class BackendSecurityConfiguration {
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(req -> req.anyRequest().permitAll())
-                /*.authorizeHttpRequests(req -> req.requestMatchers("/student/**")
-                                                 .hasAuthority("STUDENT")
-                                                 .requestMatchers("/teacher/**")
-                                                 .hasAuthority("TEACHER")
-                                                 .requestMatchers("/logout")
-                                                 .authenticated()
-                                                 .anyRequest()
-                                                 .permitAll())*/               
+                /*
+                 * .authorizeHttpRequests(req -> req.requestMatchers("/student/**")
+                 * .hasAuthority("STUDENT")
+                 * .requestMatchers("/teacher/**")
+                 * .hasAuthority("TEACHER")
+                 * .requestMatchers("/logout")
+                 * .authenticated()
+                 * .anyRequest()
+                 * .permitAll())
+                 */
                 .logout(out -> out.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();

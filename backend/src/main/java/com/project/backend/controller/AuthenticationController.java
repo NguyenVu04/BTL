@@ -9,9 +9,7 @@ import com.project.backend.repository.FirestoreRepository;
 import com.project.backend.security.AuthenticationDetails;
 import com.project.backend.security.JwtUtils;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +22,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.util.MultiValueMapAdapter;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 public class AuthenticationController {
@@ -62,6 +60,7 @@ public class AuthenticationController {
      *         authorization token if the login is successful. Otherwise, returns an
      *         unauthorized response.
      */
+    @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(@RequestParam(name = "email", required = true) String email,
             @RequestParam(name = "password", required = true) String password) {
@@ -77,11 +76,9 @@ public class AuthenticationController {
                         .next()
                         .toString());
                 String token = jwtUtils.encodeObject(map);
-                Map<String, List<String>> header = new HashMap<String, List<String>>();
-                header.put("Authorization", Arrays.asList(token));
-                return new ResponseEntity<Map<String, Object>>(map,
-                        new MultiValueMapAdapter<String, String>(header),
-                        HttpStatus.OK);
+                map.put("authorization", token);
+                map.remove("password");
+                return ResponseEntity.ok().body(map);
             } else {
                 exceptionLog.log(new UsernameNotFoundException(this.getClass().getName()));
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
