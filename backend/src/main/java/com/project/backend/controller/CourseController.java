@@ -258,7 +258,7 @@ public class CourseController {
         }
 
     }
-    @DeleteMapping("/delete/teacher")
+    @DeleteMapping("/del/teacher")
     public ResponseEntity<Teacher> deleteTeacherinCourse(@RequestParam(defaultValue = "non") String id, @RequestParam(required = false) String idCourse) {
         try {
             DocumentSnapshot documentSnapshot = repository.getDocumentById(Teacher.class, id);

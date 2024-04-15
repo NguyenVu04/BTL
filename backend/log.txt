@@ -41,3 +41,8 @@
 2024-04-16T00:48:04.392947800: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
 2024-04-16T00:48:18.721589900: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
 >>>>>>> Stashed changes
+2024-04-16T00:54:19.114234600: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T00:57:03.875818100: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T01:01:58.524367100: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T01:03:09.547310200: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
+2024-04-16T01:09:40.573391400: java.lang.RuntimeException: Could not deserialize object. Failed to convert a value of type java.lang.String to double (found in field 'price')
