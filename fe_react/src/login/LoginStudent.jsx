@@ -3,16 +3,29 @@ import '../assets/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import validator from "validator";
 function LoginStudent (props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [disabled, setDisabled] = useState(false)
     function handleSubmit () {
+        if (!email.endsWith('@hcmut.edu.vn') && !validator.isEmail(email)) {
+            toast.error("Invalid Email, Please try again.")
+            return;
+        }
+        if (!validator.isLength(password, {min: 8, max: 32})) {
+            toast.error("Invalid Password, Please try again.")
+            return;
+        }
         let data = new FormData()
         data.append('email', email)
         data.append('password', password)
         data.append('role', 'STUDENT')
         setEmail('')
         setPassword('')
+        setDisabled(true)
         fetch ('http://localhost:8080/login', {
             method: 'POST',
             mode: 'cors',
@@ -30,7 +43,9 @@ function LoginStudent (props) {
                 console.log(localStorage.getItem('Authorization'))
             }
         ).catch(
-            error => console.log(error)
+            toast.error("Wrong Username or Password, Please try again.")
+        ).finally(
+            setDisabled(false)
         )
     }
     return (
@@ -50,6 +65,7 @@ function LoginStudent (props) {
                 <div className="login-button" onClick={() => handleSubmit()}>Đăng nhập</div>
                 <h3 className="forgotPassword">Quên mật khẩu?</h3>
             </div>
+            <ToastContainer />
         </div>
     );
 }

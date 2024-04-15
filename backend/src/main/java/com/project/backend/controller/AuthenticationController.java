@@ -10,6 +10,7 @@ import com.project.backend.security.AuthenticationDetails;
 import com.project.backend.security.JwtUtils;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -68,7 +70,7 @@ public class AuthenticationController {
             @RequestParam (name = "role", required = true) String role) {
         try {
             Authentication authentication = manager
-                    .authenticate(new UsernamePasswordAuthenticationToken(email, password));
+                    .authenticate(new UsernamePasswordAuthenticationToken(email, password, List.of(new SimpleGrantedAuthority(role))));
             if (authentication.isAuthenticated()) {
                 Map<String, Object> map = new HashMap<>();
                 map.put("password", password);

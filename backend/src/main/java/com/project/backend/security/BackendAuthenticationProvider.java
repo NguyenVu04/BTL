@@ -46,9 +46,12 @@ public class BackendAuthenticationProvider implements AuthenticationProvider {
                                         .toString();
         // Compare the provided password with the stored password
         String userPassword = details.getPassword();
-
+        String role = authentication.getAuthorities()
+                                    .iterator()
+                                    .next()
+                                    .toString();
         // If the passwords match, create an authenticated UsernamePasswordAuthenticationToken with the user's details and roles
-        if (encoder.matches(password, userPassword)) {
+        if (encoder.matches(password, userPassword) && details.getRole().equals(role)) {
             List<SimpleGrantedAuthority> list = List.of(new SimpleGrantedAuthority(details.getRole()));
             return UsernamePasswordAuthenticationToken.authenticated(details.getId(), userPassword, list);
         } else {

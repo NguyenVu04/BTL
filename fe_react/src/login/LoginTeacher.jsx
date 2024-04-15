@@ -3,16 +3,29 @@ import '../assets/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import validator from "validator";
 function LoginTeacher (props) {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [disabled, setDisabled] = useState(false)
     function handleSubmit () {
+        if (!email.endsWith('@hcmut.edu.vn') && !validator.isEmail(email)) {
+            toast.error("Invalid Email, Please try again.")
+            return;
+        }
+        if (!validator.isLength(password, {min: 8, max: 32})) {
+            toast.error("Invalid Password, Please try again.")
+            return;
+        }
         let data = new FormData()
         data.append('email', email)
         data.append('password', password)
         data.append('role', 'TEACHER')
         setEmail('')
         setPassword('')
+        setDisabled(true)
         fetch ('http://localhost:8080/login', {
             method: 'POST',
             mode: 'cors',
@@ -29,7 +42,9 @@ function LoginTeacher (props) {
                 localStorage.setItem('Authorization', data['authorization'])
             }
         ).catch(
-            error => console.log(error)
+            toast.error("Wrong Username or Password, Please try again.")
+        ).finally(
+            setDisabled(false)
         )
     }
     return (
@@ -44,9 +59,10 @@ function LoginTeacher (props) {
                 <input className="input-box" type="email" placeholder="Nhập email" name='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <p className="input-note">Mật khẩu:</p>
                 <input className="input-box" type="password" placeholder="Nhập mật khẩu" name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
-                <div className="login-button" onClick={() => handleSubmit()}>Đăng nhập</div>
+                <div className="login-button" onClick={() => !disabled && handleSubmit()}>Đăng nhập</div>
                 <h3 className="forgotPassword">Quên mật khẩu?</h3>
             </div>
+            <ToastContainer />
         </div>
     );
 }
