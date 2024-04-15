@@ -62,8 +62,10 @@ public class AuthenticationController {
      */
     @CrossOrigin(origins = "http://localhost:5173")
     @PostMapping("/login")
-    public ResponseEntity<Map<String, Object>> login(@RequestParam(name = "email", required = true) String email,
-            @RequestParam(name = "password", required = true) String password) {
+    public ResponseEntity<Map<String, Object>> login(
+            @RequestParam(name = "email", required = true) String email,
+            @RequestParam(name = "password", required = true) String password,
+            @RequestParam (name = "role", required = true) String role) {
         try {
             Authentication authentication = manager
                     .authenticate(new UsernamePasswordAuthenticationToken(email, password));

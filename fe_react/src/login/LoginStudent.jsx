@@ -2,8 +2,37 @@ import './login.css'
 import '../assets/style.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
-
+import { useState } from 'react'
 function LoginStudent (props) {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    function handleSubmit () {
+        let data = new FormData()
+        data.append('email', email)
+        data.append('password', password)
+        data.append('role', 'STUDENT')
+        setEmail('')
+        setPassword('')
+        fetch ('http://localhost:8080/login', {
+            method: 'POST',
+            mode: 'cors',
+            body: data
+        }).then(
+            res => {
+                if (!res.ok) {
+                    throw new Error("UNAUTHENTICATED")
+                }
+                return res.json()
+            }
+        ).then(
+            data => {
+                localStorage.setItem('Authorization', data['authorization'])
+                console.log(localStorage.getItem('Authorization'))
+            }
+        ).catch(
+            error => console.log(error)
+        )
+    }
     return (
         <div className="login">
             <div className="login__option-student">
@@ -15,10 +44,10 @@ function LoginStudent (props) {
                 Lưu ý: Dùng email trường có đuôi hcmut.edu.vn để đăng nhập
                 </p>
                 <p className="input-note">Email:</p>
-                <input className="input-box" type="email" placeholder="Nhập email" />
+                <input className="input-box" type="email" placeholder="Nhập email" name='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <p className="input-note">Mật khẩu:</p>
-                <input className="input-box" type="password" placeholder="Nhập mật khẩu" />
-                <div className="login-button">Đăng nhập</div>
+                <input className="input-box" type="password" placeholder="Nhập mật khẩu" name='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
+                <div className="login-button" onClick={() => handleSubmit()}>Đăng nhập</div>
                 <h3 className="forgotPassword">Quên mật khẩu?</h3>
             </div>
         </div>

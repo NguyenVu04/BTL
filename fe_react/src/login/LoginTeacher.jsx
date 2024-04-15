@@ -10,6 +10,7 @@ function LoginTeacher (props) {
         let data = new FormData()
         data.append('email', email)
         data.append('password', password)
+        data.append('role', 'TEACHER')
         setEmail('')
         setPassword('')
         fetch ('http://localhost:8080/login', {
