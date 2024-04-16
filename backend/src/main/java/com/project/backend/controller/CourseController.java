@@ -38,6 +38,25 @@ public class CourseController {
 
     @Autowired
     private ExceptionLog exceptionLog;
+    // get all Courses 
+    @GetMapping("/all")
+    public ResponseEntity<List<Course>> getAllCourses() {
+        try{
+            List<DocumentSnapshot> snapshot = repository.getAllDocuments(Course.class);
+            if (snapshot.size() == 0) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            List<Course> courses = new ArrayList<Course>();
+            for (DocumentSnapshot course : snapshot) {
+                courses.add(course.toObject(Course.class));
+            }
+            return ResponseEntity.ok().body(courses);
+        } catch (Exception e){
+            exceptionLog.log(e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+    
     // get Course by ID
     @GetMapping("/id")
     public ResponseEntity<Course> get(@RequestParam String id) {

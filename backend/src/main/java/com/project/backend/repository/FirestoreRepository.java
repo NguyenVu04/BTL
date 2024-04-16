@@ -17,6 +17,7 @@ import com.google.cloud.firestore.Query;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
+import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
@@ -360,4 +361,5 @@ public class FirestoreRepository {
             return false;
         }
     }
+
 }

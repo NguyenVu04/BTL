@@ -91,7 +91,7 @@ public class StudentController {
 
     }
 
-    @PutMapping("adjustion/id")
+    @PutMapping("/adjustion/id")
     public ResponseEntity<Map<String, Object>> UpdateStudentbyField(
         @RequestParam String id,
         @RequestParam String field, 
@@ -118,7 +118,7 @@ public class StudentController {
     }
 
 
-    @PutMapping("adjustion/id/day-of-birth")
+    @PutMapping("/adjustion/id/day-of-birth")
     public ResponseEntity<Map<String, Object>> UpdateBirthday(@RequestParam String id,
                                 @RequestParam (required = false, defaultValue = "0000") Integer year,
                                 @RequestParam (required = false, defaultValue =  "01") Integer month,
@@ -162,7 +162,7 @@ public class StudentController {
     }
 
 
-    @GetMapping("id")
+    @GetMapping("/id")
     public ResponseEntity<Student> getStudentbyId(@RequestParam String id) {
         try {
             DocumentSnapshot snapshot = repository.getDocumentById(Student.class, id);
@@ -177,7 +177,7 @@ public class StudentController {
         }
     }
     
-    @GetMapping("all")
+    @GetMapping("/all")
     public ResponseEntity<List<Student>> getAllStudent() {
         try {
             List<DocumentSnapshot> snapshots = repository.getAllDocuments(Student.class);
