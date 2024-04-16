@@ -14,6 +14,7 @@ import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.firestore.Firestore;
 import com.google.cloud.firestore.Query;
+import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.cloud.firestore.QuerySnapshot;
 import com.google.cloud.firestore.WriteResult;
 import com.project.backend.exceptionhandler.ExceptionLog;
@@ -147,6 +148,25 @@ public class FirestoreRepository {
         }
     }
 
+    @Nullable
+    public List<DocumentSnapshot> getAllDocuments(Class<? extends Model> type){
+        CollectionReference collection = getCollection(type);
+        ApiFuture<QuerySnapshot> query = collection.get();
+        QuerySnapshot querySnapshot = null;
+        try {
+            querySnapshot = query.get();
+        } catch (Exception e) {
+            exceptionLog.log(e);
+        }
+        List<DocumentSnapshot> documentSnapshots = new ArrayList<>();
+        if (querySnapshot != null) {
+            List<QueryDocumentSnapshot> queryDocumentSnapshots = querySnapshot.getDocuments();
+            for (QueryDocumentSnapshot queryDocumentSnapshot : queryDocumentSnapshots) {
+                documentSnapshots.add(queryDocumentSnapshot);
+            }
+        }
+        return documentSnapshots;
+    }
     // Method to get all documents by a specific field value from Firestore
     @Nullable
     public List<DocumentSnapshot> getAllDocumentsByField(Class<? extends Model> type,
