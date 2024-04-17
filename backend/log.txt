@@ -11952,3 +11952,14 @@
 2024-04-16T14:40:21.667905300: java.lang.IllegalStateException: Firestore client has already been closed
 2024-04-16T14:40:21.667905300: java.lang.IllegalStateException: Firestore client has already been closed
 2024-04-16T14:40:21.667905300: java.lang.IllegalStateException: Firestore client has already been closed
+2024-04-17T15:01:55.267629500: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:02:02.172226500: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:02:24.937405700: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:02:29.571380: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:04:24.882857400: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:04:53.549352700: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:06:04.795805200: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:07:17.822362600: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:07:31.989852700: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:08:14.874829300: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T15:08:26.937313300: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null

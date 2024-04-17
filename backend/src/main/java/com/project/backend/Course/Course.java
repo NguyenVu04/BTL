@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.cloud.Timestamp;
-import com.project.backend.Course.Quizz.Quizz;
+import com.project.backend.QuizMain.Quizz;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Teacher;
 import com.project.backend.firebase.CollectionName;
@@ -23,11 +23,13 @@ public class Course extends Model{
     private Timestamp endDate;;
     private List<Lesson> LessonMaterials;
     private Double price;
-    private List<Map<String, Quizz>> quizz;
     private Map<String,String> timeTable;
 
-    private List<Student> listStudent;
-    private List<Teacher> listTeacher; 
+    private List<String> listStudent;
+    private List<String> listTeacher;
+
+    // multiple quizzes
+    private List<Quizz> listQuizz;
     protected Course(){}
 
     public Course(
@@ -37,20 +39,20 @@ public class Course extends Model{
             Timestamp endDate, 
             List<Lesson> LessonMaterials, 
             Double price, 
-            List<Map<String, Quizz>> quizz, 
             Map<String,String> timeTable,
-            List<Student> listStudent,
-            List<Teacher> listTeacher
-            ) {
+            List<String> listStudent,
+            List<String> listTeacher,
+            List<Quizz> listQuizz
+        ) {
         this.name = name;
         this.category = category;
         this.endDate = endDate;
         this.startDate = startDate;
         this.LessonMaterials = LessonMaterials;
         this.price = price;
-        this.quizz = quizz;
         this.timeTable = timeTable;
         this.listStudent = listStudent;
         this.listTeacher = listTeacher;
+        this.listQuizz = listQuizz;
     }
 }

@@ -34,6 +34,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 @RequestMapping("/student")
 public class StudentController {
     @Autowired
+    private CourseController courseController;
+
+    @Autowired
     private ExceptionLog exceptionLog;
     @Autowired
     private FirestoreRepository repository;
@@ -145,23 +148,53 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping("/del")
-    public ResponseEntity<String> DeleteStudent(@RequestParam String id) {
+    @DeleteMapping("id/del")
+    public ResponseEntity<Student> DeleteStudent(@RequestParam String id) {
         //TODO: process DELETE request
         
         try{            
             DocumentSnapshot snapshot = repository.getDocumentById(Student.class, id);
             if (snapshot == null)  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            
+            Student student = snapshot.toObject(Student.class);
+            for (int i = 0; i < student.getCourseID().size(); i++){
+                String getidCourse = student.getCourseID().get(i);
+                courseController.deleteStudentinCourse(id, getidCourse);
+            }
             repository.deleteDocumentById(Student.class, id);
-            return ResponseEntity.ok().body(id);
+            return ResponseEntity.ok().body(student);
         } catch (Exception e) {
             exceptionLog.log(e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-
-
+    @DeleteMapping("/del-all")
+    public ResponseEntity<List<Student>> deleteAll() {
+        //TODO: process DELETE request
+        
+        try{
+            List<Student> list = new ArrayList<Student>();
+            List<DocumentSnapshot> documents = repository.getAllDocuments(Student.class);
+            if (documents == null || documents.size() == 0) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            for (DocumentSnapshot document : documents) {
+                Student teacher = document.toObject(Student.class);
+                list.add(teacher);
+                
+                for (int i = 0; i < teacher.getCourseID().size(); i++){
+                    String getid = teacher.getCourseID().get(i);
+                    courseController.deleteTeacherinCourse(teacher.getId(), getid);
+                }
+                
+                repository.deleteDocumentById(Student.class, document.getId());
+            }
+            return ResponseEntity.ok().body(list);
+        } catch (Exception e) {
+            exceptionLog.log(e);
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+    
     @GetMapping("/id")
     public ResponseEntity<Student> getStudentbyId(@RequestParam String id) {
         try {

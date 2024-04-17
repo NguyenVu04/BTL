@@ -7,7 +7,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.Course.Category;
 import com.project.backend.Course.Course;
 import com.project.backend.Course.Lesson;
-import com.project.backend.Course.Quizz.Quizz;
+import com.project.backend.QuizMain.Quizz;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
@@ -109,13 +109,13 @@ public class CourseController {
             }
             Category category = new Category(null, null);
             List<Lesson> LessonMaterials = new ArrayList<Lesson>();
-            List<Student> students = new ArrayList<Student>();
-            List<Teacher> teachers = new ArrayList<Teacher>();
-            List<Map<String,Quizz>> quizz = new ArrayList<Map<String,Quizz>>();
-
+            List<String> students = new ArrayList<String>();
+            List<String> teachers = new ArrayList<String>();
+            
             Timestamp now = Timestamp.now();
             Timestamp later = Timestamp.ofTimeMicroseconds((now.getSeconds()+10713600)*1000000);
-            Course course = new Course(name, category, now, later, LessonMaterials, price, quizz, null, students, teachers);
+            List<Quizz> listQuizz = new ArrayList<Quizz>();
+            Course course = new Course(name, category, now, later, LessonMaterials, price, null, students, teachers, listQuizz);
             repository.saveDocument(course, id);
             return ResponseEntity.ok(course);
 
@@ -147,11 +147,12 @@ public class CourseController {
                 }
             }
             // inject courseID into that student
+            
             student.getCourseID().add(CourseID);
             
             // inject that student into the course
             Course temp = repository.getDocumentById(Course.class, CourseID).toObject(Course.class);
-            temp.getListStudent().add(student);
+            temp.getListStudent().add(student.getId());
             repository.updateDocumentById(student);
             repository.updateDocumentById(temp);
             return ResponseEntity.ok().body(student);
@@ -186,7 +187,7 @@ public class CourseController {
             
             // inject that teacher into the course
             Course temp = repository.getDocumentById(Course.class, CourseID).toObject(Course.class);
-            temp.getListTeacher().add(teacher);
+            temp.getListTeacher().add(teacher.getId());
             repository.updateDocumentById(teacher);
             repository.updateDocumentById(temp);
             return ResponseEntity.ok().body(teacher);
@@ -247,7 +248,7 @@ public class CourseController {
             }
     
             Student student = documentSnapshot.toObject(Student.class);
-            String email = student.getEmail();
+            String idstudent = student.getId();
             boolean alreadyExists = false;
             for (int i = 0 ; i < student.getCourseID().size() ; i++) {
                 if (student.getCourseID().get(i).equals(idCourse)){
@@ -263,7 +264,7 @@ public class CourseController {
             Course course = snapshot.toObject(Course.class);
             // course.getListStudent()
             for (int i = 0 ; i <  course.getListStudent().size(); i++) {
-                if (course.getListStudent().get(i).getEmail().equals(email)) {
+                if (course.getListStudent().get(i).equals(idstudent)) {
                     course.getListStudent().remove(i);
                     break;
                 }
@@ -287,7 +288,7 @@ public class CourseController {
             }
         
             Teacher teacher = documentSnapshot.toObject(Teacher.class);
-            String email = teacher.getEmail();
+            String teacherid = teacher.getId();
             boolean alreadyExists = false;
             for (int i = 0 ; i < teacher.getCourseID().size() ; i++) {
                 if (teacher.getCourseID().get(i).equals(idCourse)){
@@ -302,7 +303,7 @@ public class CourseController {
             }
             Course course = snapshot.toObject(Course.class);
             for (int i = 0 ; i <  course.getListTeacher().size(); i++) {
-                if (course.getListTeacher().get(i).getEmail().equals(email)) {
+                if (course.getListTeacher().get(i).equals(teacherid)) {
                     course.getListTeacher().remove(i);
                     break;
                 }

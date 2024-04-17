@@ -1,4 +1,4 @@
-package com.project.backend.Course.Quizz;
+package com.project.backend.QuizMain;
 
 import java.util.*;
 
@@ -11,7 +11,7 @@ public class QuizzDetail {
     private Double score = 0.0;
     private List<String> history;
     boolean passOrnot = false;
-
+    private Integer timeleft;
     protected QuizzDetail() {}
 
     public QuizzDetail(
@@ -22,5 +22,6 @@ public class QuizzDetail {
         this.score = score;
         this.history = history;
         this.passOrnot = passOrnot;
+        this.timeleft = 3;
     }
 }
