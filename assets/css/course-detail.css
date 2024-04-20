@@ -15,9 +15,13 @@
     text-decoration: none;
 }
 
-#content .course-on {
+#content .course-on,
+#content .score-on,
+#content .classlist-on
+{
     background-color: #8abee0;  
 }
+
 
 #content .content__map:hover {
     background-color: #8abee0;
