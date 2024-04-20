@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="./assets/font/fontawesome-free-6.5.1-web/css/all.css">
     <link rel="stylesheet" href="./assets/css/grid.css">
     <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/courses.css">
+    <link rel="stylesheet" href="./assets/css/modal.css">
     <link rel="icon" type="img/x-icon" href="./assets/img/favicon.ico">
     <title>Document</title>
 </head>
@@ -15,48 +17,48 @@
         <div id="header">
             <div id="nav">
                 <div class="nav__logo">
-                    <a href="#home">
+                    <a href="./index.html">
                         <img src="./assets/img/HCMUT_official_logo.png" alt="">
                     </a>
                 </div>
 
                 <div class="nav__menu">
                     <div class="menu-home menu-effect">
-                        <a href="#home">Trang chủ</a>
+                        <a href="./index.html">Trang chủ</a>
                     </div>
                     <div class="menu-teacher menu-effect">
-                        <a href="#teacher">
+                        <a href="./teacher_host.html">
                             Thông tin giảng viên
-                            <i class="fa-solid fa-caret-down"></i>
+                            <i class="fa-solid fa-angle-down"></i>
                         </a>
                         
                         <ul class="subnav">
-                            <li><a href="">Thông tin cá nhân</a></li>
-                            <li><a href="">Lịch trình giảng dạy</a></li>
-                            <li><a href="">Danh sách lớp</a></li>
+                            <li><a href="./teacher_host.html">Thông tin cá nhân</a></li>
+                            <li><a href="./teacher_lich.html">Lịch trình giảng dạy</a></li>
+                            <li><a href="./teacher_classlist.html">Danh sách lớp</a></li>
                         </ul>
                         <div class="underline"></div>
                     </div>
                     <div class="menu-student menu-effect">
-                        <a href="#student">
+                        <a href="./student-info.html">
                             Thông tin sinh viên
-                            <i class="fa-solid fa-caret-down"></i>
+                            <i class="fa-solid fa-angle-down"></i>
                         </a>
                         <ul class="subnav">
-                            <li><a href="">Thông tin cá nhân</a></li>
+                            <li><a href="./student-info.html">Thông tin cá nhân</a></li>
                             <li><a href="">Tiến trình học tập</a></li>
                             <li><a href="">Kết quả đánh giá</a></li>
                         </ul>
                         <div class="underline"></div>
                     </div>
                     <div class="menu-courses menu-effect">
-                        <a href="#course">
+                        <a href="./courses.html">
                             Khóa học của tôi
-                            <i class="fa-solid fa-caret-down"></i>
+                            <i class="fa-solid fa-angle-down"></i>
                         </a>
                         <ul class="subnav">
-                            <li><a href="">Danh sách khóa học</a></li>
-                            <li><a href="">Đăng kí mới</a></li>
+                            <li><a href="./courses.html">Danh sách khóa học</a></li>
+                            <li><a href="./courses.html">Đăng kí mới</a></li>
                         </ul>
                         <div class="underline"></div>
                     </div>
@@ -70,8 +72,8 @@
                         <i class="fa-solid fa-circle-user"></i>
                         <i class="arrow-down fa-solid fa-caret-down"></i>  
                         <ul class="subnav">
-                            <li><a href="">Đăng nhập</a></li>
-                            <li><a href="">Đăng xuất</a></li>
+                            <li><a href="./login.html">Đăng nhập</a></li>
+                            <li><a href="./login.html">Đăng xuất</a></li>
                             <li><a href="">Đổi mật khẩu</a></li>
                         </ul>
                     </div>
@@ -82,7 +84,7 @@
         <div id="content">
             <div class="grid wide">
                 <div class="row">
-                    <div class="content__title col l-o-3 l-6">
+                    <div class="content__title col l-12">
                         Các khóa học của tôi
                     </div>
                 </div>
@@ -130,7 +132,7 @@
                                     </div>
                                 </div>
                                 <div class="course-enter-btn">
-                                    <a class="btn-text" href="#">Chi tiết khóa học</a>
+                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
                                 </div>
                             </div>
                         </div>
@@ -163,7 +165,7 @@
                                     </div>
                                 </div>
                                 <div class="course-enter-btn">
-                                    <a class="btn-text" href="#">Chi tiết khóa học</a>
+                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +198,7 @@
                                     </div>
                                 </div>
                                 <div class="course-enter-btn">
-                                    <a class="btn-text" href="#">Chi tiết khóa học</a>
+                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
                                 </div>
                             </div>
                         </div>
@@ -229,7 +231,7 @@
                                     </div>
                                 </div>
                                 <div class="course-enter-btn">
-                                    <a class="btn-text" href="#">Chi tiết khóa học</a>
+                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +265,7 @@
                                     </div>
                                 </div>
                                 <div class="course-enter-btn">
-                                    <a class="btn-text" href="#">Chi tiết khóa học</a>
+                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
                                 </div>
                             </div>
                         </div> 
@@ -278,17 +280,13 @@
                             <div class="edit-heading">Hiệu chỉnh môn học</div>
                             <div class="row">
                                 <div class="col l-o-1 l-4">
-                                    <div class="edit-course">
-                                        <a href="">
-                                            Đăng kí mới
-                                        </a>
+                                    <div class="edit-course regist-course">
+                                        Đăng kí mới
                                     </div>
                                 </div>
                                 <div class="col l-o-2 l-4">
-                                    <div class="edit-course">
-                                        <a href="">
-                                            Xóa môn học
-                                        </a>
+                                    <div class="edit-course delete-course">
+                                        Xóa môn học
                                     </div>
                                 </div>
                             </div>
@@ -298,7 +296,8 @@
             </div>
         </div>
         
-        <footer> 
+        <!--footer start-->
+        <footer id="footer"> 
             <div class="chan">
                     <div class="cotleft">
                         <div class="logo-text-container">
@@ -308,23 +307,23 @@
                                 <p> Trường đại học Bách khoa </p>
                             </div>
                         </div>
-                        <div class="icon" style="margin-top:50px;">
-                            <i class="fa-solid fa-mobile-screen"></i>
+                        <div class="icon" style="margin-top:30px;">
+                            <i class="fa-solid fa-mobile-screen" style="margin-top:-10px;"></i>
                             <p class="inf"><a href="tel: 0838 654 087" class="map">Điện thoại: (02) 838 654 087  ; Số Fax: (02) 838 637 002</a></p>
                         </div>
                         <br>
                         <div class="icon">
-                            <i class="fa-solid fa-envelope"></i>
+                            <i class="fa-solid fa-envelope" style="margin-top:-10px;"></i>
                             <p class="inf"><a href="mailto: pdt@hcmut.edu.vn " class="map">Email: pdt@hcmut.edu.vn</a></p>
                         </div>
                         <br>
                         <div class="icon">
-                            <i class="fa-solid fa-map-location-dot"></i>
+                            <i class="fa-solid fa-map-location-dot" style="margin-top:-10px;"></i>
                             <p class="inf"><a href="https://maps.app.goo.gl/NM7Kr9vRVhMyhNZP8" class="map">
                                 Địa chỉ: Cơ sở Lý Thường Kiệt: 268 Lý Thường Kiệt, Phường 14, Quận 10, TP. HCM</a></p>
                         </div>
                         <div class="icon">
-                            <p class="inf" style="margin-left:72px;"><a href="https://maps.app.goo.gl/JWBADEVHJPFfKAgt7" class="map">
+                            <p class="inf" style="margin-left:80px;"><a href="https://maps.app.goo.gl/JWBADEVHJPFfKAgt7" class="map">
                                 Cơ sở Dĩ An: Khu phố Tân Lập, Phường Đông Hòa, TP. Dĩ An, Tỉnh Bình Dương</a></p>
                         </div>
                         <br>
@@ -341,10 +340,10 @@
                             </div>
                         </div>
                         <div class="tqchild">
-                            <p><a href="#" class="ctqs">Giới thiệu</a></p>
-                            <p><a href="#" class="ctqs">Liên hệ</a></p>
-                            <p><a href="#" class="ctqs">Điều khoản</a></p>
-                            <p><a href="#" class="ctqs">Bảo mật</a></p>
+                            <p><a href="https://hcmut.edu.vn/tong-quan" class="ctqs">Giới thiệu</a></p>
+                            <p><a href="https://hcmut.edu.vn/contact" class="ctqs">Liên hệ</a></p>
+                            <p><a href="http://www.aao.hcmut.edu.vn/image/data/quyche/VB%20to%CC%82%CC%89ng%20ho%CC%9B%CC%A3p%20Quy%20%C4%91i%CC%A3nh%20ve%CC%82%CC%80%20ho%CC%A3c%20vu%CC%A3%20va%CC%80%20%C4%91a%CC%80o%20ta%CC%A3o%20(1).pdf" class="ctqs">Điều khoản</a></p>
+                            <p><a href="https://hcmut.edu.vn/library-page" class="ctqs">Thư viện</a></p>
                         </div>  
                     </div>
         
@@ -359,10 +358,10 @@
                         </div>
                     </div>
                     <div class="tqchild">
-                        <p><a href="#" class="ctqs">Giảng viên</a></p>
-                        <p><a href="#" class="ctqs">Sinh viên</a></p>
-                        <p><a href="#" class="ctqs">Admin</a></p>
-                        <p><a href="#" class="ctqs">Guest</a></p>
+                        <p><a href="./login.html" class="ctqs">Giảng viên</a></p>
+                        <p><a href="./login.html" class="ctqs">Sinh viên</a></p>
+                        <p><a href="./login.html" class="ctqs">Admin</a></p>
+                        <p><a href="./login.html" class="ctqs">Guest</a></p>
                     </div>
                     
                 </div>
@@ -376,10 +375,10 @@
                         </div>
                     </div>
                     <div class="tqchild">
-                        <p><a href="#" class="ctqs">Mục tiêu tương lai</a></p>
-                        <p><a href="#" class="ctqs">Dự án dài hạn</a></p>
-                        <p><a href="#" class="ctqs">Hoạt động</a></p>
-                        <p><a href="#" class="ctqs">Feedback</a></p>
+                        <p><a href="https://hcmut.edu.vn/gioi-thieu/ke-hoach-chien-luoc" class="ctqs">Mục tiêu tương lai</a></p>
+                        <p><a href="https://hcmut.edu.vn/hoat-dong-doi-moi-sang-tao" class="ctqs">Dự án dài hạn</a></p>
+                        <p><a href="https://hcmut.edu.vn/ba-cong-khai" class="ctqs">Hoạt động</a></p>
+                        <p><a href="mailto: pdt@hcmut.edu.vn" class="ctqs">Feedback</a></p>
                     </div>
                 </div>
         
@@ -388,7 +387,7 @@
             <div class="copyright">
                     <div class="icon">
                             <i class="fa-solid fa-copyright"></i>
-                            <p class="te" style="font-weight:bold;">2007-2024 BKEL. Hệ thống giáo dục hàng đầu Việt Nam </p>
+                            <p class="te" style="margin-top:10px; font-weight:bold;">2007-2024 BKEL. Hệ thống giáo dục hàng đầu Việt Nam </p>
                     </div>
                     <div class="social a">
                                 <a href="https://www.facebook.com/truongdhbachkhoa/"><i class="fa-brands fa-facebook" style="color: #001c4d;"></i></a>
@@ -401,22 +400,42 @@
         </footer>
     </div>
 
-    <!-- Thêm modal vào phần tử body -->
-    <div id="myModal" class="modal">
-        <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>Thêm khóa học mới</h2>
-        <form id="addCourseForm">
-            <label for="courseName">Tên khóa học:</label>
-            <input type="text" id="courseName" name="courseName" required>
-            <!-- Thêm các trường thông tin khác ở đây nếu cần -->
-            <button type="submit">Xác nhận</button>
-        </form>
+    <div class="modal js-modal">
+        <div class="modal-container js-modal-container">
+            <div class="modal-close js-modal-close">
+                <i class="fa-solid fa-xmark"></i>
+            </div>
+
+            <header class="modal-header">
+                <i class="fa-solid fa-graduation-cap modal-graduate"></i>
+                Đăng kí môn học     
+            </header>
+
+            <div class="modal-body">
+                <label for="modal-quantity" class="modal-label">
+                    <i class="fa-solid fa-book"></i>
+                    Tên môn học
+                </label>
+                <input id="modal-course-name" type="text" class="modal-input" placeholder="Nhập tên môn học bạn muốn đăng kí">
+
+                <label for="modal-mail" class="modal-label">
+                    <i class="fa-solid fa-file-code"></i>
+                    Mã môn học
+                </label>
+                <input id="modal-course-id" type="email" class="modal-input" placeholder="Nhập mã môn học">
+                <button id="submit-btn">
+                    Xác nhận đăng kí
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            </div>
+
+            <footer class="modal-footer">
+                <p class="modal-help">Need <a href="http://www.aao.hcmut.edu.vn/">help?</a></p>
+            </footer>
         </div>
     </div>
   
+    <script src="./assets/js/courses.js"></script>
 
-    
-    <script src="./courses.js"></script>
 </body>
 </html>
