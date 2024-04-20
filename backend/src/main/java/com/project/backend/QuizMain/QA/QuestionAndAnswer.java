@@ -10,7 +10,7 @@ public class QuestionAndAnswer {
 
     protected QuestionAndAnswer() {}
     public QuestionAndAnswer(Question question) {
-        question = question;
+        this.question = question;
     }
 
 }

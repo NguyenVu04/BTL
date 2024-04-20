@@ -5,8 +5,6 @@ import java.util.Map;
 
 import com.google.cloud.Timestamp;
 import com.project.backend.QuizMain.Quizz;
-import com.project.backend.Student.Student;
-import com.project.backend.Teacher.Teacher;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 

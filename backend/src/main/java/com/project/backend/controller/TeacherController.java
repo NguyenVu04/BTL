@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 
 
@@ -177,8 +176,13 @@ public class TeacherController {
                                         @RequestParam (required = false, defaultValue = "01") Integer day,
                                         @RequestParam (required = false, defaultValue = "00") Integer hour,
                                         @RequestParam (required = false, defaultValue = "00") Integer minute,
-                                        @RequestParam (required = false, defaultValue = "00") Integer second) {
+                                        @RequestParam (required = false, defaultValue = "00") Integer second,
+                                        @RequestParam (required = false, defaultValue = "null") String master,
+                                        @RequestParam (required = false, defaultValue = "null") String phd,
+                                        @RequestParam (required = false, defaultValue = "null") String university
+                                        ) {
         try{
+
             DocumentSnapshot snapshot = repository.getDocumentById(Teacher.class, id);
             if (snapshot != null) 
             {
@@ -192,10 +196,11 @@ public class TeacherController {
             Timestamp value = convertTimestamp(year, month, day, hour, minute, second);
             teacher.setDayofBirth(value);
             teacher.setCourseID(new ArrayList<String>());
-            teacher.setCertificate(new Certificate(null, null, null));
-            teacher.setPhonenumber(email);
+            teacher.setCertificate(new Certificate(master, phd, university));
+            teacher.setPhonenumber(phonenumber);
             repository.saveDocument(teacher, id);
             return ResponseEntity.ok().body(teacher);
+
         }catch (Exception e){
             exceptionLog.log(e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();

@@ -11963,3 +11963,5 @@
 2024-04-17T15:07:31.989852700: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
 2024-04-17T15:08:14.874829300: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
 2024-04-17T15:08:26.937313300: java.lang.NullPointerException: Cannot invoke "java.util.List.size()" because the return value of "com.project.backend.Student.Student.getCourseID()" is null
+2024-04-17T21:59:26.161232400: java.time.DateTimeException: Invalid value for DayOfMonth (valid values 1 - 28/31): 32
+2024-04-17T22:08:12.666003200: java.time.DateTimeException: Invalid value for MonthOfYear (valid values 1 - 12): 121

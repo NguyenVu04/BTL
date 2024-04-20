@@ -7,7 +7,6 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.Course.Course;
 import com.project.backend.QuizMain.Quizz;
 import com.project.backend.QuizMain.QuizzDetail;
-import com.project.backend.QuizMain.QA.Question;
 import com.project.backend.QuizMain.QA.QuestionAndAnswer;
 import com.project.backend.Student.Student;
 import com.project.backend.exceptionhandler.ExceptionLog;
@@ -28,7 +27,6 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.GetMapping;
 
 
@@ -41,8 +39,6 @@ public class QuizController {
     @Autowired
     private ExceptionLog exceptionLog;
     
-    @Autowired
-    private CourseController courseController;
     
     @GetMapping("/get-score/id")
     public ResponseEntity<QuizzDetail> getScore(@RequestParam String id, @RequestParam String idCourse, @RequestParam Integer number) {
