@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width1, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <link rel="stylesheet" href="./assets/font/fontawesome-free-6.5.1-web/css/all.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/teacher_host.css">
+    <script src="./assets/js/reload.js"></script>
+    <link rel="icon" type="img/x-icon" href="./assets/img/favicon.ico">
+
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <div id="header">
+            <div id="nav">
+                <div class="nav__logo">
+                    <a href="./index.html">
+                        <img src="./assets/img/HCMUT_official_logo.png" alt="">
+                    </a>
+                </div>
+    
+                <div class="nav__menu">
+                    <div class="menu-home menu-effect">
+                        <a href="./index.html">Trang chủ</a>
+                    </div>
+                    <div class="menu-teacher menu-effect">
+                        <a href="./teacher_host.html">
+                            Thông tin giảng viên
+                            <i class="fa-solid fa-angle-down"></i>
+                        </a>
+                        
+                        <ul class="subnav">
+                            <li><a href="./teacher_host.html">Thông tin cá nhân</a></li>
+                            <li><a href="./teacher_lich.html">Lịch trình giảng dạy</a></li>
+                            <li><a href="./teacher_classlist.html">Danh sách lớp</a></li>
+                        </ul>
+                        <div class="underline"></div>
+                    </div>
+                    
+                    <div class="menu-courses menu-effect">
+                        <a href="./courses.html">
+                            Khóa học của tôi
+                            <i class="fa-solid fa-angle-down"></i>
+                        </a>
+                        <ul class="subnav">
+                            <li><a href="./courses.html">Danh sách khóa học</a></li>
+                            <li><a href="./courses.html">Đăng kí mới</a></li>
+                        </ul>
+                        <div class="underline"></div>
+                    </div>
+                </div>
+    
+                <div class="nav__icon">
+                    <div class="noti-icon">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <div class="ava-icon">
+                        <i class="fa-solid fa-circle-user"></i>
+                        <i class="arrow-down fa-solid fa-caret-down"></i>  
+                        <ul class="subnav">
+                            <li><a href="./login.html">Đăng nhập</a></li>
+                            <li><a href="./login.html">Đăng xuất</a></li>
+                            <li><a href="">Đổi mật khẩu</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+
+
+          
+        <div id="content">
+            <div class="container">
+                <div class="row">
+                    <div class="self-inf">
+                        <p> Thông tin cá nhân </p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="ava col-lg-4"> 
+                        <!-- 1 khung hiển thị avatar -->
+                        <div class="avacircle">
+                            <div class="avatar" id="avatar">
+                                <img src="./assets/img/teacher/avatar.jpg" alt="Avatar">
+                            </div>
+                            <div class="ten">
+                                <p class="name">ThS. Nguyễn Kiều Dung</p>
+                                <p>ngkieudung@hcmut.edu.vn</p>
+                            </div>
+                            <div class="change">
+                                <div class="teachicon" onclick="openEditForm()">
+                                    <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
+                                    <p style="color:#b2343a;"> Sửa thông tin </p>
+                                </div>
+                                <div class="teachicon">
+                                    <i class="fa-regular fa-envelope" style="color: #27889b;"></i>
+                                    <p style="color:#27889b;"> <a href="mailto: pdt@hcmut.edu.vn ">Phản hồi</a>  </p>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- 1 khung hiển thị hoạt động -->
+                        <div class="activity">
+                            <div class="recently">
+                                <p style="font-weight:bold; text-transform: uppercase;"> Hoạt động gần đây</p>
+                            </div>
+                            <!-- frameact là 1 khung hiển thị lịch sử gần đây  -->
+                            <div class="frameact">
+                                <div class="change">
+                                    <div class="teachicon">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
+                                        <p> Bạn đã sửa avatar </p>
+                                    </div>
+                                </div>
+                                <p> 07/04/2024 16:32</p>
+                            </div>
+                            <div class="frameact">
+                                <div class="change">
+                                    <div class="teachicon">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
+                                        <p> Bạn đã sửa tên </p>
+                                    </div>
+                                </div>
+                                <p> 08/04/2024 2:00</p>
+                            </div>
+                            <div class="frameact">
+                                <div class="change">
+                                    <div class="teachicon">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
+                                        <p> Bạn đã sửa văn bằng </p>
+                                    </div>
+                                </div>
+                                <p> 08/04/2024 10:50</p>
+                            </div>
+                            <div class="frameact">
+                                <div class="change">
+                                    <div class="teachicon">
+                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
+                                        <p> Bạn đã sửa chức vụ </p>
+                                    </div>
+                                </div>
+                                <p> 08/04/2024 19:29</p>
+                            </div>
+                        </div>
+                        <!-- 1 khung hiển thị thời gian online -->
+                        <div class="thoiluong">
+                            <div class="recently">
+                                <p style="font-weight:bold; text-transform: uppercase;"> Thời lượng online</p>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th>Ngày tháng</th>
+                                        <th>Thời lượng online</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      <tr>
+                                        <td>08/04/2024</td>
+                                        <td>2 giờ 50 phút 20 giây</td>
+                                      </tr>
+                                      <tr>
+                                        <td>07/04/2024</td>
+                                        <td>1 giờ 10 phút 10 giây</td>
+                                      </tr>
+                                      <tr>
+                                        <td>05/04/2024</td>
+                                        <td>50 phút 24 giây</td>
+                                      </tr>
+                                      <tr>
+                                        <td>02/04/2024</td>
+                                        <td>1 giò 02 phút 41 giây</td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                            </div>
+                            
+                        </div>
+
+                    </div>
+                    <!-- khung thông tin giáo viên -->
+                    <div class="teach-content col-lg-8">
+                        <div class="teach-body">
+                            <div class="techinf">
+                                <p style="padding-top:10px;"> THÔNG TIN KHOA HỌC</p>
+                                <p>(Dành cho cán bộ tham gia đào tạo ĐH tại Trường Đại học Bách Khoa, Đại học Quốc gia Tp.HCM)</p>
+                            </div>
+                            <br>
+                            <div class="thongtin">
+                                <ol>
+                                    <div id="personalInfo">
+                                        <li><strong>Họ và tên:</strong> Nguyễn Kiều Dung</li>
+                                        <li><strong>Ngày tháng năm sinh:</strong> 12-01-1971</li>
+                                        <li><strong>Khoa:</strong> Khoa Khoa học ứng dụng,<strong> Bộ môn: </strong>Toán Ứng Dụng</li>
+                                        <li><strong>Điện thoại liên hệ:</strong></li>
+                                        <li><strong>Email:</strong> ngkieudung@hcmut.edu.vn</li>
+                                        <li><strong>Học vị:</strong> Thạc sĩ</li>
+                                        <li><strong>Nước tốt nghiệp:</strong></li>
+                                        <li><strong>Ngành:</strong></li>
+                                        <li><strong>Chuyên ngành:</strong></li>
+                                        <li><strong>Chức danh khoa học:</strong></li>
+                                        <li><strong>Lĩnh vực chuyên môn hiện tại:</strong></li>
+                                        <li><strong>Các hướng nghiên cứu chính:</strong></li>
+                                        <li><strong>Số LATS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004): </strong> 0 / 0</li>
+                                        <li><strong>Số LVThS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004):</strong> 0</li>
+                                        <li><strong>Giảng dạy các môn học đại học:</strong> Xác suất thống kê</li>
+                                        <li><strong>Các công trình khoa học đã công bố:</strong></li>
+                                    </div>   
+                                    <div class="certi">
+                                        <li><strong>Văn bằng:</strong></li>
+                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;margin-top:-10px; margin-left:10px; font-size:20px;" onclick="openModal()"></i>
+                                    </div>
+                                    <!-- phần upload thông tin văn bằng -->
+                                    <div class="vanbang">
+                                        <br>
+                                        <br>
+                                        <br>
+                                        <p> Mục này trống </p>
+                                        <p> Tải lên văn bằng của bạn </p>
+                                    </div>
+                                </ol>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Modal -->
+<!-- Phần cửa sổ modal để thay đổi ảnh đại diện -->
+<div id="changeAvatarModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 class="doianh">Thay đổi ảnh đại diện</h2>
+      <img id="preview" src="./assets/img/teacher/nonavatar.jpg" alt="Preview" style="width:200px;height:200px; ">
+      <input type="file" id="newAvatar" accept="image/*">
+      <button onclick="saveNewAvatar()" id="luu">Lưu</button>
+    </div>
+  </div>
+
+<!-- Phần cửa sổ modal để tải lên file -->
+<div id="uploadModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2 class="doibang">Tải lên văn bằng</h2>
+      <div id="previewFrame"><h4>Certificate</h4></div> <!-- Khung xem trước -->
+      <input type="file" id="certificateFile" accept=".pdf,.jpg,.png">
+      <button id="tailen" onclick="uploadCertificate()">Tải lên</button>
+
+    </div>
+  </div>
+
+<!-- Form sửa thông tin -->
+<!-- Modal -->
+<div id="editModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeEditModal()">&times;</span>
+        <h2 class="formchinh">Chỉnh sửa thông tin cá nhân</h2>
+        <form id="infoForm">
+            <label for="fullname">Họ và tên:</label>
+            <input type="text" id="fullname" name="fullname" required><br><br>
+            
+            <label for="birthdate">Ngày tháng năm sinh:</label>
+            <input type="date" id="birthdate" name="birthdate" required><br><br>
+            
+            <label for="khoa">Khoa:</label>
+            <input type="text" id="khoa" name="khoa" required><br><br>
+            
+            <label for="dienthoai">Điện thoại liên hệ:</label>
+            <input type="number" id="dienthoai" name="dienthoai" required><br><br>            
+            
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required><br><br>
+             
+            <label for="hocvi">Học vị:</label>
+            <input type="text" id="hocvi" name="hocvi" required><br><br>
+
+            <label for="nuoc">Nước tốt nghiệp:</label>
+            <input type="text" id="nuoc" name="nuoc" required><br><br>
+
+            <label for="nganh">Ngành:</label>
+            <input type="text" id="nganh" name="nganh" required><br><br>
+
+            <label for="cn">Chuyên ngành:</label>
+            <input type="text" id="cn" name="cn" required><br><br>
+
+            <label for="chucdanh">Chức danh khoa học:</label>
+            <input type="text" id="chucdanh" name="chucdanh" required><br><br>
+
+            <label for="linhvuc">Lĩnh vực chuyên môn hiện tại:</label>
+            <input type="text" id="linhvuc" name="linhvuc" required><br><br>
+
+            <label for="huong">Các hướng nghiên cứu chính:</label>
+            <input type="text" id="huong" name="huong" required><br><br>
+
+            <label for="lats">Số LATS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004): </label>
+            <input type="text" id="lats" name="lats" required><br><br>
+            
+            <label for="lv">Số LVThS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004):</label>
+            <input type="text" id="lv" name="lv" required><br><br>
+
+            <label for="daymh">Giảng dạy các môn học đại học:</label>
+            <input type="text" id="daymh" name="daymh" required><br><br>
+            
+            <label for="ctkh">Các công trình khoa học đã công bố:</label>
+            <input type="text" id="ctkh" name="ctkh" required><br><br>
+
+            <button type="button" onclick="saveInfo()" id="luu">Lưu</button>
+        </form>
+    </div>
+</div>
+
+
+
+    </div>
+
+    <!--footer start-->
+    <footer id="footer"> 
+        <div class="chan">
+                <div class="cotleft">
+                    <div class="logo-text-container">
+                        <img class="logo" src="./assets/img/HCMUT_official_logo.png" alt="logo" onclick="reloadPage()">
+                        <div class="text">
+                            <p> Đại học quốc gia thành phố Hồ Chí Minh </p>
+                            <p> Trường đại học Bách khoa </p>
+                        </div>
+                    </div>
+                    <div class="icon" style="margin-top:30px;">
+                        <i class="fa-solid fa-mobile-screen" style="margin-top:-10px;"></i>
+                        <p class="inf"><a href="tel: 0838 654 087" class="map">Điện thoại: (02) 838 654 087  ; Số Fax: (02) 838 637 002</a></p>
+                    </div>
+                    <br>
+                    <div class="icon">
+                        <i class="fa-solid fa-envelope" style="margin-top:-10px;"></i>
+                        <p class="inf"><a href="mailto: pdt@hcmut.edu.vn " class="map">Email: pdt@hcmut.edu.vn</a></p>
+                    </div>
+                    <br>
+                    <div class="icon">
+                        <i class="fa-solid fa-map-location-dot" style="margin-top:-10px;"></i>
+                        <p class="inf"><a href="https://maps.app.goo.gl/NM7Kr9vRVhMyhNZP8" class="map">
+                            Địa chỉ: Cơ sở Lý Thường Kiệt: 268 Lý Thường Kiệt, Phường 14, Quận 10, TP. HCM</a></p>
+                    </div>
+                    <div class="icon">
+                        <p class="inf" style="margin-left:80px;"><a href="https://maps.app.goo.gl/JWBADEVHJPFfKAgt7" class="map">
+                            Cơ sở Dĩ An: Khu phố Tân Lập, Phường Đông Hòa, TP. Dĩ An, Tỉnh Bình Dương</a></p>
+                    </div>
+                    <br>
+                    <br>
+                </div>
+    
+                <div class="cotright collg2 colmd4">
+                    <div class="logo-text-container">
+                        <div class="home">
+                            <i class="fa-solid fa-house-chimney-window"></i>
+                        </div>
+                        <div class="tq">
+                            <p><a href="#" class="main">TỔNG QUAN</a></p>
+                        </div>
+                    </div>
+                    <div class="tqchild">
+                        <p><a href="https://hcmut.edu.vn/tong-quan" class="ctqs">Giới thiệu</a></p>
+                        <p><a href="https://hcmut.edu.vn/contact" class="ctqs">Liên hệ</a></p>
+                        <p><a href="http://www.aao.hcmut.edu.vn/image/data/quyche/VB%20to%CC%82%CC%89ng%20ho%CC%9B%CC%A3p%20Quy%20%C4%91i%CC%A3nh%20ve%CC%82%CC%80%20ho%CC%A3c%20vu%CC%A3%20va%CC%80%20%C4%91a%CC%80o%20ta%CC%A3o%20(1).pdf" class="ctqs">Điều khoản</a></p>
+                        <p><a href="https://hcmut.edu.vn/library-page" class="ctqs">Thư viện</a></p>
+                    </div>  
+                </div>
+    
+    
+            <div class="dangnhap collg2 colmd4">
+                <div class="logo-text-container">
+                    <div class="home" style="color:#9966ff;">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <div class="tq">
+                        <p><a href="#" class="main">Đăng nhập</a></p>
+                    </div>
+                </div>
+                <div class="tqchild">
+                    <p><a href="./login.html" class="ctqs">Giảng viên</a></p>
+                    <p><a href="./login.html" class="ctqs">Sinh viên</a></p>
+                    <p><a href="./login.html" class="ctqs">Admin</a></p>
+                    <p><a href="./login.html" class="ctqs">Guest</a></p>
+                </div>
+                
+            </div>
+            <div class="dangnhap collg2 colmd4">
+                <div class="logo-text-container">
+                    <div class="home" style="color:#40bf80;">
+                        <i class="fa-solid fa-bullseye"></i>
+                    </div>
+                    <div class="tq">
+                        <p><a href="#" class="main">Chiến lược</a></p>
+                    </div>
+                </div>
+                <div class="tqchild">
+                    <p><a href="https://hcmut.edu.vn/gioi-thieu/ke-hoach-chien-luoc" class="ctqs">Mục tiêu tương lai</a></p>
+                    <p><a href="https://hcmut.edu.vn/hoat-dong-doi-moi-sang-tao" class="ctqs">Dự án dài hạn</a></p>
+                    <p><a href="https://hcmut.edu.vn/ba-cong-khai" class="ctqs">Hoạt động</a></p>
+                    <p><a href="mailto: pdt@hcmut.edu.vn" class="ctqs">Feedback</a></p>
+                </div>
+            </div>
+    
+        </div>
+        
+        <div class="copyright">
+                <div class="icon">
+                        <i class="fa-solid fa-copyright"></i>
+                        <p class="te" style="margin-top:10px; font-weight:bold;">2007-2024 BKEL. Hệ thống giáo dục hàng đầu Việt Nam </p>
+                </div>
+                <div class="social a">
+                            <a href="https://www.facebook.com/truongdhbachkhoa/"><i class="fa-brands fa-facebook" style="color: #001c4d;"></i></a>
+                            <a href="https://www.instagram.com/bachkhoa.hcmut/"><i class="fa-brands fa-square-instagram" style="color: #b3059c;"></i></a>
+                            <a href="https://www.youtube.com/@truongdhbachkhoa"><i class="fa-brands fa-youtube" style="color: #c20d00;"></i></a>
+                            <a href="https://www.tiktok.com/tag/hcmut"><i class="fa-brands fa-tiktok" style="color: #131416;"></i></a>
+                            <a href="https://vn.linkedin.com/company/hcmut"><i class="fa-brands fa-linkedin" style="color: #001c4d;"></i></a>
+                </div>   
+        </div>
+    </footer>
+    <script src="./assets/js/teacher_host.js"></script>
+</body>
+</html>

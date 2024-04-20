@@ -1,7 +1,10 @@
+
+
 #content .content__map {
     height: 48px;
     background-color: #ddd;
-    margin: 16px auto 32px;
+    margin-top: 16px;
+    margin-bottom: 32px;
     border-radius: 5px;
     text-align: center;
     line-height: 48px;
