@@ -1,3 +1,21 @@
+    // init values to get from database
+    var BT_DD = 0;
+    var BT_DD_NOTE = "NONE";
+    var BT_DD_PERCENT = 0;
+    var BT_LON_PERCENT = 0;
+    var BT_LON =0;
+    var BT_LON_NOTE =0;
+    var KT_GIUA = 0;
+    var KT_GIUA_NOTE = "NONE";
+    var KT_GIUA_PERCENT =  0;
+    var KT_CUOI = 0;
+    var KT_CUOI_NOTE = "NONE";
+    var KT_CUOI_PERCENT = 0;
+
+    localStorage.setItem(BT_DD, 10);
+
+
+
 // hàm đổi điểm số
 
      // Function to open modal
@@ -16,18 +34,18 @@
     function updateScores(event) {
         event.preventDefault();
         
-        var bt_dd = parseFloat(document.getElementById("bt-dd-input").value) || 0;
-        var bt_dd_note = document.getElementById("bt-dd-note-input").value;
-        var bt_dd_percent = parseFloat(document.getElementById("bt-dd-percent-input").value) || 0;
-        var bt_lon = parseFloat(document.getElementById("bt-lon-input").value) || 0;
-        var bt_lon_note = document.getElementById("bt-lon-note-input").value;
-        var bt_lon_percent = parseFloat(document.getElementById("bt-lon-percent-input").value) || 0;
-        var kt_giua = parseFloat(document.getElementById("kt-giua-input").value) || 0;
-        var kt_giua_note = document.getElementById("kt-giua-note-input").value;
-        var kt_giua_percent = parseFloat(document.getElementById("kt-giua-percent-input").value) || 0;
-        var kt_cuoi = parseFloat(document.getElementById("kt-cuoi-input").value) || 0;
-        var kt_cuoi_note = document.getElementById("kt-cuoi-note-input").value;
-        var kt_cuoi_percent = parseFloat(document.getElementById("kt-cuoi-percent-input").value) || 0;
+        var bt_dd = parseFloat(document.getElementById("bt-dd-input").value) || localStorage.getItem(BT_DD);
+        var bt_dd_note = document.getElementById("bt-dd-note-input").value || BT_DD_NOTE;
+        var bt_dd_percent = parseFloat(document.getElementById("bt-dd-percent-input").value) || BT_DD_PERCENT ;
+        var bt_lon = parseFloat(document.getElementById("bt-lon-input").value) || BT_LON;
+        var bt_lon_note = document.getElementById("bt-lon-note-input").value || BT_LON_NOTE;
+        var bt_lon_percent = parseFloat(document.getElementById("bt-lon-percent-input").value) || BT_LON_PERCENT;
+        var kt_giua = parseFloat(document.getElementById("kt-giua-input").value) || KT_GIUA;
+        var kt_giua_note = document.getElementById("kt-giua-note-input").value || KT_GIUA_NOTE;
+        var kt_giua_percent = parseFloat(document.getElementById("kt-giua-percent-input").value) || KT_GIUA_PERCENT;
+        var kt_cuoi = parseFloat(document.getElementById("kt-cuoi-input").value) || KT_CUOI;
+        var kt_cuoi_note = document.getElementById("kt-cuoi-note-input").value || KT_CUOI_NOTE;
+        var kt_cuoi_percent = parseFloat(document.getElementById("kt-cuoi-percent-input").value) || KT_CUOI_PERCENT;
         
         // Check if total weight exceeds 100
         var total_weight = bt_dd_percent + bt_lon_percent + kt_giua_percent + kt_cuoi_percent;
