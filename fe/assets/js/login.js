@@ -1,3 +1,4 @@
+/*DONE*/
 var content2 = document.querySelector('.login');
 let count = 0;
 function switchToLogin(classname){
@@ -17,7 +18,7 @@ function switchToLogin(classname){
 
 function studentLogin() {
     document.getElementById('student-submit').removeEventListener('click', studentLogin);
-    let studentEmail = document.getElementById('student-email').value.toLowerCase();
+    let studentEmail = document.getElementById('student-email').value.toLowerCase().trim();
     let studentPassword = document.getElementById('student-password').value;
     if (studentEmail == '' || studentPassword == '') {
         document.getElementById('alert-message').innerHTML = 'Vui lòng nhập đầy đủ thông tin';
@@ -35,11 +36,11 @@ function studentLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.json();
+            return res.headers.get('Authorization');
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data['authorization']);
+            localStorage.setItem('Authorization', data);
             window.location.href = 'http://127.0.0.1:3000/';
         }
     ).catch (
@@ -63,9 +64,9 @@ function studentLogin() {
 
 function teacherLogin() {
     document.getElementById('teacher-submit').removeEventListener('click', teacherLogin);
-    let teacherEmail = document.getElementById('teacher-email').value.toLowerCase();
+    let teacherEmail = document.getElementById('teacher-email').value.toLowerCase().trim();
     let teacherPassword = document.getElementById('teacher-password').value;
-    if (teacherEmail == '' || teacherPassword == '') {
+    if (teacherEmail === '' || teacherPassword === '') {
         document.getElementById('alert-message').innerHTML = 'Vui lòng nhập đầy đủ thông tin';
         document.getElementById('teacher-submit').addEventListener('click', teacherLogin);
         return;
@@ -81,11 +82,11 @@ function teacherLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.json();
+            return res.headers.get('Authorization');
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data['authorization']);
+            localStorage.setItem('Authorization', data);
             window.location.href = 'http://127.0.0.1:3000/';
         }
     ).catch(
@@ -103,6 +104,6 @@ function teacherLogin() {
             }
         }
     ).finally(
-        () => console.clear()
+        //() => console.clear()
     )
 }

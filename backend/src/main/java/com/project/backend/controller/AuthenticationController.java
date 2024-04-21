@@ -24,7 +24,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 @RestController
 public class AuthenticationController {
@@ -62,7 +61,6 @@ public class AuthenticationController {
      *         authorization token if the login is successful. Otherwise, returns an
      *         unauthorized response.
      */
-    @CrossOrigin(origins = "http://127.0.0.1:3000")
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(
             @RequestParam(name = "email", required = true) String email,
@@ -80,9 +78,9 @@ public class AuthenticationController {
                         .next()
                         .toString());
                 String token = jwtUtils.encodeObject(map);
-                map.put("authorization", token);
                 map.remove("password");
-                return ResponseEntity.ok().body(map);
+                token = "Bearer " + token;
+                return ResponseEntity.ok().header("Authorization", token).body(map);
             } else {
                 exceptionLog.log(new UsernameNotFoundException(this.getClass().getName()));
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
