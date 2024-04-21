@@ -62,7 +62,7 @@ public class AuthenticationController {
      *         authorization token if the login is successful. Otherwise, returns an
      *         unauthorized response.
      */
-    @CrossOrigin(origins = "http://localhost:5173")
+    @CrossOrigin(origins = "http://127.0.0.1:3000")
     @PostMapping("/login")
     public ResponseEntity<Map<String, Object>> login(
             @RequestParam(name = "email", required = true) String email,

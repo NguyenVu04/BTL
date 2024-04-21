@@ -56,7 +56,7 @@ class BackendApplicationTests {
 	private Firestore store;
 	@Test
 	void testSaveDocument() {
-		AuthenticationDetails details = new AuthenticationDetails("dcmbachkhoa", "dcmbackkhoa@hcmut.edu.vn", "dmbachkhoa", UserRole.TEACHER);
+		AuthenticationDetails details = new AuthenticationDetails("dcmbk", "admin@hcmut.edu.vn", "admin", UserRole.TEACHER);
 		boolean t = repo.updateDocumentById(details);
 		assertTrue(t);
 	}

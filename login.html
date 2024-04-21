@@ -81,11 +81,12 @@
                     Đăng nhập cho sinh viên
                 </h2>
                 <p style="padding: 0px 40px;margin-top: 20px;">Lưu ý: Dùng email trường có đuôi hcmut.edu.vn để đăng nhập</p>
+                <p id="alert-message" style="padding: 0px 40px;margin-top: 20px; color: red;"></p>
                 <p class="input-note" style="font-weight: 700;margin-bottom:-16px">Email:</p>
-                <input class="input-box" type="email" placeholder="Nhập email">
+                <input class="input-box" id="student-email" type="email" placeholder="Nhập email">
                 <p class="input-note" style="font-weight: 700;margin-bottom:-16px">Mật khẩu:</p>
-                <input class="input-box" type="password" placeholder="Nhập mật khẩu">
-                <div class="login-button">Đăng nhập</div>
+                <input class="input-box" id="student-password" type="password" placeholder="Nhập mật khẩu">
+                <div class="login-button" id="student-submit">Đăng nhập</div>
                 <h3 class="forgotPassword">Quên mật khẩu?</h3>
             </div>
         </div>
@@ -100,11 +101,12 @@
                     Đăng nhập cho giảng viên
                 </h2>
                 <p style="padding: 0px 40px;margin-top: 20px;">Lưu ý: Dùng email trường có đuôi hcmut.edu.vn để đăng nhập</p>
+                <p id="alert-message" style="padding: 0px 40px;margin-top: 20px; color: red;"></p>
                 <p class="input-note" style="font-weight: 700;margin-bottom:-16px">Email:</p>
-                <input class="input-box" type="email" placeholder="Nhập email">
+                <input class="input-box" id="teacher-email" type="email" placeholder="Nhập email">
                 <p class="input-note" style="font-weight: 700;margin-bottom:-16px">Mật khẩu:</p>
-                <input class="input-box" type="password" placeholder="Nhập mật khẩu">
-                <div class="login-button">Đăng nhập</div>
+                <input class="input-box" id="teacher-password" type="password" placeholder="Nhập mật khẩu">
+                <div class="login-button" id="teacher-submit">Đăng nhập</div>
                 <h3 class="forgotPassword">Quên mật khẩu?</h3>
             </div>
         </div>
@@ -112,5 +114,6 @@
 
 
     <script src="./assets/js/login.js"></script>
+    
 </body>
 </html>
