@@ -81,17 +81,18 @@ function teacherLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.json();
+            return res.headers.get('Authorization');
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data['authorization']);
-            window.location.href = 'http://127.0.0.1:3000/';
+            //localStorage.setItem('Authorization', data['email']);
+            console.log(data);
+            //window.location.href = 'http://127.0.0.1:3000/';
         }
     ).catch(
         err => {
             count++;
-            if (count < 3) {
+            if (count < 100) {
                 document.getElementById('teacher-submit').addEventListener('click', teacherLogin);
                 document.getElementById('alert-message').innerHTML = 'Tài khoản hoặc mật khẩu không chính xác';
             } else {
@@ -103,6 +104,6 @@ function teacherLogin() {
             }
         }
     ).finally(
-        () => console.clear()
+        //() => console.clear()
     )
 }
