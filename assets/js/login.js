@@ -17,7 +17,7 @@ function switchToLogin(classname){
 
 function studentLogin() {
     document.getElementById('student-submit').removeEventListener('click', studentLogin);
-    let studentEmail = document.getElementById('student-email').value.toLowerCase();
+    let studentEmail = document.getElementById('student-email').value.toLowerCase().trim();
     let studentPassword = document.getElementById('student-password').value;
     if (studentEmail == '' || studentPassword == '') {
         document.getElementById('alert-message').innerHTML = 'Vui lòng nhập đầy đủ thông tin';
@@ -63,9 +63,9 @@ function studentLogin() {
 
 function teacherLogin() {
     document.getElementById('teacher-submit').removeEventListener('click', teacherLogin);
-    let teacherEmail = document.getElementById('teacher-email').value.toLowerCase();
+    let teacherEmail = document.getElementById('teacher-email').value.toLowerCase().trim();
     let teacherPassword = document.getElementById('teacher-password').value;
-    if (teacherEmail == '' || teacherPassword == '') {
+    if (teacherEmail === '' || teacherPassword === '') {
         document.getElementById('alert-message').innerHTML = 'Vui lòng nhập đầy đủ thông tin';
         document.getElementById('teacher-submit').addEventListener('click', teacherLogin);
         return;
@@ -85,14 +85,13 @@ function teacherLogin() {
         }
     ).then(
         data => {
-            //localStorage.setItem('Authorization', data['email']);
-            console.log(data);
-            //window.location.href = 'http://127.0.0.1:3000/';
+            localStorage.setItem('Authorization', data['email']);
+            window.location.href = 'http://127.0.0.1:3000/';
         }
     ).catch(
         err => {
             count++;
-            if (count < 100) {
+            if (count < 3) {
                 document.getElementById('teacher-submit').addEventListener('click', teacherLogin);
                 document.getElementById('alert-message').innerHTML = 'Tài khoản hoặc mật khẩu không chính xác';
             } else {
@@ -104,6 +103,6 @@ function teacherLogin() {
             }
         }
     ).finally(
-        //() => console.clear()
+        () => console.clear()
     )
 }
