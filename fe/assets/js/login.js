@@ -36,11 +36,11 @@ function studentLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.json();
+            return res.headers.get('Authorization');
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data['authorization']);
+            localStorage.setItem('Authorization', data);
             window.location.href = 'http://127.0.0.1:3000/';
         }
     ).catch (
@@ -86,7 +86,7 @@ function teacherLogin() {
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data['email']);
+            localStorage.setItem('Authorization', data);
             window.location.href = 'http://127.0.0.1:3000/';
         }
     ).catch(
@@ -104,6 +104,6 @@ function teacherLogin() {
             }
         }
     ).finally(
-        () => console.clear()
+        //() => console.clear()
     )
 }
