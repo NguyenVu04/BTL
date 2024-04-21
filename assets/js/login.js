@@ -1,3 +1,4 @@
+/*DONE*/
 var content2 = document.querySelector('.login');
 let count = 0;
 function switchToLogin(classname){
