@@ -90,9 +90,8 @@
                                 <img src="./assets/img/teacher/student.jpg" alt="Avatar">
                             </div>
                             <div class="ten">
-                                <p class="name">Nguyễn Đức Anh - 2211512 </p>
-                                <p>ducanh.nguyen@hcmut.du.vn</p>
-                                <p></p>
+                                <p class="name-id" onclick="updateName()">Nguyễn Đức Anh - 2211512 </p>
+                                <p class="mail" onclick="updateEmail()">ducanh.nguyen@hcmut.du.vn</p>
                             </div>
                             <div class="change">
                                 <div class="teachicon" onclick="openModal()">
@@ -178,46 +177,46 @@
         
 
     <!-- đổi điểm số -->
-<!-- Modal -->
-<div id="myModal" class="modal">
-    <!-- Modal content -->
-    <div class="modal-content">
-      <span class="close" onclick="closeModal()">&times;</span>
-      <h2 class="doianh">Cập nhật điểm số</h2>
-      <form id="updateForm" onsubmit="updateScores(event)">
-          <div>
-              <label for="bt-dd-input">Bài tập + Điểm danh:</label>
-              <input type="number" id="bt-dd-input" name="bt-dd" min="0" max="10" step="0.1">
-              <input type="number" id="bt-dd-percent-input" name="bt-dd-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-              <input type="text" id="bt-dd-note-input" name="bt-dd-note" placeholder="Lưu ý">
-          </div>
-          <div>
-              <label for="bt-lon-input">Bài tập lớn:</label>
-              <input type="number" id="bt-lon-input" name="bt-lon" min="0" max="10" step="0.1">
-              <input type="number" id="bt-lon-percent-input" name="bt-lon-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-              <input type="text" id="bt-lon-note-input" name="bt-lon-note" placeholder="Lưu ý">
-          </div>
-          <div>
-              <label for="kt-giua-input">Kiểm tra Giữa kì:</label>
-              <input type="number" id="kt-giua-input" name="kt-giua" min="0" max="10" step="0.1">
-              <input type="number" id="kt-giua-percent-input" name="kt-giua-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-              <input type="text" id="kt-giua-note-input" name="kt-giua-note" placeholder="Lưu ý">
-          </div>
-          <div>
-              <label for="kt-cuoi-input">Kiểm tra Cuối kì:</label>
-              <input type="number" id="kt-cuoi-input" name="kt-cuoi" min="0" max="10" step="0.1">
-              <input type="number" id="kt-cuoi-percent-input" name="kt-cuoi-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-              <input type="text" id="kt-cuoi-note-input" name="kt-cuoi-note" placeholder="Lưu ý">
-          </div>
-          <div>
-              <label for="tong-ket-input">Tổng kết:</label>
-              <input type="number" id="tong-ket-input" name="tong-ket" readonly>
-              <input type="text" id="tong-ket-note-input" name="tong-ket-note" placeholder="Lưu ý">
-          </div>
-          <input type="submit" value="Cập nhật" id="luu">
-      </form>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+        <!-- Modal content -->
+        <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 class="doianh">Cập nhật điểm số</h2>
+        <form id="updateForm" onsubmit="updateScores(event)">
+            <div>
+                <label for="bt-dd-input">Bài tập + Điểm danh:</label>
+                <input type="number" id="bt-dd-input" name="bt-dd" min="0" max="10" step="0.1">
+                <input type="number" id="bt-dd-percent-input" name="bt-dd-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
+                <input type="text" id="bt-dd-note-input" name="bt-dd-note" placeholder="Lưu ý">
+            </div>
+            <div>
+                <label for="bt-lon-input">Bài tập lớn:</label>
+                <input type="number" id="bt-lon-input" name="bt-lon" min="0" max="10" step="0.1">
+                <input type="number" id="bt-lon-percent-input" name="bt-lon-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
+                <input type="text" id="bt-lon-note-input" name="bt-lon-note" placeholder="Lưu ý">
+            </div>
+            <div>
+                <label for="kt-giua-input">Kiểm tra Giữa kì:</label>
+                <input type="number" id="kt-giua-input" name="kt-giua" min="0" max="10" step="0.1">
+                <input type="number" id="kt-giua-percent-input" name="kt-giua-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
+                <input type="text" id="kt-giua-note-input" name="kt-giua-note" placeholder="Lưu ý">
+            </div>
+            <div>
+                <label for="kt-cuoi-input">Kiểm tra Cuối kì:</label>
+                <input type="number" id="kt-cuoi-input" name="kt-cuoi" min="0" max="10" step="0.1">
+                <input type="number" id="kt-cuoi-percent-input" name="kt-cuoi-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
+                <input type="text" id="kt-cuoi-note-input" name="kt-cuoi-note" placeholder="Lưu ý">
+            </div>
+            <div>
+                <label for="tong-ket-input">Tổng kết:</label>
+                <input type="number" id="tong-ket-input" name="tong-ket" readonly>
+                <input type="text" id="tong-ket-note-input" name="tong-ket-note" placeholder="Lưu ý">
+            </div>
+            <input type="submit" value="Cập nhật" id="luu">
+        </form>
+        </div>
     </div>
-  </div>
 
 
   <!-- nhận xét cho sinh viên -->
@@ -231,6 +230,35 @@
         </div>
     </div>
 
+    <!-- đổi tên sinh viên -->
+    <!-- Modal -->
+    <div id="changeName" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModalName()">&times;</span>
+            <h2 class="doianh">Cập nhật tên & MSSV</h2>
+            <form id="editFormName">
+                <label for="editStudentName">Tên sinh viên:</label>
+                <input type="text" id="editStudentName" name="editStudentName" required><br><br>
+                <label for="editStudentID">Mã số sinh viên:</label>
+                <input type="number" id="editStudentID" name="editStudentID" required><br><br>
+                <button type="submit" class="luu">Submit</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- đổi mail sinh viên -->
+    <div id="changeEmail" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModalEmail()">&times;</span>
+            <h2 class="doianh">Cập nhật Email</h2>
+            <form id="editFormEmail">
+                <label for="editStudentEmail">Email:</label>
+                <input type="email" id="editStudentEmail" name="editStudentEmail" required><br><br>
+                <button type="submit" class="luu">Submit</button>
+            </form>
+        </div>
+    </div>
+  
 
     </div>
 
