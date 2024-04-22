@@ -4,16 +4,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.google.cloud.Timestamp;
+import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
 import com.project.backend.security.AuthenticationDetails;
+import com.project.backend.security.BackendSecurityConfiguration;
 import com.project.backend.security.JwtUtils;
 
+import io.jsonwebtoken.Claims;
+import jakarta.servlet.http.HttpServletRequest;
+
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AuthorizationServiceException;
@@ -114,5 +121,43 @@ public class AuthenticationController {
             return ResponseEntity.status(HttpStatus.REQUEST_TIMEOUT).build();
         }
         return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("/validate")
+    public ResponseEntity<Map<String, Object>> validate(HttpServletRequest request) {
+        String token = request.getHeader(HttpHeaders.AUTHORIZATION);
+        if (token == null || !token.startsWith("Bearer ")) {
+            exceptionLog.log(new IOException(this.getClass().getName()));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        token = token.split(" ")[1].trim();
+        Claims claims = jwtUtils.decodeToken(token);
+        if (!jwtUtils.isValid(claims)) {
+            exceptionLog.log(new IOException(this.getClass().getName()));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        String id = jwtUtils.getId(claims);
+        String role = jwtUtils.getRole(claims);
+        String password = jwtUtils.getPassword(claims);
+        DocumentSnapshot snapshot = repository.getDocumentById(AuthenticationDetails.class, id);
+        if (snapshot == null) {
+            exceptionLog.log(new IOException(this.getClass().getName()));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        String userPassword = snapshot.get("password", String.class);
+        if (BackendSecurityConfiguration.encoder.matches(password, userPassword)) {
+            Map<String, Object> map = new HashMap<>();
+            map.put("id", id);
+            map.put("role", role);
+            map.put("password", password);
+            String newToken = jwtUtils.encodeObject(map);
+            newToken = "Bearer " + newToken;
+            return ResponseEntity.ok()
+                                 .header("Authorization", newToken)
+                                 .build();
+        } else {
+            exceptionLog.log(new IOException(this.getClass().getName()));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
 }

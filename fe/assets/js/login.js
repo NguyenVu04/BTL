@@ -56,9 +56,8 @@ function studentLogin() {
                     count = 0;
                 }, 600000);
             }
+            console.clear()
         }
-    ).finally (
-        () => console.clear()
     )
 }
 
@@ -102,8 +101,7 @@ function teacherLogin() {
                     count = 0;
                 }, 600000);
             }
+            console.clear();
         }
-    ).finally(
-        //() => console.clear()
     )
 }

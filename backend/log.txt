@@ -1,2 +1,21 @@
 2024-04-21T23:01:34.083321200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
 2024-04-21T23:01:34.083321200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-04-22T07:31:33.312969600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T07:33:53.886338700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-04-22T07:33:53.886338700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-04-22T07:39:20.729458600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T08:45:54.254828200: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T08:46:02.757282600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-04-22T08:46:02.757282600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=sss, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-04-22T08:46:02.761561400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-04-22T08:46:26.212352500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T08:49:44.216397500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T08:52:26.751748600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:12:22.961799500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:12:48.560541500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:13:05.631085600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:13:59.060508: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:15:12.753109400: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:15:16.554547500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:21:35.706001: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-22T09:24:26.660856: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController

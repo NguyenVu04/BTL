@@ -46,7 +46,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     private ExceptionLog exceptionLog;
     @Autowired
     private JwtUtils jwtUtils;
-    private final List<String> igoredPath = List.of("/login");
+    private final List<String> igoredPath = List.of("/login", "/validate");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
