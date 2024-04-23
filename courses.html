@@ -131,8 +131,13 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="course-enter-btn">
-                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                <div class="course-actions">
+                                    <div class="course-enter-btn">
+                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                    </div>
+                                    <div class="course-delete-btn" style="display: none;">
+                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -164,8 +169,13 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="course-enter-btn">
-                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                <div class="course-actions">
+                                    <div class="course-enter-btn">
+                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                    </div>
+                                    <div class="course-delete-btn" style="display: none;">
+                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -197,8 +207,13 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="course-enter-btn">
-                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                <div class="course-actions">
+                                    <div class="course-enter-btn">
+                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                    </div>
+                                    <div class="course-delete-btn" style="display: none;">
+                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -230,8 +245,13 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="course-enter-btn">
-                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                <div class="course-actions">
+                                    <div class="course-enter-btn">
+                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                    </div>
+                                    <div class="course-delete-btn" style="display: none;">
+                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -264,13 +284,59 @@
                                         </p>
                                     </div>
                                 </div>
-                                <div class="course-enter-btn">
-                                    <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                <div class="course-actions">
+                                    <div class="course-enter-btn">
+                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                    </div>
+                                    <div class="course-delete-btn" style="display: none;">
+                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                    </div>
                                 </div>
                             </div>
                         </div> 
+
+                        <div class="col l-4 m-6 c-12">
+                            <div class="course-each">
+                                <div class="course-img">
+                                    <img src="./assets/img/courses-img/2.jpg" alt="" width="100%" >   
+                                </div>
+                                <div class="course-desc">
+                                    <div class="course-name">
+                                        <a href="">Hệ thống số</a>
+                                    </div>
+                                    <div class="course-info">
+                                        <p>
+                                            <i class="fa-regular fa-folder-open"></i> 
+                                            Mã môn học: <strong>CO1009</strong>
+                                        </p>
+                                        <p>
+                                            <i class="fa-regular fa-calendar-days"></i> 
+                                            Lớp: <strong>L12</strong>
+                                        </p>
+                                        <p>
+                                            <i class="fa-regular fa-chart-bar"></i> 
+                                            Số tín chỉ: <strong>3</strong>
+                                        </p>
+                                        <p>
+                                            <i class="fa-regular fa-user"></i> 
+                                            Giảng viên: <strong>Đoàn Minh Vững</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="course-actions">
+                                    <div class="course-enter-btn">
+                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                    </div>
+                                    <div class="course-delete-btn" style="display: none;">
+                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <!-- nút thoát khỏi chế độ xóa môn học -->
+                <button class="exit-delete-mode-btn" style="display: none;">Thoát chế độ xóa môn học</button>
             </div>
 
             <div class="grid wide">
@@ -285,7 +351,7 @@
                                     </div>
                                 </div>
                                 <div class="col l-o-2 l-4">
-                                    <div class="edit-course delete-course">
+                                    <div class="edit-course delete-mode-btn">
                                         Xóa môn học
                                     </div>
                                 </div>
@@ -412,13 +478,13 @@
             </header>
 
             <div class="modal-body">
-                <label for="modal-quantity" class="modal-label">
+                <label for="modal-course-name" class="modal-label">
                     <i class="fa-solid fa-book"></i>
                     Tên môn học
                 </label>
                 <input id="modal-course-name" type="text" class="modal-input" placeholder="Nhập tên môn học bạn muốn đăng kí">
 
-                <label for="modal-mail" class="modal-label">
+                <label for="modal-course-id" class="modal-label">
                     <i class="fa-solid fa-file-code"></i>
                     Mã môn học
                 </label>
