@@ -18,8 +18,7 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-
-
+document.addEventListener("DOMContentLoaded", addinner);
 
 const registBtn = document.querySelector('.regist-course')
 const modal = document.querySelector('.js-modal')
@@ -52,6 +51,51 @@ modalContainer.addEventListener('click', function (event) {
 })  
 
 
+function addinner() {
+    let tableCourse = document.getElementById("table-course");
+    let innerTable = `<div class="col l-4 m-6 c-12">
+    <div class="course-each">
+        <div class="course-img">
+            <img src="./assets/img/courses-img/1.jpg" alt="" width="100%" >   
+        </div>
+        <div class="course-desc">
+            <div class="course-name">
+                <a href="">{nameCourse}</a>
+            </div>
+            <div class="course-info">
+                <p>
+                    <i class="fa-regular fa-folder-open"></i> 
+                    Mã môn học: <strong>C02039</strong>
+                </p>
+                <p>
+                    <i class="fa-regular fa-calendar-days"></i> 
+                    Lớp: <strong>L07</strong>
+                </p>
+                <p>
+                    <i class="fa-regular fa-chart-bar"></i> 
+                    Số tín chỉ: <strong>3</strong>
+                </p>
+                <p>
+                    <i class="fa-regular fa-user"></i> 
+                    Giảng viên: <strong>Lê Đình Thuận</strong>
+                </p>
+            </div>
+        </div>
+        <div class="course-enter-btn">
+            <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+        </div>
+    </div>
+</div>
+`
+    let stringhtml = '';
+    
+    
+    for (let i = 0 ; i < 4 ; i++) {
+        let nameCourse = "LTNC" + i;
 
+        stringhtml += innerTable.replace('{nameCourse}', nameCourse);
+    }
 
+    tableCourse.innerHTML = stringhtml;
+}
 
