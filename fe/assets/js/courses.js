@@ -1,8 +1,9 @@
-/* 
+/*
 TÌM KIẾM KHÓA HỌC
 */
-
-document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", getCourse().then(res => {
+        document.addEventListener('DOMContentLoaded', addinner(res));
+    document.addEventListener("DOMContentLoaded", function() {
     const searchInput = document.querySelector(".search__input");
     const courseNames = document.querySelectorAll(".course-name");
 
@@ -21,9 +22,6 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     });
 });
-
-
-
 
 
 /*
@@ -290,133 +288,143 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 });
 
-// document.addEventListener("DOMContentLoaded", addinner);
+        return res;
+    }));
+    
 
-function addinner() {
+
+
+
+
+
+function addinner(data) {
     let tableCourse = document.getElementById("table-course");
     let innerTable = `<div class="col l-4 m-6 c-12">
-    <div class="course-each">
-    <div class="course-img">
-    <img src="./assets/img/courses-img/1.jpg" alt="" width="100%" >   
-    </div>
-    <div class="course-desc">
-    <div class="course-name">
-    <a href="">{nameCourse}</a>
-    </div>
-    <div class="course-info">
-    <p>
-                    <i class="fa-regular fa-folder-open"></i> 
-                    Mã môn học: <strong>C02039</strong>
-                </p>
-                <p>
-                    <i class="fa-regular fa-calendar-days"></i> 
-                    Lớp: <strong>L07</strong>
-                </p>
-                <p>
-                    <i class="fa-regular fa-chart-bar"></i> 
-                    Số tín chỉ: <strong>3</strong>
-                </p>
-                <p>
-                    <i class="fa-regular fa-user"></i> 
-                    Giảng viên: <strong>Lê Đình Thuận</strong>
-                </p>
-            </div>
-        </div>
-        <div class="course-enter-btn">
-            <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
-        </div>
-    </div>
-</div>
+                            <div class="course-each">
+                                <div class="course-img">
+                                    <img src="./assets/img/courses-img/1.jpg" alt="" width="100%" >   
+                                </div>
+                                <div class="course-desc">
+                                    <div class="course-name">
+                                        <a href="">{nameCourse}</a>
+                                    </div>
+                                    <div class="course-info">
+                                        <p>
+                                            <i class="fa-regular fa-folder-open"></i> 
+                                            Mã môn học: <strong>{idCourse}</strong>
+                                        </p>
+                                        <p>
+                                            <i class="fa-regular fa-calendar-days"></i> 
+                                            Lớp: <strong>L07</strong>
+                                        </p>
+                                        <p>
+                                            <i class="fa-regular fa-chart-bar"></i> 
+                                            Số tín chỉ: <strong>{price}</strong>
+                                        </p>
+                                        <p>
+                                            <i class="fa-regular fa-user"></i> 
+                                            Giảng viên: <strong>{teacherName}</strong>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="course-actions">
+                                    <div class="course-enter-btn">
+                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                    </div>
+                                    <div class="course-delete-btn" style="display: none;">
+                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 `
     let stringhtml = '';
-    
-    
-    for (let i = 0 ; i < 4 ; i++) {
-        let nameCourse = "LTNC" + i;
-
-        stringhtml += innerTable.replace('{nameCourse}', nameCourse);
+    for (let i = 0 ; i < data.length ; i++) {
+        let temp = innerTable;
+        console.log(data[i]);
+        let listTeacher = data[i].listTeacher;
+        let teacherName = '';
+        for (let j = 0 ; j < listTeacher.length ; j++) {
+            teacherName += listTeacher[j];
+        }
+        console.log(teacherName);
+        
+        let nameCourse = data[i].name;
+        let idCourse = data[i].id;
+        let price = data[i].price;
+        temp= temp.replace('{teacherName}',teacherName );
+        temp= temp.replace('{nameCourse}', nameCourse);
+        temp= temp.replace('{idCourse}', idCourse);
+        temp= temp.replace('{price}',price );
+        stringhtml += temp;
     }
 
     tableCourse.innerHTML = stringhtml;
 }
+const user = {
+    id: '1213',
+    name: 'LeDinhThuan',
+    price: '1213'
+};
+// document.addEventListener('DOMContentLoaded', fetchCourse());
+// document.addEventListener('DOMContentLoaded', getCourse());
+async function getCourse() {
+    let url = 'http://localhost:8080/course/all';
+    let returnVal = await 
+    fetch(url ,{
+        mode: 'cors',
+        method: 'GET'
+    })
+    .then(res => {
+        if (!res.ok){
+            throw Error(res.statusText);
+        }
+        return res.json();}
+    );
+    // console.log(returnVal);
+    for (let i = 0 ; i < returnVal.length; i++) {
+        const val = returnVal[i];
+        console.log(val.id, val.name, val.price);
+    }
+    // document.addEventListener('DOMContentLoaded', addinner(returnVal));
+    return returnVal;
 
-// document.addEventListener('DOMContentLoaded', logMovies);
-// logMovies();
-// function fetchDataFromAPI(url) {
-//     return fetch(url, {mode: 'no-cors'})
-//       .then(response => {
-//         if (!response.ok) {
-//           throw new Error('Network response was not ok');
-//         }
-//         return response.json();
-//       })
-//       .catch(error => {
-//         console.error('There was a problem with the fetch operation:', error);
-//       });
-//   }
+}
+function addCourse() {
+    // let url = 'http://localhost:8080/course/id?';
+    let url = 'http://localhost:8080/course/add/course';
+    let form = new FormData();
+    form.append('id', 'CO2011');
+    form.append('name', 'CTRR1');
+    form.append('price', '125224');
+    
+    fetch(url ,{
+        mode: 'cors',
+        method: 'POST',
+        body: form
+    })
+    .then(res => 
+        {
+            // console.log(123);
+        if (!res.ok) {
+            throw Error(res.statusText);
+            // return;
+        }
+            console.log(res);
+            return res.json();
+        
+        }
+    )
+    .then(data => {
+        console.log(data);
+        // return res.json();
+    })
+    .catch(error => {
+        console.log(error);
+    })
+    ;
+    
+}
 
-// fetchDataFromAPI('http://localhost:8080/course/all')
-//   .then(data => {
-//     // Perform operations with the data here
-//     const asd = data;
-//     console.log(asd);
-//     console.log(123);
-//   });
-// fetchDataFromAPI();
-// function fetchDataFromAPI(){
-//     fetch('https://www.youtube.com/watch?v=tv-lHlfwpZI', {
-//         mode: 'no-cors',
-//         method: 'GET'
-//     })
-//         .then(res => {
-//             if (res.ok){
-//                 console.log('SUCCESS')
-//             }
-//             else {
-//                 console.log('FAILURE')
-//             }
-//         })
-//         .then(data => console.log(data))
-//         .catch(error => console.log('ERROR'))
-    
-// }
-// fetch('http://localhost:8080/course/id?id=CO1023', {
-//         mode: 'cors',
-//         method: 'GET'
-//     })
-//         .then(
-//             res => {
-//                 if (!res.ok) throw new Error(res.statusText);
-//                 return res.json();
-//             }
-//         ).then(
-//             data => {
-//                 console.log(data);
-                
-//                 return res.json();
-//             }
-//         ).catch (
-//             err => { console.log(err);
-//             }
-            
-//         )
-    
-// let url = 'http://localhost:8080/course/all';
-let url = 'http://localhost:8080/course/id?id=CO1023';
-        fetch(url, {
-            mode: 'no-cors',
-            method: 'GET'
-        })
-        .then(res => res.json()
-        //     {
-        //     if (!res.ok) throw new Error(res.statusText);
-        //     else {
-        //         console.log(res);
-        //         return res.json();
-        //     }
-            
-        // }
-        )
-        .then(data => {
-            console.log(data);
-        });
+
+

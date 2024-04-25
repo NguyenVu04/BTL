@@ -98,13 +98,13 @@ public class CourseController {
     @PostMapping("add/course")
     public ResponseEntity<Course> createCourse(
                                 @RequestParam String name,
-                                @RequestParam Double price,
+                                @RequestParam(required = false, defaultValue = "4" ) Integer price,
                                 @RequestParam String id
                                 ) 
     {
         try{
-            if (repository.getDocumentById(Course.class, name) != null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            if (repository.getDocumentById(Course.class, id) != null) {
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
             Category category = new Category(null, null);
             List<Lesson> LessonMaterials = new ArrayList<Lesson>();

@@ -19,3 +19,45 @@
 2024-04-22T09:15:16.554547500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
 2024-04-22T09:21:35.706001: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
 2024-04-22T09:24:26.660856: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-25T21:28:51.965932800: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:28:56.602550300: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:30:12.589508: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:30:26.712910200: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:30:28.496474300: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:45:20.937428600: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:45:20.965762700: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:45:26.523327300: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:45:26.968384500: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:45:29.031829700: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:46:27.843558: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:46:28.130515800: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:49:46.620888100: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:49:46.623889: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:56:35.832252: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:56:51.743322: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:57:09.083834200: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:58:11.544579400: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T21:59:01.457475100: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:00:20.725022300: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:00:49.974786300: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:24:56.155215400: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:25:06.191086300: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:25:45.415794700: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:25:51.330892200: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:29:57.564481400: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:30:40.034842300: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:32:29.459005100: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-25T22:33:34.183603300: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:33:38.188051400: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:33:56.899949900: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:34:11.313854700: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:34:17.893465200: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:34:22.587715: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:35:00.694564800: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:35:22.609462800: java.lang.IllegalArgumentException: com.project.backend.repository.FirestoreRepository
+2024-04-25T22:38:53.942290: java.lang.IllegalArgumentException: timestamp out of range: -62167243324, 0
+2024-04-26T01:16:46.596374500: java.util.concurrent.ExecutionException: com.google.api.gax.rpc.DeadlineExceededException: io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 27.781858000s. [closed=[], open=[[buffered_nanos=27792348400, waiting_for_connection]]]
+2024-04-26T01:17:05.060023400: java.util.concurrent.ExecutionException: com.google.api.gax.rpc.DeadlineExceededException: io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 12.965719200s. [closed=[], open=[[buffered_nanos=12980540700, waiting_for_connection]]]
+2024-04-26T01:17:09.157653300: java.util.concurrent.ExecutionException: com.google.api.gax.rpc.DeadlineExceededException: io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 18.148734400s. [closed=[], open=[[buffered_nanos=18162100900, waiting_for_connection]]]
+2024-04-26T01:17:27.773786600: java.util.concurrent.ExecutionException: com.google.api.gax.rpc.DeadlineExceededException: io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 15.510786200s. [closed=[], open=[[buffered_nanos=15520796600, waiting_for_connection]]]
+2024-04-26T01:17:37.920950600: java.util.concurrent.ExecutionException: com.google.api.gax.rpc.DeadlineExceededException: io.grpc.StatusRuntimeException: DEADLINE_EXCEEDED: deadline exceeded after 5.341835500s. [closed=[], open=[[buffered_nanos=5343728200, waiting_for_connection]]]

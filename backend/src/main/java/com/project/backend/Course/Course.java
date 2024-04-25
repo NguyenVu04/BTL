@@ -20,7 +20,7 @@ public class Course extends Model{
     private Timestamp startDate;;
     private Timestamp endDate;;
     private List<Lesson> LessonMaterials;
-    private Double price;
+    private Integer price;
     private Map<String,String> timeTable;
 
     private List<String> listStudent;
@@ -36,7 +36,7 @@ public class Course extends Model{
             Timestamp startDate, 
             Timestamp endDate, 
             List<Lesson> LessonMaterials, 
-            Double price, 
+            Integer price, 
             Map<String,String> timeTable,
             List<String> listStudent,
             List<String> listTeacher,
