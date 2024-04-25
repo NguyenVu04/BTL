@@ -25,7 +25,7 @@ public class Course extends Model{
 
     private List<String> listStudent;
     private List<String> listTeacher;
-
+    
     // multiple quizzes
     private List<Quizz> listQuizz;
     protected Course(){}

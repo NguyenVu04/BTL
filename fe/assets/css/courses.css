@@ -33,6 +33,13 @@
     /* height: auto; */
 }
 
+/* Trong file CSS */
+#content .content__courses.grid-wide {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px; /* Khoảng cách giữa các phần tử */
+}
+
 
 #content .content__courses .courses-wrapper{
     /* height: 1000px; */
@@ -332,4 +339,55 @@
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* CSS cho nút "Xóa môn học này" */
+.delete-course-btn {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-course-btn:hover {
+    background-color: #c82333;
+}
+
+/* CSS cho nút "Thoát" */
+.exit-delete-mode-btn {
+    background-color: #6c757d;
+    color: #fff;
+    padding: 16px 132px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 0 auto;
+}
+
+.exit-delete-mode-btn:hover {
+    background-color: #5a6268;
+}
+
+
+/* Kiểu cho nút xóa */
+.delete-course {
+    background-color: #e74840; /* Màu nền */
+    color: #fff; /* Màu chữ */
+    padding: 16px 32px; /* Kích thước góc bo trái và phải */
+    border: none; /* Không viền */
+    border-radius: 4px; /* Góc bo */
+    cursor: pointer; /* Con trỏ khi di chuột */
+    font-size: 14px; /* Kích thước chữ */
+    position: absolute;
+    bottom: 40px;
+    right: 40px;left: 40px;
+}
+
+/* Kiểu cho nút xóa khi di chuột qua */
+.delete-course:hover {
+    background-color: #e60000; /* Màu nền khi di chuột qua */
 }
