@@ -355,7 +355,7 @@ function addinner(data) {
         temp= temp.replace('{teacherName}',teacherName );
         temp= temp.replace('{nameCourse}', nameCourse);
         temp= temp.replace('{idCourse}', idCourse);
-        temp= temp.replace('{price}',price );
+        temp= temp.replace('{price}',price )
         stringhtml += temp;
     }
 
