@@ -97,41 +97,6 @@ document.getElementById("submit-btn").addEventListener("click", function() {
 });
 
 
-
-function displayNewCourse(course) {
-    // Tạo một phần tử div mới để chứa thông tin của khóa học
-    const courseElement = document.createElement("div");
-    courseElement.classList.add("col", "l-4", "m-6", "c-12"); // Thêm các lớp cho phần tử div mới
-
-    // Tạo HTML cho thông tin của khóa học và gắn vào phần tử div mới tạo
-
-
-    // Thêm phần tử khóa học mới vào giao diện
-    const gridWide = document.querySelector(".content__courses .grid.wide");
-    const rows = gridWide.querySelectorAll(".row");
-    let targetRow;
-    for (let i = 0; i < rows.length; i++) {
-        const cols = rows[i].querySelectorAll(".col");
-        if (cols.length < 3) {
-            targetRow = rows[i];
-            break;
-        }
-    }
-    if (!targetRow) {
-        targetRow = document.createElement("div");
-        targetRow.classList.add("row");
-        gridWide.appendChild(targetRow);
-    }
-    targetRow.appendChild(courseElement);
-
-    // Gán sự kiện xóa môn học cho nút "Xóa khóa học" của khóa học mới
-    const deleteBtn = courseElement.querySelector('.delete-course');
-    deleteBtn.addEventListener('click', function() {
-        const courseContainer = deleteBtn.closest('.course-each');
-        courseContainer.remove();
-    });
-}
-
 function displayNewCourse(course) {
     // Tạo một phần tử div mới để chứa thông tin của khóa học
     const courseElement = document.createElement("div");

@@ -33,14 +33,6 @@
     /* height: auto; */
 }
 
-/* Trong file CSS */
-#content .content__courses.grid-wide {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px; /* Khoảng cách giữa các phần tử */
-}
-
-
 #content .content__courses .courses-wrapper{
     /* height: 1000px; */
 
