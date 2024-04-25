@@ -122,3 +122,38 @@ input[type="radio"] {
     box-shadow: 0 6px 8px rgba(0,0,0,0.5);
     transform: translate3d(0, -2px, 0); 
 }
+
+.qs-option {
+    display: flex;
+    align-items: center;
+}
+
+.qs-option__check {
+    margin-top:-5px;
+    margin-right: 15px; /* Điều chỉnh khoảng cách giữa radio button và input */
+}
+
+.choice{
+    margin-right:10px;
+}
+
+.back-to-quiz{
+    background-color: #0c89dc;
+    padding: 16px;
+    text-align: center;
+    background-image: linear-gradient(90deg, #00ADEF, #001C66);
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+    transition: background-image 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
+                box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    z-index: 0.5;
+    color: #fff;
+    font-weight: 600;
+}
+.back-to-quiz:hover {
+    background-image: linear-gradient(-90deg, #00ADEF, #001C66);
+    cursor: pointer;
+    box-shadow: 0 6px 8px rgba(0,0,0,0.5);
+    transform: translate3d(0, -2px, 0); 
+}
