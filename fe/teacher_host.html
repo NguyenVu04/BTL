@@ -92,8 +92,8 @@
                                 <img src="./assets/img/teacher/avatar.jpg" alt="Avatar">
                             </div>
                             <div class="ten">
-                                <p class="name">ThS. Nguyễn Kiều Dung</p>
-                                <p>ngkieudung@hcmut.edu.vn</p>
+                                <p class="name" onclick="updateName()">ThS. Nguyễn Kiều Dung</p>
+                                <p class="teachermail" onclick="updateEmail()">ngkieudung@hcmut.edu.vn</p>
                             </div>
                             <div class="change">
                                 <div class="teachicon" onclick="openEditForm()">
@@ -102,89 +102,12 @@
                                 </div>
                                 <div class="teachicon">
                                     <i class="fa-regular fa-envelope" style="color: #27889b;"></i>
-                                    <p style="color:#27889b;"> <a href="mailto: pdt@hcmut.edu.vn ">Phản hồi</a>  </p>
+                                    <p style="color:#27889b;"> <a href="mailto:">Phản hồi</a>  </p>
                                 </div>
                             </div>
                         </div>
                         <br>
-                        <!-- 1 khung hiển thị hoạt động -->
-                        <div class="activity">
-                            <div class="recently">
-                                <p style="font-weight:bold; text-transform: uppercase;"> Hoạt động gần đây</p>
-                            </div>
-                            <!-- frameact là 1 khung hiển thị lịch sử gần đây  -->
-                            <div class="frameact">
-                                <div class="change">
-                                    <div class="teachicon">
-                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
-                                        <p> Bạn đã sửa avatar </p>
-                                    </div>
-                                </div>
-                                <p> 07/04/2024 16:32</p>
-                            </div>
-                            <div class="frameact">
-                                <div class="change">
-                                    <div class="teachicon">
-                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
-                                        <p> Bạn đã sửa tên </p>
-                                    </div>
-                                </div>
-                                <p> 08/04/2024 2:00</p>
-                            </div>
-                            <div class="frameact">
-                                <div class="change">
-                                    <div class="teachicon">
-                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
-                                        <p> Bạn đã sửa văn bằng </p>
-                                    </div>
-                                </div>
-                                <p> 08/04/2024 10:50</p>
-                            </div>
-                            <div class="frameact">
-                                <div class="change">
-                                    <div class="teachicon">
-                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;"></i>
-                                        <p> Bạn đã sửa chức vụ </p>
-                                    </div>
-                                </div>
-                                <p> 08/04/2024 19:29</p>
-                            </div>
-                        </div>
-                        <!-- 1 khung hiển thị thời gian online -->
-                        <div class="thoiluong">
-                            <div class="recently">
-                                <p style="font-weight:bold; text-transform: uppercase;"> Thời lượng online</p>
-                            </div>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                      <tr>
-                                        <th>Ngày tháng</th>
-                                        <th>Thời lượng online</th>
-                                      </tr>
-                                    </thead>
-                                    <tbody>
-                                      <tr>
-                                        <td>08/04/2024</td>
-                                        <td>2 giờ 50 phút 20 giây</td>
-                                      </tr>
-                                      <tr>
-                                        <td>07/04/2024</td>
-                                        <td>1 giờ 10 phút 10 giây</td>
-                                      </tr>
-                                      <tr>
-                                        <td>05/04/2024</td>
-                                        <td>50 phút 24 giây</td>
-                                      </tr>
-                                      <tr>
-                                        <td>02/04/2024</td>
-                                        <td>1 giò 02 phút 41 giây</td>
-                                      </tr>
-                                    </tbody>
-                                  </table>
-                            </div>
-                            
-                        </div>
+
 
                     </div>
                     <!-- khung thông tin giáo viên -->
@@ -217,7 +140,7 @@
                                     </div>   
                                     <div class="certi">
                                         <li><strong>Văn bằng:</strong></li>
-                                        <i class="fa-solid fa-pen-to-square" style="color: #b2343a;margin-top:-10px; margin-left:10px; font-size:20px;" onclick="openModal()"></i>
+                                        <i class="fa-solid fa-pen-to-square bangicon" style="color: #b2343a;margin-top:-10px; margin-left:10px; font-size:20px;" onclick="openModal()"></i>
                                     </div>
                                     <!-- phần upload thông tin văn bằng -->
                                     <div class="vanbang">
@@ -247,6 +170,34 @@
       <button onclick="saveNewAvatar()" id="luu">Lưu</button>
     </div>
   </div>
+
+<!-- đổi mail giáo viên -->
+<div id="changeEmail" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModalEmail()">&times;</span>
+        <h2 class="doianh">Cập nhật Email</h2>
+        <form id="editFormEmail">
+            <label for="editTeacherEmail">Email:</label>
+            <input type="email" id="editTeacherEmail" name="editTeacherEmail" required><br><br>
+            <button type="submit" id="luu">Submit</button>
+        </form>
+    </div>
+</div>
+  
+<!-- Đổi tên sinh viên -->
+<!-- Modal -->
+<div id="changeName" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModalName()">&times;</span>
+        <h2 class="doianh">Cập nhật tên giáo viên</h2>
+        <form id="editFormName">
+            <label for="editTeacherName">Tên giáo viên:</label>
+            <input type="text" id="editTeacherName" name="editTeacherName" required><br><br>
+            <button type="submit" id="luu">Submit</button>
+        </form>
+    </div>
+</div>
+
 
 <!-- Phần cửa sổ modal để tải lên file -->
 <div id="uploadModal" class="modal">
@@ -319,7 +270,6 @@
         </form>
     </div>
 </div>
-
 
 
     </div>

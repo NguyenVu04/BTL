@@ -34,6 +34,17 @@ document.getElementById("newAvatar").addEventListener("change", function() {
   reader.readAsDataURL(this.files[0]);
 });
 
+// Kiểm tra xem đã có ảnh avatar được lưu trong Local Storage chưa
+document.addEventListener("DOMContentLoaded", function() {
+  var savedAvatar = localStorage.getItem("avatar");
+  if (savedAvatar) {
+    // Nếu có, cập nhật ảnh avatar
+    var avatarImg = document.querySelector("#avatar img");
+    avatarImg.src = savedAvatar;
+  }
+});
+
+
 // Hàm lưu ảnh đại diện mới
 function saveNewAvatar() {
   var newAvatarFile = document.getElementById("newAvatar").files[0];
@@ -45,15 +56,24 @@ function saveNewAvatar() {
       var newAvatarSrc = e.target.result; // Đường dẫn của ảnh mới
       var avatarImg = document.querySelector("#avatar img");
       avatarImg.src = newAvatarSrc; // Cập nhật đường dẫn của ảnh trong class "avatar"
+      
+      // Lưu đường dẫn của ảnh vào Local Storage
+      localStorage.setItem("avatar", newAvatarSrc);
+      
+      // Xóa ảnh avatar ban đầu khỏi Local Storage (nếu có)
+      localStorage.removeItem("defaultAvatar");
+
+      // Đóng cửa sổ sau khi lưu
+      modal.style.display = "none";
     };
     reader.readAsDataURL(newAvatarFile);
   } else {
     // Hiển thị thông báo nếu người dùng không chọn ảnh
     alert("Vui lòng chọn một ảnh để thay đổi!");
   }
-  
-  modal.style.display = "none"; // Đóng cửa sổ sau khi lưu
 }
+
+
 
 
 
@@ -62,95 +82,112 @@ function saveNewAvatar() {
 
 // Lấy phần tử cửa sổ modal và biểu tượng
 var uploadModal = document.getElementById("uploadModal");
-var certiIcon = document.querySelector(".fa-pen-to-square");
+var certiIcon = document.querySelector(".bangicon");
 
 // Mở cửa sổ modal khi click vào biểu tượng
 function openModal() {
-  uploadModal.style.display = "block";
+ uploadModal.style.display = "block";
 }
 
 // Đóng cửa sổ modal khi click vào nút đóng
 function closeModal() {
-  uploadModal.style.display = "none";
+ uploadModal.style.display = "none";
 }
 
 // Hiển thị trước ảnh khi người dùng chọn ảnh từ máy tính
 document.getElementById("certificateFile").addEventListener("change", function() {
-  var reader = new FileReader();
-  reader.onload = function(e) {
+ var reader = new FileReader();
+ reader.onload = function(e) {
     var previewFrame = document.getElementById("previewFrame");
     previewFrame.style.backgroundImage = "url('" + e.target.result + "')";
-  };
-  reader.readAsDataURL(this.files[0]);
+ };
+ reader.readAsDataURL(this.files[0]);
 });
 
 // Tải lên văn bằng
-// Tải lên văn bằng
-function openModal() {
-  document.getElementById('uploadModal').style.display = 'block';
-}
-
-function closeModal() {
-  document.getElementById('uploadModal').style.display = 'none';
-}
-
 function uploadCertificate() {
-  // Xử lý việc tải lên file và hiển thị preview
-  var input = document.getElementById('certificateFile');
-  var file = input.files[0];
-  var fileType = file.type;
+ var input = document.getElementById('certificateFile');
+ var file = input.files[0];
+ var fileType = file.type;
 
-  if (fileType.includes('image')) {
-      // Xử lý nếu tệp là hình ảnh
-      var reader = new FileReader();
-      reader.onload = function(e) {
-          var img = document.createElement('img');
-          img.src = e.target.result;
-          img.style.maxWidth = '100%'; // Điều chỉnh kích cỡ phù hợp
-
-          // Xóa các phần tử <p> không cần thiết trong class "vanbang"
-          var vanbang = document.querySelector('.vanbang');
-          vanbang.innerHTML = '';
-
-          // Thêm ảnh vào khung vanbang
-          vanbang.appendChild(img);
-      }
-      reader.readAsDataURL(file);
-  } else if (fileType === 'application/pdf') {
-      // Xử lý nếu tệp là PDF
-      var reader = new FileReader();
-      reader.onload = function(e) {
-          var pdfUrl = e.target.result;
-
-          // Tạo một thẻ iframe để hiển thị PDF
-          var iframe = document.createElement('iframe');
-          iframe.src = pdfUrl;
-          iframe.style.width = '100%';
-          iframe.style.height = '100%';
-          iframe.style.border = 'none';
-
-          // Xóa các phần tử <p> không cần thiết trong class "vanbang"
-          var vanbang = document.querySelector('.vanbang');
-          vanbang.innerHTML = '';
-
-          // Thêm iframe vào khung vanbang
-          vanbang.appendChild(iframe);
-
-          // Hiển thị liên kết tải về
-          var downloadLink = document.getElementById('downloadLink');
-          downloadLink.style.display = 'block';
-          var downloadButton = document.getElementById('downloadButton');
-          downloadButton.href = pdfUrl;
-          downloadButton.download = 'certificate.pdf';
-      }
-      reader.readAsDataURL(file);
-  } else {
-      alert('Định dạng tệp không được hỗ trợ.');
-  }
-
-  // Đóng cửa sổ modal sau khi tải lên
-  closeModal();
+ if (fileType.includes('image')) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var img = document.createElement('img');
+      img.src = e.target.result;
+      img.style.maxWidth = '100%';
+      var vanbang = document.querySelector('.vanbang');
+      vanbang.innerHTML = '';
+      vanbang.appendChild(img);
+      // Lưu trạng thái của tệp hình ảnh vào localStorage
+      localStorage.setItem('uploadedFile', e.target.result);
+      localStorage.setItem('fileType', 'image');
+    }
+    reader.readAsDataURL(file);
+ } else if (fileType === 'application/pdf') {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      var pdfUrl = e.target.result;
+      var iframe = document.createElement('iframe');
+      iframe.src = pdfUrl;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      var vanbang = document.querySelector('.vanbang');
+      vanbang.innerHTML = '';
+      vanbang.appendChild(iframe);
+      var downloadLink = document.getElementById('downloadLink');
+      downloadLink.style.display = 'block';
+      var downloadButton = document.getElementById('downloadButton');
+      downloadButton.href = pdfUrl;
+      downloadButton.download = 'certificate.pdf';
+      // Lưu trạng thái của tệp PDF vào localStorage
+      localStorage.setItem('uploadedFile', pdfUrl);
+      localStorage.setItem('fileType', 'pdf');
+    }
+    reader.readAsDataURL(file);
+ } else {
+    alert('Định dạng tệp không được hỗ trợ.');
+ }
+ closeModal();
 }
+
+// Hàm này sẽ được gọi khi trang được tải lại
+function restoreUploadedFile() {
+ var uploadedFile = localStorage.getItem('uploadedFile');
+ var fileType = localStorage.getItem('fileType');
+ if (uploadedFile) {
+    if (fileType === 'image') {
+      var img = document.createElement('img');
+      img.src = uploadedFile;
+      img.style.maxWidth = '100%';
+      var vanbang = document.querySelector('.vanbang');
+      vanbang.innerHTML = '';
+      vanbang.appendChild(img);
+    } else if (fileType === 'pdf') {
+      var iframe = document.createElement('iframe');
+      iframe.src = uploadedFile;
+      iframe.style.width = '100%';
+      iframe.style.height = '100%';
+      iframe.style.border = 'none';
+      var vanbang = document.querySelector('.vanbang');
+      vanbang.innerHTML = '';
+      vanbang.appendChild(iframe);
+      var downloadLink = document.getElementById('downloadLink');
+      downloadLink.style.display = 'block';
+      var downloadButton = document.getElementById('downloadButton');
+      downloadButton.href = uploadedFile;
+      downloadButton.download = 'certificate.pdf';
+    }
+ }
+}
+
+// Gọi hàm restoreUploadedFile khi DOM của trang đã được tải hoàn toàn
+document.addEventListener('DOMContentLoaded', function() {
+ restoreUploadedFile();
+});
+
+
 
 
 
@@ -190,6 +227,50 @@ function saveInfo() {
   var daymh = form.elements['daymh'].value;
   var ctkh = form.elements['ctkh'].value;
 
+  // Save edited information to Local Storage
+  localStorage.setItem('fullname', fullname);
+  localStorage.setItem('birthdate', birthdate);
+  localStorage.setItem('khoa', khoa);
+  localStorage.setItem('dienthoai', dienthoai);
+  localStorage.setItem('email', email);
+  localStorage.setItem('hocvi', hocvi);
+  localStorage.setItem('nuoc', nuoc);
+  localStorage.setItem('nganh', nganh);
+  localStorage.setItem('cn', cn);
+  localStorage.setItem('chucdanh', chucdanh);
+  localStorage.setItem('linhvuc', linhvuc);
+  localStorage.setItem('huong', huong);
+  localStorage.setItem('lats', lats);
+  localStorage.setItem('lv', lv);
+  localStorage.setItem('daymh', daymh);
+  localStorage.setItem('ctkh', ctkh);
+  
+  // Close edit modal
+  closeEditModal();
+
+  // Reload the page to display the updated information
+  location.reload();
+}
+
+// Load edited information from Local Storage when the page is loaded
+document.addEventListener('DOMContentLoaded', function() {
+  var fullname = localStorage.getItem('fullname') || '';
+  var birthdate = localStorage.getItem('birthdate') || '';
+  var khoa = localStorage.getItem('khoa') || '';
+  var dienthoai = localStorage.getItem('dienthoai') || '';
+  var email = localStorage.getItem('email') || '';
+  var hocvi = localStorage.getItem('hocvi') || '';
+  var nuoc = localStorage.getItem('nuoc') || '';
+  var nganh = localStorage.getItem('nganh') || '';
+  var cn = localStorage.getItem('cn') || '';
+  var chucdanh = localStorage.getItem('chucdanh') || '';
+  var linhvuc = localStorage.getItem('linhvuc') || '';
+  var huong = localStorage.getItem('huong') || '';
+  var lats = localStorage.getItem('lats') || '';
+  var lv = localStorage.getItem('lv') || '';
+  var daymh = localStorage.getItem('daymh') || '';
+  var ctkh = localStorage.getItem('ctkh') || '';
+
   var personalInfo = document.getElementById('personalInfo');
 
   personalInfo.innerHTML = '<li><strong>Họ và tên:</strong> ' + fullname + '</li>' +
@@ -208,11 +289,98 @@ function saveInfo() {
                             '<li><strong>Số LVThS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004):</strong> ' + lv + '</li>' +
                             '<li><strong>Giảng dạy các môn học đại học:</strong> ' + daymh + '</li>' +
                             '<li><strong>Các công trình khoa học đã công bố:</strong> ' + ctkh + '</li>';
-  // Add other personal information fields here
 
-  closeEditModal();
-}
+});
 
 
+        // Đổi tên sinh viên 
+        // Restore form data when the page is loaded
+        window.addEventListener('DOMContentLoaded', function() {
+          // Lấy thông tin từ local storage
+          var currentName = localStorage.getItem('teacherName') || "";
 
+          // Hiển thị thông tin từ local storage trên màn hình chính
+          document.querySelector('.name').innerText = currentName;
+        });
+
+      // Function to open edit modal
+      function updateName() {
+        var modal = document.getElementById("changeName");
+        modal.style.display = "block";
+
+        // Lấy tên sinh viên hiện tại từ local storage (nếu có)
+        var currentName = localStorage.getItem('teacherName') || "";
+
+        // Đặt giá trị hiện tại của tên sinh viên vào input
+        document.getElementById('editTeacherName').value = currentName;
+      }
+
+      // Lắng nghe sự kiện submit form
+      document.getElementById('editFormName').addEventListener('submit', function(event) {
+        event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+
+        // Lấy giá trị từ input
+        var newName = document.getElementById('editTeacherName').value;
+
+        // Lưu giá trị của tên sinh viên vào local storage
+        localStorage.setItem('teacherName', newName);
+
+        // Hiển thị tên sinh viên mới trên màn hình chính
+        document.querySelector('.name').innerText = newName;
+
+        // Ẩn modal sau khi submit
+        closeModalName();
+      });
+
+      // Function to close edit modal
+      function closeModalName() {
+        var modal = document.getElementById("changeName");
+        modal.style.display = "none";
+      }
+
+
+    // đổi gmail của giáo viên
+
+    // Restore form data when the page is loaded
+    window.addEventListener('DOMContentLoaded', function() {
+      // Lấy thông tin từ local storage
+      var currentEmail = localStorage.getItem('teachEmail') || "";
+
+      // Hiển thị thông tin từ local storage trên màn hình chính
+      document.querySelector('.teachermail').innerText = currentEmail;
+  });
+  // Function to open email edit modal
+  function updateEmail() {
+      var modal = document.getElementById("changeEmail");
+      modal.style.display = "block";
+
+      // Lấy email hiện tại từ local storage (nếu có)
+      var currentEmail = localStorage.getItem('teachEmail') || "";
+
+      // Đặt giá trị hiện tại của gmail vào input
+      document.getElementById('editTeacherEmail').value = currentEmail;
+  }
+
+  // Lắng nghe sự kiện submit form
+  document.getElementById('editFormEmail').addEventListener('submit', function(event) {
+      event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+
+      // Lấy giá trị từ input
+      var newEmail = document.getElementById('editTeacherEmail').value;
+
+      // Lưu giá trị của tên sinh viên và mã số sinh viên vào local storage
+      localStorage.setItem('teachEmail', newEmail);
+
+      // Hiển thị tên sinh viên và mã số sinh viên mới trên màn hình chính
+      document.querySelector('.teachermail').innerText = newEmail;
+
+      // Ẩn modal sau khi submit
+      closeModalEmail();
+  });
+
+  // Function to close edit modal
+  function closeModalEmail() {
+      var modal = document.getElementById("changeEmail");
+      modal.style.display = "none";
+  }
 
