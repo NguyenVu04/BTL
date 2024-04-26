@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import com.project.backend.Course.Course;
 
 
 
@@ -81,7 +82,7 @@ public class StudentController {
             if (repository.getDocumentById(Student.class, id) != null){
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            List<String> CourseID = new ArrayList<String>();
+            List<Course> CourseID = new ArrayList<Course>();
             
             Timestamp dob = convertTimestamp(year, month, day, hour, minute, second);
             Student student = new Student(name, dob, email, CourseID, false);
@@ -157,7 +158,7 @@ public class StudentController {
             if (snapshot == null)  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             Student student = snapshot.toObject(Student.class);
             for (int i = 0; i < student.getCourseID().size(); i++){
-                String getidCourse = student.getCourseID().get(i);
+                String getidCourse = student.getCourseID().get(i).getId();
                 courseController.deleteStudentinCourse(id, getidCourse);
             }
             repository.deleteDocumentById(Student.class, id);
@@ -182,7 +183,7 @@ public class StudentController {
                 list.add(teacher);
                 
                 for (int i = 0; i < teacher.getCourseID().size(); i++){
-                    String getid = teacher.getCourseID().get(i);
+                    String getid = teacher.getCourseID().get(i).getId();
                     courseController.deleteTeacherinCourse(teacher.getId(), getid);
                 }
                 

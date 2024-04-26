@@ -114,7 +114,7 @@ public class CourseController {
             Timestamp now = Timestamp.now();
             Timestamp later = Timestamp.ofTimeMicroseconds((now.getSeconds()+10713600)*1000000);
             List<Quizz> listQuizz = new ArrayList<Quizz>();
-            Course course = new Course(name, category, now, later, LessonMaterials, price, null, students, teachers, listQuizz);
+            Course course = new Course(id, name, category, now, later, LessonMaterials, price, null, students, teachers, listQuizz);
             repository.saveDocument(course, id);
             return ResponseEntity.ok(course);
 
@@ -127,30 +127,35 @@ public class CourseController {
     // add student into course
     @PostMapping("/add/student")
     public ResponseEntity<Student> addStudentIntoCourse(
-                            @RequestParam String studentID, 
-                            @RequestParam String CourseID 
+                            @RequestParam String idStudent, 
+                            @RequestParam String idCourse,
+                            @RequestParam String  nameCourse
                             )
     {
         try{
             // get course information
-            DocumentSnapshot findCourse = repository.getDocumentById(Course.class, CourseID);
-            DocumentSnapshot findStudent = repository.getDocumentById(Student.class, studentID);
+            DocumentSnapshot findCourse = repository.getDocumentById(Course.class, idCourse);
+            DocumentSnapshot findStudent = repository.getDocumentById(Student.class, idStudent);
             
             if (findStudent == null || findCourse == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }        
-            Student student = findStudent.toObject(Student.class);
-            for (int i = 0 ; i < student.getCourseID().size() ; i++) {
-                if (student.getCourseID().get(i).equals(CourseID)){
+            Course course = findCourse.toObject(Course.class);
+            if (!course.getName().equals(nameCourse)) {
+                return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+            }
+            for (int i = 0 ; i < course.getListStudent().size() ; i++) {
+                if (course.getListStudent().get(i).equals(idStudent)){
                     return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
                 }
             }
             // inject courseID into that student
             
-            student.getCourseID().add(CourseID);
+            Student student = findStudent.toObject(Student.class);
+            student.getCourseID().add(course);
             
             // inject that student into the course
-            Course temp = repository.getDocumentById(Course.class, CourseID).toObject(Course.class);
+            Course temp = repository.getDocumentById(Course.class, idCourse).toObject(Course.class);
             temp.getListStudent().add(student.getId());
             repository.updateDocumentById(student);
             repository.updateDocumentById(temp);
@@ -238,9 +243,9 @@ public class CourseController {
     }
 
     @DeleteMapping("/del/student")
-    public ResponseEntity<Student> deleteStudentinCourse(@RequestParam String id, @RequestParam String idCourse) {
+    public ResponseEntity<Student> deleteStudentinCourse(@RequestParam String idStudent, @RequestParam String idCourse) {
         try {
-            DocumentSnapshot documentSnapshot = repository.getDocumentById(Student.class, id);
+            DocumentSnapshot documentSnapshot = repository.getDocumentById(Student.class, idStudent);
             DocumentSnapshot snapshot = repository.getDocumentById(Course.class, idCourse);
             if (documentSnapshot == null || snapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -250,7 +255,7 @@ public class CourseController {
             String idstudent = student.getId();
             boolean alreadyExists = false;
             for (int i = 0 ; i < student.getCourseID().size() ; i++) {
-                if (student.getCourseID().get(i).equals(idCourse)){
+                if (student.getCourseID().get(i).getId().equals(idCourse)){
                     student.getCourseID().remove(i);
                     alreadyExists = true;
                     repository.updateDocumentById(student);
@@ -325,5 +330,25 @@ public class CourseController {
         return "ID: " + fooId + " Name: " + name;
     }
     
+    @GetMapping("/student/id")
+    public ResponseEntity<List<Course>> getallCourseOfStudentX(
+        @RequestParam(required = true) String idStudent
+    ){
+        try{
+            DocumentSnapshot student = repository.getDocumentById(Student.class, idStudent);
+            if (student == null) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+            Student tempStudent = student.toObject(Student.class);
+            List<Course> allCourse =  new ArrayList<>();
+            allCourse = tempStudent.getCourseID();
+            return ResponseEntity.ok().body(allCourse);
+        } 
+        catch(Exception e ) {
+            exceptionLog.log(e);
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+
+    }
     
 }

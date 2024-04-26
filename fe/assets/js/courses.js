@@ -1,6 +1,7 @@
+let idStudent = '2213954';
 getCourse().then(
     res => {
-    addinner(res);
+    // addinner(res);
     
     document.addEventListener("DOMContentLoaded", searchCourse());
         
@@ -41,6 +42,9 @@ getCourse().then(
         
         
         
+        /*
+        HIỂN THỊ KHÓA HỌC MỚI
+        */
         function generateRandomClass() {
         const randomClassNumber = Math.floor(Math.random() * 20) + 1; // Sinh số nguyên ngẫu nhiên từ 1 đến 20
         return "L" + ("0" + randomClassNumber).slice(-2); // Chuyển số thành chuỗi và thêm "0" vào trước số nếu số chỉ có một chữ số, sau đó lấy 2 chữ số cuối cùng
@@ -60,12 +64,11 @@ getCourse().then(
                 code: courseCodeInput,
                 // Ở đây bạn có thể thêm các thông tin khác nếu cần
             };
-        
+            addCourse(courseCodeInput, courseNameInput);
+            
             // Gọi hàm để hiển thị khóa học mới trên giao diện
-            displayNewCourse(newCourse);
-        
+            // displayNewCourse(newCourse);
             // Đóng modal sau khi đã đăng kí môn học mới thành công
-            hideCourseRegister();
         } else {
             // Nếu thông tin không hợp lệ, có thể hiển thị một thông báo hoặc thực hiện các xử lý khác tùy ý
             alert("Vui lòng nhập đầy đủ thông tin cho môn học mới!");
@@ -191,7 +194,7 @@ async function addinner(data) {
                                         <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
                                     </div>
                                     <div class="course-delete-btn" style="display: none;">
-                                        <button class="btn-text delete-course">Xóa khóa học này</button>
+                                        <button class="btn-text delete-course" id = "{id-course-del}">Xóa khóa học này</button>
                                     </div>
                                 </div>
                             </div>
@@ -209,28 +212,28 @@ async function addinner(data) {
         let nameCourse = data[i].name;
         let idCourse = data[i].id;
         let price = data[i].price;
+
         temp= temp.replace('{teacherName}',teacherName );
         temp= temp.replace('{nameCourse}', nameCourse);
         temp= temp.replace('{idCourse}', idCourse);
         temp= temp.replace('{price}',price )
+        temp = temp.replace('{id-course-del}', idCourse);
         stringhtml += temp;
     }
 
     tableCourse.innerHTML = stringhtml;
-    console.log(data);
-    console.log('inner');
 
     return data;
 }
-const user = {
-    id: '1213',
-    name: 'LeDinhThuan',
-    price: '1213'
-};
+
 async function getCourse() {
-    let url = 'http://localhost:8080/course/all';
+    let url = 'http://localhost:8080/course/student/id?';
     let returnVal = await
-    fetch(url ,{
+    fetch(url 
+            + new URLSearchParams({
+            idStudent: idStudent
+            }) 
+    ,{
         mode: 'cors',
         method: 'GET'
     })
@@ -240,22 +243,25 @@ async function getCourse() {
         }
         return res.json();}
     );
-    // console.log(returnVal);
+    
     for (let i = 0 ; i < returnVal.length; i++) {
         const val = returnVal[i];
     }
     // document.addEventListener('DOMContentLoaded', addinner(returnVal));
+    addinner(returnVal);
     return returnVal;
 
 }
-function addCourse() {
+async function addCourse(idCourse, nameCourse) {
     // let url = 'http://localhost:8080/course/id?';
-    let url = 'http://localhost:8080/course/add/course';
+    let url = 'http://localhost:8080/course/add/student';
     let form = new FormData();
-    form.append('id', 'CO2011');
-    form.append('name', 'CTRR1');
-    form.append('price', '125224');
+    console.log(idCourse, nameCourse, '\n');
+    form.append('idCourse', idCourse);
+    form.append('nameCourse', nameCourse);
+    form.append('idStudent', idStudent);
     
+    let data = await
     fetch(url ,{
         mode: 'cors',
         method: 'POST',
@@ -263,12 +269,16 @@ function addCourse() {
     })
     .then(res => 
         {
-            // console.log(123);
+    
         if (!res.ok) {
             throw Error(res.statusText);
             // return;
         }
             console.log(res);
+            
+            // if successfully created
+            if (res!=null)
+                location.reload();
             return res.json();
         
         }
@@ -281,42 +291,13 @@ function addCourse() {
         console.log(error);
     })
     ;
-    
+    return data;
 }
 
-// document.addEventListener('DOMContentLoaded', test().then(async ()  => {
-//     console.log(333);
-//     document.addEventListener('DOMContentLoaded', async () => {
-//         console.log(125);
-//     });
-// }));
-
-
-// async function test() {
-//     document.addEventListener('DOMContentLoaded', () => {
-//         console.log(123);
-//     });
-//     document.addEventListener('DOMContentLoaded', () => {
-//         console.log(124);
-//     });
-//     return 125;
-// }
-
-// getCourse().then(res => {
-//     document.addEventListener('DOMContentLoaded', addinner(res));
-//     console.log(res);
-
-//     console.log(123);
-//     document.addEventListener('DOMContentLoaded', console124());
-// });
-
-// function console124() {
-//     console.log(124);
-// }
 
 function searchCourse() {
     {
-        console.log(188);
+       
         const searchInput = document.querySelector(".search__input");
         const courseNames = document.querySelectorAll(".course-name");
         
@@ -364,11 +345,16 @@ function deleteCourse() {
         deleteBtn.addEventListener('click', function() {
             // Xóa phần tử của khóa học
             const courseContainer = deleteBtn.closest('.course-each');
+
+            // get idCourse to delete
+            let idCourse = courseContainer.children[2].children[1].children[0].id;
+            console.log(idCourse);
+            deleteCourseFromDB(idCourse);
+            // location.reload();
             courseContainer.remove();
     
             // Kiểm tra xem hàng có trống không sau khi xóa
             const row = courseContainer.parentElement;
-            console.log(row);
             if (row.childElementCount === 0) {
                 row.remove(); // Nếu hàng trống, loại bỏ nó
             }
@@ -413,4 +399,43 @@ function deleteCourse() {
             deleteBtnContainer.style.display = 'none';
         });
     });
+}
+
+async function deleteCourseFromDB(idCourse){
+    let url = 'http://localhost:8080/course/del/student';
+    let form = new FormData();
+    form.append('idCourse', idCourse);
+    form.append('idStudent', idStudent);
+    
+    let data = await
+    fetch(url ,{
+        mode: 'cors',
+        method: 'DELETE',
+        body: form
+    })
+    .then(res => 
+        {
+    
+        if (!res.ok) {
+            throw Error(res.statusText);
+            // return;
+        }
+            console.log(res);
+            
+            // if successfully created
+            if (res!=null)
+                location.reload();
+            return res.json();
+        
+        }
+    )
+    .then(data => {
+        console.log(data);
+        // return res.json();
+    })
+    .catch(error => {
+        console.log(error);
+    })
+    ;
+    return data;
 }

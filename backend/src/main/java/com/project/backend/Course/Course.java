@@ -3,6 +3,8 @@ package com.project.backend.Course;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import com.google.cloud.Timestamp;
 import com.project.backend.QuizMain.Quizz;
 import com.project.backend.firebase.CollectionName;
@@ -15,6 +17,8 @@ import lombok.Setter;
 @Setter
 @CollectionName("Course")
 public class Course extends Model{
+    @Autowired
+    private String id;
     private String name; // name of the course
     private Category category;
     private Timestamp startDate;;
@@ -31,6 +35,7 @@ public class Course extends Model{
     protected Course(){}
 
     public Course(
+            String id,
             String name, 
             Category category, 
             Timestamp startDate, 
@@ -42,6 +47,7 @@ public class Course extends Model{
             List<String> listTeacher,
             List<Quizz> listQuizz
         ) {
+        this.id=id;
         this.name = name;
         this.category = category;
         this.endDate = endDate;

@@ -19,3 +19,6 @@
 2024-04-22T09:15:16.554547500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
 2024-04-22T09:21:35.706001: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
 2024-04-22T09:24:26.660856: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
+2024-04-26T14:55:29.098074700: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.Course (found in field 'courseID.[0]')
+2024-04-26T14:55:54.261306200: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.Course (found in field 'courseID.[0]')
+2024-04-26T14:59:41.367591400: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.Course (found in field 'courseID.[0]')

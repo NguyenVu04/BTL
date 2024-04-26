@@ -3,6 +3,7 @@ package com.project.backend.Student;
 import java.util.List;
 
 import com.google.cloud.Timestamp;
+import com.project.backend.Course.Course;
 import com.project.backend.firebase.CollectionName;
 import com.project.backend.model.Model;
 
@@ -19,13 +20,13 @@ public class Student extends Model {
     private Timestamp dob;
     @NonNull
     private String email;
-    private List<String> CourseID;
+    private List<Course> CourseID;
     private boolean status;
 
 
     protected Student() {}
 
-    public Student(String name, Timestamp dob, @NonNull String email, List<String> CourseID, boolean status) {
+    public Student(String name, Timestamp dob, @NonNull String email, List<Course> CourseID, boolean status) {
         this.name = name;
         this.dob = dob;
         this.email = email;
