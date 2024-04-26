@@ -1,212 +1,8 @@
-let data = [
-    {
-        "id": "CO1018",
-        "name": "Cấu Trúc Rời Rạc",
-        "category": {
-            "major": null,
-            "yearvalid": null
-        },
-        "startDate": {
-            "seconds": 1714071311,
-            "nanos": 947000000
-        },
-        "endDate": {
-            "seconds": 1724784911,
-            "nanos": 0
-        },
-        "price": 4,
-        "timeTable": null,
-        "listStudent": [],
-        "listTeacher": [],
-        "listQuizz": [],
-        "lessonMaterials": []
-    },
-    {
-        "id": "CO1023",
-        "name": "CTRR",
-        "category": {
-            "major": null,
-            "yearvalid": null
-        },
-        "startDate": {
-            "seconds": 1713329232,
-            "nanos": 465000000
-        },
-        "endDate": {
-            "seconds": 1724042832,
-            "nanos": 0
-        },
-        "price": 1700000,
-        "timeTable": null,
-        "listStudent": [
-            "2213954",
-            "2213952"
-        ],
-        "listTeacher": [
-            "2021"
-        ],
-        "listQuizz": [
-            {
-                "questionAndAnswer": [
-                    {
-                        "question": {
-                            "question": "1+1",
-                            "answer": "A"
-                        }
-                    },
-                    {
-                        "question": {
-                            "question": "1+2",
-                            "answer": "B"
-                        }
-                    },
-                    {
-                        "question": {
-                            "question": "who is the most handsome guy in the world?",
-                            "answer": "A"
-                        }
-                    },
-                    {
-                        "question": {
-                            "question": "output of this code",
-                            "answer": "B"
-                        }
-                    }
-                ],
-                "title": "first quiz",
-                "info": {
-                    "2213952": {
-                        "score": 2,
-                        "history": [],
-                        "passOrnot": true,
-                        "timeleft": 3
-                    },
-                    "2213954": {
-                        "score": 2,
-                        "history": [],
-                        "passOrnot": true,
-                        "timeleft": 3
-                    }
-                },
-                "times": 3,
-                "enddate": {
-                    "seconds": 1704646800,
-                    "nanos": 0
-                },
-                "startdate": {
-                    "seconds": 1704042000,
-                    "nanos": 0
-                }
-            },
-            {
-                "questionAndAnswer": [],
-                "title": "second quiz",
-                "info": {},
-                "times": 3,
-                "enddate": {
-                    "seconds": 1704646800,
-                    "nanos": 0
-                },
-                "startdate": {
-                    "seconds": 1704042000,
-                    "nanos": 0
-                }
-            }
-        ],
-        "lessonMaterials": []
-    },
-    {
-        "id": "CO1024",
-        "name": "CTRR1",
-        "category": {
-            "major": null,
-            "yearvalid": null
-        },
-        "startDate": {
-            "seconds": 1714059312,
-            "nanos": 632000000
-        },
-        "endDate": {
-            "seconds": 1724772912,
-            "nanos": 0
-        },
-        "price": 125224,
-        "timeTable": null,
-        "listStudent": [],
-        "listTeacher": [],
-        "listQuizz": [],
-        "lessonMaterials": []
-    },
-    {
-        "id": "CO1030",
-        "name": "Kỹ Thuật Lập Trình",
-        "category": {
-            "major": null,
-            "yearvalid": null
-        },
-        "startDate": {
-            "seconds": 1714072342,
-            "nanos": 996000000
-        },
-        "endDate": {
-            "seconds": 1724785942,
-            "nanos": 0
-        },
-        "price": 3,
-        "timeTable": null,
-        "listStudent": [],
-        "listTeacher": [],
-        "listQuizz": [],
-        "lessonMaterials": []
-    },
-    {
-        "id": "CO2039",
-        "name": "Xác suất thống kê",
-        "category": {
-            "major": null,
-            "yearvalid": null
-        },
-        "startDate": {
-            "seconds": 1714072383,
-            "nanos": 811000000
-        },
-        "endDate": {
-            "seconds": 1724785983,
-            "nanos": 0
-        },
-        "price": 4,
-        "timeTable": null,
-        "listStudent": [],
-        "listTeacher": [],
-        "listQuizz": [],
-        "lessonMaterials": []
-    }
-]
-
-document.addEventListener("DOMContentLoaded", getCourse().then(
-    (res) => {
-        console.log(res);
-    document.addEventListener('DOMContentLoaded', addinner(res).then(result => {
-        // document.addEventListener('DOMContentLoaded', addinner(data));
-        document.addEventListener("DOMContentLoaded", function() {
-        const searchInput = document.querySelector(".search__input");
-        const courseNames = document.querySelectorAll(".course-name");
-        
-        searchInput.addEventListener("input", function() {
-            const searchTerm = this.value.toLowerCase();
-        
-            courseNames.forEach(function(courseName) {
-                const name = courseName.textContent.toLowerCase();
-                const course = courseName.closest(".course-each");
-        
-                if (name.includes(searchTerm)) {
-                    course.style.display = "block";
-                } else {
-                    course.style.display = "none";
-                }
-            });
-        });
-        });
+getCourse().then(
+    res => {
+    addinner(res);
+    
+    document.addEventListener("DOMContentLoaded", searchCourse());
         
         
         /*
@@ -222,7 +18,7 @@ document.addEventListener("DOMContentLoaded", getCourse().then(
         modal.classList.add('open');
         }
         
-        registBtn.addEventListener('click', showCourseRegister)
+        registBtn.addEventListener('click', showCourseRegister);
         
         //Ham an modal mua ve (go bo class open cua modal)
         function hideCourseRegister() {
@@ -230,24 +26,21 @@ document.addEventListener("DOMContentLoaded", getCourse().then(
         }
         
         //nghe hanh vi click vao button close cua user, nghe dc thi goi ham an
-        modalClose.addEventListener('click', hideCourseRegister)
+        modalClose.addEventListener('click', hideCourseRegister);
         
         //bam vao ben ngoai cung tat giao dien modal 
-        modal.addEventListener('click', hideCourseRegister)
+        modal.addEventListener('click', hideCourseRegister);
         
         // khi bam vao form modal thi van se close do modal-container la con cua modal (tinh chat noi bot)
         //-> ngan chan t/c noi bot tu modal-container ra ben ngoai
         //event la bien tra ve
         modalContainer.addEventListener('click', function (event) {
         event.stopPropagation() //ngung noi bot tu modalcontainer qua bien tra ve event, su kien click van dien ra nhung ko noi bot ra ben ngoai
-        })  
+        });  
         
         
         
         
-        /*
-        HIỂN THỊ KHÓA HỌC MỚI
-        */
         function generateRandomClass() {
         const randomClassNumber = Math.floor(Math.random() * 20) + 1; // Sinh số nguyên ngẫu nhiên từ 1 đến 20
         return "L" + ("0" + randomClassNumber).slice(-2); // Chuyển số thành chuỗi và thêm "0" vào trước số nếu số chỉ có một chữ số, sau đó lấy 2 chữ số cuối cùng
@@ -280,40 +73,6 @@ document.addEventListener("DOMContentLoaded", getCourse().then(
         });
         
         
-        
-        function displayNewCourse(course) {
-        // Tạo một phần tử div mới để chứa thông tin của khóa học
-        const courseElement = document.createElement("div");
-        courseElement.classList.add("col", "l-4", "m-6", "c-12"); // Thêm các lớp cho phần tử div mới
-        
-        // Tạo HTML cho thông tin của khóa học và gắn vào phần tử div mới tạo
-        
-        
-        // Thêm phần tử khóa học mới vào giao diện
-        const gridWide = document.querySelector(".content__courses .grid.wide");
-        const rows = gridWide.querySelectorAll(".row");
-        let targetRow;
-        for (let i = 0; i < rows.length; i++) {
-            const cols = rows[i].querySelectorAll(".col");
-            if (cols.length < 3) {
-                targetRow = rows[i];
-                break;
-            }
-        }
-        if (!targetRow) {
-            targetRow = document.createElement("div");
-            targetRow.classList.add("row");
-            gridWide.appendChild(targetRow);
-        }
-        targetRow.appendChild(courseElement);
-        
-        // Gán sự kiện xóa môn học cho nút "Xóa khóa học" của khóa học mới
-        const deleteBtn = courseElement.querySelector('.delete-course');
-        deleteBtn.addEventListener('click', function() {
-            const courseContainer = deleteBtn.closest('.course-each');
-            courseContainer.remove();
-        });
-        }
         
         function displayNewCourse(course) {
         // Tạo một phần tử div mới để chứa thông tin của khóa học
@@ -392,98 +151,9 @@ document.addEventListener("DOMContentLoaded", getCourse().then(
         });
         }
         
-        
-        
-        /* 
-        XÓA MÔN HỌC
-        */
-        document.addEventListener("DOMContentLoaded", function() {
-        // Lấy danh sách tất cả các nút "Chi tiết khóa học"
-        const detailButtons = document.querySelectorAll('.course-enter-btn a');
-        
-        // Lặp qua từng nút "Chi tiết khóa học" và thêm sự kiện click
-        detailButtons.forEach(function(button) {
-            button.addEventListener('click', function(event) {
-                // Ngăn chặn hành vi mặc định của nút "Chi tiết khóa học" (chuyển hướng trang)
-                event.preventDefault();
-        
-                // Kiểm tra xem có ở chế độ xóa môn học không
-                const isInDeleteMode = document.body.classList.contains('delete-mode');
-        
-                if (!isInDeleteMode) {
-                    // Nếu không ở chế độ xóa môn học, chuyển đến trang chi tiết khóa học
-                    window.location.href = button.getAttribute('href');
-                }
-            });
-        });
-        
-        // Xử lý sự kiện khi bấm nút "Xóa môn học"
-        const deleteCourseBtns = document.querySelectorAll('.delete-course');
-        deleteCourseBtns.forEach(function(deleteBtn) {
-            deleteBtn.addEventListener('click', function() {
-                // Xóa phần tử của khóa học
-                const courseContainer = deleteBtn.closest('.course-each');
-                courseContainer.remove();
-        
-                // Kiểm tra xem hàng có trống không sau khi xóa
-                const row = courseContainer.parentElement;
-                if (row.childElementCount === 0) {
-                    row.remove(); // Nếu hàng trống, loại bỏ nó
-                }
-            });
-        });
-        
-        // Xử lý sự kiện khi bấm nút "Xóa môn học" để chuyển sang chế độ xóa
-        const deleteCourseModeBtn = document.querySelector('.delete-mode-btn');
-        deleteCourseModeBtn.addEventListener('click', function() {
-            // Hiển thị nút "Thoát" khỏi chế độ xóa môn học
-            const exitDeleteModeBtn = document.querySelector('.exit-delete-mode-btn');
-            exitDeleteModeBtn.style.display = 'block';
-            // Thêm lớp "delete-mode" vào phần tử <body>
-            document.body.classList.add('delete-mode');
-            // Ẩn nút "Chi tiết khóa học" khi ở chế độ xóa môn học
-            const detailButtons = document.querySelectorAll('.course-enter-btn');
-            detailButtons.forEach(function(enterBtnContainer) {
-                enterBtnContainer.style.display = 'none';
-            });
-            // Hiển thị nút "Xóa khóa học"
-            const deleteCourseButtons = document.querySelectorAll('.course-delete-btn');
-            deleteCourseButtons.forEach(function(deleteBtnContainer) {
-                deleteBtnContainer.style.display = 'block';
-            });
-        });
-        
-        // Xử lý sự kiện khi bấm nút "Thoát" khỏi chế độ xóa môn học
-        const exitDeleteModeBtn = document.querySelector('.exit-delete-mode-btn');
-        exitDeleteModeBtn.addEventListener('click', function() {
-            // Ẩn nút "Thoát" khỏi chế độ xóa môn học
-            exitDeleteModeBtn.style.display = 'none';
-            // Loại bỏ lớp "delete-mode" khỏi phần tử <body>
-            document.body.classList.remove('delete-mode');
-            // Hiển thị lại nút "Chi tiết khóa học" khi thoát khỏi chế độ xóa môn học
-            const detailButtons = document.querySelectorAll('.course-enter-btn');
-            detailButtons.forEach(function(enterBtnContainer) {
-                enterBtnContainer.style.display = 'block';
-            });
-            // Ẩn nút "Xóa khóa học"
-            const deleteCourseButtons = document.querySelectorAll('.course-delete-btn');
-            deleteCourseButtons.forEach(function(deleteBtnContainer) {
-                deleteBtnContainer.style.display = 'none';
-            });
-        });
-        });
-    
-        
-
-    })
-
-);
-        
-    
-    
-
-}
-));
+        // remove course
+        document.addEventListener("DOMContentLoaded", deleteCourse());
+});
 
 
 async function addinner(data) {
@@ -548,6 +218,8 @@ async function addinner(data) {
 
     tableCourse.innerHTML = stringhtml;
     console.log(data);
+    console.log('inner');
+
     return data;
 }
 const user = {
@@ -557,7 +229,7 @@ const user = {
 };
 async function getCourse() {
     let url = 'http://localhost:8080/course/all';
-    let returnVal = await 
+    let returnVal = await
     fetch(url ,{
         mode: 'cors',
         method: 'GET'
@@ -571,7 +243,6 @@ async function getCourse() {
     // console.log(returnVal);
     for (let i = 0 ; i < returnVal.length; i++) {
         const val = returnVal[i];
-        console.log(val.id, val.name, val.price);
     }
     // document.addEventListener('DOMContentLoaded', addinner(returnVal));
     return returnVal;
@@ -613,5 +284,133 @@ function addCourse() {
     
 }
 
+// document.addEventListener('DOMContentLoaded', test().then(async ()  => {
+//     console.log(333);
+//     document.addEventListener('DOMContentLoaded', async () => {
+//         console.log(125);
+//     });
+// }));
 
 
+// async function test() {
+//     document.addEventListener('DOMContentLoaded', () => {
+//         console.log(123);
+//     });
+//     document.addEventListener('DOMContentLoaded', () => {
+//         console.log(124);
+//     });
+//     return 125;
+// }
+
+// getCourse().then(res => {
+//     document.addEventListener('DOMContentLoaded', addinner(res));
+//     console.log(res);
+
+//     console.log(123);
+//     document.addEventListener('DOMContentLoaded', console124());
+// });
+
+// function console124() {
+//     console.log(124);
+// }
+
+function searchCourse() {
+    {
+        console.log(188);
+        const searchInput = document.querySelector(".search__input");
+        const courseNames = document.querySelectorAll(".course-name");
+        
+        searchInput.addEventListener("input", function() {
+            const searchTerm = this.value.toLowerCase();
+        
+            courseNames.forEach(function(courseName) {
+                const name = courseName.textContent.toLowerCase();
+                const course = courseName.closest(".course-each");
+        
+                if (name.includes(searchTerm)) {
+                    course.style.display = "block";
+                } else {
+                    course.style.display = "none";
+                }
+            });
+        });
+        }
+}
+
+// xóa môn học
+function deleteCourse() {
+    console.log('xoa mon hoc');
+    // Lấy danh sách tất cả các nút "Chi tiết khóa học"
+    const detailButtons = document.querySelectorAll('.course-enter-btn a');
+    
+    // Lặp qua từng nút "Chi tiết khóa học" và thêm sự kiện click
+    detailButtons.forEach(function(button) {
+        button.addEventListener('click', function(event) {
+            // Ngăn chặn hành vi mặc định của nút "Chi tiết khóa học" (chuyển hướng trang)
+            event.preventDefault();
+    
+            // Kiểm tra xem có ở chế độ xóa môn học không
+            const isInDeleteMode = document.body.classList.contains('delete-mode');
+    
+            if (!isInDeleteMode) {
+                // Nếu không ở chế độ xóa môn học, chuyển đến trang chi tiết khóa học
+                window.location.href = button.getAttribute('href');
+            }
+        });
+    });
+    // Xử lý sự kiện khi bấm nút "Xóa môn học"
+    const deleteCourseBtns = document.querySelectorAll('.delete-course');
+    deleteCourseBtns.forEach(function(deleteBtn) {
+        deleteBtn.addEventListener('click', function() {
+            // Xóa phần tử của khóa học
+            const courseContainer = deleteBtn.closest('.course-each');
+            courseContainer.remove();
+    
+            // Kiểm tra xem hàng có trống không sau khi xóa
+            const row = courseContainer.parentElement;
+            console.log(row);
+            if (row.childElementCount === 0) {
+                row.remove(); // Nếu hàng trống, loại bỏ nó
+            }
+        });
+    });
+    
+    // Xử lý sự kiện khi bấm nút "Xóa môn học" để chuyển sang chế độ xóa
+    const deleteCourseModeBtn = document.querySelector('.delete-mode-btn');
+    deleteCourseModeBtn.addEventListener('click', function() {
+        // Hiển thị nút "Thoát" khỏi chế độ xóa môn học
+        const exitDeleteModeBtn = document.querySelector('.exit-delete-mode-btn');
+        exitDeleteModeBtn.style.display = 'block';
+        // Thêm lớp "delete-mode" vào phần tử <body>
+        document.body.classList.add('delete-mode');
+        // Ẩn nút "Chi tiết khóa học" khi ở chế độ xóa môn học
+        const detailButtons = document.querySelectorAll('.course-enter-btn');
+        detailButtons.forEach(function(enterBtnContainer) {
+            enterBtnContainer.style.display = 'none';
+        });
+        // Hiển thị nút "Xóa khóa học"
+        const deleteCourseButtons = document.querySelectorAll('.course-delete-btn');
+        deleteCourseButtons.forEach(function(deleteBtnContainer) {
+            deleteBtnContainer.style.display = 'block';
+        });
+    });
+    
+    // Xử lý sự kiện khi bấm nút "Thoát" khỏi chế độ xóa môn học
+    const exitDeleteModeBtn = document.querySelector('.exit-delete-mode-btn');
+    exitDeleteModeBtn.addEventListener('click', function() {
+        // Ẩn nút "Thoát" khỏi chế độ xóa môn học
+        exitDeleteModeBtn.style.display = 'none';
+        // Loại bỏ lớp "delete-mode" khỏi phần tử <body>
+        document.body.classList.remove('delete-mode');
+        // Hiển thị lại nút "Chi tiết khóa học" khi thoát khỏi chế độ xóa môn học
+        const detailButtons = document.querySelectorAll('.course-enter-btn');
+        detailButtons.forEach(function(enterBtnContainer) {
+            enterBtnContainer.style.display = 'block';
+        });
+        // Ẩn nút "Xóa khóa học"
+        const deleteCourseButtons = document.querySelectorAll('.course-delete-btn');
+        deleteCourseButtons.forEach(function(deleteBtnContainer) {
+            deleteBtnContainer.style.display = 'none';
+        });
+    });
+}
