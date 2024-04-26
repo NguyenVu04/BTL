@@ -97,54 +97,56 @@
     <div class="detail-info">
         <div class="student-info">
             <div class="detail-info-header">
-                <h1 style="padding:30px 60px; color:var(--firstColor);">
-                    1. Thông tin sinh viên
-                </h3>
+                <h1 style="padding:30px 60px;">
+                    <i class="fa-solid fa-file-signature"></i>
+                     Thông tin sinh viên
+                </h1>
             </div>
             <div class="detail-info-body">
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Mã số sinh viên:</p>
-                    <p>2210812</p>
+                    <p id="studentID">2210812</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Căn cước công dân:</p>
-                    <p>042204008309</p>
+                    <p id="citizenID">042204008309</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Họ và tên:</p>
-                    <p>Trần Huy Đức</p>
+                    <p id="fullName">Trần Huy Đức</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Số điện thoại:</p>
-                    <p>0393030568</p>
+                    <p id="phoneNumber">0393030568</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Ngày tháng năm sinh:</p>
-                    <p>05/02/2004</p>
+                    <p id="dob">05/02/2004</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Email:</p>
-                    <p>duc.tranthd52@hcmut.edu.vn</p>
+                    <p id="email">duc.tranthd52@hcmut.edu.vn</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Giới tính:</p>
-                    <p>Nam</p>
+                    <p id="gender">Nam</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Hộ khẩu thường trú:</p>
-                    <p>KTX khu A</p>
+                    <p id="permanentAddress">KTX khu A</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Nơi sinh:</p>
-                    <p>Hương Sơn, Hà Tĩnh</p>
+                    <p id="birthPlace">Hương Sơn, Hà Tĩnh</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Ngành học:</p>
-                    <p>Khoa học máy tính</p>
+                    <p id="major">Khoa học máy tính</p>
                 </div>
             </div>
             <div class="detail-info-footer">
-                <div>
+                <div onclick="showEditModal()">
+                    <i class="fa-solid fa-pen-to-square"></i>
                     Chỉnh sửa
                 </div>
             </div>
@@ -152,57 +154,62 @@
     </div>
 
 
+
+
+    
     <div style="display: none;">
         <div class="student-info">
             <div class="detail-info-header">
-                <h1 style="padding:30px 60px; color:var(--firstColor);">
-                    1. Thông tin sinh viên
-                </h3>
+                <h1 style="padding:30px 60px;">
+                    <i class="fa-solid fa-file-signature"></i>
+                    Thông tin sinh viên
+                </h1>
             </div>
             <div class="detail-info-body">
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Mã số sinh viên:</p>
-                    <p>2210812</p>
+                    <p id="studentID">2210812</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Căn cước công dân:</p>
-                    <p>042204008309</p>
+                    <p id="citizenID">042204008309</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Họ và tên:</p>
-                    <p>Trần Huy Đức</p>
+                    <p id="fullName">Trần Huy Đức</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Số điện thoại:</p>
-                    <p>0393030568</p>
+                    <p id="phoneNumber">0393030568</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Ngày tháng năm sinh:</p>
-                    <p>05/02/2004</p>
+                    <p id="dob">05/02/2004</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Email:</p>
-                    <p>duc.tranthd52@hcmut.edu.vn</p>
+                    <p id="email">duc.tranthd52@hcmut.edu.vn</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Giới tính:</p>
-                    <p>Nam</p>
+                    <p id="gender">Nam</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Hộ khẩu thường trú:</p>
-                    <p>KTX khu A</p>
+                    <p id="permanentAddress">KTX khu A</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Nơi sinh:</p>
-                    <p>Hương Sơn, Hà Tĩnh</p>
+                    <p id="birthPlace">Hương Sơn, Hà Tĩnh</p>
                 </div>
                 <div class="detail-info-item">
                     <p style="font-weight: bold;">Ngành học:</p>
-                    <p>Khoa học máy tính</p>
+                    <p id="major">Khoa học máy tính</p>
                 </div>
             </div>
             <div class="detail-info-footer">
-                <div>
+                <div onclick="showEditModal()">
+                    <i class="fa-solid fa-pen-to-square"></i>
                     Chỉnh sửa
                 </div>
             </div>
@@ -213,8 +220,9 @@
         <div class="progress-info">
             <div class="detail-info-header">
                 <h1 style="padding:30px 60px;">
-                    2. Tiến trình học tập
-                </h3>
+                    <i class="fa-solid fa-chart-line"></i>
+                     Tiến trình học tập
+                </h1>
             </div>
             <div class="detail-info-body">
             </div>
@@ -224,14 +232,132 @@
         <div class="grade-info">
             <div class="detail-info-header">
                 <h1 style="padding:30px 60px;">
-                    3. Điểm số
-                </h3>
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                     Điểm số
+                </h>
             </div>
-            <div class="detail-info-body">
+            <div style="padding: 0px 40px;height: 80%;">
+                <div class="info-body-header">
+                    <div class="subject_name">
+                        Tên môn học
+                    </div>
+                    <div class="quiz_score">
+                        Điểm chuyên cần
+                    </div>
+                    <div class="assignment_score">
+                        Điểm bài tập lớn
+                    </div>
+                    <div class="midterm_score">
+                        Điểm giữa kỳ
+                    </div>
+                    <div class="finalterm_score">
+                        Điểm cuối kỳ
+                    </div>
+                    <div class="total_score">
+                        Điểm tổng kết
+                    </div>
+                </div>
+                <div class="info-body-content">
+                    <div>
+                        <p>Xác suất thống kê</p>
+                    </div>
+                    <div>
+                        10
+                    </div>
+                    <div>10</div>
+                    <div>10</div>
+                    <div>10</div>
+                    <div>10</div>
+                </div>
+                <div class="info-body-content">
+                    <div>
+                        <p>Lập trình nâng cao</p>
+                    </div>
+                    <div>
+                        10
+                    </div>
+                    <div>10</div>
+                    <div>10</div>
+                    <div>10</div>
+                    <div>10</div>
+                </div>
+                <div class="info-body-content">
+                    <div>
+                        <p>Kinh tế chính trị Mác-Lênin</p>
+                    </div>
+                    <div>
+                        10
+                    </div>
+                    <div>10</div>
+                    <div>10</div>
+                    <div>10</div>
+                    <div>10</div>
+                </div>
             </div>
         </div>
-
     </div>
+
+
+
+    
+
+
+<!-- Pop-up chỉnh sửa thông tin cá nhân -->
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <form id="editForm">
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Mã số sinh viên:</p>
+                    <input type="text" id="editStudentID">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Căn cước công dân:</p>
+                    <input type="text" id="editCitizenID">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Họ và tên:</p>
+                    <input type="text" id="editFullName">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Số điện thoại:</p>
+                    <input type="text" id="editPhoneNumber">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Ngày tháng năm sinh:</p>
+                    <input type="text" id="editDOB">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Email:</p>
+                    <input type="text" id="editEmail">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Giới tính:</p>
+                    <input type="text" id="editGender">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Hộ khẩu thường trú:</p>
+                    <input type="text" id="editPermanentAddress">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Nơi sinh:</p>
+                    <input type="text" id="editBirthPlace">
+                </div>
+                <div class="editForm__item">
+                    <p style="font-weight: bold;">Ngành học:</p>
+                    <input type="text" id="editMajor">
+                </div>
+            </form>
+            <button id="saveButton" onclick="saveChanges()">Lưu</button>
+        </div>
+    </div>
+
+
+
+
+
+    
+    
     <!--footer start-->
     <footer id="footer"> 
         <div class="chan">
