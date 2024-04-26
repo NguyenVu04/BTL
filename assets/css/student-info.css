@@ -105,3 +105,123 @@ body{
     width: 100%;
     height: 100%;
 }
+div>h1>i{
+    margin-right: 10px;
+}
+.info-body-header{
+    display: flex;
+    height: 15%;
+    justify-content: space-evenly;
+    background-color: var(--themeColor);
+}
+.info-body-content{
+    margin-top: 10px;
+    display: flex;
+    height: 12%;
+    justify-content: space-evenly;
+}
+.info-body-content>div{
+    flex: 1;
+    /* margin-right: 5px; */
+    /* height: 100%; */
+    text-align: center;
+    /* padding-top: 20px; */
+    border: 0.5px solid;
+    line-height: 70px;
+}
+.info-body-content :first-child
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.info-body-content>div>p{
+    line-height: 18px;
+}
+.info-body-header>div{
+    font-size: large;
+    font-weight: bold;
+    flex: 1;
+    text-align: center;
+    line-height: 80px;
+    border: 0.5px solid;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /* overflow: auto; */
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 50px;
+}
+
+.modal-content {
+    position: relative;
+    background-color: #fefefe;
+    margin:0px auto;
+    /* padding: 60px 40px 20px; */
+    border: 1px solid #888;
+    width: 80%;
+    height: 100%;
+    border-radius: 20px;
+    /* display: flex; */
+    /* flex-wrap: wrap; */
+}
+
+.close {
+    /* color: var(--themeC; */
+    opacity: .2;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.close:hover,
+.close:focus {
+    /* color: black; */
+    opacity: 1;
+    text-decoration: none;
+    cursor: pointer;
+}
+#editForm{
+    height: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding: 60px 20px 20px;
+}
+#saveButton{
+    height: 10%;
+    width: 10%;
+    border-radius: 20px;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    /* background-color: var(--themeColor); */
+    /* border: none; */
+}
+#saveButton:hover{
+    cursor: pointer;
+    opacity: .5;
+}
+.editForm__item{
+    width: 40%;
+}
+#editForm>div>input{
+    width: 100%;
+    height: 40%;
+    border-radius: 10px;
+}
+#editForm>div>input[type="text"]
+{
+    padding-left: 20px;
+    padding-right: 10px;
+}
