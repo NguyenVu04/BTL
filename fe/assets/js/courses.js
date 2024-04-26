@@ -439,3 +439,39 @@ async function deleteCourseFromDB(idCourse){
     ;
     return data;
 }
+
+
+console.log(get_all_course());
+async function get_all_course() {
+    let url = 'http://localhost:8080/course/all';
+    
+    let data = await
+    fetch(url ,{
+        mode: 'cors',
+        method: 'GET',
+    })
+    .then(res => 
+        {
+    
+        if (!res.ok) {
+            throw Error(res.statusText);
+            // return;
+        }
+            console.log(res);
+            
+            // if successfully created
+            if (res!=null)
+            return res.json();
+        
+        }
+    )
+    .then(data => {
+        console.log(data);
+        // return res.json();
+    })
+    .catch(error => {
+        console.log(error);
+    })
+    ;
+    return data;
+}
