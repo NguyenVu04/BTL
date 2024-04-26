@@ -1,4 +1,3 @@
-/*DONE*/
 var content2 = document.querySelector('.login');
 let count = 0;
 function switchToLogin(classname){
@@ -11,6 +10,10 @@ function switchToLogin(classname){
         document.getElementById('student-submit').addEventListener('click', studentLogin);
     } else if (classname == '.goToTeacher') {
         document.getElementById('teacher-submit').addEventListener('click', teacherLogin);
+    } else if (classname == '.signUpStudent') {
+        //TODO: add sign up here
+    } else if (classname == '.signUpTeacher') {
+        //TODO: add sign up here
     } else {
         window.location.href = 'http://127.0.0.1:3000/';
     }
@@ -36,11 +39,12 @@ function studentLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.headers.get('Authorization');
+            return res.headers;
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data);
+            localStorage.setItem('Authorization', data.get('Authorization'));
+            localStorage.setItem('Role', data.get('role'));
             window.location.href = 'http://127.0.0.1:3000/';
         }
     ).catch (
