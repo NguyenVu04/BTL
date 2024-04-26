@@ -29,9 +29,9 @@
 }
 
 
-#content .content__courses {
+/* #content .content__courses {
     /* height: auto; */
-}
+/*} 
 
 /* Trong file CSS */
 #content .content__courses.grid-wide {
@@ -41,17 +41,17 @@
 }
 
 
-#content .content__courses .courses-wrapper{
+/* #content .content__courses .courses-wrapper{
     /* height: 1000px; */
 
-}
+/* }
 
-#content .content__courses .courses-row {
+#content .content__courses .courses-row { */
     /* display: block; */
     /* height: 1000px; */
     /* background-color: #fff; */
 
-}
+/* } */
 
 #content .content__courses .course-each {
     height: 600px;
