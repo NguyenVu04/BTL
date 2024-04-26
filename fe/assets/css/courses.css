@@ -33,6 +33,7 @@
     /* height: auto; */
 /*} 
 
+<<<<<<< HEAD:fe/assets/css/courses.css
 /* Trong file CSS */
 #content .content__courses.grid-wide {
     display: grid;
@@ -42,6 +43,9 @@
 
 
 /* #content .content__courses .courses-wrapper{
+=======
+#content .content__courses .courses-wrapper{
+>>>>>>> remotes/origin/master:assets/css/courses.css
     /* height: 1000px; */
 
 /* }
