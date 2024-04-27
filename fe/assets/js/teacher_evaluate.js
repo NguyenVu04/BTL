@@ -1,18 +1,3 @@
-<<<<<<< HEAD:fe/assets/js/teacher_evaluate.js
-    // init values to get from database
-    var BT_DD = 0;
-    var BT_DD_NOTE = "NONE";
-    var BT_DD_PERCENT = 0;
-    var BT_LON_PERCENT = 0;
-    var BT_LON =0;
-    var BT_LON_NOTE =0;
-    var KT_GIUA = 0;
-    var KT_GIUA_NOTE = "NONE";
-    var KT_GIUA_PERCENT =  0;
-    var KT_CUOI = 3;
-    var KT_CUOI_NOTE = "NONE";
-    var KT_CUOI_PERCENT = 50;
-=======
 // init values to get from database
 var BT_DD = 0;
 var BT_DD_NOTE = "NONE";
@@ -26,7 +11,6 @@ var KT_GIUA_PERCENT =  0;
 var KT_CUOI = 0;
 var KT_CUOI_NOTE = "NONE";
 var KT_CUOI_PERCENT = 0;
->>>>>>> remotes/origin/master:assets/js/teacher_evaluate.js
 
 localStorage.setItem(BT_DD, 10);
 
@@ -134,27 +118,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 
-<<<<<<< HEAD:fe/assets/js/teacher_evaluate.js
-    // Hàm cập nhật bảng với dữ liệu từ Local Storage
-    function updateTable() {
-        var bt_dd = parseFloat(localStorage.getItem('bt_dd')) || BT_DD;
-        var bt_dd_note = localStorage.getItem('bt_dd_note') || BT_DD_NOTE;
-        var bt_dd_percent = parseFloat(localStorage.getItem('bt_dd_percent')) || BT_DD_PERCENT;
-        var bt_lon = parseFloat(localStorage.getItem('bt_lon')) || BT_LON;
-        var bt_lon_note = localStorage.getItem('bt_lon_note') || BT_LON_NOTE;
-        var bt_lon_percent = parseFloat(localStorage.getItem('bt_lon_percent')) || BT_LON_PERCENT;
-        var kt_giua = parseFloat(localStorage.getItem('kt_giua')) || KT_GIUA;
-        var kt_giua_note = localStorage.getItem('kt_giua_note') || KT_GIUA_NOTE;
-        var kt_giua_percent = parseFloat(localStorage.getItem('kt_giua_percent')) || KT_GIUA_PERCENT;
-        var kt_cuoi = parseFloat(localStorage.getItem('kt_cuoi')) || KT_CUOI;
-        var kt_cuoi_note = localStorage.getItem('kt_cuoi_note') || KT_CUOI_NOTE;
-        var kt_cuoi_percent = parseFloat(localStorage.getItem('kt_cuoi_percent')) || KT_CUOI_PERCENT;
-=======
 // hàm nhận xét
 // Lấy modal
 var evaluateModal = document.getElementById("evaluatemodal");
 var commentInput = document.getElementById("commentInput");
->>>>>>> remotes/origin/master:assets/js/teacher_evaluate.js
 
 // Kiểm tra xem có dữ liệu đã lưu trong localStorage không
 var savedComment = localStorage.getItem("comment");
@@ -218,16 +185,6 @@ window.onclick = function(event) {
 
 
 
-<<<<<<< HEAD:fe/assets/js/teacher_evaluate.js
-    var CURRENTNAME = "VO QUANG DAI VIET";
-    var CURRENTID = "2213954";
-    // Đổi tên sinh viên 
-    // Restore form data when the page is loaded
-    window.addEventListener('DOMContentLoaded', function() {
-        // Lấy thông tin từ local storage
-        var currentName = localStorage.getItem('studentName') || CURRENTNAME;
-        var currentID = localStorage.getItem('studentID') || CURRENTID;
-=======
 
 // Đổi tên sinh viên 
 // Restore form data when the page is loaded
@@ -235,7 +192,6 @@ window.addEventListener('DOMContentLoaded', function() {
     // Lấy thông tin từ local storage
     var currentName = localStorage.getItem('studentName') || "";
     var currentID = localStorage.getItem('studentID') || "";
->>>>>>> remotes/origin/master:assets/js/teacher_evaluate.js
 
     // Hiển thị thông tin từ local storage trên màn hình chính
     document.querySelector('.name-id').innerText = currentName + ' - ' + currentID;
@@ -344,14 +300,3 @@ var headingNodes = document.querySelectorAll('.box .heading-2');
 var headingNodes = document.querySelector
 
 
-
-<<<<<<< HEAD:fe/assets/js/teacher_evaluate.js
-    // Function to close edit modal
-    function closeModalEmail() {
-        var modal = document.getElementById("changeEmail");
-        modal.style.display = "none";
-    }
-
-
-=======
->>>>>>> remotes/origin/master:assets/js/teacher_evaluate.js

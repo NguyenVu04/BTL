@@ -1,5 +1,26 @@
-// document.addEventListener("DOMContentLoaded", addinner());
-console.log(localStorage.detail_course)
+
+let adjustStu = `<div class="row">
+<div class="thutu col-lg-2">
+    <div class="circle">
+        <div class="number">{index}</div>
+    </div>
+</div>
+<div class="sinhvien col-lg-6">
+    <div class="thestu" style="background-color: #ccf5ff ;">
+        <p style=" font-size:20px; text-align: center;"> {nameStudent}</p>
+    </div>
+</div>
+<div class="col-lg-2">
+    <div class="thestu" style="background-color: #f0f0f0; margin-top:10px; border-radius:10px; height:30px; padding-top:5px;">
+        <p style="font-size:18px; text-align:center;"> {idStudent} </p>
+    </div>
+    
+</div>
+<div class="col-lg-2">
+    <button type="button" class="btn btn-info eva" onclick="opennewweb()">Đánh giá</button>
+</div>
+</div>`;
+console.log(localStorage.detail_course);
 getClass();
 function opennewweb() {
     var url = "teacher_evaluate.html";
@@ -62,7 +83,7 @@ function addinner(data){
 
     console.log(listStu);
     for (let i = 0; i < listStu.length; i++) {
-        let temp = adjust_stu;
+        let temp = adjustStu;
         let name = listStu[i].name;
         let id = listStu[i].id;
         temp = temp.replace('{nameStudent}', name);
@@ -83,24 +104,3 @@ function addinner(data){
 
 
 
-let adjust_stu = `<div class="row">
-<div class="thutu col-lg-2">
-    <div class="circle">
-        <div class="number">{index}</div>
-    </div>
-</div>
-<div class="sinhvien col-lg-6">
-    <div class="thestu" style="background-color: #ccf5ff ;">
-        <p style=" font-size:20px; text-align: center;"> {nameStudent}</p>
-    </div>
-</div>
-<div class="col-lg-2">
-    <div class="thestu" style="background-color: #f0f0f0; margin-top:10px; border-radius:10px; height:30px; padding-top:5px;">
-        <p style="font-size:18px; text-align:center;"> {idStudent} </p>
-    </div>
-    
-</div>
-<div class="col-lg-2">
-    <button type="button" class="btn btn-info eva" onclick="opennewweb()">Đánh giá</button>
-</div>
-</div>`;
