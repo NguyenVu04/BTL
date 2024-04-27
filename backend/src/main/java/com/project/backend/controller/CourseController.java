@@ -7,6 +7,7 @@ import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.Course.Category;
 import com.project.backend.Course.Course;
 import com.project.backend.Course.Lesson;
+import com.project.backend.Course.NameIDStu;
 import com.project.backend.QuizMain.Quizz;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Teacher;
@@ -108,7 +109,7 @@ public class CourseController {
             }
             Category category = new Category(null, null);
             List<Lesson> LessonMaterials = new ArrayList<Lesson>();
-            List<String> students = new ArrayList<String>();
+            List<NameIDStu> students = new ArrayList<NameIDStu>();
             List<String> teachers = new ArrayList<String>();
             
             Timestamp now = Timestamp.now();
@@ -145,7 +146,7 @@ public class CourseController {
                 return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
             }
             for (int i = 0 ; i < course.getListStudent().size() ; i++) {
-                if (course.getListStudent().get(i).equals(idStudent)){
+                if (course.getListStudent().get(i).getId().equals(idStudent)){
                     return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).build();
                 }
             }
@@ -154,9 +155,12 @@ public class CourseController {
             Student student = findStudent.toObject(Student.class);
             student.getCourseID().add(course);
             
+            // Name and id of the student
+            NameIDStu nameIDStu = new NameIDStu(student.getName(), student.getId());
+
             // inject that student into the course
             Course temp = repository.getDocumentById(Course.class, idCourse).toObject(Course.class);
-            temp.getListStudent().add(student.getId());
+            temp.getListStudent().add(nameIDStu);
             repository.updateDocumentById(student);
             repository.updateDocumentById(temp);
             return ResponseEntity.ok().body(student);

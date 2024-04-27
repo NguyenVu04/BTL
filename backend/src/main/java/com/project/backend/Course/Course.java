@@ -27,7 +27,7 @@ public class Course extends Model{
     private Integer price;
     private Map<String,String> timeTable;
 
-    private List<String> listStudent;
+    private List<NameIDStu> listStudent;
     private List<String> listTeacher;
     
     // multiple quizzes
@@ -43,7 +43,7 @@ public class Course extends Model{
             List<Lesson> LessonMaterials, 
             Integer price, 
             Map<String,String> timeTable,
-            List<String> listStudent,
+            List<NameIDStu> listStudent,
             List<String> listTeacher,
             List<Quizz> listQuizz
         ) {
