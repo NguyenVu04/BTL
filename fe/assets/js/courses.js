@@ -77,83 +77,7 @@ getCourse().then(
         
         
         
-        function displayNewCourse(course) {
-        // Tạo một phần tử div mới để chứa thông tin của khóa học
-        const courseElement = document.createElement("div");
-        courseElement.classList.add("col", "l-4", "m-6", "c-12"); // Thêm các lớp cho phần tử div mới
-        
-        // Tạo HTML cho thông tin của khóa học và gắn vào phần tử div mới tạo
-            courseElement.innerHTML = `
-            <div class="course-each">
-                <div class="course-img">
-                    <img src="./assets/img/courses-img/3.jpg" alt="" width="100%">
-                </div>
-                <div class="course-desc">
-                    <div class="course-name">
-                        <a href="">${course.name}</a>
-                    </div>
-                    <div class="course-info">
-                        <p>
-                            <i class="fa-regular fa-folder-open"></i> 
-                            Mã môn học: <strong>${course.code}</strong>
-                        </p>
-                        <p>
-                            <i class="fa-regular fa-calendar-days"></i> 
-                            Lớp: <strong>${generateRandomClass()}</strong> <!-- Thay đổi ở đây -->
-                        </p>
-                        <p>
-                            <i class="fa-regular fa-chart-bar"></i> 
-                            Số tín chỉ: <strong>4</strong>
-                        </p>
-                        <p>
-                            <i class="fa-regular fa-user"></i> 
-                            Giảng viên: <strong>Lê Đình Thuận</strong>
-                        </p>
-                    </div>
-                </div>
-                <div class="course-actions">
-                    <div class="course-enter-btn">
-                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
-                    </div>
-                    <div class="course-delete-btn" style="display: none;">
-                        <button class="btn-text delete-course">Xóa khóa học này</button>
-                    </div>
-                </div>
-            </div>
-        `;
-        
-        // Thêm phần tử khóa học mới vào giao diện
-        const gridWide = document.querySelector(".content__courses .grid.wide");
-        const rows = gridWide.querySelectorAll(".row");
-        let targetRow;
-        for (let i = 0; i < rows.length; i++) {
-            const cols = rows[i].querySelectorAll(".col");
-            if (cols.length < 3) {
-                targetRow = rows[i];
-                break;
-            }
-        }
-        if (!targetRow) {
-            targetRow = document.createElement("div");
-            targetRow.classList.add("row");
-            gridWide.appendChild(targetRow);
-        }
-        targetRow.appendChild(courseElement);
-        
-        // Gán sự kiện xóa môn học cho nút "Xóa khóa học" của khóa học mới
-        const deleteBtn = courseElement.querySelector('.delete-course');
-        deleteBtn.addEventListener('click', function() {
-            const courseContainer = deleteBtn.closest('.course-each');
-            courseContainer.remove();
-        
-            // Kiểm tra xem hàng có trống không sau khi xóa
-            const row = courseContainer.parentElement;
-            if (row.childElementCount === 0) {
-                row.remove(); // Nếu hàng trống, loại bỏ nó
-            }
-        });
-        }
-        
+        document.addEventListener('DOMContentLoaded', detailCourse());
         // remove course
         document.addEventListener("DOMContentLoaded", deleteCourse());
 });
@@ -161,6 +85,7 @@ getCourse().then(
 
 async function addinner(data) {
     let tableCourse = document.getElementById("table-course");
+    console.log(tableCourse);
     let innerTable = `<div class="col l-4 m-6 c-12">
                             <div class="course-each">
                                 <div class="course-img">
@@ -191,7 +116,7 @@ async function addinner(data) {
                                 </div>
                                 <div class="course-actions">
                                     <div class="course-enter-btn">
-                                        <a class="btn-text" href="./course-detail.html">Chi tiết khóa học</a>
+                                        <a class="btn-text" href= "course-detail.html">Chi tiết khóa học</a>
                                     </div>
                                     <div class="course-delete-btn" style="display: none;">
                                         <button class="btn-text delete-course" id = "{id-course-del}">Xóa khóa học này</button>
@@ -271,6 +196,7 @@ async function addCourse(idCourse, nameCourse) {
         {
     
         if (!res.ok) {
+            alert('Nội dung không hợp lệ hoặc không tìm thấy khóa học');
             throw Error(res.statusText);
             // return;
         }
@@ -318,6 +244,24 @@ function searchCourse() {
         }
 }
 
+// chi tiết khoa học
+function detailCourse(){
+    // Lấy danh sách tất cả các nút "Chi tiết khóa học"
+    const detail = document.querySelectorAll('.course-enter-btn');
+    detail.forEach(function(search) {
+        search.addEventListener('click', function() {
+            console.log('chi tiet');
+            // Xóa phần tử của khóa học
+            const courseContainer = search.closest('.course-each');
+
+            // get idCourse to seach
+            let idCourse = courseContainer.children[1].children[1].children[0].children[1].textContent
+            console.log(idCourse);
+            localStorage.detail_course = idCourse;
+            console.log(localStorage.detail_course);
+        });
+    });
+}
 // xóa môn học
 function deleteCourse() {
     console.log('xoa mon hoc');
@@ -417,6 +361,7 @@ async function deleteCourseFromDB(idCourse){
         {
     
         if (!res.ok) {
+            alert(res.statusText);
             throw Error(res.statusText);
             // return;
         }
@@ -454,7 +399,7 @@ async function get_all_course() {
         {
     
         if (!res.ok) {
-            throw Error(res.statusText);
+            alert(res.statusText);
             // return;
         }
             console.log(res);

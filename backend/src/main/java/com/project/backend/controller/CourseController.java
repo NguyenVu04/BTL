@@ -58,9 +58,9 @@ public class CourseController {
     
     // get Course by ID
     @GetMapping("/id")
-    public ResponseEntity<Course> get(@RequestParam String id) {
+    public ResponseEntity<Course> get(@RequestParam String idCourse) {
         try{
-            DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class, id);
+            DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class, idCourse);
             
             if (documentSnapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
