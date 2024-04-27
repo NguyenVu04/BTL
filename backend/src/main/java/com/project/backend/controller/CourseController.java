@@ -154,9 +154,8 @@ public class CourseController {
             
             Student student = findStudent.toObject(Student.class);
             student.getCourseID().add(course);
-            
             // Name and id of the student
-            NameIDStu nameIDStu = new NameIDStu(student.getName(), student.getId(), 0.0, 0.0, 0.0);
+            NameIDStu nameIDStu = new NameIDStu(student.getName(), student.getId(), 0.0, 0.0, 0.0, 0.0, student.getEmail());
 
             // inject that student into the course
             Course temp = repository.getDocumentById(Course.class, idCourse).toObject(Course.class);
@@ -357,7 +356,7 @@ public class CourseController {
     
 
     @GetMapping("student/score")
-    public ResponseEntity<NameIDStu> getMethodName(
+    public ResponseEntity<NameIDStu> getScorebyID(
             @RequestParam String idCourse,
             @RequestParam String idStudent
             ) {
@@ -382,4 +381,46 @@ public class CourseController {
 
             }
     
+            @PutMapping("student/score/update")
+            public ResponseEntity<NameIDStu> updateScore(
+            @RequestParam String idCourse,
+            @RequestParam String idStudent,
+            @RequestParam(required = false, defaultValue = "-1") Double midTerm,
+            @RequestParam(required = false, defaultValue = "-1") Double finalExam,
+            @RequestParam(required = false, defaultValue = "-1") Double other,
+            @RequestParam(required = false, defaultValue = "-1") Double assignment
+
+            ) {
+                try{
+                    ResponseEntity<NameIDStu> score = getScorebyID(idCourse, idStudent);
+                    ResponseEntity<Course> course = get(idCourse);
+                    if (score.getStatusCode() != HttpStatus.OK) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                    }
+                    if (midTerm == -1) midTerm = score.getBody().getMidTerm();
+                    if (finalExam == -1) finalExam = score.getBody().getFinalExam();
+                    if (other == -1) other = score.getBody().getOther();
+                    if (assignment == -1) assignment = score.getBody().getAssignment();
+                    
+                    Course thisCourse = course.getBody();
+                    List<NameIDStu> list = thisCourse.getListStudent();
+                    for (int i = 0 ; i < list.size(); i++){
+                        if (list.get(i).getId().equals(idStudent)){
+                            list.get(i).setAssignment(assignment);
+                            list.get(i).setFinalExam(finalExam);
+                            list.get(i).setOther(other);
+                            list.get(i).setMidTerm(midTerm);
+                            repository.updateDocumentById(course.getBody());
+                            return ResponseEntity.ok().body(list.get(i));
+                        }
+                    }
+
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();     
+                } catch (Exception e) {
+                    exceptionLog.log(e);
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+
+            }
 }
+

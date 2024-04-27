@@ -90,8 +90,8 @@
                                 <img src="./assets/img/teacher/student.jpg" alt="Avatar">
                             </div>
                             <div class="ten" id="student-info">
-                                <p class="name-id" onclick="updateName()">Nguyễn Đức Anh - 2211512 </p>
-                                <p class="mail" onclick="updateEmail()">ducanh.nguyen@hcmut.du.vn</p>
+                                <p class="name-id"> </p>
+                                <p class="mail"></p>
                             </div>
                             <div class="change">
                                 <div class="teachicon" onclick="openModal()">
@@ -129,27 +129,27 @@
                                                   <tr>
                                                     <td>Bài tập + Chuyên cần</td>
                                                     <td id="bt-dd"></td>
-                                                    <td id="bt-dd-note"></td>
+                                                    <td id="bt-dd-note">10%</td>
                                                   </tr>
                                                   <tr>
                                                     <td>Bài tập lớn</td>
                                                     <td id="bt-lon"></td>
-                                                    <td id="bt-lon-note"></td>
+                                                    <td id="bt-lon-note">20%</td>
                                                   </tr>
                                                   <tr>
                                                     <td>Kiểm tra Giữa kì</td>
                                                     <td id="kt-giua"></td>
-                                                    <td id="kt-giua-note"></td>
+                                                    <td id="kt-giua-note">20%</td>
                                                   </tr>
                                                   <tr>
                                                     <td>Kiểm tra Cuối kì</td>
                                                     <td id="kt-cuoi"></td>
-                                                    <td id="kt-cuoi-note"></td>
+                                                    <td id="kt-cuoi-note">50%</td>
                                                   </tr>
                                                   <tr>
                                                     <td style="font-weight:bold; color:red;">Tổng kết</td>
                                                     <td id="tong-ket"></td>
-                                                    <td id="tong-ket-note"></td>
+                                                    <td id="tong-ket-note">Điểm thành phần phải &ge; 2</td>
                                                   </tr>
                                                 </tbody>
                                               </table>
@@ -187,31 +187,18 @@
             <div>
                 <label for="bt-dd-input">Bài tập + Điểm danh:</label>
                 <input type="number" id="bt-dd-input" name="bt-dd" min="0" max="10" step="0.1">
-                <input type="number" id="bt-dd-percent-input" name="bt-dd-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-                <input type="text" id="bt-dd-note-input" name="bt-dd-note" placeholder="Lưu ý">
             </div>
             <div>
                 <label for="bt-lon-input">Bài tập lớn:</label>
                 <input type="number" id="bt-lon-input" name="bt-lon" min="0" max="10" step="0.1">
-                <input type="number" id="bt-lon-percent-input" name="bt-lon-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-                <input type="text" id="bt-lon-note-input" name="bt-lon-note" placeholder="Lưu ý">
             </div>
             <div>
                 <label for="kt-giua-input">Kiểm tra Giữa kì:</label>
                 <input type="number" id="kt-giua-input" name="kt-giua" min="0" max="10" step="0.1">
-                <input type="number" id="kt-giua-percent-input" name="kt-giua-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-                <input type="text" id="kt-giua-note-input" name="kt-giua-note" placeholder="Lưu ý">
             </div>
             <div>
                 <label for="kt-cuoi-input">Kiểm tra Cuối kì:</label>
                 <input type="number" id="kt-cuoi-input" name="kt-cuoi" min="0" max="10" step="0.1">
-                <input type="number" id="kt-cuoi-percent-input" name="kt-cuoi-percent" min="0" max="100" step="1" placeholder="Trọng số (%)" style="width:100px;">
-                <input type="text" id="kt-cuoi-note-input" name="kt-cuoi-note" placeholder="Lưu ý">
-            </div>
-            <div>
-                <label for="tong-ket-input">Tổng kết:</label>
-                <input type="number" id="tong-ket-input" name="tong-ket" readonly>
-                <input type="text" id="tong-ket-note-input" name="tong-ket-note" placeholder="Lưu ý">
             </div>
             <input type="submit" value="Cập nhật" id="luu">
         </form>

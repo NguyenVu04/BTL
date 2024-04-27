@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 import com.google.cloud.Timestamp;
 import com.project.backend.QuizMain.Quizz;
 import com.project.backend.firebase.CollectionName;
@@ -29,7 +30,7 @@ public class Course extends Model{
 
     private List<NameIDStu> listStudent;
     private List<String> listTeacher;
-    
+    private String email;
     // multiple quizzes
     private List<Quizz> listQuizz;
     protected Course(){}

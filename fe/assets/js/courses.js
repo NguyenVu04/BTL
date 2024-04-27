@@ -258,7 +258,6 @@ function detailCourse(){
             let idCourse = courseContainer.children[1].children[1].children[0].children[1].textContent
             console.log(idCourse);
             localStorage.idCourse = idCourse;
-            console.log(localStorage.idCourse);
         });
     });
 }
