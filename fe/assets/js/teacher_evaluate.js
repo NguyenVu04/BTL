@@ -1,3 +1,5 @@
+console.log(localStorage.idStudent);
+console.log(localStorage.idCourse);
 // init values to get from database
 var BT_DD = 0;
 var BT_DD_NOTE = "NONE";
@@ -300,3 +302,6 @@ var headingNodes = document.querySelectorAll('.box .heading-2');
 var headingNodes = document.querySelector
 
 
+function addinner(){
+    
+}

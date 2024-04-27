@@ -1,4 +1,4 @@
-console.log(localStorage.detail_course);
+console.log(localStorage.idCourse);
 getCourse();
 document.addEventListener("DOMContentLoaded", function() {
     var button = document.getElementById("content__toggle");
@@ -128,7 +128,7 @@ function addinner(data){
 async function getCourse() {
     let url = 'http://localhost:8080/course/id?';
     let returnVal = await fetch(url + new URLSearchParams({
-        idCourse: localStorage.detail_course
+        idCourse: localStorage.idCourse
     }), {
         method:"GET",
         mode:"cors"

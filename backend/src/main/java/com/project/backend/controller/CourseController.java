@@ -156,7 +156,7 @@ public class CourseController {
             student.getCourseID().add(course);
             
             // Name and id of the student
-            NameIDStu nameIDStu = new NameIDStu(student.getName(), student.getId());
+            NameIDStu nameIDStu = new NameIDStu(student.getName(), student.getId(), 0.0, 0.0, 0.0);
 
             // inject that student into the course
             Course temp = repository.getDocumentById(Course.class, idCourse).toObject(Course.class);
@@ -272,7 +272,7 @@ public class CourseController {
             Course course = snapshot.toObject(Course.class);
             // course.getListStudent()
             for (int i = 0 ; i <  course.getListStudent().size(); i++) {
-                if (course.getListStudent().get(i).equals(idstudent)) {
+                if (course.getListStudent().get(i).getId().equals(idstudent)) {
                     course.getListStudent().remove(i);
                     break;
                 }
@@ -354,5 +354,32 @@ public class CourseController {
         }
 
     }
+    
+
+    @GetMapping("student/score")
+    public ResponseEntity<NameIDStu> getMethodName(
+            @RequestParam String idCourse,
+            @RequestParam String idStudent
+            ) {
+                try{
+                    ResponseEntity<Course> getCourse = this.get(idCourse);
+                    if (getCourse.getStatusCode() != HttpStatus.OK) {
+                        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                    }
+
+                    List<NameIDStu> list = new ArrayList<NameIDStu>();
+                    list = getCourse.getBody().getListStudent();
+                    for (int i = 0 ; i < list.size() ; i++) {
+                        if (list.get(i).getId().equals(idStudent)) {
+                            return ResponseEntity.ok().body(list.get(i));
+                        }
+                    }
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();     
+                } catch (Exception e) {
+                    exceptionLog.log(e);
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                }
+
+            }
     
 }
