@@ -39,7 +39,7 @@ async function getClass() {
 
     let url = 'http://localhost:8080/course/id?';
     let returnVal = await fetch(url + new URLSearchParams({
-        idCourse: localStorage.detail_course
+        idCourse: localStorage.idCourse
     }), {
         method:"GET",
         mode:"cors"

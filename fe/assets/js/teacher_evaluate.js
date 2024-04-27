@@ -1,6 +1,15 @@
 console.log(localStorage.idStudent);
 console.log(localStorage.idCourse);
 
+// Khi trang được load, kiểm tra xem có dữ liệu trong Local Storage không và cập nhật bảng
+document.addEventListener("DOMContentLoaded", function() {
+    getScore().then(data => {
+        updateTable(data);
+    } );
+
+
+});
+
 // hàm đổi điểm số
 
 // Function to open modal
@@ -79,6 +88,8 @@ function updateTable(data) {
     document.getElementById("kt-cuoi").textContent = kt_cuoi;
     document.getElementById("tong-ket").textContent = tong_ket.toFixed(2);
     
+    let savedComment = data.message;
+    localStorage.setItem("comment", savedComment);
         // Lấy thông tin sinh viên
         var currentName = data.name;
         var currentID = data.id;
@@ -88,14 +99,6 @@ function updateTable(data) {
         document.querySelector('.mail').innerText = currentEmail;
 }
 
-// Khi trang được load, kiểm tra xem có dữ liệu trong Local Storage không và cập nhật bảng
-document.addEventListener("DOMContentLoaded", function() {
-    getScore().then(data => {
-        updateTable(data);
-    } );
-
-
-});
 
 
 
@@ -131,11 +134,31 @@ function closeEvaluateModal() {
     evaluateModal.style.display = "none";
 }
 
-function confirmEvaluation() {
+async function confirmEvaluation() {
     var comment = commentInput.value;
-    // Lưu comment vào localStorage
-    localStorage.setItem("comment", comment);
 
+    let url = 'http://localhost:8080/course/student/score/update?' 
+    + new URLSearchParams({
+        idStudent: localStorage.idStudent,
+        idCourse: localStorage.idCourse,
+        midTerm: localStorage.getItem('kt_giua'),
+        finalExam: localStorage.getItem('kt_cuoi'),
+        other: localStorage.getItem('bt_dd'),
+        assignment: localStorage.getItem('bt_lon'),
+        message: comment
+    }) ;
+    
+    let fetchs = await fetch(url, {
+        method: 'PUT',
+        mode: 'cors'
+    }).then(result => {
+        if (!result.ok) throw Error(result.statusText);
+        return result.json();
+    }).then(res => {
+        return res;
+    })
+
+    // Lưu comment vào localStorage
     var emptyComments = document.querySelectorAll(".nhanxet p");
     emptyComments.forEach(function(pElement) {
         pElement.remove();
