@@ -1,6 +1,7 @@
 package com.project.backend.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
@@ -12,11 +13,13 @@ import com.project.backend.QuizMain.Quizz;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
+import com.project.backend.repository.BackendStorage;
 import com.project.backend.repository.FirestoreRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -35,7 +38,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 public class CourseController {
     @Autowired
     private FirestoreRepository repository;
-
+    @Autowired
+    private BackendStorage storage;
     @Autowired
     private ExceptionLog exceptionLog;
     // get all Courses 
@@ -100,8 +104,8 @@ public class CourseController {
     public ResponseEntity<Course> createCourse(
                                 @RequestParam String name,
                                 @RequestParam(required = false, defaultValue = "4" ) Integer price,
-                                @RequestParam String id
-                                ) 
+                                @RequestParam String id,
+                                @RequestParam(name = "files", required = false) MultipartFile[] files) 
     {
         try{
             if (repository.getDocumentById(Course.class, id) != null) {
@@ -111,7 +115,11 @@ public class CourseController {
             List<Lesson> LessonMaterials = new ArrayList<Lesson>();
             List<NameIDStu> students = new ArrayList<NameIDStu>();
             List<String> teachers = new ArrayList<String>();
-            
+            if (files != null) {
+                for (MultipartFile file : files) {
+                    storage.saveBlob(file, List.of(id));
+                }
+            }
             Timestamp now = Timestamp.now();
             Timestamp later = Timestamp.ofTimeMicroseconds((now.getSeconds()+10713600)*1000000);
             List<Quizz> listQuizz = new ArrayList<Quizz>();

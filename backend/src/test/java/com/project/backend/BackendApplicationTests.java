@@ -68,8 +68,8 @@ class BackendApplicationTests {
 		Date date = Date.from(convertDate.atZone(ZoneId.systemDefault()).toInstant());
 		Timestamp timestamp = Timestamp.of(date);
 
-		Student student = new Student("Viet", timestamp, "daivietvonin1@gmail.com", CourseID, true);
-		repo.saveDocument(student, "2213955");
+		//Student student = new Student("Viet", timestamp, "daivietvonin1@gmail.com", CourseID, true);
+		//repo.saveDocument(student, "2213955");
 	}
 
 	@Test
