@@ -155,7 +155,7 @@ public class CourseController {
             Student student = findStudent.toObject(Student.class);
             student.getCourseID().add(course);
             // Name and id of the student
-            NameIDStu nameIDStu = new NameIDStu(student.getName(), student.getId(), 0.0, 0.0, 0.0, 0.0, student.getEmail());
+            NameIDStu nameIDStu = new NameIDStu(student.getName(), student.getId(), 0.0, 0.0, 0.0, 0.0, student.getEmail(), "");
 
             // inject that student into the course
             Course temp = repository.getDocumentById(Course.class, idCourse).toObject(Course.class);
@@ -388,7 +388,8 @@ public class CourseController {
             @RequestParam(required = false, defaultValue = "-1") Double midTerm,
             @RequestParam(required = false, defaultValue = "-1") Double finalExam,
             @RequestParam(required = false, defaultValue = "-1") Double other,
-            @RequestParam(required = false, defaultValue = "-1") Double assignment
+            @RequestParam(required = false, defaultValue = "-1") Double assignment,
+            @RequestParam(required = false, defaultValue = "NULL") String message
 
             ) {
                 try{
@@ -401,6 +402,7 @@ public class CourseController {
                     if (finalExam == -1) finalExam = score.getBody().getFinalExam();
                     if (other == -1) other = score.getBody().getOther();
                     if (assignment == -1) assignment = score.getBody().getAssignment();
+                    if (message == "NULL") message = score.getBody().getMessage();
                     
                     Course thisCourse = course.getBody();
                     List<NameIDStu> list = thisCourse.getListStudent();
@@ -410,6 +412,7 @@ public class CourseController {
                             list.get(i).setFinalExam(finalExam);
                             list.get(i).setOther(other);
                             list.get(i).setMidTerm(midTerm);
+                            list.get(i).setMessage(message);
                             repository.updateDocumentById(course.getBody());
                             return ResponseEntity.ok().body(list.get(i));
                         }

@@ -14,9 +14,10 @@ public class NameIDStu {
     Double finalExam;
     Double assignment;
     Double other;
+    String message;
     protected NameIDStu(){}
 
-    public NameIDStu(String name, String id, Double midTerm, Double finalExam, Double assignment, Double other, String email) {
+    public NameIDStu(String name, String id, Double midTerm, Double finalExam, Double assignment, Double other, String email, String message) {
         this.name = name;
         this.id = id;
         this.midTerm = midTerm;
@@ -24,5 +25,6 @@ public class NameIDStu {
         this.assignment = assignment;
         this.other = other;
         this.email = email;
+        this.message = message;
     }
 }
