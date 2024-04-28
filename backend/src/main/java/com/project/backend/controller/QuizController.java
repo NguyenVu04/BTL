@@ -41,20 +41,38 @@ public class QuizController {
     
     
     @GetMapping("/get-score/id")
-    public ResponseEntity<QuizzDetail> getScore(@RequestParam String id, @RequestParam String idCourse, @RequestParam Integer number) {
+    public ResponseEntity<QuizzDetail> getScore(@RequestParam String idStudent, @RequestParam String idCourse, @RequestParam Integer number) {
         try{
             DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class, idCourse);
-            if (documentSnapshot == null) {
+            DocumentSnapshot documentSnapshot2 = repository.getDocumentById(Student.class, idStudent);
+            if (documentSnapshot == null || documentSnapshot2 == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
             Course course = documentSnapshot.toObject(Course.class);
+
+            Student student = documentSnapshot2.toObject(Student.class);
+
+            boolean exist = false;
+            for (int i = 0 ; i < student.getCourseID().size() ; i++ ) {
+                if ( student.getCourseID().get(i).getId().equals(idCourse) )
+                    exist = true;
+            }
+            if (exist == false) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
             Map<String, QuizzDetail> score = course.getListQuizz().get(number).getInfo();
-            QuizzDetail quizzDetail = score.get(id);
+            QuizzDetail quizzDetail = score.get(idStudent);
+            if (quizzDetail == null) {
+                // if student didn't complete the quiz
+                QuizzDetail zeroScore = new QuizzDetail(0.0, null, false);
+                return ResponseEntity.ok().body(zeroScore);
+            }
             return ResponseEntity.ok().body(quizzDetail);
             
         } catch (Exception e) {
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
     
@@ -113,15 +131,15 @@ public class QuizController {
 
             boolean exist = false;
             for (int i = 0 ; i < student.getCourseID().size() ; i++ ) {
-                if ( student.getCourseID().get(i).equals(idCourse) )
+                if ( student.getCourseID().get(i).getId().equals(idCourse) )
                     exist = true;
             }
             if (exist == false) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
             }
             Course course = documentSnapshot.toObject(Course.class);
             if (course.getListQuizz().size() < number + 1) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
             Map<String, QuizzDetail> detail = course.getListQuizz().get(number).getInfo();
 
