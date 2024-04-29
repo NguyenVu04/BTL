@@ -1,4 +1,14 @@
+let idStudent = '2213955'
 
+// let asd = document.getElementById('asd');
+// console.log(asd.innerHTML);
+document.addEventListener('DOMContentLoaded', function() {
+    
+    getInfo().then(data => {
+        console.log(123);
+        addinner(data);
+    });
+});
 var content1 = document.querySelector('.detail-info');
 var list_i=document.querySelectorAll('.option_detail h4 i');
 var list_option=document.querySelectorAll('.option_detail');
@@ -71,5 +81,88 @@ function saveChanges() {
     document.getElementById("birthPlace").innerText = birthPlace;
     document.getElementById("major").innerText = major;
     
+
     modal.style.display = "none"; // Đóng modal sau khi lưu
+}
+
+
+async function updateInfo() {
+    let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
+        id: idStudent,
+        name: nameStudent,
+        year: year,
+        month: month,
+        date: date,
+        gender: gender,
+        country: country,
+        personalId: personalId,
+        phoneNumber: phoneNumber,
+        email: email,
+        address: address,
+        major : major
+    });
+
+    let returnVal = await fetch(url, {
+        method: 'PUT',
+        mode: 'cors'
+    }).then(respone => {
+        if (!respone.ok) throw Error(respone.statusText);
+        return respone.json();
+    }).then(data => {
+        return data.json();
+    });
+
+    return returnVal;
+}
+
+
+async function getInfo() {
+    let url = 'http://localhost:8080/student/id?' + new URLSearchParams({
+        id: idStudent
+    });
+
+    let returnVal = await fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+    }).then(respone => {
+        if (!respone.ok) throw Error(respone.statusText);
+        return respone.json();
+    }).then(data => {
+        return data;
+    });
+
+    return returnVal;
+}
+function addinner(data) {
+
+    let idStudentHTML = document.getElementById('idStudent');
+    idStudentHTML.innerHTML = data.id;
+    
+    let personalId = document.getElementById('personalId');
+    personalId.innerHTML = data.personalId;
+
+    let nameHTML = document.getElementById('name');
+    nameHTML.innerHTML = data.name;
+
+    let phoneNumberHTML = document.getElementById('phoneNumber');
+    phoneNumberHTML.innerHTML = data.phoneNumber;
+
+    let dobHTML = document.getElementById('dob');
+    var d = new Date(data.dob.seconds*1000);
+    dobHTML.innerHTML = d;
+
+    let emailHTML = document.getElementById('email');
+    emailHTML.innerHTML = data.email;
+    
+    let genderHTML = document.getElementById('gender');
+    genderHTML.innerHTML = data.gender;
+    
+    let addressHTML = document.getElementById('address');
+    addressHTML.innerHTML = data.address;
+
+    let country = document.getElementById('country');
+    country.innerHTML = data.country;
+
+    let majorHTML = document.getElementById('major');
+    majorHTML.innerHTML = data.major;
 }

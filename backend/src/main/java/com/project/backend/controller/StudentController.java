@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.google.cloud.Timestamp;
 import com.project.backend.Student.Student;
+import com.project.backend.Student.gender;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
 
@@ -85,7 +86,7 @@ public class StudentController {
             List<Course> CourseID = new ArrayList<Course>();
             
             Timestamp dob = convertTimestamp(year, month, day, hour, minute, second);
-            Student student = new Student(name, dob, email, CourseID, false);
+            Student student = new Student(name, dob, email, CourseID, false, gender.other, "", "", "", "", "");
             repository.saveDocument(student, id);
             return ResponseEntity.ok().body(student);
         } catch (Exception e) {
@@ -96,10 +97,20 @@ public class StudentController {
     }
 
     @PutMapping("/adjustion/id")
-    public ResponseEntity<Map<String, Object>> UpdateStudentbyField(
+    public ResponseEntity<Student> UpdateStudent(
         @RequestParam String id,
-        @RequestParam String field, 
-        @RequestParam Object value
+        @RequestParam(required = false) String name,
+        @RequestParam(required = false, defaultValue = "01") Integer date,
+        @RequestParam(required = false, defaultValue = "01") Integer month,
+        @RequestParam(required = false, defaultValue = "2004") Integer year,
+        @RequestParam(required = false) gender gender,
+        @RequestParam(required = false) String country,
+        @RequestParam(required = false) String personalId,
+        @RequestParam(required = false) String phoneNumber,
+        @RequestParam(required = false) String email,
+        @RequestParam(required = false) String address,
+        @RequestParam(required = false) String major
+
         
         ) {
         //TODO: process PUT request
@@ -109,12 +120,29 @@ public class StudentController {
             if (snapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-    
-            Map<String, Object> obj = snapshot.getData();
-            obj.put(field, value);
-    
-            repository.saveDocument(Student.class, obj);
-            return ResponseEntity.ok().body(obj);
+            Student student = snapshot.toObject(Student.class);
+            if (name == null || name == "") name = student.getName();
+            if (gender == null ) gender = student.getGender();
+            if (country == null || country == "") country = student.getCountry();
+            if (personalId == null || personalId == "") personalId = student.getPersonalId();
+            if (phoneNumber == null || phoneNumber == "") phoneNumber = student.getPhoneNumber();
+            if (email == null || email == "") email = student.getEmail();
+            if (address == null || address == "") address = student.getAddress();
+            if (major == null || major == "") major = student.getMajor();
+
+            student.setName(name);
+            student.setDob(convertTimestamp(year, month, date, 0, 0, 0));
+            student.setGender(gender);
+            student.setCountry(country);
+            student.setPersonalId(personalId);
+            student.setPhoneNumber(phoneNumber);
+            student.setEmail(email);
+            student.setAddress(address);
+            student.setMajor(major);
+            repository.updateDocumentById(student);
+
+            return ResponseEntity.ok().body(student);
+
         } catch (Exception e) {
             exceptionLog.log(e);
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
