@@ -7,7 +7,6 @@ import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.Course.Category;
 import com.project.backend.Course.Course;
-import com.project.backend.Course.Lesson;
 import com.project.backend.Course.NameIDStu;
 import com.project.backend.QuizMain.Quizz;
 import com.project.backend.Student.Student;
@@ -19,7 +18,6 @@ import com.project.backend.repository.FirestoreRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.StringJoiner;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,7 +30,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@CrossOrigin(origins = "http://127.0.0.1:5502")
 @RestController
 @RequestMapping("/course")
 public class CourseController {
@@ -104,26 +101,20 @@ public class CourseController {
     public ResponseEntity<Course> createCourse(
                                 @RequestParam String name,
                                 @RequestParam(required = false, defaultValue = "4" ) Integer price,
-                                @RequestParam String id,
-                                @RequestParam(name = "files", required = false) MultipartFile[] files) 
+                                @RequestParam String id) 
     {
         try{
             if (repository.getDocumentById(Course.class, id) != null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
             Category category = new Category(null, null);
-            List<Lesson> LessonMaterials = new ArrayList<Lesson>();
             List<NameIDStu> students = new ArrayList<NameIDStu>();
             List<String> teachers = new ArrayList<String>();
-            if (files != null) {
-                for (MultipartFile file : files) {
-                    storage.saveBlob(file, List.of(id));
-                }
-            }
+            
             Timestamp now = Timestamp.now();
             Timestamp later = Timestamp.ofTimeMicroseconds((now.getSeconds()+10713600)*1000000);
             List<Quizz> listQuizz = new ArrayList<Quizz>();
-            Course course = new Course(id, name, category, now, later, LessonMaterials, price, null, students, teachers, listQuizz);
+            Course course = new Course(id, name, category, now, later, price, null, students, teachers, listQuizz);
             repository.saveDocument(course, id);
             return ResponseEntity.ok(course);
 

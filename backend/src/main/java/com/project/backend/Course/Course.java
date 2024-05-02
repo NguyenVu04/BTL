@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import com.fasterxml.jackson.databind.deser.std.StringArrayDeserializer;
 import com.google.cloud.Timestamp;
 import com.project.backend.QuizMain.Quizz;
 import com.project.backend.firebase.CollectionName;
@@ -24,7 +23,6 @@ public class Course extends Model{
     private Category category;
     private Timestamp startDate;;
     private Timestamp endDate;;
-    private List<Lesson> LessonMaterials;
     private Integer price;
     private Map<String,String> timeTable;
 
@@ -41,7 +39,6 @@ public class Course extends Model{
             Category category, 
             Timestamp startDate, 
             Timestamp endDate, 
-            List<Lesson> LessonMaterials, 
             Integer price, 
             Map<String,String> timeTable,
             List<NameIDStu> listStudent,
@@ -53,7 +50,6 @@ public class Course extends Model{
         this.category = category;
         this.endDate = endDate;
         this.startDate = startDate;
-        this.LessonMaterials = LessonMaterials;
         this.price = price;
         this.timeTable = timeTable;
         this.listStudent = listStudent;
