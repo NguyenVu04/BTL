@@ -390,8 +390,7 @@ public class CourseController {
             @RequestParam(required = false, defaultValue = "-1") Double midTerm,
             @RequestParam(required = false, defaultValue = "-1") Double finalExam,
             @RequestParam(required = false, defaultValue = "-1") Double other,
-            @RequestParam(required = false, defaultValue = "-1") Double assignment,
-            @RequestParam(required = false, defaultValue = "NULL") String message
+            @RequestParam(required = false, defaultValue = "-1") Double assignment
 
             ) {
                 try{
@@ -404,7 +403,6 @@ public class CourseController {
                     if (finalExam == -1) finalExam = score.getBody().getFinalExam();
                     if (other == -1) other = score.getBody().getOther();
                     if (assignment == -1) assignment = score.getBody().getAssignment();
-                    if (message == "NULL") message = score.getBody().getMessage();
                     
                     Course thisCourse = course.getBody();
                     List<NameIDStu> list = thisCourse.getListStudent();
