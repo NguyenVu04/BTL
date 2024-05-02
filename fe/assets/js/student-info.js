@@ -1,4 +1,21 @@
+let idStudent = '2213954'
 
+// let asd = document.getElementById('asd');
+// console.log(asd.innerHTML);
+document.addEventListener('DOMContentLoaded', function() {
+    
+    getInfo().then(data => {
+        addinner(data);
+
+    });
+    getCourse().then(data => {
+        for (let i = 0 ; i < data.length; i++) {
+            const val = data[i];
+            // console.log(val.id, val.name);
+            getScore(val);
+        }
+    });
+});
 var content1 = document.querySelector('.detail-info');
 var list_i=document.querySelectorAll('.option_detail h4 i');
 var list_option=document.querySelectorAll('.option_detail');
@@ -71,5 +88,178 @@ function saveChanges() {
     document.getElementById("birthPlace").innerText = birthPlace;
     document.getElementById("major").innerText = major;
     
+
     modal.style.display = "none"; // Đóng modal sau khi lưu
+}
+
+
+async function updateInfo() {
+    let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
+        id: idStudent,
+        name: nameStudent,
+        year: year,
+        month: month,
+        date: date,
+        gender: gender,
+        country: country,
+        personalId: personalId,
+        phoneNumber: phoneNumber,
+        email: email,
+        address: address,
+        major : major
+    });
+
+    let returnVal = await fetch(url, {
+        method: 'PUT',
+        mode: 'cors'
+    }).then(respone => {
+        if (!respone.ok) throw Error(respone.statusText);
+        return respone.json();
+    }).then(data => {
+        return data.json();
+    });
+
+    return returnVal;
+}
+
+async function getCourse() {
+    let url = 'http://localhost:8080/course/student/id?';
+    let returnVal = await
+    fetch(url 
+            + new URLSearchParams({
+            idStudent: idStudent
+            }) 
+    ,{
+        mode: 'cors',
+        method: 'GET'
+    })
+    .then(res => {
+        if (!res.ok){
+            throw Error(res.statusText);
+        }
+        return res.json();}
+    );
+    
+    for (let i = 0 ; i < returnVal.length; i++) {
+        const val = returnVal[i].id;
+        console.log(val);
+    }
+    // document.addEventListener('DOMContentLoaded', addinner(returnVal));
+    return returnVal;
+
+}
+async function getInfo() {
+    let url = 'http://localhost:8080/student/id?' + new URLSearchParams({
+        id: idStudent
+    });
+
+    let returnVal = await fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+    }).then(respone => {
+        if (!respone.ok) throw Error(respone.statusText);
+        return respone.json();
+    }).then(data => {
+        return data;
+    });
+
+    return returnVal;
+}
+async function getScore(course) {
+    let url = 'http://localhost:8080/course/student/score?';
+    url = url + new URLSearchParams({
+        idCourse: course.id,
+        idStudent: idStudent
+    });
+    let returnVal = await fetch(url, {
+        method: 'GET',
+        mode: 'cors'
+    }).then(data => {
+        if (!data.ok){
+            throw Error(data.statusText);
+        }
+
+        return data.json();
+    });
+    // console.log(course.id, course.name, returnVal);
+    add_result(course.id, course.name, returnVal);
+    return returnVal;
+}
+function add_result(idCourse, nameCourse, data) {
+    let result = document.getElementById('result-info');
+
+    let adder = `<div class="info-body-content">
+                    <div>
+                        <p>{nameCourse}</p>
+                    </div>
+                    <div>
+                        {other}
+                    </div>
+                    <div>{assignment}</div>
+                    <div>{midterm}</div>
+                    <div>{finalexam}</div>
+                    <div>{total}</div>
+                </div>`;
+    adder = adder.replace('{nameCourse}', nameCourse);
+    adder = adder.replace('{other}', data.other);
+    adder = adder.replace('{assignment}', data.assignment);
+    adder = adder.replace('{midterm}', data.midTerm);
+    adder = adder.replace('{finalexam}', data.finalExam);
+
+    let total = (data.other*10 + data.assignment*20 + data.midTerm*20 + data.finalExam*50)/100;
+    adder = adder.replace('{total}', total.toString());
+    result.innerHTML += adder;
+}
+function addinner(data) {
+
+    let idStudentHTML = document.getElementById('idStudent');
+    let idStudentHTML1 = document.getElementById('idStudent1');
+    idStudentHTML.innerHTML = data.id;
+    idStudentHTML1.innerHTML = data.id;
+    
+    let personalId = document.getElementById('personalId');
+    let personalId1 = document.getElementById('personalId1');
+    personalId.innerHTML = data.personalId;
+    personalId1.innerHTML = data.personalId;
+
+    let nameHTML = document.getElementById('name');
+    let nameHTML1 = document.getElementById('name1');
+    nameHTML.innerHTML = data.name;
+    nameHTML1.innerHTML = data.name;
+
+    let phoneNumberHTML = document.getElementById('phoneNumber');
+    let phoneNumberHTML1 = document.getElementById('phoneNumber1');
+    phoneNumberHTML.innerHTML = data.phoneNumber;
+    phoneNumberHTML1.innerHTML = data.phoneNumber;
+
+    let dobHTML = document.getElementById('dob');
+    let dobHTML1 = document.getElementById('dob1');
+    var d = new Date(data.dob.seconds*1000);
+    dobHTML.innerHTML = d;
+    dobHTML1.innerHTML = d;
+
+    let emailHTML = document.getElementById('email');
+    let emailHTML1 = document.getElementById('email1');
+    emailHTML.innerHTML = data.email;
+    emailHTML1.innerHTML = data.email;
+    
+    let genderHTML = document.getElementById('gender');
+    let genderHTML1 = document.getElementById('gender1');
+    genderHTML.innerHTML = data.gender;
+    genderHTML1.innerHTML = data.gender;
+    
+    let addressHTML = document.getElementById('address');
+    let addressHTML1 = document.getElementById('address1');
+    addressHTML.innerHTML = data.address;
+    addressHTML1.innerHTML = data.address;
+
+    let country = document.getElementById('country');
+    let country1 = document.getElementById('country1');
+    country.innerHTML = data.country;
+    country1.innerHTML = data.country;
+
+    let majorHTML = document.getElementById('major');
+    let majorHTML1 = document.getElementById('major1');
+    majorHTML.innerHTML = data.major;
+    majorHTML1.innerHTML = data.major;
 }

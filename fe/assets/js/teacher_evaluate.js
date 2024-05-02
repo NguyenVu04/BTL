@@ -97,6 +97,27 @@ function updateTable(data) {
 
         document.querySelector('.name-id').innerText = currentName + ' - ' + currentID;
         document.querySelector('.mail').innerText = currentEmail;
+
+
+         // Kiểm tra xem có dữ liệu đã lưu trong localStorage không
+    // var savedComment = localStorage.getItem("comment");
+    var savedComment = data.message;
+    console.log(savedComment);
+    if (savedComment && savedComment != "NULL") {
+        // Nếu có dữ liệu đã lưu, xóa đi hai thẻ <p> trống trong phần nhận xét
+        var emptyComments = document.querySelectorAll(".nhanxet p");
+        emptyComments.forEach(function(pElement) {
+            pElement.remove();
+        });
+    
+        // Gán giá trị của savedComment vào phần hiển thị trên màn hình
+        var newCommentElements = document.getElementsByClassName("nhanxet");
+        for (var i = 0; i < newCommentElements.length; i++) {
+            var commentElement = document.createElement("span");
+            commentElement.textContent = savedComment;
+            newCommentElements[i].appendChild(commentElement);
+        }
+    }
 }
 
 
@@ -108,23 +129,7 @@ function updateTable(data) {
 var evaluateModal = document.getElementById("evaluatemodal");
 var commentInput = document.getElementById("commentInput");
 
-// Kiểm tra xem có dữ liệu đã lưu trong localStorage không
-var savedComment = localStorage.getItem("comment");
-if (savedComment) {
-    // Nếu có dữ liệu đã lưu, xóa đi hai thẻ <p> trống trong phần nhận xét
-    var emptyComments = document.querySelectorAll(".nhanxet p");
-    emptyComments.forEach(function(pElement) {
-        pElement.remove();
-    });
-
-    // Gán giá trị của savedComment vào phần hiển thị trên màn hình
-    var newCommentElements = document.getElementsByClassName("nhanxet");
-    for (var i = 0; i < newCommentElements.length; i++) {
-        var commentElement = document.createElement("span");
-        commentElement.textContent = savedComment;
-        newCommentElements[i].appendChild(commentElement);
-    }
-}
+   
 
 function showComment() {
     evaluateModal.style.display = "block";
@@ -159,6 +164,8 @@ async function confirmEvaluation() {
     })
 
     // Lưu comment vào localStorage
+    localStorage.setItem("comment", comment);
+
     var emptyComments = document.querySelectorAll(".nhanxet p");
     emptyComments.forEach(function(pElement) {
         pElement.remove();

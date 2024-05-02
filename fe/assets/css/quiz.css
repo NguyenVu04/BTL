@@ -100,6 +100,7 @@ input[type="radio"] {
     border: 1px solid #ccc;
 }
 
+.back-to-detail,
 #content .test-submit {
     background-color: #0c89dc;
     padding: 16px;
@@ -113,9 +114,19 @@ input[type="radio"] {
     z-index: 0.5;
     color: #fff;
     font-weight: 600;
-    
 }
 
+.back-to-detail {
+    margin-top: 16px;
+    padding: 10px;
+}
+
+.back-to-detail a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.back-to-detail:hover,
 #content .test-submit:hover {
     background-image: linear-gradient(-90deg, #00ADEF, #001C66);
     cursor: pointer;

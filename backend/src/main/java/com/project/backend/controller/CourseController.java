@@ -1,17 +1,18 @@
 package com.project.backend.controller;
 
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
 import com.project.backend.Course.Category;
 import com.project.backend.Course.Course;
-import com.project.backend.Course.Lesson;
 import com.project.backend.Course.NameIDStu;
 import com.project.backend.QuizMain.Quizz;
 import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
+import com.project.backend.repository.BackendStorage;
 import com.project.backend.repository.FirestoreRepository;
 
 import java.util.ArrayList;
@@ -29,13 +30,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
-@CrossOrigin(origins = "http://127.0.0.1:5502")
 @RestController
 @RequestMapping("/course")
 public class CourseController {
     @Autowired
     private FirestoreRepository repository;
-
+    @Autowired
+    private BackendStorage storage;
     @Autowired
     private ExceptionLog exceptionLog;
     // get all Courses 
@@ -100,22 +101,20 @@ public class CourseController {
     public ResponseEntity<Course> createCourse(
                                 @RequestParam String name,
                                 @RequestParam(required = false, defaultValue = "4" ) Integer price,
-                                @RequestParam String id
-                                ) 
+                                @RequestParam String id) 
     {
         try{
             if (repository.getDocumentById(Course.class, id) != null) {
                 return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
             Category category = new Category(null, null);
-            List<Lesson> LessonMaterials = new ArrayList<Lesson>();
             List<NameIDStu> students = new ArrayList<NameIDStu>();
             List<String> teachers = new ArrayList<String>();
             
             Timestamp now = Timestamp.now();
             Timestamp later = Timestamp.ofTimeMicroseconds((now.getSeconds()+10713600)*1000000);
             List<Quizz> listQuizz = new ArrayList<Quizz>();
-            Course course = new Course(id, name, category, now, later, LessonMaterials, price, null, students, teachers, listQuizz);
+            Course course = new Course(id, name, category, now, later, price, null, students, teachers, listQuizz);
             repository.saveDocument(course, id);
             return ResponseEntity.ok(course);
 
@@ -388,8 +387,7 @@ public class CourseController {
             @RequestParam(required = false, defaultValue = "-1") Double midTerm,
             @RequestParam(required = false, defaultValue = "-1") Double finalExam,
             @RequestParam(required = false, defaultValue = "-1") Double other,
-            @RequestParam(required = false, defaultValue = "-1") Double assignment,
-            @RequestParam(required = false, defaultValue = "NULL") String message 
+            @RequestParam(required = false, defaultValue = "-1") Double assignment
 
             ) {
                 try{
@@ -402,7 +400,7 @@ public class CourseController {
                     if (finalExam == -1) finalExam = score.getBody().getFinalExam();
                     if (other == -1) other = score.getBody().getOther();
                     if (assignment == -1) assignment = score.getBody().getAssignment();
-                    if (message.equals("NULL")) message = score.getBody().getMessage();
+                    
                     Course thisCourse = course.getBody();
                     List<NameIDStu> list = thisCourse.getListStudent();
                     for (int i = 0 ; i < list.size(); i++){

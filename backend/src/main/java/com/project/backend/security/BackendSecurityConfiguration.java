@@ -128,7 +128,7 @@ public class BackendSecurityConfiguration {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://127.0.0.1:3000", "http://127.0.0.1:5500"));
+        configuration.setAllowedOrigins(List.of("*"));
         configuration.setExposedHeaders(List.of("Authorization"));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH"));
         configuration.setAllowedHeaders(List.of("*"));

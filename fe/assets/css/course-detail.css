@@ -158,6 +158,10 @@ li {
     transition: background-color 0.3s; /* Hiệu ứng khi hover */
 }
 
+input#file-upload-button {
+    background-color: #f3d3f3;
+}
+
 #content .section__list .fileUpload:hover {
     background-color: #0056b3; /* Màu nền khi hover */
 }
@@ -169,4 +173,23 @@ li {
 #content .section__list .delete-button {
     position: absolute;
     right: 10px;
+}
+
+#content .section__list .quiz-name {
+    padding: 24px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.section__list .quiz-name a {
+    color: #002792;
+    padding: 24px 12px;
+}
+
+#content .section__list .quiz-name:hover a{
+    opacity: 0.5;
+    cursor: pointer;
 }

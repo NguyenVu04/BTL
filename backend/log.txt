@@ -36,3 +36,9 @@ java.lang.RuntimeException: Could not deserialize object. Can't convert object o
 2024-04-27T17:53:25.251352: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'listStudent.[0]')
 2024-04-27T17:54:52.474139900: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
 2024-04-27T17:56:04.315322200: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
+2024-04-28T21:50:52.194676600: java.lang.IndexOutOfBoundsException: Index 1 out of bounds for length 1
+2024-04-28T21:51:29.522130700: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+2024-04-28T21:58:22.991318700: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
+2024-04-28T22:09:27.856044300: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
+2024-04-28T22:11:22.422379800: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
+2024-04-30T01:21:03.861561200: java.util.concurrent.ExecutionException: com.google.api.gax.rpc.UnavailableException: io.grpc.StatusRuntimeException: UNAVAILABLE: Credentials failed to obtain metadata
