@@ -25,7 +25,7 @@ public class Course extends Model{
     private Timestamp endDate;;
     private Integer price;
     private Map<String,String> timeTable;
-
+    
     private List<NameIDStu> listStudent;
     private List<String> listTeacher;
     private String email;

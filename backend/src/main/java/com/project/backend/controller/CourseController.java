@@ -27,8 +27,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/course")
@@ -424,5 +427,16 @@ public class CourseController {
                 }
 
             }
+    @PostMapping("/{id}/material")
+    public ResponseEntity<String> postMethodName(
+        @RequestParam(name = "file", required = true) MultipartFile file,
+        @PathVariable(name = "id", required = true) String courseId) {
+        if (storage.saveBlob(file, List.of(courseId)) == false)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .build();
+        return ResponseEntity.ok()
+                             .build();
+    }
+    
 }
 
