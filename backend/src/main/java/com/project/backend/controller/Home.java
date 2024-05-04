@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.project.backend.repository.BackendStorage;
+import com.project.backend.security.BackendDetailsService;
 
 import java.util.Arrays;
 
@@ -20,7 +21,7 @@ public class Home {
     private BackendStorage storage;
     @GetMapping("/")
     public String home() {
-        return "Hello";
+        return BackendDetailsService.getCurrentUserId();
     }
 
     /**

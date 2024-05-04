@@ -39,3 +39,5 @@
 2024-05-04T06:22:52.649104300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
 2024-05-04T06:25:52.568119500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
 2024-05-04T06:27:10.807650600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T15:49:09.265507800: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-04T15:49:39.770103200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
