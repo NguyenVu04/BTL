@@ -1,13 +1,15 @@
 console.log(localStorage.idCourse);
 getCourse();
-document.addEventListener("DOMContentLoaded", function() {
+let reference = new JSZip();
+let slide = new JSZip();
+document.addEventListener("DOMContentLoaded", function () {
     var button = document.getElementById("content__toggle");
     var sections = document.querySelectorAll(".content__section");
 
     // Thêm sự kiện click cho nút toggle
-    button.addEventListener("click", function() {
+    button.addEventListener("click", function () {
         var isAllCollapsed = button.textContent === "Thu gọn toàn bộ";
-        sections.forEach(function(section) {
+        sections.forEach(function (section) {
             if (isAllCollapsed) {
                 collapseSection(section);
             } else {
@@ -37,11 +39,11 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Thêm sự kiện click cho mỗi heading
-    sections.forEach(function(section) {
+    sections.forEach(function (section) {
         var heading = section.querySelector(".section__heading");
         var content = section.querySelector(".section__list"); // Lấy phần nội dung bên dưới mỗi section
         var files = section.querySelectorAll(".file-container"); // Lấy danh sách các file trong section
-        heading.addEventListener("click", function() {
+        heading.addEventListener("click", function () {
             if (section.classList.contains("collapsed")) {
                 expandSection(section);
             } else {
@@ -52,49 +54,63 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     // Function to handle file upload
     function handleFileUpload(input, fileList) {
-        input.addEventListener("change", function(event) {
-            var files = event.target.files; // Lấy danh sách file từ input
+
+        input.addEventListener("change", function (event) {
+            var file = event.target.files[0]; // Lấy danh sách file từ input
 
             // Hiển thị từng file và tạo một div để chứa file, icon và link mở file
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                var fileContainer = document.createElement("div");
-                fileContainer.className = "file-container"; // Thêm class cho div chứa file
+            var fileContainer = document.createElement("div");
+            fileContainer.className = "file-container"; // Thêm class cho div chứa file
 
-                var fileIcon = document.createElement("i");
-                fileIcon.className = "fa-solid fa-file-arrow-down file-icon"; // Thêm class cho icon
+            var fileIcon = document.createElement("i");
+            fileIcon.className = "fa-solid fa-file-arrow-down file-icon"; // Thêm class cho icon
 
-                var fileName = document.createElement("span");
-                fileName.textContent = " " + file.name; // Thêm khoảng trắng trước tên file
+            var fileName = document.createElement("span");
+            fileName.textContent = " " + file.name; // Thêm khoảng trắng trước tên file
 
-                // Tạo link để mở file
-                var fileLink = document.createElement("a");
-                fileLink.href = URL.createObjectURL(file); // Tạo URL cho file
-                fileLink.target = "_blank"; // Mở file trong tab mới
+            // Tạo link để mở file
+            var fileLink = document.createElement("a");
+            fileLink.href = URL.createObjectURL(file); // Tạo URL cho file
+            fileLink.target = "_blank"; // Mở file trong tab mới
 
-                fileLink.appendChild(fileIcon); // Thêm icon vào link
-                fileLink.appendChild(fileName); // Thêm tên file vào link
+            fileLink.appendChild(fileIcon); // Thêm icon vào link
+            fileLink.appendChild(fileName); // Thêm tên file vào link
 
-                fileContainer.appendChild(fileLink); // Thêm link vào div chứa file
+            fileContainer.appendChild(fileLink); // Thêm link vào div chứa file
 
-                // Tạo nút xóa file
-                var deleteButton = document.createElement("button");
-                deleteButton.textContent = "Xóa";
-                deleteButton.className = "delete-button";
-                deleteButton.addEventListener("click", function() {
-                    fileList.removeChild(fileContainer); // Xóa div chứa file khi nút xóa được click
-                    if (fileList.childNodes.length === 0) {
-                        fileList.innerHTML = ''; // Nếu không còn file nào, xóa hết nội dung của danh sách
-                    }
-                });
+            JSZipUtils.getBinaryContent(fileLink.href, function (err, content) {
+                if (err) {
+                    console.error(err);
+                    return;
+                }
+                if (fileList.id === 'slideFileList') {
+                    slide.file(file.name, content, { binary: true });
+                } else {
+                    reference.file(file.name, content, { binary: true });
+                }
+            })
+            // Tạo nút xóa file
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "Xóa";
+            deleteButton.className = "delete-button";
+            deleteButton.addEventListener("click", function () {
+                fileList.removeChild(fileContainer); // Xóa div chứa file khi nút xóa được click
+                if (fileList.childNodes.length === 0) {
+                    fileList.innerHTML = ''; // Nếu không còn file nào, xóa hết nội dung của danh sách
+                }
+                if (fileList.id === 'slideFileList') {
+                    slide.remove(content, file.name);
+                } else {
+                    reference.remove(content, file.name);
+                }
+            });
 
-                fileContainer.appendChild(deleteButton); // Thêm nút xóa vào div chứa file
+            fileContainer.appendChild(deleteButton); // Thêm nút xóa vào div chứa file
 
-                fileList.appendChild(fileContainer); // Thêm div chứa file vào danh sách
-            }
+            fileList.appendChild(fileContainer); // Thêm div chứa file vào danh sách
         });
     }
 
@@ -106,11 +122,104 @@ document.addEventListener("DOMContentLoaded", function() {
     // Xử lý upload file cho cả phần Slide và Tài liệu tham khảo
     handleFileUpload(slideFileInput, slideFileList);
     handleFileUpload(referenceFileInput, referenceFileList);
+
+    //Handle file for reference and slide
+    let id = new URLSearchParams(window.location.search).get('id');
+    console.log(id);
+    fetch(`http://localhost:8080/course/${id}/materials`, {
+        method: 'GET',
+        mode: 'cors'
+    }).then(res => {
+        if (!res.ok) {
+            throw Error(res.statusText);
+        }
+        return res.json();
+    }).then(data => {
+        //reference
+        var fileContainer = document.createElement("div");
+        fileContainer.className = "file-container"; // Thêm class cho div chứa file
+
+        var fileIcon = document.createElement("i");
+        fileIcon.className = "fa-solid fa-file-arrow-down file-icon"; // Thêm class cho icon
+
+        var fileName = document.createElement("span");
+        fileName.textContent = "reference.zip"; // Thêm khoảng trắng trước tên file
+
+        // Tạo link để mở file
+        var fileLink = document.createElement("a");
+        fileLink.href = data.reference; // Tạo URL cho file
+
+        fileLink.appendChild(fileIcon); // Thêm icon vào link
+        fileLink.appendChild(fileName); // Thêm tên file vào link
+
+        fileContainer.appendChild(fileLink); // Thêm link vào div chứa file
+
+        referenceFileList.appendChild(fileContainer); // Thêm div chứa file vào danh sách
+        
+        //slide
+        var fileContainer = document.createElement("div");
+        fileContainer.className = "file-container"; // Thêm class cho div chứa file
+
+        var fileIcon = document.createElement("i");
+        fileIcon.className = "fa-solid fa-file-arrow-down file-icon"; // Thêm class cho icon
+
+        var fileName = document.createElement("span");
+        fileName.textContent = "slide.zip"; // Thêm khoảng trắng trước tên file
+
+        // Tạo link để mở file
+        var fileLink = document.createElement("a");
+        fileLink.href = data.slide; // Tạo URL cho file
+
+        fileLink.appendChild(fileIcon); // Thêm icon vào link
+        fileLink.appendChild(fileName); // Thêm tên file vào link
+
+        fileContainer.appendChild(fileLink); // Thêm link vào div chứa file
+
+        slideFileList.appendChild(fileContainer); // Thêm div chứa file vào danh sách
+    }).catch(err => {
+        console.log(err);
+    })
 });
 
+document.addEventListener('keypress', (e) => {
+    let id = new URLSearchParams(window.location.search).get('id');
+    if (e.code === 'Enter') {
+        e.preventDefault();
+        reference.generateAsync({ type: 'blob' }).then(function (content) {
+            let formData = new FormData();
+            formData.append('file', content, 'reference.zip');
+            fetch(`http://localhost:8080/course/${id}/materials`, {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            }).then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        })
+        slide.generateAsync({ type: 'blob' }).then(function (content) {
+            let formData = new FormData();
+            formData.append('file', content, 'slide.zip');
+            fetch(`http://localhost:8080/course/${id}/materials`, {
+                method: 'POST',
+                mode: 'cors',
+                body: formData
+            }).then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+            }).catch(err => {
+                console.log(err);
+            })
+        })
+        location.reload();
+    }
+})
 
-
-function addinner(data){
+function addinner(data) {
     // let page = document.getElementsByClassName("contents");
     let page = document.getElementById("nameCourse");
 
@@ -121,7 +230,7 @@ function addinner(data){
     let nameCourse = data.name;
     console.log(nameCourse);
     nameCourse_html = nameCourse_html.replace('{nameCourse}', nameCourse);
-    page.innerHTML= nameCourse_html;
+    page.innerHTML = nameCourse_html;
 }
 
 
@@ -130,11 +239,11 @@ async function getCourse() {
     let returnVal = await fetch(url + new URLSearchParams({
         idCourse: localStorage.idCourse
     }), {
-        method:"GET",
-        mode:"cors"
+        method: "GET",
+        mode: "cors"
     }).then(
         data => {
-            if(!data.ok) {
+            if (!data.ok) {
                 throw Error(data.statusText);
             }
             return data.json();

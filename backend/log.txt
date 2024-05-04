@@ -1,44 +1,41 @@
-2024-04-21T23:01:34.083321200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
-2024-04-21T23:01:34.083321200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
-2024-04-22T07:31:33.312969600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T07:33:53.886338700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
-2024-04-22T07:33:53.886338700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
-2024-04-22T07:39:20.729458600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T08:45:54.254828200: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T08:46:02.757282600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
-2024-04-22T08:46:02.757282600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=sss, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
-2024-04-22T08:46:02.761561400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
-2024-04-22T08:46:26.212352500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T08:49:44.216397500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T08:52:26.751748600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:12:22.961799500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:12:48.560541500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:13:05.631085600: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:13:59.060508: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:15:12.753109400: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:15:16.554547500: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:21:35.706001: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-22T09:24:26.660856: org.springframework.security.access.AuthorizationServiceException: com.project.backend.controller.AuthenticationController
-2024-04-26T14:55:29.098074700: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.Course (found in field 'courseID.[0]')
-2024-04-26T14:55:54.261306200: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.Course (found in field 'courseID.[0]')
-2024-04-26T14:59:41.367591400: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.Course (found in field 'courseID.[0]')
-2024-04-27T17:53:23.831162200: 2024-04-27T17:53:23.831162200: 2024-04-27T17:53:23.831162200: 2024-04-27T17:53:23.831162200: 2024-04-27T17:53:23.831162200: 2024-04-27T17:53:23.831162200: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'listStudent.[0]')
-java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'listStudent.[0]')
-2024-04-27T17:53:24.542162200: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-2024-04-27T17:53:24.605937900: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'listStudent.[0]')
-2024-04-27T17:53:24.875352100: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'listStudent.[0]')
-2024-04-27T17:53:24.971352600: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'listStudent.[0]')
-2024-04-27T17:53:25.010351: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-2024-04-27T17:53:25.251352: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'listStudent.[0]')
-2024-04-27T17:54:52.474139900: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-2024-04-27T17:56:04.315322200: java.lang.RuntimeException: Could not deserialize object. Can't convert object of type java.lang.String to type com.project.backend.Course.NameIDStu (found in field 'courseID.[1].listStudent.[0]')
-2024-04-28T21:50:52.194676600: java.lang.IndexOutOfBoundsException: Index 1 out of bounds for length 1
-2024-04-28T21:51:29.522130700: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-2024-04-28T21:58:22.991318700: java.lang.IndexOutOfBoundsException: Index 0 out of bounds for length 0
-2024-04-28T22:09:27.856044300: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
-2024-04-28T22:11:22.422379800: java.lang.IndexOutOfBoundsException: Index 2 out of bounds for length 2
-2024-04-30T01:21:03.861561200: java.util.concurrent.ExecutionException: com.google.api.gax.rpc.UnavailableException: io.grpc.StatusRuntimeException: UNAVAILABLE: Credentials failed to obtain metadata
+2024-05-03T23:05:32.938033500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:06:39.647284300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:11:35.342736600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:11:51.982598200: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:11:59.858861400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:12:04.457949900: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:38.290758800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:39.202223700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:41.729211700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:43.966490100: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:45.200598700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:45.803840700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:47.356470100: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:51.056531300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:52.002108800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:53.072214500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:18:21.250067900: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:18:21.929969400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:18:22.821154300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:24:52.908264400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:14:23.678800600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:04.851351500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:05.462416: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:16.184910200: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:32.459546900: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:33.314707300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:35.342997400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:38.184997800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:39.716287300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:49.123830300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:52.082632700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:53.253437800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:55.655177500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:57.453173300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:21:10.141988800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:21:38.779352400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:22:47.821418700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:22:49.680309700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:22:52.649104300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:25:52.568119500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:27:10.807650600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage

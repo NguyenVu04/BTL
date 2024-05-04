@@ -1,5 +1,6 @@
 package com.project.backend.Course;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -56,4 +57,5 @@ public class Course extends Model{
         this.listTeacher = listTeacher;
         this.listQuizz = listQuizz;
     }
+
 }
