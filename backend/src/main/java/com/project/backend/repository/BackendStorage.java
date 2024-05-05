@@ -12,7 +12,10 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.google.cloud.storage.Acl;
 import com.google.cloud.storage.Blob;
+import com.google.cloud.storage.Acl.Role;
+import com.google.cloud.storage.Acl.User;
 import com.google.cloud.storage.Bucket.BlobWriteOption;
 import com.google.firebase.cloud.StorageClient;
 import com.project.backend.exceptionhandler.ExceptionLog;
@@ -132,7 +135,8 @@ public class BackendStorage {
         try {
             storage.bucket()
                     .create(joiner.toString(),
-                            file.getInputStream());
+                            file.getInputStream())
+                    .createAcl(Acl.of(User.ofAllUsers(), Role.READER));
             return true;
         } catch (Exception e) {
             exceptionLog.log(e, this.getClass().getName());

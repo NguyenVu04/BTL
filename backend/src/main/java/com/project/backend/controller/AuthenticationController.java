@@ -10,6 +10,7 @@ import com.project.backend.repository.FirestoreRepository;
 import com.project.backend.security.AuthenticationDetails;
 import com.project.backend.security.BackendSecurityConfiguration;
 import com.project.backend.security.JwtUtils;
+import com.project.backend.security.UserRole;
 
 import io.jsonwebtoken.Claims;
 import jakarta.servlet.http.HttpServletRequest;
@@ -158,6 +159,29 @@ public class AuthenticationController {
         } else {
             exceptionLog.log(new IOException(this.getClass().getName()));
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<String> register(
+            @RequestParam(name = "id", required = true) String id,
+            @RequestParam(name = "email", required = true) String email,
+            @RequestParam(name = "password", required = true) String password,
+            @RequestParam(name = "role", required = true) String role) {
+        try {
+            //TODO: Create User here
+            AuthenticationDetails details = new AuthenticationDetails(id, 
+                                                                      email, 
+                                                                      password, 
+                                                                      UserRole.valueOf(role));
+            if (repository.updateDocumentById(details) == false) 
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                     .build();
+            return ResponseEntity.ok()
+                                 .build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .build();
         }
     }
 }

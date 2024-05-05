@@ -86,7 +86,7 @@ public class JwtUtils {
         object.put("role", map.get("role"));
         object.put("password", map.get("password"));
         Date now = new Date();
-        Date expDate = new Date(now.getTime() + 3600000);
+        Date expDate = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000);
         try {
             return Jwts.builder()
                     .claims(object)

@@ -2,7 +2,12 @@ package com.project.backend.security;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -57,5 +62,14 @@ public class BackendDetailsService {
             exceptionLog.log(e);
             return null;
         }
+    }
+    @Nullable
+    public static String getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext()
+                                         .getAuthentication();
+        if (authentication == null || authentication instanceof AnonymousAuthenticationToken) {
+            return null;
+        }
+        return authentication.getName();
     }
 }

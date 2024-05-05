@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.google.cloud.storage.Blob;
 import com.project.backend.Course.Category;
 import com.project.backend.Course.Course;
 import com.project.backend.Course.NameIDStu;
@@ -20,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +29,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/course")
@@ -424,5 +429,40 @@ public class CourseController {
                 }
 
             }
+    @PostMapping("{id}/materials")
+    public ResponseEntity<String> postMaterial(
+        @PathVariable(name = "id") String id,
+        @RequestParam(name = "file", required = true) MultipartFile file) {
+        if (storage.updateBlob(file, List.of(id, file.getOriginalFilename())) == false)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+                                 .build();
+        return ResponseEntity.ok()
+                             .build();
+    }
+    /**
+     * Retrieves a material file with the given ID.
+     *
+     * @param  id   The ID of the material file to retrieve.
+     * @return      A ResponseEntity containing a Map of the material file, wrapped in a Resource.
+     *              If the file is not found, a 404 Not Found response is returned.
+     */
+    @GetMapping("{id}/materials")
+    public ResponseEntity<Map<String, String>> getMaterial(
+        @PathVariable(name = "id") String id) {
+       
+       // Retrieve the file with the given ID
+        Blob referenceBlob = storage.getBlob(List.of(id, "reference.zip"));
+        Blob slideBlob = storage.getBlob(List.of(id, "slide.zip"));
+        // If the file is not found, return a 404 Not Found response
+        if (referenceBlob == null || slideBlob == null)
+            return ResponseEntity.notFound()
+                                 .build();
+        // Create a Map containing the retrieved file and return it in a 200 OK response
+        return ResponseEntity.ok()
+                             .body(Map.of(
+                                "reference", referenceBlob.getMediaLink(),
+                                "slide", slideBlob.getMediaLink()
+                                ));        
+    }
 }
 

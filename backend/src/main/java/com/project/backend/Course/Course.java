@@ -1,5 +1,6 @@
 package com.project.backend.Course;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -25,7 +26,7 @@ public class Course extends Model{
     private Timestamp endDate;;
     private Integer price;
     private Map<String,String> timeTable;
-
+    
     private List<NameIDStu> listStudent;
     private List<String> listTeacher;
     private String email;
@@ -56,4 +57,5 @@ public class Course extends Model{
         this.listTeacher = listTeacher;
         this.listQuizz = listQuizz;
     }
+
 }

@@ -138,6 +138,11 @@ body{
     /* font-size:larger; */
     opacity: .5;
 }
+.input-box[type=text]{
+    padding-left: 20px;
+    font-size:large;
+    font-weight:lighter;
+}
 .input-box[type=email]{
     padding-left: 20px;
     font-size:large;
