@@ -54,8 +54,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     let teacher_only = document.getElementsByClassName("teacher-only");
-    console.log(localStorage.getItem('Role'))
-    console.log(localStorage.getItem('role'))
     if (localStorage.getItem('Role') === 'STUDENT') {
         for (let i = 0; i < teacher_only.length; i++) {
             teacher_only[i].style.display = 'none';

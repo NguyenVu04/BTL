@@ -39,15 +39,14 @@ function studentLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.headers;
+            localStorage.setItem('Authorization', res.headers.get('Authorization'));
+
+            return res.json();
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data.get('Authorization'));
-            localStorage.setItem('Role', data.get('role'));
-            console.log(localStorage.getItem('Role'));
-            console.log(localStorage.getItem('role'));
-            // window.location.href = '/';
+            localStorage.setItem('Role', data.role);
+            window.location.href = '/';
         }
     ).catch (
         err => {

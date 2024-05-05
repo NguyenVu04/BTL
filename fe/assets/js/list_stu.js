@@ -16,12 +16,30 @@ let adjustStu = `<div class="row">
     </div>
     
 </div>
-<div class="col-lg-2" id="{idStudent2}">
+<div class="col-lg-2 teacher-only" id="{idStudent2}">
     <button type="button" class="btn btn-info eva" onclick="opennewweb()">Đánh giá</button>
 </div>
 </div>`;
 console.log(localStorage.detail_course);
-getClass();
+document.addEventListener('DOMContentLoaded', function(e) {
+    let teacher_only = document.getElementsByClassName("teacher-only");
+    if (localStorage.getItem('Role') === 'STUDENT') {
+        for (let i = 0; i < teacher_only.length; i++) {
+            teacher_only[i].style.display = 'none';
+        }
+    }
+    
+    getClass().then(function(any){
+        let teacher_only = document.getElementsByClassName("teacher-only");
+        if (localStorage.getItem('Role') === 'STUDENT') {
+            for (let i = 0; i < teacher_only.length; i++) {
+                teacher_only[i].style.display = 'none';
+            }
+        }
+
+    })
+
+})
 
 
 function opennewweb() {
