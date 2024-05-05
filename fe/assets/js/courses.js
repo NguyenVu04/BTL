@@ -1,4 +1,5 @@
 let idStudent = '2213954';
+var token = localStorage.getItem('Authorization');
 getCourse().then(
     res => {
     // addinner(res);
@@ -160,7 +161,10 @@ async function getCourse() {
             }) 
     ,{
         mode: 'cors',
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => {
         if (!res.ok){
@@ -190,7 +194,10 @@ async function addCourse(idCourse, nameCourse) {
     fetch(url ,{
         mode: 'cors',
         method: 'POST',
-        body: form
+        body: form,
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => 
         {
@@ -354,7 +361,10 @@ async function deleteCourseFromDB(idCourse){
     fetch(url ,{
         mode: 'cors',
         method: 'DELETE',
-        body: form
+        body: form,
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => 
         {
@@ -393,6 +403,9 @@ async function get_all_course() {
     fetch(url ,{
         mode: 'cors',
         method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => 
         {

@@ -8,6 +8,7 @@ import com.project.backend.Student.Student;
 import com.project.backend.Student.gender;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
+import com.project.backend.security.BackendDetailsService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -225,8 +226,9 @@ public class StudentController {
     }
     
     @GetMapping("/id")
-    public ResponseEntity<Student> getStudentbyId(@RequestParam String id) {
+    public ResponseEntity<Student> getStudentbyId() {
         try {
+            String id = BackendDetailsService.getCurrentUserId();
             DocumentSnapshot snapshot = repository.getDocumentById(Student.class, id);
             if (snapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

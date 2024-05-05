@@ -1,4 +1,5 @@
 console.log(localStorage.idCourse);
+var token = localStorage.getItem('Authorization');
 getCourse();
 let reference = new JSZip();
 let slide = new JSZip();
@@ -51,6 +52,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         });
     });
+
+    let teacher_only = document.getElementsByClassName("teacher-only");
+    console.log(localStorage.getItem('Role'))
+    console.log(localStorage.getItem('role'))
+    if (localStorage.getItem('Role') === 'STUDENT') {
+        for (let i = 0; i < teacher_only.length; i++) {
+            teacher_only[i].style.display = 'none';
+        }
+    }
 });
 
 
@@ -124,11 +134,14 @@ document.addEventListener("DOMContentLoaded", function () {
     handleFileUpload(referenceFileInput, referenceFileList);
 
     //Handle file for reference and slide
-    let id = new URLSearchParams(window.location.search).get('id');
+    let id = localStorage.getItem('idCourse');
     console.log(id);
     fetch(`http://localhost:8080/course/${id}/materials`, {
         method: 'GET',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(res => {
         if (!res.ok) {
             throw Error(res.statusText);
@@ -182,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener('keypress', (e) => {
-    let id = new URLSearchParams(window.location.search).get('id');
+    let id = localStorage.getItem('idCourse');
     if (e.code === 'Enter') {
         e.preventDefault();
         reference.generateAsync({ type: 'blob' }).then(function (content) {
@@ -191,6 +204,9 @@ document.addEventListener('keypress', (e) => {
             fetch(`http://localhost:8080/course/${id}/materials`, {
                 method: 'POST',
                 mode: 'cors',
+                headers: {
+                    'Authorization': token
+                },
                 body: formData
             }).then(res => {
                 if (!res.ok) {
@@ -206,7 +222,10 @@ document.addEventListener('keypress', (e) => {
             fetch(`http://localhost:8080/course/${id}/materials`, {
                 method: 'POST',
                 mode: 'cors',
-                body: formData
+                body: formData,
+                headers: {
+                    'Authorization': token
+                }
             }).then(res => {
                 if (!res.ok) {
                     throw Error(res.statusText);
@@ -215,7 +234,11 @@ document.addEventListener('keypress', (e) => {
                 console.log(err);
             })
         })
-        location.reload();
+        
+        setTimeout(() => {
+            
+            window.location.reload();
+        }, 6000);
     }
 })
 
@@ -240,7 +263,10 @@ async function getCourse() {
         idCourse: localStorage.idCourse
     }), {
         method: "GET",
-        mode: "cors"
+        mode: "cors",
+        headers: {
+            'Authorization': token
+        }
     }).then(
         data => {
             if (!data.ok) {

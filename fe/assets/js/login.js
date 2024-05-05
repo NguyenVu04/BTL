@@ -45,7 +45,9 @@ function studentLogin() {
         data => {
             localStorage.setItem('Authorization', data.get('Authorization'));
             localStorage.setItem('Role', data.get('role'));
-            window.location.href = '/';
+            console.log(localStorage.getItem('Role'));
+            console.log(localStorage.getItem('role'));
+            // window.location.href = '/';
         }
     ).catch (
         err => {
@@ -58,7 +60,7 @@ function studentLogin() {
                     count = 0;
                 }, 600000);
             }
-            console.clear()
+            // console.clear()
         }
     )
 }
@@ -100,7 +102,7 @@ function teacherLogin() {
                     count = 0;
                 }, 600000);
             }
-            console.clear();
+            // console.clear();
         }
     )
 }
@@ -126,10 +128,10 @@ function teacherRegister() {
         body: form
     }).then(res => {
         if (!res.ok) throw Error(res.statusText);
-        window.location.href = '/login.html';
+        window.location.href = 'login.html';
     }).catch(err => {
         document.getElementById('teacher-submit').addEventListener('click', teacherRegister);
-        console.clear();
+        // console.clear();
     })
 }
 
@@ -157,6 +159,6 @@ function studentRegister() {
         window.location.href = '/login.html';
     }).catch(err => {
         document.getElementById('student-submit').addEventListener('click', studentRegister);
-        console.clear();
+        // console.clear();
     })
 }

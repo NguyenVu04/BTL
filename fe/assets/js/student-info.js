@@ -1,5 +1,5 @@
 let idStudent = '2213954'
-
+var token = localStorage.getItem('Authorization');
 // let asd = document.getElementById('asd');
 // console.log(asd.innerHTML);
 document.addEventListener('DOMContentLoaded', function() {
@@ -131,7 +131,10 @@ async function getCourse() {
             }) 
     ,{
         mode: 'cors',
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => {
         if (!res.ok){
@@ -155,7 +158,10 @@ async function getInfo() {
 
     let returnVal = await fetch(url, {
         method: 'GET',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(respone => {
         if (!respone.ok) throw Error(respone.statusText);
         return respone.json();
@@ -173,7 +179,10 @@ async function getScore(course) {
     });
     let returnVal = await fetch(url, {
         method: 'GET',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(data => {
         if (!data.ok){
             throw Error(data.statusText);

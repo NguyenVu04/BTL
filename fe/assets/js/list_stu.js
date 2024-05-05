@@ -1,4 +1,4 @@
-
+let token = localStorage.getItem('Authorization');
 let adjustStu = `<div class="row">
 <div class="thutu col-lg-2">
     <div class="circle">
@@ -42,7 +42,10 @@ async function getClass() {
         idCourse: localStorage.idCourse
     }), {
         method:"GET",
-        mode:"cors"
+        mode:"cors",
+        headers: {
+            'Authorization': token
+        }
     }).then(
         data => {
             if(!data.ok) {

@@ -1,3 +1,4 @@
+var token = localStorage.getItem('Authorization');
 function openliststudent() {
     var url = "list_stu.html";
 
@@ -19,7 +20,10 @@ async function getClass() {
 
     let returnVal = await fetch(url, {
         mode: 'cors',
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     }).then(data => {
         if (!data.ok) throw new Error(data.statusText);
 

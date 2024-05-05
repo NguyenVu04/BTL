@@ -1,3 +1,4 @@
+var token = localStorage.getItem('Authorization')
 console.log(localStorage.idStudent);
 console.log(localStorage.idCourse);
 
@@ -46,7 +47,10 @@ async function updateScores(event) {
     
     let fetchs = await fetch(url, {
         method: 'PUT',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(result => {
         if (!result.ok) throw Error(result.statusText);
         return result.json();
@@ -153,7 +157,10 @@ async function confirmEvaluation() {
     
     let fetchs = await fetch(url, {
         method: 'PUT',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(result => {
         if (!result.ok) throw Error(result.statusText);
         return result.json();
@@ -208,7 +215,10 @@ async function getScore() {
     });
     let returnVal = await fetch(url, {
         method: 'GET',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(data => {
         if (!data.ok){
             throw Error(data.statusText);
