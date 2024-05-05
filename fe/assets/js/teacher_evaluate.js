@@ -88,36 +88,34 @@ function updateTable(data) {
     document.getElementById("kt-cuoi").textContent = kt_cuoi;
     document.getElementById("tong-ket").textContent = tong_ket.toFixed(2);
     
-    let savedComment = data.message;
-    localStorage.setItem("comment", savedComment);
-        // Lấy thông tin sinh viên
-        var currentName = data.name;
-        var currentID = data.id;
-        var currentEmail = data.email;
-
-        document.querySelector('.name-id').innerText = currentName + ' - ' + currentID;
-        document.querySelector('.mail').innerText = currentEmail;
-
-
-         // Kiểm tra xem có dữ liệu đã lưu trong localStorage không
-    // var savedComment = localStorage.getItem("comment");
-    var savedComment = data.message;
-    console.log(savedComment);
-    if (savedComment && savedComment != "NULL") {
-        // Nếu có dữ liệu đã lưu, xóa đi hai thẻ <p> trống trong phần nhận xét
-        var emptyComments = document.querySelectorAll(".nhanxet p");
-        emptyComments.forEach(function(pElement) {
-            pElement.remove();
-        });
+    // Lấy thông tin sinh viên
+    var currentName = data.name;
+    var currentID = data.id;
+    var currentEmail = data.email;
     
-        // Gán giá trị của savedComment vào phần hiển thị trên màn hình
-        var newCommentElements = document.getElementsByClassName("nhanxet");
-        for (var i = 0; i < newCommentElements.length; i++) {
-            var commentElement = document.createElement("span");
-            commentElement.textContent = savedComment;
-            newCommentElements[i].appendChild(commentElement);
+    document.querySelector('.name-id').innerText = currentName + ' - ' + currentID;
+    document.querySelector('.mail').innerText = currentEmail;
+    
+    
+        let savedComment = data.message;
+        localStorage.setItem("comment", savedComment);
+        // Kiểm tra xem có dữ liệu đã lưu trong localStorage không
+        if (savedComment) {
+            // Nếu có dữ liệu đã lưu, xóa đi hai thẻ <p> trống trong phần nhận xét
+            var emptyComments = document.querySelectorAll(".nhanxet p");
+            emptyComments.forEach(function(pElement) {
+                pElement.remove();
+            });
+
+            // Gán giá trị của savedComment vào phần hiển thị trên màn hình
+            var newCommentElements = document.getElementsByClassName("nhanxet");
+            for (var i = 0; i < newCommentElements.length; i++) {
+                var commentElement = document.createElement("span");
+                commentElement.textContent = savedComment;
+                newCommentElements[i].appendChild(commentElement);
+            }
         }
-    }
+    
 }
 
 
@@ -129,7 +127,7 @@ function updateTable(data) {
 var evaluateModal = document.getElementById("evaluatemodal");
 var commentInput = document.getElementById("commentInput");
 
-   
+
 
 function showComment() {
     evaluateModal.style.display = "block";
@@ -163,8 +161,6 @@ async function confirmEvaluation() {
         return res;
     })
 
-    // Lưu comment vào localStorage
-    localStorage.setItem("comment", comment);
 
     var emptyComments = document.querySelectorAll(".nhanxet p");
     emptyComments.forEach(function(pElement) {
