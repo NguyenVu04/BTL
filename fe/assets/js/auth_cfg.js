@@ -20,7 +20,7 @@ function logout() {
     }).finally(
         () => {
             localStorage.removeItem('Authorization');
-            window.location.href = 'http://127.0.0.1:3000/login.html';
+            window.location.href = '/login.html';
         }
     )
 }
@@ -49,7 +49,7 @@ function validate() {
     ).catch(
         err => {
             localStorage.removeItem('Authorization');
-            window.location.href = 'http://127.0.0.1:3000/';
+            window.location.href = '/';
             () => console.clear()
         }
     )
