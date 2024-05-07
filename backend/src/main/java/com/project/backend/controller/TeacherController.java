@@ -8,6 +8,7 @@ import com.project.backend.Teacher.Certificate;
 import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
+import com.project.backend.security.BackendDetailsService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -45,8 +46,9 @@ public class TeacherController {
     @Autowired
     private CourseController courseController;
     @GetMapping("/id")
-    public ResponseEntity<Teacher> findTeacher(@RequestParam String id) {
+    public ResponseEntity<Teacher> CurrentTeacherInfo() {
         try {
+            String id = BackendDetailsService.getCurrentUserId();
             DocumentSnapshot documentSnapshot = repository.getDocumentById(Teacher.class, id);
             if (documentSnapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -62,24 +64,46 @@ public class TeacherController {
     }
     
     @PutMapping("/id/info")
-    public ResponseEntity<Map<String,Object>> putMethodName(@RequestParam String id,
-                                @RequestParam String field,
-                                @RequestParam Object value) 
+    public ResponseEntity<Teacher> updateCurrentTeacher(
+        @RequestParam (required = false, defaultValue ="") String name,
+        @RequestParam(required = false, defaultValue = "01") Integer date,
+        @RequestParam(required = false, defaultValue = "01") Integer month,
+        @RequestParam(required = false, defaultValue = "2004") Integer year,
+        @RequestParam (required = false, defaultValue ="") String falcuty,
+        @RequestParam (required = false, defaultValue ="") String phoneNumber,
+        @RequestParam (required = false, defaultValue ="") String email,
+        @RequestParam (required = false, defaultValue ="") String phd,
+        @RequestParam (required = false, defaultValue ="") String university,
+        @RequestParam (required = false, defaultValue ="") String master) 
     {
-        //TODO: process PUT request
         try{
+            String id = BackendDetailsService.getCurrentUserId();
             DocumentSnapshot snapshot = repository.getDocumentById(Teacher.class, id);
             if (snapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
-            Map<String, Object> obj = snapshot.getData();
-            obj.put(field, value);
-    
-            repository.saveDocument(Teacher.class, obj);
-            return ResponseEntity.ok().body(obj);
+            Teacher teacher = snapshot.toObject(Teacher.class);
+            
+            if (name == null || name == "") name = teacher.getName();
+            if (falcuty == null || falcuty == "") falcuty = teacher.getFalcuty();
+            if (phoneNumber == null || phoneNumber == "") phoneNumber = teacher.getPhoneNumber();
+            if (email == null || email == "") email = teacher.getEmail();
+            if (phd == null || phd == "") phd = teacher.getCertificate().getPhd();
+            if (university == null || university == "") university = teacher.getCertificate().getUniversity();
+            if (master == null || master == "") master = teacher.getCertificate().getMaster();
+
+            teacher.setName(name);
+            Certificate certificate = new Certificate(master, phd, university);
+            teacher.setCertificate(certificate);
+            teacher.setFalcuty(falcuty);
+            teacher.setPhoneNumber(phoneNumber);
+            teacher.setEmail(email);
+            teacher.setDayofBirth(convertTimestamp(year, month, date, 00, 00, 00));
+            repository.updateDocumentById(teacher);
+            return ResponseEntity.ok().body(teacher);
         } catch (Exception e) {
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
         }
     }
 
@@ -93,7 +117,6 @@ public class TeacherController {
         @RequestParam (required = false, defaultValue = "00") Integer minute,
         @RequestParam (required = false, defaultValue = "00") Integer second
         ) {
-        //TODO: process PUT request
         try{
             DocumentSnapshot snapshot = repository.getDocumentById(Teacher.class, id);
             if (snapshot == null) {
@@ -167,8 +190,8 @@ public class TeacherController {
     }
 
     @PostMapping("/add/id")
-    public ResponseEntity<Teacher> add(@RequestParam String id, 
-                                        @RequestParam String name, 
+    public ResponseEntity<Teacher> createTeacher(@RequestParam String id, 
+                                        @RequestParam (required = false, defaultValue = "") String name, 
                                         @RequestParam String email,
                                         @RequestParam (required = false, defaultValue = "0355916621") String phonenumber,
                                         @RequestParam (required = false, defaultValue = "0000") Integer year,
@@ -179,16 +202,16 @@ public class TeacherController {
                                         @RequestParam (required = false, defaultValue = "00") Integer second,
                                         @RequestParam (required = false, defaultValue = "null") String master,
                                         @RequestParam (required = false, defaultValue = "null") String phd,
-                                        @RequestParam (required = false, defaultValue = "null") String university
+                                        @RequestParam (required = false, defaultValue = "null") String university,
+                                        @RequestParam (required = false, defaultValue = "null") String falcuty
                                         ) {
         try{
-
+            
             DocumentSnapshot snapshot = repository.getDocumentById(Teacher.class, id);
             if (snapshot != null) 
             {
                 return ResponseEntity.status(HttpStatus.CONFLICT).build();
             }
-
             Teacher teacher = new Teacher();
             teacher.setId(id);
             teacher.setName(name);
@@ -196,8 +219,9 @@ public class TeacherController {
             Timestamp value = convertTimestamp(year, month, day, hour, minute, second);
             teacher.setDayofBirth(value);
             teacher.setCourseID(new ArrayList<String>());
+            teacher.setPhoneNumber(phonenumber);
             teacher.setCertificate(new Certificate(master, phd, university));
-            teacher.setPhonenumber(phonenumber);
+            teacher.setFalcuty(falcuty);
             repository.saveDocument(teacher, id);
             return ResponseEntity.ok().body(teacher);
 

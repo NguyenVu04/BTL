@@ -1,3 +1,4 @@
 2024-05-06T00:12:47.241696900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-06T00:34:08.454340900: java.lang.RuntimeException: Could not deserialize object. Could not find enum value of com.project.backend.Student.gender for value "man" (found in field 'gender')
 2024-05-06T00:34:09.367145900: java.lang.RuntimeException: Could not deserialize object. Could not find enum value of com.project.backend.Student.gender for value "other" (found in field 'gender')
+2024-05-07T10:43:49.066639700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter

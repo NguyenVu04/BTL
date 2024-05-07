@@ -175,7 +175,6 @@ public class AuthenticationController {
             @RequestParam(name = "password", required = true) String password,
             @RequestParam(name = "role", required = true) String role) {
         try {
-            //TODO: Create User here
             
             if (role.equals("STUDENT")) {
                 
@@ -186,13 +185,13 @@ public class AuthenticationController {
                 }
                 
             }
-            // else {
-            //     ResponseEntity<Teacher> newTeacher = 
-            //     teacherController.add(id, "", email, "", null, null, null, null, null, null, "", "", "");
-            //     if (newTeacher.getStatusCode() != HttpStatus.OK) {
-            //         return ResponseEntity.status(HttpStatus.CONFLICT).build();
-            //     }
-            // }
+            else {
+                ResponseEntity<Teacher> newTeacher = 
+                teacherController.createTeacher(id, "", email, "", 1980, 1, 1, 1, 1, 1, "", "", "", "");
+                if (newTeacher.getStatusCode() != HttpStatus.OK) {
+                    return ResponseEntity.status(newTeacher.getStatusCode()).build();
+                }
+            }
 
             AuthenticationDetails details = new AuthenticationDetails(id, 
                                                                       email, 

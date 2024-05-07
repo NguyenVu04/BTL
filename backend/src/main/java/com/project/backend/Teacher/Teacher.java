@@ -18,9 +18,12 @@ import lombok.Setter;
 public class Teacher extends Model {
     private String name;
     @NonNull
-    private String email;
-
     private Timestamp dayofBirth;
+    private String falcuty;
+    private String phoneNumber;
+    private String email;
+    // private String 
+    
 
     private String phonenumber;
     private List<String> CourseID;   
@@ -33,12 +36,14 @@ public class Teacher extends Model {
                 Timestamp dayofBirth, 
                 String phonenumber, 
                 List<String> CourseID, 
-                Certificate certificate) {
+                Certificate certificate,
+                String falcuty) {
         this.name = name;
         this.email = email;
         this.dayofBirth = dayofBirth;
         this.phonenumber = phonenumber;
         this.CourseID = CourseID;
         this.certificate = certificate;
+        this.falcuty = falcuty;
     }
 }

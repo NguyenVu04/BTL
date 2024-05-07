@@ -1,4 +1,4 @@
-
+var token = localStorage.getItem('Authorization')
 
 // này là phần cho avatar
 
@@ -34,15 +34,7 @@ document.getElementById("newAvatar").addEventListener("change", function() {
   reader.readAsDataURL(this.files[0]);
 });
 
-// Kiểm tra xem đã có ảnh avatar được lưu trong Local Storage chưa
-document.addEventListener("DOMContentLoaded", function() {
-  var savedAvatar = localStorage.getItem("avatar");
-  if (savedAvatar) {
-    // Nếu có, cập nhật ảnh avatar
-    var avatarImg = document.querySelector("#avatar img");
-    avatarImg.src = savedAvatar;
-  }
-});
+
 
 
 // Hàm lưu ảnh đại diện mới
@@ -209,87 +201,55 @@ function closeEditModal() {
 
 // Save edited information
 function saveInfo() {
+
   var form = document.getElementById('infoForm');
+
+  let url = 'http://localhost:8080/teacher/id/info?'
   var fullname = form.elements['fullname'].value;
   var birthdate = form.elements['birthdate'].value;
   var khoa = form.elements['khoa'].value;
   var dienthoai = form.elements['dienthoai'].value;
   var email = form.elements['email'].value;
   var hocvi = form.elements['hocvi'].value;
-  var nuoc = form.elements['nuoc'].value;
-  var nganh = form.elements['nganh'].value;
-  var cn = form.elements['cn'].value;
-  var chucdanh = form.elements['chucdanh'].value;
-  var linhvuc = form.elements['linhvuc'].value;
-  var huong = form.elements['huong'].value;
-  var lats = form.elements['lats'].value;
-  var lv = form.elements['lv'].value;
-  var daymh = form.elements['daymh'].value;
-  var ctkh = form.elements['ctkh'].value;
+  var chuyennganh = form.elements['cn'].value;
+  var truong = form.elements['truong'].value;
 
-  // Save edited information to Local Storage
-  localStorage.setItem('fullname', fullname);
-  localStorage.setItem('birthdate', birthdate);
-  localStorage.setItem('khoa', khoa);
-  localStorage.setItem('dienthoai', dienthoai);
-  localStorage.setItem('email', email);
-  localStorage.setItem('hocvi', hocvi);
-  localStorage.setItem('nuoc', nuoc);
-  localStorage.setItem('nganh', nganh);
-  localStorage.setItem('cn', cn);
-  localStorage.setItem('chucdanh', chucdanh);
-  localStorage.setItem('linhvuc', linhvuc);
-  localStorage.setItem('huong', huong);
-  localStorage.setItem('lats', lats);
-  localStorage.setItem('lv', lv);
-  localStorage.setItem('daymh', daymh);
-  localStorage.setItem('ctkh', ctkh);
+  console.log(truong);
+  fetch(url + new URLSearchParams({
+    name: fullname,
+    falcuty: khoa,
+    phoneNumber:dienthoai,
+    email:email,
+    phd: hocvi,
+    university: truong,
+    master: chuyennganh
+  }), {
+    method: 'PUT',
+    mode: 'cors',
+    headers: {
+      'Authorization': token
+    }
+  }).then(respone => {
+    if (!respone.ok) throw new Error(respone.statusText)
+      return respone.json();
+  }).then (data => {
+    console.log(data);
+    location.reload();
+  })
   
   // Close edit modal
   closeEditModal();
 
   // Reload the page to display the updated information
-  location.reload();
+  // location.reload();
 }
 
-// Load edited information from Local Storage when the page is loaded
+// Load edited information from database when the page is loaded
 document.addEventListener('DOMContentLoaded', function() {
-  var fullname = localStorage.getItem('fullname') || '';
-  var birthdate = localStorage.getItem('birthdate') || '';
-  var khoa = localStorage.getItem('khoa') || '';
-  var dienthoai = localStorage.getItem('dienthoai') || '';
-  var email = localStorage.getItem('email') || '';
-  var hocvi = localStorage.getItem('hocvi') || '';
-  var nuoc = localStorage.getItem('nuoc') || '';
-  var nganh = localStorage.getItem('nganh') || '';
-  var cn = localStorage.getItem('cn') || '';
-  var chucdanh = localStorage.getItem('chucdanh') || '';
-  var linhvuc = localStorage.getItem('linhvuc') || '';
-  var huong = localStorage.getItem('huong') || '';
-  var lats = localStorage.getItem('lats') || '';
-  var lv = localStorage.getItem('lv') || '';
-  var daymh = localStorage.getItem('daymh') || '';
-  var ctkh = localStorage.getItem('ctkh') || '';
-
-  var personalInfo = document.getElementById('personalInfo');
-
-  personalInfo.innerHTML = '<li><strong>Họ và tên:</strong> ' + fullname + '</li>' +
-                            '<li><strong>Ngày tháng năm sinh:</strong> ' + birthdate + '</li>' +
-                            '<li><strong>Khoa:</strong> ' + khoa + '</li>' +
-                            '<li><strong>Điện thoại liên hệ:</strong> ' + dienthoai + '</li>' +
-                            '<li><strong>Email:</strong> ' + email + '</li>' +
-                            '<li><strong>Học vị:</strong> ' + hocvi + '</li>' +
-                            '<li><strong>Nước tốt nghiệp:</strong> ' + nuoc + '</li>' +
-                            '<li><strong>Ngành:</strong> ' + nganh + '</li>' +
-                            '<li><strong>Chuyên ngành:</strong> ' + cn + '</li>' +
-                            '<li><strong>Chức danh khoa học:</strong> ' + chucdanh + '</li>' +
-                            '<li><strong>Lĩnh vực chuyên môn hiện tại:</strong> ' + linhvuc + '</li>' +
-                            '<li><strong>Các hướng nghiên cứu chính:</strong> ' + huong + '</li>' +
-                            '<li><strong>Số LATS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004):</strong> ' + lats + '</li>' +
-                            '<li><strong>Số LVThS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004):</strong> ' + lv + '</li>' +
-                            '<li><strong>Giảng dạy các môn học đại học:</strong> ' + daymh + '</li>' +
-                            '<li><strong>Các công trình khoa học đã công bố:</strong> ' + ctkh + '</li>';
-
+  getInfo().then(data => {
+    addinner(data);
+  })
+  
 });
 
 
@@ -384,3 +344,54 @@ document.addEventListener('DOMContentLoaded', function() {
       modal.style.display = "none";
   }
 
+
+
+  async function getInfo(){
+    let url = 'http://localhost:8080/teacher/id';
+
+    let returnVal = await fetch(url , {
+      method: 'GET',
+      mode: 'cors',
+      headers: {
+        'Authorization': token
+      }
+    }).then(res => {
+      if (!res.ok) throw new Error(res.statusText);
+
+      return res.json();
+    }).then(data => {
+      console.log(data);
+      return data;
+    });
+
+    return returnVal;
+  }
+
+  function addinner(data) {
+    var fullname = data.name;
+    var birthdate = new Date(data.dayofBirth.seconds*1000);
+    var khoa = data.falcuty;
+    var dienthoai = data.phoneNumber;
+    var email = data.email;
+    var hocvi = data.certificate.phd;
+    var cn = data.certificate.master;
+    var daymh = data.courseID;
+  
+    var personalInfo = document.getElementById('personalInfo');
+  
+    personalInfo.innerHTML = '<li><strong>Họ và tên:</strong> ' + fullname + '</li>' +
+                              '<li><strong>Ngày tháng năm sinh:</strong> ' + birthdate + '</li>' +
+                              '<li><strong>Khoa:</strong> ' + khoa + '</li>' +
+                              '<li><strong>Điện thoại liên hệ:</strong> ' + dienthoai + '</li>' +
+                              '<li><strong>Email:</strong> ' + email + '</li>' +
+                              '<li><strong>Học vị:</strong> ' + hocvi + '</li>' +
+                              '<li><strong>Chuyên ngành:</strong> ' + cn + '</li>' +
+                              '<li><strong>Giảng dạy các môn học đại học:</strong> ' + daymh + '</li>' 
+                              ;
+    var savedAvatar = localStorage.getItem("avatar");
+    if (savedAvatar) {
+      // Nếu có, cập nhật ảnh avatar
+      var avatarImg = document.querySelector("#avatar img");
+      avatarImg.src = savedAvatar;
+    }
+  }
