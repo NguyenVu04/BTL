@@ -39,12 +39,13 @@ function studentLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.headers;
+            localStorage.setItem('Authorization', res.headers.get('Authorization'));
+
+            return res.json();
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data.get('Authorization'));
-            localStorage.setItem('Role', data.get('role'));
+            localStorage.setItem('Role', data.role);
             window.location.href = '/';
         }
     ).catch (
@@ -58,7 +59,7 @@ function studentLogin() {
                     count = 0;
                 }, 600000);
             }
-            console.clear()
+            // console.clear()
         }
     )
 }
@@ -82,11 +83,13 @@ function teacherLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.headers.get('Authorization');
+
+            localStorage.setItem('Authorization', res.headers.get('Authorization'));
+            return res.json();
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data);
+            localStorage.setItem('Role', data.role);
             window.location.href = '/';
         }
     ).catch(
@@ -100,7 +103,7 @@ function teacherLogin() {
                     count = 0;
                 }, 600000);
             }
-            console.clear();
+            // console.clear();
         }
     )
 }
@@ -126,10 +129,10 @@ function teacherRegister() {
         body: form
     }).then(res => {
         if (!res.ok) throw Error(res.statusText);
-        window.location.href = '/login.html';
+        window.location.href = 'login.html';
     }).catch(err => {
         document.getElementById('teacher-submit').addEventListener('click', teacherRegister);
-        console.clear();
+        // console.clear();
     })
 }
 
@@ -157,6 +160,6 @@ function studentRegister() {
         window.location.href = '/login.html';
     }).catch(err => {
         document.getElementById('student-submit').addEventListener('click', studentRegister);
-        console.clear();
+        // console.clear();
     })
 }

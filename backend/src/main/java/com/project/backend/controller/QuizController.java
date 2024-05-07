@@ -159,7 +159,6 @@ public class QuizController {
     public ResponseEntity<Quizz> question_detail(@RequestParam Integer number, 
                                                 @RequestParam String idCourse,
                                                 @RequestBody List<QuestionAndAnswer> questionAndAnswer){
-        //TODO: process PUT request
         try {
             DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class,idCourse );
             if (documentSnapshot == null) {
@@ -186,7 +185,6 @@ public class QuizController {
     public ResponseEntity<Quizz> addQuestion(@RequestParam Integer number, 
                                                 @RequestParam String idCourse,
                                                 @RequestBody List<QuestionAndAnswer> questionAndAnswer){
-        //TODO: process PUT request
         try {
             DocumentSnapshot documentSnapshot = repository.getDocumentById(Course.class,idCourse );
             if (documentSnapshot == null) {

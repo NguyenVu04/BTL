@@ -29,7 +29,7 @@
                     <div class="menu-home menu-effect">
                         <a href="./index.html">Trang chủ</a>
                     </div>
-                    <div class="menu-teacher menu-effect">
+                    <div class="menu-teacher menu-effect teacher-only">
                         <a href="./teacher_host.html">
                             Thông tin giảng viên
                             <i class="fa-solid fa-angle-down"></i>
@@ -88,7 +88,6 @@
             <div class="grid wide">
                 <div class="row">
                     <div class="content__title col l-12" id="nameCourse">
-                        Hệ điều hành
                     </div>
                 </div>
             </div>
@@ -215,7 +214,7 @@
                                 </h2>
                                 <div class="section__list" id="slideFileList">
                                     <!-- Nút "Chọn file" ở đầu danh sách -->
-                                    <input type="file" class="fileUpload slideFileUpload" accept=".pdf, .doc, .docx">
+                                    <input type="file" class="fileUpload slideFileUpload teacher-only" accept=".pdf, .doc, .docx">
                                 </div>
                             </div>
                         </div>
@@ -231,7 +230,7 @@
                                 </h2>
                                 <div class="section__list" id="referenceFileList">
                                     <!-- Nút "Chọn file" ở đầu danh sách -->
-                                    <input type="file" class="fileUpload referenceFileUpload" accept=".pdf, .doc, .docx">
+                                    <input type="file" class="fileUpload referenceFileUpload teacher-only" accept=".pdf, .doc, .docx">
                                 </div>
                             </div>
                         </div>
@@ -363,5 +362,7 @@
         </footer>
         
     </div>
+    <script src="./assets/js/only.js"></script>
+
 </body>
 </html>

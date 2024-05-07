@@ -44,7 +44,7 @@
                         <div class="underline"></div>
                     </div>
                     
-                    <div class="menu-courses menu-effect">
+                    <div class="menu-courses menu-effect student-only">
                         <a href="./courses.html">
                             Khóa học của tôi
                             <i class="fa-solid fa-angle-down"></i>
@@ -124,19 +124,17 @@
                                         <li><strong>Họ và tên:</strong> Nguyễn Kiều Dung</li>
                                         <li><strong>Ngày tháng năm sinh:</strong> 12-01-1971</li>
                                         <li><strong>Khoa:</strong> Khoa Khoa học ứng dụng,<strong> Bộ môn: </strong>Toán Ứng Dụng</li>
-                                        <li><strong>Điện thoại liên hệ:</strong></li>
+                                        <li id = "phoneNumber">
+                                            <strong>
+                                                Điện thoại liên hệ:
+                                            </strong> 
+                                                0355916621
+
+                                        </li>
                                         <li><strong>Email:</strong> ngkieudung@hcmut.edu.vn</li>
                                         <li><strong>Học vị:</strong> Thạc sĩ</li>
-                                        <li><strong>Nước tốt nghiệp:</strong></li>
-                                        <li><strong>Ngành:</strong></li>
-                                        <li><strong>Chuyên ngành:</strong></li>
-                                        <li><strong>Chức danh khoa học:</strong></li>
-                                        <li><strong>Lĩnh vực chuyên môn hiện tại:</strong></li>
-                                        <li><strong>Các hướng nghiên cứu chính:</strong></li>
-                                        <li><strong>Số LATS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004): </strong> 0 / 0</li>
-                                        <li><strong>Số LVThS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004):</strong> 0</li>
+                                        <li><strong>Trường tốt nghiệp:</strong> HCMUT</li>
                                         <li><strong>Giảng dạy các môn học đại học:</strong> Xác suất thống kê</li>
-                                        <li><strong>Các công trình khoa học đã công bố:</strong></li>
                                     </div>   
                                     <div class="certi">
                                         <li><strong>Văn bằng:</strong></li>
@@ -226,45 +224,24 @@
             
             <label for="khoa">Khoa:</label>
             <input type="text" id="khoa" name="khoa" required><br><br>
-            
+
             <label for="dienthoai">Điện thoại liên hệ:</label>
-            <input type="number" id="dienthoai" name="dienthoai" required><br><br>            
-            
+            <input type="number" id="dienthoai" name="dienthoai" required><br><br>  
+
             <label for="email">Email:</label>
             <input type="email" id="email" name="email" required><br><br>
-             
+            
             <label for="hocvi">Học vị:</label>
-            <input type="text" id="hocvi" name="hocvi" required><br><br>
+            <input type="text" id="hocvi" name="hocvi" required><br><br> 
 
-            <label for="nuoc">Nước tốt nghiệp:</label>
-            <input type="text" id="nuoc" name="nuoc" required><br><br>
-
-            <label for="nganh">Ngành:</label>
-            <input type="text" id="nganh" name="nganh" required><br><br>
-
+            <label for="cn">Trường tốt nghiệp:</label>
+            <input type="text" id="truong" name="truong" required><br><br>
+            
             <label for="cn">Chuyên ngành:</label>
             <input type="text" id="cn" name="cn" required><br><br>
-
-            <label for="chucdanh">Chức danh khoa học:</label>
-            <input type="text" id="chucdanh" name="chucdanh" required><br><br>
-
-            <label for="linhvuc">Lĩnh vực chuyên môn hiện tại:</label>
-            <input type="text" id="linhvuc" name="linhvuc" required><br><br>
-
-            <label for="huong">Các hướng nghiên cứu chính:</label>
-            <input type="text" id="huong" name="huong" required><br><br>
-
-            <label for="lats">Số LATS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004): </label>
-            <input type="text" id="lats" name="lats" required><br><br>
+                                
             
-            <label for="lv">Số LVThS đã hướng dẫn thành công tại trường Đại học Bách khoa Tp.HCM (từ năm 2004):</label>
-            <input type="text" id="lv" name="lv" required><br><br>
-
-            <label for="daymh">Giảng dạy các môn học đại học:</label>
-            <input type="text" id="daymh" name="daymh" required><br><br>
-            
-            <label for="ctkh">Các công trình khoa học đã công bố:</label>
-            <input type="text" id="ctkh" name="ctkh" required><br><br>
+        
 
             <button type="button" onclick="saveInfo()" id="luu">Lưu</button>
         </form>

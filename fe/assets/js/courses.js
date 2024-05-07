@@ -1,4 +1,11 @@
 let idStudent = '2213954';
+var token = localStorage.getItem('Authorization');
+let teacher_only = document.getElementsByClassName("teacher-only");
+    if (localStorage.getItem('Role') === 'STUDENT') {
+        for (let i = 0; i < teacher_only.length; i++) {
+            teacher_only[i].style.display = 'none';
+        }
+    }
 getCourse().then(
     res => {
     // addinner(res);
@@ -152,15 +159,16 @@ async function addinner(data) {
 }
 
 async function getCourse() {
-    let url = 'http://localhost:8080/course/student/id?';
+    let url = 'http://localhost:8080/course/student/current/id?';
     let returnVal = await
     fetch(url 
-            + new URLSearchParams({
-            idStudent: idStudent
-            }) 
+             
     ,{
         mode: 'cors',
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => {
         if (!res.ok){
@@ -190,7 +198,10 @@ async function addCourse(idCourse, nameCourse) {
     fetch(url ,{
         mode: 'cors',
         method: 'POST',
-        body: form
+        body: form,
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => 
         {
@@ -354,7 +365,10 @@ async function deleteCourseFromDB(idCourse){
     fetch(url ,{
         mode: 'cors',
         method: 'DELETE',
-        body: form
+        body: form,
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => 
         {
@@ -393,6 +407,9 @@ async function get_all_course() {
     fetch(url ,{
         mode: 'cors',
         method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => 
         {

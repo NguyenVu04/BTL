@@ -1,9 +1,12 @@
 let idStudent = '2213954'
-
-// let asd = document.getElementById('asd');
-// console.log(asd.innerHTML);
+var token = localStorage.getItem('Authorization');
 document.addEventListener('DOMContentLoaded', function() {
-    
+    let teacher_only = document.getElementsByClassName("teacher-only");
+    if (localStorage.getItem('Role') === 'STUDENT') {
+        for (let i = 0; i < teacher_only.length; i++) {
+            teacher_only[i].style.display = 'none';
+        }
+    }
     getInfo().then(data => {
         addinner(data);
 
@@ -11,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function() {
     getCourse().then(data => {
         for (let i = 0 ; i < data.length; i++) {
             const val = data[i];
-            // console.log(val.id, val.name);
             getScore(val);
         }
     });
@@ -63,33 +65,43 @@ function closeModal() {
     modal.style.display = "none";
 }
 
-function saveChanges() {
+async function saveChanges() {
+    console.log("Saving changes");
     var modal = document.getElementById("myModal");
-    var studentID = document.getElementById("editStudentID").value;
     var citizenID = document.getElementById("editCitizenID").value;
     var fullName = document.getElementById("editFullName").value;
     var phoneNumber = document.getElementById("editPhoneNumber").value;
     var dob = document.getElementById("editDOB").value;
-    var email = document.getElementById("editEmail").value;
     var gender = document.getElementById("editGender").value;
     var permanentAddress = document.getElementById("editPermanentAddress").value;
     var birthPlace = document.getElementById("editBirthPlace").value;
     var major = document.getElementById("editMajor").value;
     
-    // Hiển thị dữ liệu đã chỉnh sửa trên trang chính
-    document.getElementById("studentID").innerText = studentID;
-    document.getElementById("citizenID").innerText = citizenID;
-    document.getElementById("fullName").innerText = fullName;
-    document.getElementById("phoneNumber").innerText = phoneNumber;
-    document.getElementById("dob").innerText = dob;
-    document.getElementById("email").innerText = email;
-    document.getElementById("gender").innerText = gender;
-    document.getElementById("permanentAddress").innerText = permanentAddress;
-    document.getElementById("birthPlace").innerText = birthPlace;
-    document.getElementById("major").innerText = major;
+    console.log(citizenID);
     
+    let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
+        name: fullName,
+        gender: gender,
+        personalId: citizenID,
+        phoneNumber: phoneNumber,
+        address: permanentAddress,
+        country: birthPlace,
+        major: major
+    });
 
-    modal.style.display = "none"; // Đóng modal sau khi lưu
+    let returnVal = await fetch(url, {
+        method: 'PUT',
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
+    }).then(data => {
+        if (!data.ok) throw new Error(data.statusText);
+        return data.json();
+    }).then(res => {
+        return res;
+    });
+        location.reload();
 }
 
 
@@ -131,7 +143,10 @@ async function getCourse() {
             }) 
     ,{
         mode: 'cors',
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     })
     .then(res => {
         if (!res.ok){
@@ -144,18 +159,18 @@ async function getCourse() {
         const val = returnVal[i].id;
         console.log(val);
     }
-    // document.addEventListener('DOMContentLoaded', addinner(returnVal));
     return returnVal;
 
 }
 async function getInfo() {
-    let url = 'http://localhost:8080/student/id?' + new URLSearchParams({
-        id: idStudent
-    });
+    let url = 'http://localhost:8080/student/id';
 
     let returnVal = await fetch(url, {
         method: 'GET',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(respone => {
         if (!respone.ok) throw Error(respone.statusText);
         return respone.json();
@@ -166,14 +181,16 @@ async function getInfo() {
     return returnVal;
 }
 async function getScore(course) {
-    let url = 'http://localhost:8080/course/student/score?';
+    let url = 'http://localhost:8080/course/student/current/score?';
     url = url + new URLSearchParams({
-        idCourse: course.id,
-        idStudent: idStudent
+        idCourse: course.id
     });
     let returnVal = await fetch(url, {
         method: 'GET',
-        mode: 'cors'
+        mode: 'cors',
+        headers: {
+            'Authorization': token
+        }
     }).then(data => {
         if (!data.ok){
             throw Error(data.statusText);

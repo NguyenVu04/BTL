@@ -1,3 +1,5 @@
+var token = localStorage.getItem('Authorization');
+
 function openliststudent() {
     var url = "list_stu.html";
 
@@ -5,6 +7,7 @@ function openliststudent() {
     detail.forEach(function(search){
         search.addEventListener('click', function() {
             console.log(search.id);
+            localStorage.idCourse = search.id;
             window.open(url, "_self");
         });
     });
@@ -19,7 +22,10 @@ async function getClass() {
 
     let returnVal = await fetch(url, {
         mode: 'cors',
-        method: 'GET'
+        method: 'GET',
+        headers: {
+            'Authorization': token
+        }
     }).then(data => {
         if (!data.ok) throw new Error(data.statusText);
 
@@ -49,7 +55,7 @@ function addinner(data) {
                 <div class="card-body">
                     <h4 class="card-title">{nameCourse}</h4>
                     <p class="card-text">Mã môn học - {idCourse2} - CQ232</p>
-                    <a href="#" class="btn btn-primary card-link" onclick="openliststudent()">HIỂN THỊ CHI TIẾT</a>
+                    <button  class="btn btn-primary card-link" onclick="openliststudent()">HIỂN THỊ CHI TIẾT</button>
                 </div>
             </div>
         </div>`;

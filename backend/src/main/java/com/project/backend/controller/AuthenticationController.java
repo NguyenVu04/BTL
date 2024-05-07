@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.Student.Student;
+import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
 import com.project.backend.security.AuthenticationDetails;
@@ -38,6 +40,10 @@ public class AuthenticationController {
     /**
      * The AuthenticationManager used to authenticate users.
      */
+    @Autowired
+    private TeacherController teacherController;
+    @Autowired
+    private StudentController studentController;
     @Autowired
     private AuthenticationManager manager;
     /**
@@ -169,7 +175,24 @@ public class AuthenticationController {
             @RequestParam(name = "password", required = true) String password,
             @RequestParam(name = "role", required = true) String role) {
         try {
-            //TODO: Create User here
+            
+            if (role.equals("STUDENT")) {
+                
+                ResponseEntity<Student> newStudent =
+                studentController.setStudent(id, "", email, 2000, 01, 01, 00, 00, 00 );
+                if (newStudent.getStatusCode() != HttpStatus.OK) {
+                    return ResponseEntity.status(newStudent.getStatusCode()).build();
+                }
+                
+            }
+            else {
+                ResponseEntity<Teacher> newTeacher = 
+                teacherController.createTeacher(id, "", email, "", 1980, 1, 1, 1, 1, 1, "", "", "", "");
+                if (newTeacher.getStatusCode() != HttpStatus.OK) {
+                    return ResponseEntity.status(newTeacher.getStatusCode()).build();
+                }
+            }
+
             AuthenticationDetails details = new AuthenticationDetails(id, 
                                                                       email, 
                                                                       password, 

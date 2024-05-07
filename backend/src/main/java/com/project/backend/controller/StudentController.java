@@ -8,6 +8,7 @@ import com.project.backend.Student.Student;
 import com.project.backend.Student.gender;
 import com.project.backend.exceptionhandler.ExceptionLog;
 import com.project.backend.repository.FirestoreRepository;
+import com.project.backend.security.BackendDetailsService;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -67,10 +68,11 @@ public class StudentController {
 
     @PostMapping("/new/id")
     
-    public ResponseEntity<Student> setStudent(@RequestParam String name,
-                            @RequestParam(required = false) String email,
+    public ResponseEntity<Student> setStudent(
                             @RequestParam String id,
-                            @RequestParam (required = false, defaultValue = "0000") Integer year,
+                            @RequestParam (required = false, defaultValue = "") String name,
+                            @RequestParam(required = false, defaultValue = "") String email,
+                            @RequestParam (required = false, defaultValue = "2000") Integer year,
                             @RequestParam (required = false, defaultValue =  "01") Integer month,
                             @RequestParam (required = false, defaultValue = "01") Integer day,
                             @RequestParam (required = false, defaultValue = "00") Integer hour,
@@ -81,7 +83,7 @@ public class StudentController {
         try{
 
             if (repository.getDocumentById(Student.class, id) != null){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+                return ResponseEntity.status(HttpStatus.CREATED).build();
             }
             List<Course> CourseID = new ArrayList<Course>();
             
@@ -91,14 +93,13 @@ public class StudentController {
             return ResponseEntity.ok().body(student);
         } catch (Exception e) {
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
         }
 
     }
 
     @PutMapping("/adjustion/id")
     public ResponseEntity<Student> UpdateStudent(
-        @RequestParam String id,
         @RequestParam(required = false) String name,
         @RequestParam(required = false, defaultValue = "01") Integer date,
         @RequestParam(required = false, defaultValue = "01") Integer month,
@@ -115,7 +116,7 @@ public class StudentController {
         ) {
         //TODO: process PUT request
         try{
-
+            String id = BackendDetailsService.getCurrentUserId();
             DocumentSnapshot snapshot = repository.getDocumentById(Student.class, id);
             if (snapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -140,12 +141,28 @@ public class StudentController {
             student.setAddress(address);
             student.setMajor(major);
             repository.updateDocumentById(student);
+            
+
+            List<Course> courses = student.getCourseID();
+            for (int i = 0; i < courses.size(); i++){
+                String getidCourse = courses.get(i).getId();
+                DocumentSnapshot temp = repository.getDocumentById(Course.class, getidCourse);
+                Course findCourse = temp.toObject(Course.class);
+
+                for (int j = 0 ; j < findCourse.getListStudent().size(); j++){
+                    if (findCourse.getListStudent().get(j).getId().equals(id)){
+                        findCourse.getListStudent().get(j).setName(student.getName());
+                        findCourse.getListStudent().get(j).setEmail(student.getEmail());
+                        repository.updateDocumentById(findCourse);
+                    }
+                }
+            }
 
             return ResponseEntity.ok().body(student);
 
         } catch (Exception e) {
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
         }
     }
 
@@ -169,6 +186,8 @@ public class StudentController {
             Map<String, Object> changes = snapshot.getData();
             changes.put("dob", value);
             repository.updateDocumentById(Student.class, id, changes);
+
+            
             return ResponseEntity.ok().body(changes);
 
         } catch (Exception e) {
@@ -225,8 +244,9 @@ public class StudentController {
     }
     
     @GetMapping("/id")
-    public ResponseEntity<Student> getStudentbyId(@RequestParam String id) {
+    public ResponseEntity<Student> getStudentbyId() {
         try {
+            String id = BackendDetailsService.getCurrentUserId();
             DocumentSnapshot snapshot = repository.getDocumentById(Student.class, id);
             if (snapshot == null) {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();

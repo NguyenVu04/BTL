@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 2024-05-03T23:05:32.938033500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
 2024-05-03T23:06:39.647284300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
 2024-05-03T23:11:35.342736600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
@@ -43,3 +44,17 @@
 2024-05-04T15:49:39.770103200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-05T19:47:49.413204500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-05T19:47:49.413204500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+=======
+2024-05-06T00:12:47.241696900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-06T00:34:08.454340900: java.lang.RuntimeException: Could not deserialize object. Could not find enum value of com.project.backend.Student.gender for value "man" (found in field 'gender')
+2024-05-06T00:34:09.367145900: java.lang.RuntimeException: Could not deserialize object. Could not find enum value of com.project.backend.Student.gender for value "other" (found in field 'gender')
+2024-05-07T10:43:49.066639700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-07T11:05:51.155522400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=giaovien@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-05-07T11:05:51.156478400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-07T11:06:18.123539300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-07T11:06:19.596741700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-07T11:06:32.302841800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-07T11:06:32.303372500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-07T11:07:06.611380500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=giaovien@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-07T11:07:06.611380500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+>>>>>>> 35cc1ec0935a79c1b895ba9aae1ff6b2b8bb16b3
