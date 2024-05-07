@@ -29,20 +29,15 @@ function closeModal() {
 async function updateScores(event) {
     event.preventDefault();
 
-    // Lưu giá trị vào Local Storage
-    localStorage.setItem('bt_dd', document.getElementById("bt-dd-input").value);
-    localStorage.setItem('bt_lon', document.getElementById("bt-lon-input").value );
-    localStorage.setItem('kt_giua', document.getElementById("kt-giua-input").value);
-    localStorage.setItem('kt_cuoi', document.getElementById("kt-cuoi-input").value);
 
     let url = 'http://localhost:8080/course/student/score/update?' 
     + new URLSearchParams({
         idStudent: localStorage.idStudent,
         idCourse: localStorage.idCourse,
-        midTerm: localStorage.getItem('kt_giua'),
-        finalExam: localStorage.getItem('kt_cuoi'),
-        other: localStorage.getItem('bt_dd'),
-        assignment: localStorage.getItem('bt_lon')
+        midTerm: document.getElementById("kt-giua-input").value,
+        finalExam: document.getElementById("kt-cuoi-input").value,
+        other:  document.getElementById("bt-dd-input").value,
+        assignment: document.getElementById("bt-lon-input").value
     }) ;
     
     let fetchs = await fetch(url, {

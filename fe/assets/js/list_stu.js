@@ -22,12 +22,6 @@ let adjustStu = `<div class="row">
 </div>`;
 console.log(localStorage.detail_course);
 document.addEventListener('DOMContentLoaded', function(e) {
-    let teacher_only = document.getElementsByClassName("teacher-only");
-    if (localStorage.getItem('Role') === 'STUDENT') {
-        for (let i = 0; i < teacher_only.length; i++) {
-            teacher_only[i].style.display = 'none';
-        }
-    }
     
     getClass().then(function(any){
         let teacher_only = document.getElementsByClassName("teacher-only");

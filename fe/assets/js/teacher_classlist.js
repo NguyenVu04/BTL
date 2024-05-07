@@ -1,4 +1,5 @@
 var token = localStorage.getItem('Authorization');
+
 function openliststudent() {
     var url = "list_stu.html";
 

@@ -83,11 +83,13 @@ function teacherLogin() {
     }).then(
         res => {
             if (!res.ok) throw Error(res.statusText);
-            return res.headers.get('Authorization');
+
+            localStorage.setItem('Authorization', res.headers.get('Authorization'));
+            return res.json();
         }
     ).then(
         data => {
-            localStorage.setItem('Authorization', data);
+            localStorage.setItem('Role', data.role);
             window.location.href = '/';
         }
     ).catch(
