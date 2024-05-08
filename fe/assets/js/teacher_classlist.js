@@ -6,14 +6,23 @@ function openliststudent() {
     const detail = document.querySelectorAll('.card');
     detail.forEach(function(search){
         search.addEventListener('click', function() {
-            console.log(search.id);
             localStorage.idCourse = search.id;
             window.open(url, "_self");
         });
     });
 }
 
+function openCourseDetail(){
+    var url = "course-detail.html";
 
+    const detail = document.querySelectorAll('.card');
+    detail.forEach(function(search){
+        search.addEventListener('click', function() {
+            localStorage.idCourse = search.id;
+            window.open(url, "_self");
+        });
+    });
+}
 getClass();
 
 
@@ -32,14 +41,9 @@ async function getClass() {
         return data.json();
     }).then(data => {
 
-
         addinner(data);
         return data;
 
-
-    }).catch(err => {
-        console.log(err);
-        // console.clear();
     });
 }
 
@@ -55,7 +59,9 @@ function addinner(data) {
                 <div class="card-body">
                     <h4 class="card-title">{nameCourse}</h4>
                     <p class="card-text">Mã môn học - {idCourse2} - CQ232</p>
-                    <button  class="btn btn-primary card-link" onclick="openliststudent()">HIỂN THỊ CHI TIẾT</button>
+                    <button  class="btn btn-primary card-link" onclick="openCourseDetail()">ĐIỀU CHỈNH KHÓA HỌC</button>
+                    <p></p>
+                    <button  class="btn btn-primary card-link" onclick="openliststudent()">DANH SÁCH LỚP</button>
                 </div>
             </div>
         </div>`;

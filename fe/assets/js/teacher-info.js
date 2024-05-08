@@ -78,7 +78,6 @@ getAllTeacher();
 async function addinner(data) {
     let teacher_list = document.getElementById('teacher-list');
     let storage_info = document.getElementById('storage-info');
-    console.log(data);
     for (let i = 0; i < data.length; i++) {
         let temp = box;
         let sto = storage;
