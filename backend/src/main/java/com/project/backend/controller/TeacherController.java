@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.DocumentSnapshot;
+import com.project.backend.Student.Student;
 import com.project.backend.Teacher.Certificate;
 import com.project.backend.Teacher.Teacher;
 import com.project.backend.exceptionhandler.ExceptionLog;
@@ -62,7 +63,26 @@ public class TeacherController {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
     }
-    
+    @GetMapping("/all")
+    public ResponseEntity<List<Teacher>> getAllTeacher() {
+        try {
+            List<DocumentSnapshot> snapshots = repository.getAllDocuments(Teacher.class);
+            if (snapshots == null || snapshots.size() == 0) {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            }
+
+            List<Teacher> teachers = new ArrayList<Teacher>();
+            for (DocumentSnapshot snapshot : snapshots) {
+                Teacher each = snapshot.toObject(Teacher.class);
+                teachers.add(each);
+            }
+
+            return ResponseEntity.ok().body(teachers);
+        } catch (Exception e) {
+            exceptionLog.log(e);
+            return ResponseEntity.status(HttpStatus.BAD_GATEWAY).build();
+        }
+    }
     @PutMapping("/id/info")
     public ResponseEntity<Teacher> updateCurrentTeacher(
         @RequestParam (required = false, defaultValue ="") String name,

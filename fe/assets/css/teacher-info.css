@@ -105,6 +105,15 @@
     margin: 10px;
     background-image: url('/assets/img/ava_thayco/Ava_Thanh.png');
 }
+.ava_nobody {
+    flex: 1;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-clip: content-box;
+    margin: 10px;
+    background-image: url('/assets/img/HCMUT_official_logo.png');
+
+}
 .ava_vanquy{
     flex: 1;
     background-repeat: no-repeat;
@@ -112,6 +121,15 @@
     background-clip: content-box;
     margin: 10px;
     background-image: url('/assets/img/ava_thayco/ava-vanquy.png');
+}
+.item-ava-nobody {
+    height: 80%;
+    width: 45%;
+    background-size: contain;
+    margin: auto;
+    background-image: url(/assets/img/teacher/nonavatar.jpg);
+    background-repeat: no-repeat;
+
 }
 .item-ava_vananh{
     height: 80%;

@@ -1,12 +1,5 @@
-let idStudent = '2213954'
 var token = localStorage.getItem('Authorization');
 document.addEventListener('DOMContentLoaded', function() {
-    let teacher_only = document.getElementsByClassName("teacher-only");
-    if (localStorage.getItem('Role') === 'STUDENT') {
-        for (let i = 0; i < teacher_only.length; i++) {
-            teacher_only[i].style.display = 'none';
-        }
-    }
     getInfo().then(data => {
         addinner(data);
 
@@ -47,7 +40,6 @@ function showEditModal() {
     var modal = document.getElementById("myModal");
     modal.style.display = "block";
     // Điền các trường thông tin từ trang chính vào form modal
-    //console.log(document.getElementById("studentID"));
     document.getElementById("editStudentID").value = document.getElementById("studentID").innerText;
     document.getElementById("editCitizenID").value = document.getElementById("citizenID").innerText;
     document.getElementById("editFullName").value = document.getElementById("fullName").innerText;
@@ -77,7 +69,6 @@ async function saveChanges() {
     var birthPlace = document.getElementById("editBirthPlace").value;
     var major = document.getElementById("editMajor").value;
     
-    console.log(citizenID);
     
     let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
         name: fullName,
@@ -135,30 +126,26 @@ async function updateInfo() {
 }
 
 async function getCourse() {
-    let url = 'http://localhost:8080/course/student/id?';
+    let url = 'http://localhost:8080/course/student/current/id?';
     let returnVal = await
     fetch(url 
-            + new URLSearchParams({
-            idStudent: idStudent
-            }) 
-    ,{
-        mode: 'cors',
-        method: 'GET',
-        headers: {
-            'Authorization': token
+        ,{
+            mode: 'cors',
+            method: 'GET',
+            headers: {
+                'Authorization': token
+            }
+        })
+        .then(res => {
+            if (!res.ok){
+                throw Error(res.statusText);
+            }
+            return res.json();}
+        );
+        
+        for (let i = 0 ; i < returnVal.length; i++) {
+            const val = returnVal[i].id;
         }
-    })
-    .then(res => {
-        if (!res.ok){
-            throw Error(res.statusText);
-        }
-        return res.json();}
-    );
-    
-    for (let i = 0 ; i < returnVal.length; i++) {
-        const val = returnVal[i].id;
-        console.log(val);
-    }
     return returnVal;
 
 }
@@ -197,9 +184,11 @@ async function getScore(course) {
         }
 
         return data.json();
+    }).then(res => {
+
+        add_result(course.id, course.name, res);
+        return res;
     });
-    // console.log(course.id, course.name, returnVal);
-    add_result(course.id, course.name, returnVal);
     return returnVal;
 }
 function add_result(idCourse, nameCourse, data) {
