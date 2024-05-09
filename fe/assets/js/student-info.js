@@ -1,4 +1,6 @@
 var token = localStorage.getItem('Authorization');
+let totalList = new Array();
+let courseList = new Array();
 document.addEventListener('DOMContentLoaded', function() {
     getInfo().then(data => {
         addinner(data);
@@ -213,6 +215,8 @@ function add_result(idCourse, nameCourse, data) {
     adder = adder.replace('{finalexam}', data.finalExam);
 
     let total = (data.other*10 + data.assignment*20 + data.midTerm*20 + data.finalExam*50)/100;
+    totalList.push(total);
+    courseList.push(nameCourse);
     adder = adder.replace('{total}', total.toString());
     result.innerHTML += adder;
 }
