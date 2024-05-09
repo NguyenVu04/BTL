@@ -1,39 +1,65 @@
 var token = localStorage.getItem('Authorization');
-let totalList = new Array();
-let courseList = new Array();
-document.addEventListener('DOMContentLoaded', function() {
+var totalList = new Array();
+var courseList = new Array();
+
+//TODO: For demo only. Remove later
+totalList.push(20, 30, 48);
+courseList.push("IT", "ECE", "CSE");
+
+document.addEventListener('DOMContentLoaded', function () {
     getInfo().then(data => {
         addinner(data);
 
     });
     getCourse().then(data => {
-        for (let i = 0 ; i < data.length; i++) {
+        for (let i = 0; i < data.length; i++) {
             const val = data[i];
             getScore(val);
         }
     });
 });
 var content1 = document.querySelector('.detail-info');
-var list_i=document.querySelectorAll('.option_detail h4 i');
-var list_option=document.querySelectorAll('.option_detail');
+var list_i = document.querySelectorAll('.option_detail h4 i');
+var list_option = document.querySelectorAll('.option_detail');
 
-function changeStudentInfo(p,classname){
-    var classnameChange=document.querySelector(classname).innerHTML;
-    content1.innerHTML=classnameChange;
-    for(let i=0;i<3;i++)
-    {
-        if(list_option[i].classList.contains('active'))
-        {
+function changeStudentInfo(p, classname) {
+    var classnameChange = document.querySelector(classname).innerHTML;
+    content1.innerHTML = classnameChange;
+    if (classname === '.progress-info') {
+        let data = [{
+            x: courseList,
+            y: totalList,
+            type: 'bar',
+            marker: {
+                color: 'rgb(93, 226, 231)',
+            }
+        }];
+        // Layout configuration
+        let layout = {
+            title: 'Bar Plot of Student Progress',
+            xaxis: {
+                title: 'Course',
+                tickangle: -45
+            },
+            yaxis: {
+                title: 'Score'
+            }
+        };
+
+        // Render the plot
+        Plotly.newPlot('courseChart', data, layout);
+    }
+    for (let i = 0; i < 3; i++) {
+        if (list_option[i].classList.contains('active')) {
             list_option[i].classList.toggle('active')
         }
-        else{}
-        if(list_i[i].classList.contains('main-color'))
-        {
+        else { }
+        if (list_i[i].classList.contains('main-color')) {
             list_i[i].classList.toggle('main-color')
         }
-        else{}
+        else { }
     }
-    var item=p.querySelector('h4 i');
+    var item = p.querySelector('h4 i');
     item.classList.add('main-color');
     p.classList.add('active');
 }
@@ -70,8 +96,8 @@ async function saveChanges() {
     var permanentAddress = document.getElementById("editPermanentAddress").value;
     var birthPlace = document.getElementById("editBirthPlace").value;
     var major = document.getElementById("editMajor").value;
-    
-    
+
+
     let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
         name: fullName,
         gender: gender,
@@ -94,7 +120,7 @@ async function saveChanges() {
     }).then(res => {
         return res;
     });
-        location.reload();
+    location.reload();
 }
 
 
@@ -111,7 +137,7 @@ async function updateInfo() {
         phoneNumber: phoneNumber,
         email: email,
         address: address,
-        major : major
+        major: major
     });
 
     let returnVal = await fetch(url, {
@@ -130,24 +156,25 @@ async function updateInfo() {
 async function getCourse() {
     let url = 'http://localhost:8080/course/student/current/id?';
     let returnVal = await
-    fetch(url 
-        ,{
-            mode: 'cors',
-            method: 'GET',
-            headers: {
-                'Authorization': token
+        fetch(url
+            , {
+                mode: 'cors',
+                method: 'GET',
+                headers: {
+                    'Authorization': token
+                }
+            })
+            .then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+                return res.json();
             }
-        })
-        .then(res => {
-            if (!res.ok){
-                throw Error(res.statusText);
-            }
-            return res.json();}
-        );
-        
-        for (let i = 0 ; i < returnVal.length; i++) {
-            const val = returnVal[i].id;
-        }
+            );
+
+    for (let i = 0; i < returnVal.length; i++) {
+        const val = returnVal[i].id;
+    }
     return returnVal;
 
 }
@@ -181,7 +208,7 @@ async function getScore(course) {
             'Authorization': token
         }
     }).then(data => {
-        if (!data.ok){
+        if (!data.ok) {
             throw Error(data.statusText);
         }
 
@@ -214,7 +241,7 @@ function add_result(idCourse, nameCourse, data) {
     adder = adder.replace('{midterm}', data.midTerm);
     adder = adder.replace('{finalexam}', data.finalExam);
 
-    let total = (data.other*10 + data.assignment*20 + data.midTerm*20 + data.finalExam*50)/100;
+    let total = (data.other * 10 + data.assignment * 20 + data.midTerm * 20 + data.finalExam * 50) / 100;
     totalList.push(total);
     courseList.push(nameCourse);
     adder = adder.replace('{total}', total.toString());
@@ -226,7 +253,7 @@ function addinner(data) {
     let idStudentHTML1 = document.getElementById('idStudent1');
     idStudentHTML.innerHTML = data.id;
     idStudentHTML1.innerHTML = data.id;
-    
+
     let personalId = document.getElementById('personalId');
     let personalId1 = document.getElementById('personalId1');
     personalId.innerHTML = data.personalId;
@@ -244,7 +271,7 @@ function addinner(data) {
 
     let dobHTML = document.getElementById('dob');
     let dobHTML1 = document.getElementById('dob1');
-    var d = new Date(data.dob.seconds*1000);
+    var d = new Date(data.dob.seconds * 1000);
     dobHTML.innerHTML = d;
     dobHTML1.innerHTML = d;
 
@@ -252,12 +279,12 @@ function addinner(data) {
     let emailHTML1 = document.getElementById('email1');
     emailHTML.innerHTML = data.email;
     emailHTML1.innerHTML = data.email;
-    
+
     let genderHTML = document.getElementById('gender');
     let genderHTML1 = document.getElementById('gender1');
     genderHTML.innerHTML = data.gender;
     genderHTML1.innerHTML = data.gender;
-    
+
     let addressHTML = document.getElementById('address');
     let addressHTML1 = document.getElementById('address1');
     addressHTML.innerHTML = data.address;
