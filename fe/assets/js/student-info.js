@@ -3,8 +3,8 @@ var totalList = new Array();
 var courseList = new Array();
 
 //TODO: For demo only. Remove later
-totalList.push(20, 30, 48);
-courseList.push("IT", "ECE", "CSE");
+// totalList.push(20, 30, 48);
+// courseList.push("IT", "ECE", "CSE");
 
 document.addEventListener('DOMContentLoaded', function () {
     getInfo().then(data => {
@@ -25,6 +25,7 @@ var list_option = document.querySelectorAll('.option_detail');
 function changeStudentInfo(p, classname) {
     var classnameChange = document.querySelector(classname).innerHTML;
     content1.innerHTML = classnameChange;
+    console.log(content1);
     if (classname === '.progress-info') {
         let data = [{
             x: courseList,

@@ -77,3 +77,5 @@
 2024-05-08T08:20:56.245950900: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
 2024-05-08T08:24:50.161746: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
 2024-05-08T08:24:50.162749200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-09T22:06:40.734480900: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=kmtri07102004@hcmut.edu, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-09T22:06:41.049894100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController

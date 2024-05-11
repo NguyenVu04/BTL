@@ -248,8 +248,9 @@ public class CourseController {
     }
 
     @DeleteMapping("/del/student")
-    public ResponseEntity<Student> deleteStudentinCourse(@RequestParam String idStudent, @RequestParam String idCourse) {
+    public ResponseEntity<Student> deleteStudentinCourse(@RequestParam String idCourse) {
         try {
+            String idStudent = BackendDetailsService.getCurrentUserId();
             DocumentSnapshot documentSnapshot = repository.getDocumentById(Student.class, idStudent);
             DocumentSnapshot snapshot = repository.getDocumentById(Course.class, idCourse);
             if (documentSnapshot == null || snapshot == null) {
@@ -257,7 +258,6 @@ public class CourseController {
             }
     
             Student student = documentSnapshot.toObject(Student.class);
-            String idstudent = student.getId();
             boolean alreadyExists = false;
             for (int i = 0 ; i < student.getCourseID().size() ; i++) {
                 if (student.getCourseID().get(i).getId().equals(idCourse)){
@@ -273,7 +273,7 @@ public class CourseController {
             Course course = snapshot.toObject(Course.class);
             // course.getListStudent()
             for (int i = 0 ; i <  course.getListStudent().size(); i++) {
-                if (course.getListStudent().get(i).getId().equals(idstudent)) {
+                if (course.getListStudent().get(i).getId().equals(idStudent)) {
                     course.getListStudent().remove(i);
                     break;
                 }

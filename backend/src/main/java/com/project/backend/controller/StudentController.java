@@ -196,25 +196,25 @@ public class StudentController {
         }
     }
 
-    @DeleteMapping("id/del")
-    public ResponseEntity<Student> DeleteStudent(@RequestParam String id) {
-        //TODO: process DELETE request
+    // @DeleteMapping("id/del")
+    // public ResponseEntity<Student> DeleteStudent(@RequestParam String id) {
+    //     //TODO: process DELETE request
         
-        try{            
-            DocumentSnapshot snapshot = repository.getDocumentById(Student.class, id);
-            if (snapshot == null)  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-            Student student = snapshot.toObject(Student.class);
-            for (int i = 0; i < student.getCourseID().size(); i++){
-                String getidCourse = student.getCourseID().get(i).getId();
-                courseController.deleteStudentinCourse(id, getidCourse);
-            }
-            repository.deleteDocumentById(Student.class, id);
-            return ResponseEntity.ok().body(student);
-        } catch (Exception e) {
-            exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
-    }
+    //     try{            
+    //         DocumentSnapshot snapshot = repository.getDocumentById(Student.class, id);
+    //         if (snapshot == null)  return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+    //         Student student = snapshot.toObject(Student.class);
+    //         for (int i = 0; i < student.getCourseID().size(); i++){
+    //             String getidCourse = student.getCourseID().get(i).getId();
+    //             courseController.deleteStudentinCourse(id, getidCourse);
+    //         }
+    //         repository.deleteDocumentById(Student.class, id);
+    //         return ResponseEntity.ok().body(student);
+    //     } catch (Exception e) {
+    //         exceptionLog.log(e);
+    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+    //     }
+    // }
     @DeleteMapping("/del-all")
     public ResponseEntity<List<Student>> deleteAll() {
         //TODO: process DELETE request
