@@ -36,7 +36,7 @@ function logout() {
         }
     }).finally(
         () => {
-            localStorage.removeItem('Authorization');
+            localStorage.clear();
             window.location.href = '/login.html';
         }
     )
@@ -65,7 +65,7 @@ function validate() {
         }
     ).catch(
         err => {
-            localStorage.removeItem('Authorization');
+            localStorage.clear();
             window.location.href = '/';
             () => console.clear()
         }

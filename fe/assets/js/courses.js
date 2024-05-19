@@ -347,7 +347,6 @@ async function deleteCourseFromDB(idCourse){
     let url = 'http://localhost:8080/course/del/student';
     let form = new FormData();
     form.append('idCourse', idCourse);
-    form.append('idStudent', idStudent);
     
     let data = await
     fetch(url ,{

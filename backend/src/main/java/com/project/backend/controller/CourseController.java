@@ -227,7 +227,7 @@ public class CourseController {
 
         } catch (Exception e) {
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
@@ -243,7 +243,7 @@ public class CourseController {
 
         } catch (Exception e){
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }   
     }
 
@@ -283,7 +283,7 @@ public class CourseController {
 
         } catch (Exception e) {
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
     }
@@ -323,7 +323,7 @@ public class CourseController {
         }
         catch (Exception e) {
             exceptionLog.log(e);
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
 
     }

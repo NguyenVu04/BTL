@@ -673,3 +673,20 @@
 2024-05-19T10:06:37.899283500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T10:07:41.673515: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T10:07:41.674529100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T15:20:13.329007: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=teacheradmin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-19T15:20:13.353915500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T15:20:30.819186300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=teacheradmin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-05-19T15:20:30.819186300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T15:33:53.852199400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T15:33:53.868453700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T15:51:17.498969300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T15:52:11.849700400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-05-19T15:52:11.883978: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=student1@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-19T15:52:11.884962500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T15:53:30.301292300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=student1@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-19T15:53:30.301292300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T16:08:57.637125200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-05-19T16:08:57.638127100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=teacher3@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-19T16:08:57.638127100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T16:33:12.808592200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T16:33:12.808592200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter

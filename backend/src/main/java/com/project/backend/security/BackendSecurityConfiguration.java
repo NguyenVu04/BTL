@@ -89,17 +89,18 @@ public class BackendSecurityConfiguration {
         http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(req -> req.anyRequest().permitAll())
-                /*
-                 * .authorizeHttpRequests(req -> req.requestMatchers("/student/**")
-                 * .hasAuthority("STUDENT")
-                 * .requestMatchers("/teacher/**")
-                 * .hasAuthority("TEACHER")
-                 * .requestMatchers("/logout")
-                 * .authenticated()
-                 * .anyRequest()
-                 * .permitAll())
-                 */
+                .authorizeHttpRequests(
+                    req -> req.requestMatchers("/student/**")
+                              .hasAuthority(UserRole.STUDENT.name())
+                              .requestMatchers("/teacher/**")
+                              .hasAuthority(UserRole.TEACHER.name())
+                              .requestMatchers("/course/**")
+                              .authenticated()
+                              .requestMatchers("/quiz/**")
+                              .authenticated()
+                              .anyRequest()
+                              .permitAll()
+                )
                 .logout(out -> out.disable())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         return http.build();
