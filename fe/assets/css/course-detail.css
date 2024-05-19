@@ -1,3 +1,7 @@
+.flex {
+    display: flex;
+}
+
 #content .content__map {
     height: 48px;
     background-color: #ddd;
@@ -174,6 +178,27 @@ input#file-upload-button {
     position: absolute;
     right: 10px;
 }
+
+#content .confirm-container {
+    margin-top: 10px; 
+    text-align: center; 
+}
+
+#content .confirm-button {
+    padding: 8px 12px;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    background-color: #0c89dc; 
+    transition: background-color 0.3s;
+}
+
+
+#content .confirm-button:hover {
+    cursor: pointer;
+    background-color: #0056b3; 
+}
+
 
 #content .section__list .quiz-name {
     padding: 24px;

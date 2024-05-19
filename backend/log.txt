@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 2024-05-18T22:33:41.807294800: java.lang.NumberFormatException: Cannot parse null string
 2024-05-18T22:37:57.981412200: java.time.DateTimeException: Invalid value for DayOfMonth (valid values 1 - 28/31): 0
 2024-05-18T22:38:04.891619500: java.time.DateTimeException: Invalid value for DayOfMonth (valid values 1 - 28/31): 0
@@ -690,3 +691,88 @@
 2024-05-19T16:08:57.638127100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
 2024-05-19T16:33:12.808592200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T16:33:12.808592200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+=======
+<<<<<<< HEAD
+2024-05-03T23:05:32.938033500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:06:39.647284300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:11:35.342736600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:11:51.982598200: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:11:59.858861400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:12:04.457949900: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:38.290758800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:39.202223700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:41.729211700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:43.966490100: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:45.200598700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:45.803840700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:47.356470100: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:51.056531300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:52.002108800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:13:53.072214500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:18:21.250067900: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:18:21.929969400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:18:22.821154300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-03T23:24:52.908264400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:14:23.678800600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:04.851351500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:05.462416: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:16.184910200: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:32.459546900: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:33.314707300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:35.342997400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:38.184997800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:39.716287300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:19:49.123830300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:52.082632700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:53.253437800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:55.655177500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:20:57.453173300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:21:10.141988800: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:21:38.779352400: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:22:47.821418700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:22:49.680309700: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:22:52.649104300: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:25:52.568119500: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T06:27:10.807650600: java.lang.NullPointerException: Cannot invoke "com.google.cloud.storage.Blob.getName()" because "blob" is null: com.project.backend.repository.BackendStorage
+2024-05-04T15:49:09.265507800: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-04T15:49:39.770103200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-05T19:47:49.413204500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-05T19:47:49.413204500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+=======
+2024-05-06T00:12:47.241696900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-06T00:34:08.454340900: java.lang.RuntimeException: Could not deserialize object. Could not find enum value of com.project.backend.Student.gender for value "man" (found in field 'gender')
+2024-05-06T00:34:09.367145900: java.lang.RuntimeException: Could not deserialize object. Could not find enum value of com.project.backend.Student.gender for value "other" (found in field 'gender')
+2024-05-07T10:43:49.066639700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-07T11:05:51.155522400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=giaovien@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-05-07T11:05:51.156478400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-07T11:06:18.123539300: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-07T11:06:19.596741700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-07T11:06:32.302841800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-07T11:06:32.303372500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-07T11:07:06.611380500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=giaovien@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-07T11:07:06.611380500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+>>>>>>> 35cc1ec0935a79c1b895ba9aae1ff6b2b8bb16b3
+2024-05-08T08:17:12.875148: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=kmtri07102004@hcmut.edu, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-05-08T08:17:12.876148600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:18:20.775160700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:18:20.775160700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:18:31.872725900: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=kmtri07102004@hcmut.edu, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:18:31.872725900: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:18:46.988123500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:18:46.989123800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:18:56.306536600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:18:56.306536600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:19:12.672844100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-05-08T08:19:12.673858200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=admin1@hcmut.edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:19:12.674854100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:19:40.413829800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:19:40.414831600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:20:56.245386: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:20:56.245950900: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-08T08:24:50.161746: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-08T08:24:50.162749200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-09T22:06:40.734480900: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=kmtri07102004@hcmut.edu, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-09T22:06:41.049894100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-17T22:24:21.105436400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-17T22:24:21.499499800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+>>>>>>> Stashed changes
