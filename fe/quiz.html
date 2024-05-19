@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <link rel="stylesheet" href="./assets/css/quiz.css">
     <link rel="icon" type="img/x-icon" href="./assets/img/favicon.ico">
-    <title>Document</title>
+    <title>LMS Project</title>
 </head>
 <body>
     <div id="main">
@@ -71,9 +71,9 @@
                         <i class="fa-solid fa-circle-user"></i>
                         <i class="arrow-down fa-solid fa-caret-down"></i>  
                         <ul class="subnav">
-                            <li><a href="./login.html">Đăng nhập</a></li>
-                            <li><a href="./login.html">Đăng xuất</a></li>
-                            <li><a href="">Đổi mật khẩu</a></li>
+                            <li><a id="login" href="./login.html"></a></li>
+                            <li><a id="logout"></a></li>
+                            <li><a id="change-password" href="#"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -83,9 +83,7 @@
         <div id="content">
             <div class="grid wide">
                 <div class="row">
-                    <div class="content__title col l-12">
-                        Hệ điều hành
-                    </div>
+                    <div class="content__title col l-12"></div>
                 </div>
             </div>
 
@@ -98,7 +96,7 @@
                         </div>
                     </div>
                     <div class="col l-2">
-                        <div class="back-to-detail"">
+                        <div class="back-to-detail">
                             <a href="./course-detail.html">Trở về</a>
                         </div>
                     </div>
@@ -393,7 +391,7 @@
             </div>
         </footer>   
     </div>
+    <script src="./assets/js/auth_cfg.js"></script>
     <script src="./assets/js/quiz.js"></script>
-    <script src="./assets/js/only.js"></script>
 </body>
 </html>

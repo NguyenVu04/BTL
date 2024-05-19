@@ -213,8 +213,7 @@ function saveInfo() {
   var hocvi = form.elements['hocvi'].value;
   var chuyennganh = form.elements['cn'].value;
   var truong = form.elements['truong'].value;
-
-  console.log(truong);
+  let [year, month, day] = birthdate.split('-');
   fetch(url + new URLSearchParams({
     name: fullname,
     falcuty: khoa,
@@ -222,7 +221,10 @@ function saveInfo() {
     email:email,
     phd: hocvi,
     university: truong,
-    master: chuyennganh
+    master: chuyennganh,
+    year: Number(year),
+    month: Number(month),
+    date: Number(day)
   }), {
     method: 'PUT',
     mode: 'cors',
@@ -233,7 +235,6 @@ function saveInfo() {
     if (!respone.ok) throw new Error(respone.statusText)
       return respone.json();
   }).then (data => {
-    console.log(data);
     location.reload();
   })
   
@@ -360,7 +361,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
       return res.json();
     }).then(data => {
-      console.log(data);
       return data;
     });
 
@@ -369,7 +369,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function addinner(data) {
     var fullname = data.name;
-    var birthdate = new Date(data.dayofBirth.seconds*1000);
+    var birthdate = new Date(data.dayofBirth.seconds * 1000);
+    var date = birthdate.toLocaleDateString();
     var khoa = data.falcuty;
     var dienthoai = data.phoneNumber;
     var email = data.email;
@@ -380,7 +381,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var personalInfo = document.getElementById('personalInfo');
   
     personalInfo.innerHTML = '<li><strong>Họ và tên:</strong> ' + fullname + '</li>' +
-                              '<li><strong>Ngày tháng năm sinh:</strong> ' + birthdate + '</li>' +
+                              '<li><strong>Ngày tháng năm sinh:</strong> ' + date + '</li>' +
                               '<li><strong>Khoa:</strong> ' + khoa + '</li>' +
                               '<li><strong>Điện thoại liên hệ:</strong> ' + dienthoai + '</li>' +
                               '<li><strong>Email:</strong> ' + email + '</li>' +

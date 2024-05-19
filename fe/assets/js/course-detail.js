@@ -1,4 +1,3 @@
-console.log(localStorage.idCourse);
 var token = localStorage.getItem('Authorization');
 getCourse();
 let reference = new JSZip();
@@ -91,7 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
             JSZipUtils.getBinaryContent(fileLink.href, function (err, content) {
                 if (err) {
-                    console.error(err);
                     return;
                 }
                 if (fileList.id === 'slideFileList') {
@@ -133,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     //Handle file for reference and slide
     let id = localStorage.getItem('idCourse');
-    console.log(id);
     fetch(`http://localhost:8080/course/${id}/materials`, {
         method: 'GET',
         mode: 'cors',
@@ -249,7 +246,6 @@ function addinner(data) {
                `;
 
     let nameCourse = data.name;
-    console.log(nameCourse);
     nameCourse_html = nameCourse_html.replace('{nameCourse}', nameCourse);
     page.innerHTML = nameCourse_html;
 }
@@ -273,7 +269,6 @@ async function getCourse() {
             return data.json();
         }
     ).then(res => {
-        console.log(res);
         return res;
     });
     addinner(returnVal);

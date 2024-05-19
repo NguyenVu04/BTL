@@ -1,19 +1,10 @@
 var token;
 let teacher_only = document.getElementsByClassName("teacher-only");
-    if (localStorage.getItem('Role') === 'STUDENT') {
-        for (let i = 0; i < teacher_only.length; i++) {
-            teacher_only[i].style.display = 'none';
-        }
-    }
-    let student_only = document.getElementsByClassName("student-only");
-    if (localStorage.getItem('Role') === 'TEACHER') {
-        for (let i = 0; i < student_only.length; i++) {
-            student_only[i].style.display = 'none';
-        }
-    }
+let student_only = document.getElementsByClassName("student-only");
 document.addEventListener('DOMContentLoaded', () => {
     token = localStorage.getItem('Authorization');
     if (token === null) {
+        localStorage.clear();
         if (window.location.pathname === '/')
             document.getElementById('login').innerHTML = "Đăng nhập";
         else
@@ -23,6 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
         setInterval(() => {
             validate();
         }, 3000000);
+    }
+    
+    if (localStorage.getItem('Role') !== 'STUDENT') {
+        for (let i = 0; i < student_only.length; i++) {
+            student_only[i].style.display = 'none';
+        }
+    }
+    if (localStorage.getItem('Role') !== 'TEACHER') {
+        for (let i = 0; i < teacher_only.length; i++) {
+            teacher_only[i].style.display = 'none';
+        }
     }
 });
 function logout() {

@@ -1,6 +1,4 @@
 var token = localStorage.getItem('Authorization')
-console.log(localStorage.idStudent);
-console.log(localStorage.idCourse);
 
 // Khi trang được load, kiểm tra xem có dữ liệu trong Local Storage không và cập nhật bảng
 document.addEventListener("DOMContentLoaded", function() {
@@ -59,8 +57,6 @@ async function updateScores(event) {
 
 // Hàm cập nhật bảng với dữ liệu từ Local Storage
 function updateTable(data) {
-    console.log(data);
-    console.log(111);
     var bt_dd = parseFloat(localStorage.getItem('bt_dd')) || data.other;
     var bt_dd_note = localStorage.getItem('bt_dd_note') || '';
     var bt_dd_percent = 10;

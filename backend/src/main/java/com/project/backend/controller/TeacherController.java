@@ -86,9 +86,9 @@ public class TeacherController {
     @PutMapping("/id/info")
     public ResponseEntity<Teacher> updateCurrentTeacher(
         @RequestParam (required = false, defaultValue ="") String name,
-        @RequestParam(required = false, defaultValue = "01") Integer date,
-        @RequestParam(required = false, defaultValue = "01") Integer month,
-        @RequestParam(required = false, defaultValue = "2004") Integer year,
+        @RequestParam(required = false, defaultValue = "01") int date,
+        @RequestParam(required = false, defaultValue = "01") int month,
+        @RequestParam(required = false, defaultValue = "2004") int year,
         @RequestParam (required = false, defaultValue ="") String falcuty,
         @RequestParam (required = false, defaultValue ="") String phoneNumber,
         @RequestParam (required = false, defaultValue ="") String email,
@@ -118,7 +118,7 @@ public class TeacherController {
             teacher.setFalcuty(falcuty);
             teacher.setPhoneNumber(phoneNumber);
             teacher.setEmail(email);
-            teacher.setDayofBirth(convertTimestamp(year, month, date, 00, 00, 00));
+            teacher.setDayofBirth(convertTimestamp(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(date), 00, 00, 00));
             repository.updateDocumentById(teacher);
             return ResponseEntity.ok().body(teacher);
         } catch (Exception e) {

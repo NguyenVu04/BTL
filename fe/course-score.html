@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width1, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <link rel="stylesheet" href="./assets/font/fontawesome-free-6.5.1-web/css/all.css">
     <link rel="stylesheet" href="./assets/css/grid.css">
@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="./assets/css/course-score.css">
     <link rel="icon" type="img/x-icon" href="./assets/img/favicon.ico">
     <script src="path/to/your/script.js"></script>
-    <title>Document</title>
+    <title>LMS Project</title>
 </head>
 <body>
     <div id="main">
@@ -72,9 +72,9 @@
                         <i class="fa-solid fa-circle-user"></i>
                         <i class="arrow-down fa-solid fa-caret-down"></i>  
                         <ul class="subnav">
-                            <li><a href="./login.html">Đăng nhập</a></li>
-                            <li><a href="./login.html">Đăng xuất</a></li>
-                            <li><a href="">Đổi mật khẩu</a></li>
+                            <li><a id="login" href="./login.html"></a></li>
+                            <li><a id="logout"></a></li>
+                            <li><a id="change-password" href="#"></a></li>
                         </ul>
                     </div>
                 </div>
@@ -346,7 +346,6 @@
             </div>
         </footer>
     </div>
-    <script src="./assets/js/only.js"></script>
-
+    <script src="./assets/js/auth_cfg.js"></script>
 </body>
 </html>
