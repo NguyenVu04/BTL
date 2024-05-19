@@ -13,3 +13,11 @@ if (localStorage.getItem('Role') === 'TEACHER') {
     }
 }
 console.log(student_only);
+
+let auth = document.getElementsByClassName("auth-cfg");
+console.log(localStorage.getItem('Auth'));
+if (localStorage.getItem('Auth') === null) {
+    for (let i = 0; i < auth.length; i++) {
+        auth[i].style.display = 'none';
+    }
+}

@@ -96,6 +96,9 @@ async function saveChanges() {
     var birthPlace = document.getElementById("editBirthPlace").value;
     var major = document.getElementById("editMajor").value;
     let date = dob.split('-');
+    console.log(Number(date[0]))
+    console.log(Number(date[1]))
+    console.log(Number(date[2]))
     let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
         name: fullName,
         gender: gender,

@@ -122,6 +122,9 @@ public class StudentController {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
             }
             Student student = snapshot.toObject(Student.class);
+
+            boolean dobcheck = false;
+            if (year == 0) dobcheck = true;
             if (name == null || name == "") name = student.getName();
             if (gender == null ) gender = student.getGender();
             if (country == null || country == "") country = student.getCountry();
@@ -132,7 +135,10 @@ public class StudentController {
             if (major == null || major == "") major = student.getMajor();
             
             student.setName(name);
+
+            if (dobcheck)
             student.setDob(convertTimestamp(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(date), 0, 0, 0));
+            else student.setDob(student.getDob());
             student.setGender(gender);
             student.setCountry(country);
             student.setPersonalId(personalId);

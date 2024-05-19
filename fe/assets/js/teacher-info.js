@@ -1,3 +1,4 @@
+var token = localStorage.getItem('Authorization');
 let storage = `<div class="a{name-source}">
                     <div class="display-info__avt">
                         <div class="ava_nobody"></div>
@@ -68,7 +69,6 @@ let box = `<div onclick="changeContent_func(this, '.a{name-source}')"
             </div>  `;
 var content = document.querySelector('.display-info');
 var list_gv=document.querySelectorAll('.display-list__item');
-var token = localStorage.getItem('Authorization');
 
 
 getAllTeacher();
@@ -98,6 +98,7 @@ async function addinner(data) {
 
 }
 async function getAllTeacher() {
+    console.log(token);
     let url = 'http://localhost:8080/teacher/all';
     let response = await fetch(url, {
         mode: 'cors',

@@ -4,9 +4,14 @@ let student_only = document.getElementsByClassName("student-only");
 document.addEventListener('DOMContentLoaded', () => {
     authtoken = localStorage.getItem('Authorization');
     if (authtoken === null) {
+        let auth_only = document.getElementsByClassName('auth-only');
+        for (let i = 0; i < auth_only.length; i++) {
+            auth_only[i].style.display = 'none';
+        }
         localStorage.clear();
-        if (window.location.pathname === '/')
+        if (window.location.pathname === '/'){
             document.getElementById('login').innerHTML = "Đăng nhập";
+        }
         else
           window.location.href = '/';
     } else {

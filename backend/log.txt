@@ -796,3 +796,36 @@
 2024-05-19T21:25:39.370867800: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T21:25:41.943037400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T21:25:41.944394500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:46:37.223605100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendDetailsService
+2024-05-19T21:46:37.224606700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=teacher3, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-05-19T21:46:37.224606700: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T21:47:44.537379: com.google.cloud.storage.StorageException: No such object: database-6cded.appspot.com/CT2024/slide.zip: com.project.backend.repository.BackendStorage
+2024-05-19T21:47:45.000922: com.google.cloud.storage.StorageException: The specified key does not exist.: com.project.backend.repository.BackendStorage
+2024-05-19T22:09:40.145041200: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[TEACHER]]
+2024-05-19T22:09:40.146041900: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T22:21:46.407284400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:21:46.516284: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:00.217267900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:00.278945200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:00.732842700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:00.789153900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:00.924150700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:00.980151600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:01.128152500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:22:01.181150300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:23:08.370138: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:23:10.524027700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:23:21.774188: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:23:31.912296400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:41:06.151932300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:41:07.853712600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:41:48.667381: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:43:13.365019400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:43:14.132530300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T22:57:37.566388500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=giangvien3@edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-19T22:57:37.567391400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T23:11:13.819492500: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=giangvien3@edu.vn, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-19T23:11:13.820489100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+2024-05-19T23:34:31.354825700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T23:34:34.162477600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T23:34:45.040586600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
