@@ -1,11 +1,4 @@
-let idStudent = '2213954';
 var token = localStorage.getItem('Authorization');
-let teacher_only = document.getElementsByClassName("teacher-only");
-    if (localStorage.getItem('Role') === 'STUDENT') {
-        for (let i = 0; i < teacher_only.length; i++) {
-            teacher_only[i].style.display = 'none';
-        }
-    }
 getCourse().then(
     res => {
     // addinner(res);
@@ -189,10 +182,8 @@ async function addCourse(idCourse, nameCourse) {
     // let url = 'http://localhost:8080/course/id?';
     let url = 'http://localhost:8080/course/add/student';
     let form = new FormData();
-    console.log(idCourse, nameCourse, '\n');
     form.append('idCourse', idCourse);
     form.append('nameCourse', nameCourse);
-    form.append('idStudent', idStudent);
     
     let data = await
     fetch(url ,{

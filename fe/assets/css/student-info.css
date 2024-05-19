@@ -225,3 +225,34 @@ div>h1>i{
     padding-left: 20px;
     padding-right: 10px;
 }
+
+#editForm>div>input[type="date"]
+{
+    padding-left: 20px;
+    padding-right: 10px;
+}
+
+.gender__select {
+    background-color: white;
+    border: 2px solid blue;
+    border-radius: 10px;
+    font-family: sans-serif;
+    width: 100%;
+    height: 40%;
+    font-size: 16px;
+    padding-left: 20px;
+  }
+  
+  .gender__item {
+    position: absolute;
+    background-color: white;
+    padding: 10%;
+    color: blue;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+  
+  .gender__item:hover,.gender__item.active {
+    background-color: lightblue;
+  }
+  

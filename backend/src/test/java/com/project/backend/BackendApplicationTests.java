@@ -89,9 +89,9 @@ class BackendApplicationTests {
 		LocalDateTime date = LocalDateTime.now();
 		Date dates = Date.from(date.atZone(ZoneId.systemDefault()).toInstant());
 		Timestamp timestamp = Timestamp.of(dates);
-		Teacher student = new Teacher("Viet", "ledinhthuan@hcmut.edu.vn", timestamp, "0937584842", CourseID,
-				certificate);
-		repo.saveDocument(student, "1121");
+		/*Teacher student = new Teacher("Viet", "ledinhthuan@hcmut.edu.vn", timestamp, "0937584842", CourseID,
+				certificate);*/
+		//repo.saveDocument(student, "1121");
 	}
 
 	@Test

@@ -101,9 +101,9 @@ public class StudentController {
     @PutMapping("/adjustion/id")
     public ResponseEntity<Student> UpdateStudent(
         @RequestParam(required = false) String name,
-        @RequestParam(required = false, defaultValue = "01") Integer date,
-        @RequestParam(required = false, defaultValue = "01") Integer month,
-        @RequestParam(required = false, defaultValue = "2004") Integer year,
+        @RequestParam(required = false) int date,
+        @RequestParam(required = false) int month,
+        @RequestParam(required = false) int year,
         @RequestParam(required = false) gender gender,
         @RequestParam(required = false) String country,
         @RequestParam(required = false) String personalId,
@@ -130,9 +130,9 @@ public class StudentController {
             if (email == null || email == "") email = student.getEmail();
             if (address == null || address == "") address = student.getAddress();
             if (major == null || major == "") major = student.getMajor();
-
+            
             student.setName(name);
-            student.setDob(convertTimestamp(year, month, date, 0, 0, 0));
+            student.setDob(convertTimestamp(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(date), 0, 0, 0));
             student.setGender(gender);
             student.setCountry(country);
             student.setPersonalId(personalId);

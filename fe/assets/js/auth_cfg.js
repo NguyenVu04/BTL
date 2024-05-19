@@ -1,5 +1,4 @@
 var token;
-console.log(localStorage.getItem('Role'));
 let teacher_only = document.getElementsByClassName("teacher-only");
     if (localStorage.getItem('Role') === 'STUDENT') {
         for (let i = 0; i < teacher_only.length; i++) {
@@ -14,8 +13,11 @@ let teacher_only = document.getElementsByClassName("teacher-only");
     }
 document.addEventListener('DOMContentLoaded', () => {
     token = localStorage.getItem('Authorization');
-    if (token === null || token === undefined) {
-        document.getElementById('login').innerHTML = "Đăng nhập";
+    if (token === null) {
+        if (window.location.pathname === '/')
+            document.getElementById('login').innerHTML = "Đăng nhập";
+        else
+          window.location.href = '/';
     } else {
         validate();
         setInterval(() => {

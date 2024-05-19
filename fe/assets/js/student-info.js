@@ -25,7 +25,6 @@ var list_option = document.querySelectorAll('.option_detail');
 function changeStudentInfo(p, classname) {
     var classnameChange = document.querySelector(classname).innerHTML;
     content1.innerHTML = classnameChange;
-    console.log(content1);
     if (classname === '.progress-info') {
         let data = [{
             x: courseList,
@@ -87,7 +86,6 @@ function closeModal() {
 }
 
 async function saveChanges() {
-    console.log("Saving changes");
     var modal = document.getElementById("myModal");
     var citizenID = document.getElementById("editCitizenID").value;
     var fullName = document.getElementById("editFullName").value;
@@ -97,8 +95,7 @@ async function saveChanges() {
     var permanentAddress = document.getElementById("editPermanentAddress").value;
     var birthPlace = document.getElementById("editBirthPlace").value;
     var major = document.getElementById("editMajor").value;
-
-
+    let date = dob.split('-');
     let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
         name: fullName,
         gender: gender,
@@ -106,7 +103,10 @@ async function saveChanges() {
         phoneNumber: phoneNumber,
         address: permanentAddress,
         country: birthPlace,
-        major: major
+        major: major,
+        date: Number(date[2]),
+        month: Number(date[1]),
+        year: Number(date[0])
     });
 
     let returnVal = await fetch(url, {
@@ -273,8 +273,8 @@ function addinner(data) {
     let dobHTML = document.getElementById('dob');
     let dobHTML1 = document.getElementById('dob1');
     var d = new Date(data.dob.seconds * 1000);
-    dobHTML.innerHTML = d;
-    dobHTML1.innerHTML = d;
+    dobHTML.innerHTML = d.toLocaleDateString();
+    dobHTML1.innerHTML = d.toLocaleDateString();
 
     let emailHTML = document.getElementById('email');
     let emailHTML1 = document.getElementById('email1');
@@ -283,6 +283,12 @@ function addinner(data) {
 
     let genderHTML = document.getElementById('gender');
     let genderHTML1 = document.getElementById('gender1');
+    if (data.gender === "man") 
+        data.gender = "Nam";
+    else if (data.gender === "woman")
+        data.gender = "Nữ";
+    else 
+        data.gender = "Khác";
     genderHTML.innerHTML = data.gender;
     genderHTML1.innerHTML = data.gender;
 
