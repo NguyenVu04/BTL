@@ -5,7 +5,65 @@ let slide = new JSZip();
 document.addEventListener("DOMContentLoaded", function () {
     var button = document.getElementById("content__toggle");
     var sections = document.querySelectorAll(".content__section");
+    var submit_slide = document.getElementById("slide-upload");
+    var submit_reference = document.getElementById("reference-upload");
+    let id = localStorage.getItem('idCourse');
+    submit_slide.addEventListener("click", function () {
+        let slide_spinner = document.getElementById("slide-spinner");
+        slide_spinner.style.display = "inline-block";
+        slide.generateAsync({ type: 'blob' }).then(function (content) {
+            let formData = new FormData();
+            formData.append('file', content, 'slide.zip');
+            fetch(`http://localhost:8080/course/${id}/materials`, {
+                method: 'POST',
+                mode: 'cors',
+                body: formData,
+                headers: {
+                    'Authorization': token
+                }
+            }).then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+            }).catch(err => {
+                window.alert("Error: Unable to upload slide");
+            }).finally(() => {
+                setTimeout(() => {
+                    location.reload();
+                    slide_spinner.style.display = "none";
+                }, 2000);
+            })
+        })
+    });
 
+    submit_reference.addEventListener("click", function () {
+        let reference_spinner = document.getElementById("reference-spinner");
+        reference_spinner.style.display = "inline-block";
+        reference.generateAsync({ type: 'blob' }).then(function (content) {
+            let formData = new FormData();
+            formData.append('file', content, 'reference.zip');
+            fetch(`http://localhost:8080/course/${id}/materials`, {
+                method: 'POST',
+                mode: 'cors',
+                headers: {
+                    'Authorization': token
+                },
+                body: formData
+            }).then(res => {
+                if (!res.ok) {
+                    throw Error(res.statusText);
+                }
+            }).catch(err => {
+                window.alert("Error: Unable to upload reference");
+            }).finally(() => {
+                setTimeout(() => {
+                    location.reload();
+                    reference_spinner.style.display = "none";
+                }, 2000);
+            })
+        })
+    });
+    
     // Thêm sự kiện click cho nút toggle
     button.addEventListener("click", function () {
         var isAllCollapsed = button.textContent === "Thu gọn toàn bộ";
@@ -163,7 +221,7 @@ document.addEventListener("DOMContentLoaded", function () {
         fileContainer.appendChild(fileLink); // Thêm link vào div chứa file
 
         referenceFileList.appendChild(fileContainer); // Thêm div chứa file vào danh sách
-        
+
         //slide
         var fileContainer = document.createElement("div");
         fileContainer.className = "file-container"; // Thêm class cho div chứa file
@@ -188,54 +246,6 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(err);
     })
 });
-
-document.addEventListener('keypress', (e) => {
-    let id = localStorage.getItem('idCourse');
-    if (e.code === 'Enter') {
-        e.preventDefault();
-        reference.generateAsync({ type: 'blob' }).then(function (content) {
-            let formData = new FormData();
-            formData.append('file', content, 'reference.zip');
-            fetch(`http://localhost:8080/course/${id}/materials`, {
-                method: 'POST',
-                mode: 'cors',
-                headers: {
-                    'Authorization': token
-                },
-                body: formData
-            }).then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-            }).catch(err => {
-                console.log(err);
-            })
-        })
-        slide.generateAsync({ type: 'blob' }).then(function (content) {
-            let formData = new FormData();
-            formData.append('file', content, 'slide.zip');
-            fetch(`http://localhost:8080/course/${id}/materials`, {
-                method: 'POST',
-                mode: 'cors',
-                body: formData,
-                headers: {
-                    'Authorization': token
-                }
-            }).then(res => {
-                if (!res.ok) {
-                    throw Error(res.statusText);
-                }
-            }).catch(err => {
-                console.log(err);
-            })
-        })
-        
-        setTimeout(() => {
-            
-            window.location.reload();
-        }, 6000);
-    }
-})
 
 function addinner(data) {
     // let page = document.getElementsByClassName("contents");

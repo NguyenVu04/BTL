@@ -776,3 +776,23 @@
 2024-05-17T22:24:21.105436400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
 2024-05-17T22:24:21.499499800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
 >>>>>>> Stashed changes
+2024-05-19T20:42:32.155221: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T20:42:33.164680100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T20:56:43.926744400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T20:56:44.759963100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:01:04.908413100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:01:04.910672300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:05:57.406470100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:05:58.832844400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:08:45.253676900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:08:46.910545800: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:17:21.616573900: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:17:22.638407: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:18:18.798965400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:18:19.684250500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:21:20.960472200: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:21:23.428703: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:25:39.197375300: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:25:39.370867800: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:25:41.943037400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+2024-05-19T21:25:41.944394500: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
