@@ -776,6 +776,7 @@
 2024-05-17T22:24:21.105436400: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
 2024-05-17T22:24:21.499499800: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
 >>>>>>> Stashed changes
+<<<<<<< Updated upstream
 2024-05-19T20:42:32.155221: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T20:42:33.164680100: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T20:56:43.926744400: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
@@ -829,3 +830,7 @@
 2024-05-19T23:34:31.354825700: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T23:34:34.162477600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
 2024-05-19T23:34:45.040586600: java.io.IOException: com.project.backend.security.JwtAuthenticationFilter
+=======
+2024-05-19T21:21:00.069822600: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.security.BackendAuthenticationProvider: UsernamePasswordAuthenticationToken [Principal=daivietvonin1@gmail.com, Credentials=[PROTECTED], Authenticated=true, Details=null, Granted Authorities=[STUDENT]]
+2024-05-19T21:21:00.070834100: org.springframework.security.core.userdetails.UsernameNotFoundException: com.project.backend.controller.AuthenticationController
+>>>>>>> Stashed changes

@@ -175,9 +175,21 @@ public class AuthenticationController {
             @RequestParam(name = "password", required = true) String password,
             @RequestParam(name = "role", required = true) String role) {
         try {
-            
+            List<Student> allstu = studentController.getAllStudent().getBody();
+                for (Student student : allstu) {
+                    if (student.getEmail().equals(email)) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                    }
+                }
+            List<Teacher> allteach = teacherController.getAllTeacher().getBody();
+                for (Teacher teacher : allteach) {
+                    if (teacher.getEmail().equals(email)) {
+                        return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+                    }
+                }
             if (role.equals("STUDENT")) {
                 
+
                 ResponseEntity<Student> newStudent =
                 studentController.setStudent(id, "", email, 2000, 01, 01, 00, 00, 00 );
                 if (newStudent.getStatusCode() != HttpStatus.OK) {
@@ -186,6 +198,7 @@ public class AuthenticationController {
                 
             }
             else {
+                
                 ResponseEntity<Teacher> newTeacher = 
                 teacherController.createTeacher(id, "", email, "", 1980, 1, 1, 1, 1, 1, "", "", "", "");
                 if (newTeacher.getStatusCode() != HttpStatus.OK) {
