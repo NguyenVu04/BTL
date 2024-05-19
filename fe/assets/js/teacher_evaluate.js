@@ -134,16 +134,18 @@ function closeEvaluateModal() {
 
 async function confirmEvaluation() {
     var comment = commentInput.value;
-
+    console.log(comment);
+    console.log(localStorage.idStudent);
+    console.log(localStorage.idCourse);
     let url = 'http://localhost:8080/course/student/score/update?' 
     + new URLSearchParams({
         idStudent: localStorage.idStudent,
         idCourse: localStorage.idCourse,
-        midTerm: localStorage.getItem('kt_giua'),
-        finalExam: localStorage.getItem('kt_cuoi'),
-        other: localStorage.getItem('bt_dd'),
-        assignment: localStorage.getItem('bt_lon'),
-        message: comment
+        midTerm: Number(localStorage.getItem('kt_giua')),
+        finalExam: Number(localStorage.getItem('kt_cuoi')),
+        other: Number(localStorage.getItem('bt_dd')),
+        assignment: Number(localStorage.getItem('bt_lon')),
+        message: (comment)
     }) ;
     
     let fetchs = await fetch(url, {

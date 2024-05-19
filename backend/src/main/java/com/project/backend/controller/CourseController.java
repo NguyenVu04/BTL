@@ -434,24 +434,25 @@ public class CourseController {
             public ResponseEntity<NameIDStu> updateScore(
             @RequestParam String idCourse,
             @RequestParam String idStudent,
-            @RequestParam(required = false, defaultValue = "-1") Double midTerm,
-            @RequestParam(required = false, defaultValue = "-1") Double finalExam,
-            @RequestParam(required = false, defaultValue = "-1") Double other,
-            @RequestParam(required = false, defaultValue = "-1") Double assignment,
-            @RequestParam(required = false, defaultValue = "NULL") String message 
+            @RequestParam(required = false) Double midTerm,
+            @RequestParam(required = false) Double finalExam,
+            @RequestParam(required = false) Double other,
+            @RequestParam(required = false) Double assignment,
+            @RequestParam(required = false) String message 
 
             ) {
                 try{
+                    
                     ResponseEntity<NameIDStu> score = getScorebyID(idCourse, idStudent);
                     ResponseEntity<Course> course = get(idCourse);
                     if (score.getStatusCode() != HttpStatus.OK) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
                     }
-                    if (midTerm == -1) midTerm = score.getBody().getMidTerm();
-                    if (finalExam == -1) finalExam = score.getBody().getFinalExam();
-                    if (other == -1) other = score.getBody().getOther();
-                    if (assignment == -1) assignment = score.getBody().getAssignment();
-                    if (message.equals("NULL")) message = score.getBody().getMessage();
+                    if (midTerm == null) midTerm = score.getBody().getMidTerm();
+                    if (finalExam == null) finalExam = score.getBody().getFinalExam();
+                    if (other == null) other = score.getBody().getOther();
+                    if (assignment == null) assignment = score.getBody().getAssignment();
+                    if (message == null) message = score.getBody().getMessage();
 
                     Course thisCourse = course.getBody();
                     List<NameIDStu> list = thisCourse.getListStudent();
