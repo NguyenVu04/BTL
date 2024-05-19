@@ -1,9 +1,9 @@
-var token;
+let authtoken;
 let teacher_only = document.getElementsByClassName("teacher-only");
 let student_only = document.getElementsByClassName("student-only");
 document.addEventListener('DOMContentLoaded', () => {
-    token = localStorage.getItem('Authorization');
-    if (token === null) {
+    authtoken = localStorage.getItem('Authorization');
+    if (authtoken === null) {
         localStorage.clear();
         if (window.location.pathname === '/')
             document.getElementById('login').innerHTML = "Đăng nhập";
@@ -32,7 +32,7 @@ function logout() {
         method: 'POST',
         mode: 'cors',
         headers: {
-            'Authorization': token
+            'Authorization': authtoken
         }
     }).finally(
         () => {
@@ -47,7 +47,7 @@ function validate() {
         method: 'POST',
         mode: 'cors',
         headers: {
-            'Authorization': token
+            'Authorization': authtoken
         }
     }).then(
         res => {
@@ -57,7 +57,7 @@ function validate() {
     ).then(
         data => {
             localStorage.setItem('Authorization', data);
-            token = localStorage.getItem('Authorization');
+            authtoken = localStorage.getItem('Authorization');
             document.getElementById('change-password').innerHTML = "Đổi mật khẩu";
             let logoutElement = document.getElementById('logout');
             logoutElement.innerHTML = "Đăng xuất";

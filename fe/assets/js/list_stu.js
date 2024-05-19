@@ -1,4 +1,4 @@
-let token = localStorage.getItem('Authorization');
+var token = localStorage.getItem('Authorization');
 let adjustStu = `<div class="row">
 <div class="thutu col-lg-2">
     <div class="circle">
@@ -20,7 +20,6 @@ let adjustStu = `<div class="row">
     <button type="button" class="btn btn-info eva" onclick="opennewweb()">Đánh giá</button>
 </div>
 </div>`;
-console.log(localStorage.detail_course);
 document.addEventListener('DOMContentLoaded', function(e) {
     
     getClass().then(function(any){
@@ -78,12 +77,10 @@ function addinner(data){
                             <p>L02 - {idCourse}</p>
                         </div>
 `;
-    console.log(data);
     let nameCourse = data.name;
     let idCourse = data.id;
     let listStu = data.listStudent;
 
-    console.log(listStu);
     for (let i = 0; i < listStu.length; i++) {
         let temp = adjustStu;
         let name = listStu[i].name;
@@ -98,7 +95,6 @@ function addinner(data){
     nameClass_html = nameClass_html.replace('{idCourse}', idCourse);
 
     nameClass.innerHTML = nameClass_html;
-    console.log(data);
 }
 
 

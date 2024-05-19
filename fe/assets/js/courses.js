@@ -85,7 +85,6 @@ getCourse().then(
 
 async function addinner(data) {
     let tableCourse = document.getElementById("table-course");
-    console.log(tableCourse);
     let innerTable = `<div class="col l-4 m-6 c-12">
                             <div class="course-each">
                                 <div class="course-img">
@@ -252,7 +251,6 @@ function detailCourse(){
     const detail = document.querySelectorAll('.course-enter-btn');
     detail.forEach(function(search) {
         search.addEventListener('click', function() {
-            console.log('chi tiet');
             // Xóa phần tử của khóa học
             const courseContainer = search.closest('.course-each');
 
@@ -265,7 +263,6 @@ function detailCourse(){
 }
 // xóa môn học
 function deleteCourse() {
-    console.log('xoa mon hoc');
     // Lấy danh sách tất cả các nút "Chi tiết khóa học"
     const detailButtons = document.querySelectorAll('.course-enter-btn a');
     
