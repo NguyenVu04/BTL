@@ -90,8 +90,12 @@ public class BackendSecurityConfiguration {
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
-                    req -> req
-                              
+                    req -> req.requestMatchers("/teacher/all", "/course/**")
+                              .authenticated()
+                              .requestMatchers("/teacher/**")
+                              .hasAuthority("TEACHER")
+                              .requestMatchers("/student/**")
+                              .hasAuthority("STUDENT")
                               .anyRequest()
                               .permitAll()
                 )
