@@ -32,3 +32,6 @@ mvn spring-boot:run
 5. Chế Minh Đức - 2210783
 6. Khúc Minh Trí - 2213636
 7. Nguyễn Quang Sáng - 2212922
+
+### Video
+https://youtu.be/HpA0xAE15ZE?si=Bu4EhRuMUR9bwU4F
