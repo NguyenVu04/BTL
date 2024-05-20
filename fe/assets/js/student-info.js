@@ -68,7 +68,7 @@ function showEditModal() {
     var modal = document.getElementById("myModal");
     modal.style.display = "block";
     // Điền các trường thông tin từ trang chính vào form modal
-    document.getElementById("editStudentID").value = document.getElementById("studentID").innerText;
+    document.getElementById("editStudentID").value = document.getElementById("idStudent").innerText;
     document.getElementById("editCitizenID").value = document.getElementById("citizenID").innerText;
     document.getElementById("editFullName").value = document.getElementById("fullName").innerText;
     document.getElementById("editPhoneNumber").value = document.getElementById("phoneNumber").innerText;
@@ -96,21 +96,31 @@ async function saveChanges() {
     var birthPlace = document.getElementById("editBirthPlace").value;
     var major = document.getElementById("editMajor").value;
     let date = dob.split('-');
-    console.log(Number(date[0]))
-    console.log(Number(date[1]))
-    console.log(Number(date[2]))
-    let url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
-        name: fullName,
-        gender: gender,
-        personalId: citizenID,
-        phoneNumber: phoneNumber,
-        address: permanentAddress,
-        country: birthPlace,
-        major: major,
-        date: Number(date[2]),
-        month: Number(date[1]),
-        year: Number(date[0])
-    });
+    let url;
+    if (date.length != 3) {
+        url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
+            name: fullName,
+            gender: gender,
+            personalId: citizenID,
+            phoneNumber: phoneNumber,
+            address: permanentAddress,
+            country: birthPlace,
+            major: major,
+        });
+    } else {
+        url = 'http://localhost:8080/student/adjustion/id?' + new URLSearchParams({
+            name: fullName,
+            gender: gender,
+            personalId: citizenID,
+            phoneNumber: phoneNumber,
+            address: permanentAddress,
+            country: birthPlace,
+            major: major,
+            date: Number(date[2]),
+            month: Number(date[1]),
+            year: Number(date[0])
+        });
+    }
 
     let returnVal = await fetch(url, {
         method: 'PUT',
@@ -286,11 +296,11 @@ function addinner(data) {
 
     let genderHTML = document.getElementById('gender');
     let genderHTML1 = document.getElementById('gender1');
-    if (data.gender === "man") 
+    if (data.gender === "man")
         data.gender = "Nam";
     else if (data.gender === "woman")
         data.gender = "Nữ";
-    else 
+    else
         data.gender = "Khác";
     genderHTML.innerHTML = data.gender;
     genderHTML1.innerHTML = data.gender;

@@ -101,9 +101,9 @@ public class StudentController {
     @PutMapping("/adjustion/id")
     public ResponseEntity<Student> UpdateStudent(
         @RequestParam(required = false) String name,
-        @RequestParam(required = false) int date,
-        @RequestParam(required = false) int month,
-        @RequestParam(required = false) int year,
+        @RequestParam(required = false) Integer date,
+        @RequestParam(required = false) Integer month,
+        @RequestParam(required = false) Integer year,
         @RequestParam(required = false) gender gender,
         @RequestParam(required = false) String country,
         @RequestParam(required = false) String personalId,
@@ -124,7 +124,7 @@ public class StudentController {
             Student student = snapshot.toObject(Student.class);
 
             boolean dobcheck = false;
-            if (year == 0) dobcheck = true;
+            if (year == null) dobcheck = true;
             if (name == null || name == "") name = student.getName();
             if (gender == null ) gender = student.getGender();
             if (country == null || country == "") country = student.getCountry();
@@ -136,9 +136,10 @@ public class StudentController {
             
             student.setName(name);
 
-            if (dobcheck)
-            student.setDob(convertTimestamp(Integer.valueOf(year), Integer.valueOf(month), Integer.valueOf(date), 0, 0, 0));
-            else student.setDob(student.getDob());
+            if (!dobcheck)
+                student.setDob(convertTimestamp(year, month, date, 0, 0, 0));
+            else 
+                student.setDob(student.getDob());
             student.setGender(gender);
             student.setCountry(country);
             student.setPersonalId(personalId);

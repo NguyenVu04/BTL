@@ -98,7 +98,6 @@ async function addinner(data) {
 
 }
 async function getAllTeacher() {
-    console.log(token);
     let url = 'http://localhost:8080/teacher/all';
     let response = await fetch(url, {
         mode: 'cors',
