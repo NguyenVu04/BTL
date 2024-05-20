@@ -14,14 +14,13 @@ Additionally, the website offers a friendly and easy-to-use interface for everyo
 ### Prerequisites
 
 - Java 22.0.1
-- Maven 3.9.6
 
 ### Installation
 
 ```bash
 git clone https://github.com/NguyenVu04/BTL.git
 cd BTL/backend
-mvn spring-boot:run
+./mvnw spring-boot:run
 ```
 
 ### Contributors
