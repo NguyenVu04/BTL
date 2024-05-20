@@ -248,7 +248,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function addinner(data) {
-    // let page = document.getElementsByClassName("contents");
     let page = document.getElementById("nameCourse");
 
     let nameCourse_html = `

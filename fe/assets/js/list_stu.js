@@ -95,6 +95,8 @@ function addinner(data){
     nameClass_html = nameClass_html.replace('{idCourse}', idCourse);
 
     nameClass.innerHTML = nameClass_html;
+
+    document.getElementById('name-Course').innerHTML = nameCourse;
 }
 
 
