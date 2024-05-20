@@ -67,9 +67,6 @@ let box = `<div onclick="changeContent_func(this, '.a{name-source}')"
                         <h4>{fullName}</h4>
                     </div>
             </div>  `;
-var content = document.querySelector('.display-info');
-var list_gv=document.querySelectorAll('.display-list__item');
-
 
 getAllTeacher();
 
@@ -98,6 +95,7 @@ async function addinner(data) {
 
 }
 async function getAllTeacher() {
+    console.log(token);
     let url = 'http://localhost:8080/teacher/all';
     let response = await fetch(url, {
         mode: 'cors',
@@ -116,15 +114,18 @@ async function getAllTeacher() {
     return response;
 }
 
+var content = document.querySelector('.display-info');
+var list_gv=document.querySelector('.display-list').children;
+
+
 
 function changeContent_func(p,classname){
-    console.log(classname);
     var classnameChange=document.querySelector(classname).innerHTML;
     content.innerHTML=classnameChange;
     for(let i=0;i<list_gv.length;i++){
         if(list_gv[i].classList.contains('active'))
             {
-                list_gv[i].classList.toggle('active')
+                list_gv[i].classList.remove('active')
             }
             else{}
     }
