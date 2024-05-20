@@ -3,13 +3,13 @@
 ## Description
 
 With the aim of creating a high-quality learning environment 
-along with the development of information technology, a software 
+along with the development of information technology, a website 
 has been designed to become a comprehensive academic management system. 
-This software provides a variety of conveniences for students and teachers, 
+This website provides a variety of conveniences for students and teachers, 
 simultaneously serving as an effective interactive platform between students, 
 teachers, and schools. With separate login functions for teachers and students, 
 the system ensures data security and easy access to necessary information. 
-Additionally, the software offers a friendly and easy-to-use interface for everyone.
+Additionally, the website offers a friendly and easy-to-use interface for everyone.
 
 ### Prerequisites
 
