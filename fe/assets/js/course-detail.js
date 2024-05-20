@@ -256,8 +256,11 @@ function addinner(data) {
                `;
 
     let nameCourse = data.name;
+    localStorage.nameCourse = data.name;
     nameCourse_html = nameCourse_html.replace('{nameCourse}', nameCourse);
     page.innerHTML = nameCourse_html;
+
+
 }
 
 
