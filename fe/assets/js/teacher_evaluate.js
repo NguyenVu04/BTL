@@ -57,17 +57,13 @@ async function updateScores(event) {
 
 // Hàm cập nhật bảng với dữ liệu từ Local Storage
 function updateTable(data) {
-    var bt_dd = parseFloat(localStorage.getItem('bt_dd')) || data.other;
-    var bt_dd_note = localStorage.getItem('bt_dd_note') || '';
+    var bt_dd = data.other;
     var bt_dd_percent = 10;
-    var bt_lon = parseFloat(localStorage.getItem('bt_lon')) || data.assignment;
-    var bt_lon_note = localStorage.getItem('bt_lon_note') || '';
+    var bt_lon = data.assignment;
     var bt_lon_percent = 20;
-    var kt_giua = parseFloat(localStorage.getItem('kt_giua')) || data.midTerm;
-    var kt_giua_note = localStorage.getItem('kt_giua_note') || '';
+    var kt_giua = data.midTerm;
     var kt_giua_percent = 20;
-    var kt_cuoi = parseFloat(localStorage.getItem('kt_cuoi')) || data.finalExam;
-    var kt_cuoi_note = localStorage.getItem('kt_cuoi_note') || '';
+    var kt_cuoi = data.finalExam;
     var kt_cuoi_percent = 50;
 
 
@@ -134,9 +130,10 @@ function closeEvaluateModal() {
 
 async function confirmEvaluation() {
     var comment = commentInput.value;
-    console.log(comment);
-    console.log(localStorage.idStudent);
-    console.log(localStorage.idCourse);
+    localStorage.setItem('kt_giua', -1);
+    localStorage.setItem('kt_cuoi', -1);
+    localStorage.setItem('bt_dd', -1);
+    localStorage.setItem('bt_lon', -1);
     let url = 'http://localhost:8080/course/student/score/update?' 
     + new URLSearchParams({
         idStudent: localStorage.idStudent,
@@ -147,7 +144,6 @@ async function confirmEvaluation() {
         assignment: Number(localStorage.getItem('bt_lon')),
         message: (comment)
     }) ;
-    
     let fetchs = await fetch(url, {
         method: 'PUT',
         mode: 'cors',
@@ -201,6 +197,8 @@ var headingNodes = document.querySelectorAll('.box .heading-2');
 var headingNodes = document.querySelector
 
 async function getScore() {
+    console.log(localStorage.idStudent);
+    console.log(localStorage.idCourse);
     let url = 'http://localhost:8080/course/student/score?';
     url = url + new URLSearchParams({
         idCourse: localStorage.idCourse,

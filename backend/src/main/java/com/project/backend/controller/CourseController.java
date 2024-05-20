@@ -1,6 +1,5 @@
 package com.project.backend.controller;
 
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.cloud.Timestamp;
@@ -32,6 +31,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/course")
@@ -396,7 +396,7 @@ public class CourseController {
                             return ResponseEntity.ok().body(list.get(i));
                         }
                     }
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).build();     
+                    return ResponseEntity.status(HttpStatus.CONFLICT).build();     
                 } catch (Exception e) {
                     exceptionLog.log(e);
                     return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -448,10 +448,10 @@ public class CourseController {
                     if (score.getStatusCode() != HttpStatus.OK) {
                         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
                     }
-                    if (midTerm == null) midTerm = score.getBody().getMidTerm();
-                    if (finalExam == null) finalExam = score.getBody().getFinalExam();
-                    if (other == null) other = score.getBody().getOther();
-                    if (assignment == null) assignment = score.getBody().getAssignment();
+                    if (midTerm == -1) midTerm = score.getBody().getMidTerm();
+                    if (finalExam == -1) finalExam = score.getBody().getFinalExam();
+                    if (other == -1) other = score.getBody().getOther();
+                    if (assignment == -1 || assignment == -1) assignment = score.getBody().getAssignment();
                     if (message == null) message = score.getBody().getMessage();
 
                     Course thisCourse = course.getBody();
